@@ -159,7 +159,8 @@ function handleClick(evt) {
   // all the code was tested and runs correctly, but these setTimeouts are new
   let tie = (board) => {
     let newArray = board.flat();
-      if (newArray.length === 42) {
+    // changed 42 to WIDTH * HEIGHT
+      if (newArray.length === WIDTH * HEIGHT) {
         setTimeout(function() {
           return alert('TIE!!!');
         }, 500)
