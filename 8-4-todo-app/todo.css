@@ -1,0 +1,107 @@
+body {
+    background-color: rgb(244, 242, 233);
+    margin: 0px;
+}
+
+.container {
+    margin: 0px auto;
+    height: 100%;
+    width: 710px;
+    background-color: #fff;
+    padding: 5px 5px 10px 5px;
+    border: solid 0px rgb(244, 242, 233);
+    box-sizing: border-box;
+}
+
+.complete {
+    color: rgb(145, 145, 145);
+    font-weight: bold;
+    text-decoration: line-through;
+}
+
+.items {
+    font-size: 2rem;
+    width: 676px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px 0px 20px 20px;
+    border: solid 2px rgb(152, 223, 0);
+    margin-top: 30px;
+}
+
+.items > span {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+#todo-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 700px;
+    height: 20vh;
+    background-color: rgb(0, 67, 111);
+    color: #fff;
+}
+
+label {
+    display: inine-block;
+    width: 260px;
+    padding: 0px 40px 0px 20px;
+    border: 10px;
+    margin: 10px;
+    font-size: 4.0rem;
+    text-align: center;
+    color: #fff;
+}
+
+input[type='text'] {
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    padding-right: 10px;
+    border-right: 10px;
+    margin-right: 20px;
+}
+
+#lists {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    flex: 250px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+[name='removebutton'] {
+    background-color: rgb(138, 0, 37);
+    color: #fff;
+    margin-left: 26px;
+    margin-right: 10px;
+}
+
+[name='completebutton'] {
+    margin-left: auto;
+}
+
+.button {
+    width: 100px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 03px;
+    border: none;
+    transition: background-color 0.2s ease-in;
+}
+  
+.button:hover {
+    background-color: #7a0074;
+    color: #fff;
+  }
+  
+.button:active {
+    border-top: solid 2px #6a7479;
+  }
