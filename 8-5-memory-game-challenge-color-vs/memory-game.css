@@ -1,0 +1,91 @@
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 70vh;
+    min-width: 550px;
+}
+
+h1, p {
+    display: flex;
+    justify-content: center;
+    /* background-color: blanchedalmond; */
+    padding: 0px 0px;
+    font-family: Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-bottom: 30px;
+    background: linear-gradient(rgb(138, 0, 169), #f6ac00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* color: #990091; */
+    -webkit-text-stroke: 1.6px #000;
+}
+
+p {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #000;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    height: 300px;
+    width: 440px;
+    gap: 20px;
+    padding: 20px 20px 40px 20px;
+    border: 20px solid rgb(0, 1, 44);
+    margin-top: 10vh;
+    background-color: rgb(0, 1, 44);
+    border-radius: 15px;
+    /* display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+    margin: 0 auto;
+    max-height: 400px; */
+}
+
+.grid:hover, body:hover{
+    cursor: pointer;
+}
+
+.grid > div {
+    width: 90px;
+    height: 90px;
+    border: 2px solid #fff;
+    background-color: #a0989c;
+}
+
+.cards {
+    width: 90px;
+    height: 90px;
+    border: 2px solid #fff;
+    background-color: #a0989c;
+}
+
+button[name='resetBttn'] {
+    display: grid;
+    margin: 0 auto;
+    width: 100px;
+    text-align: center;
+    line-height: 30px;
+    background-color: rgb(138, 0, 169);
+    color: #fff;
+    border: 1px solid #000;
+    transition: background-color ease-in-out 50ms;
+}
+
+button[name='resetBttn']:hover {
+    background-color: #fff;
+    color: rgb(138, 0, 169);
+}
+
+/* aside {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: black;
+} */
