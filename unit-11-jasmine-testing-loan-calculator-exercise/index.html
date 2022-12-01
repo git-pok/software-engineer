@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Loan Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+    <!--Jasmine CSS file-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine.css">
+  </head>
+  <body>
+    <header>
+      <h1>Loan Calculator 💰💲💵</h1>
+    </header>
+    <section class="calc-container">
+      <form id="calc-form">
+        <label>
+          Loan Amount
+          <input type="number" placeholder="type a whole number" onfocus="placeholder=''" id="amount" name="loan-amount">
+        </label>
+        <label>
+          Term in Years
+          <input type="number" placeholder="type a whole number" onfocus="placeholder=''" id="years" name="loan-years">
+        </label>
+        <label>
+          Yearly Rate
+          <input type="number" placeholder="type the decimal version of the percentage" onfocus="placeholder=''" step="0.001" min="0" id="rate" name="loan-rate">
+        </label>
+        <button type="submit" id="calc-submit">Calculate</button>
+      </form>
+      <div class="total">
+        <h3>Monthly Payment<h3>
+        <div id="monthly-payment"></span>
+      </div>
+    </section>
+
+    <!--Jasmine script and link files-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/jasmine-html.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.3.0/boot.js"></script>
+
+    <!--My js and test file solutions-->
+    <script type="text/javascript" src="calculator-final-syntax.js"></script>
+    <!--Jasmine test file-->
+    <script type="text/javascript" src="calculator-final-syntax-test.js"></script>
+  </body>
+</html>
