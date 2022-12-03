@@ -119,11 +119,9 @@ Examples:
 */
 
 function valTimesIndex(arr){
-    let newArray = [];
-    arr.map(function (item, index) {
-        newArray.push(item * index);
+    return arr.map(function (item, index) {
+        return (item * index);
     });
-    return newArray;
 };
 
 /*
@@ -163,7 +161,7 @@ Examples:
 
 function filterByValue(arr, key) {
     return arr.filter(function(item) {
-        return item[key] !== undefined;
+        return item[key];
     });
 };
 
@@ -205,8 +203,8 @@ Examples:
 */
 
 function removeVowels(str) {
-    let splitArray = str.split('');
-    let vowels = 'aeiouAEIOU';
+    let splitArray = str.toLowerCase().split('');
+    let vowels = 'aeiou';
     return splitArray.filter(function(char) { 
         return !vowels.includes(char);
     }).join('').toLowerCase();
