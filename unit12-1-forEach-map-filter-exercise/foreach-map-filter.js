@@ -103,11 +103,9 @@ Examples:
 */
 
 function doubleValuesWithMap(arr) {
-    let newArray = [];
-    arr.map(function (item) {
-        newArray.push(item * 2);
+    return arr.map(function (item) {
+        return item * 2;
     });
-    return newArray;
 };
 
 /*
