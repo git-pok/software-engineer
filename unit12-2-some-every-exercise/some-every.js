@@ -23,7 +23,7 @@ Examples:
 function hasAZero(num) {
     let numArray = num.toString().split(' ');
     return numArray.some(function(number) {
-        if (number.indexOf(0) !== -1) return true;
+        return number.indexOf('0') !== -1;
     });
 };
 
@@ -37,7 +37,7 @@ Examples:
 
 function hasOnlyOddNumbers(arr) {
     return arr.every(function (number) {
-        if (number % 2 !== 0) return true;
+        return number % 2 !== 0;
     });
 };
 
