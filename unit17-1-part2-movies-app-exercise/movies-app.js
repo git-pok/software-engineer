@@ -9,7 +9,7 @@ function movieRating(e) {
         `<div>
             <h1 class='review'>
                 <span class='upperCase'>Movie Title:</span> ${$titleValue} 
-                <span class='upperCase'>Rating:</span> ${$ratingValue}
+                <span class='spacedUpperCase'>Rating:</span> ${$ratingValue}
             </h1>
             <button type='button'>Remove</button>
         </div>`);
