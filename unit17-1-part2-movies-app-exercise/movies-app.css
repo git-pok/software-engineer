@@ -1,0 +1,58 @@
+form {
+    padding: 20px 20px;
+    min-width: 706px;
+    max-width: 1213px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+}
+
+form label {
+    font-size: 2em;
+    color: rgb(255, 255, 255);
+    padding: 05px 0px;
+}
+
+form input[type='text'] {
+    height: 20px;
+    width: 140px;
+    padding: 03px 10px;
+    margin-bottom: 40px;
+    font-size: 1em;
+}
+
+form button {
+    width: 80px;
+    padding: 03px 10px;
+}
+
+.movies div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-between;
+    background-color: rgb(0, 78, 0);
+    padding: 20px 20px;
+    margin: 20px 0px;
+    font-size: 1em;
+    min-width: 706px;
+    max-width: 1213px;
+}
+
+.review {
+    color: rgb(255, 255, 255);
+    justify-content: flex-start;
+    line-height: 90px;
+}
+
+.review button {
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.upperCase {
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    padding: 10px 5px;
+    text-transform: uppercase; 
+}
