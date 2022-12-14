@@ -1,0 +1,100 @@
+18.1 HOW WEB WORKS EXERCISE
+PART ONE: Solidify Terminology
+
+In your own terms, define the following terms:
+
+What is HTTP?
+// Hyper Text Transfer Protocol is a Protocol system for making browser and web page requests.
+// It's how we communicate between a browser and server.
+// It contains rules to ensure smooth communication.
+
+What is a URL?
+// A URL (Uniform Resource Locator) is an address we type into the browser. 
+// It includes the Protocol, Hostname, Port, Resource, and Query String.
+
+What is DNS?
+// DNS (Domain Name System) allows us to communicate with hostnames instead of IP Addresses. 
+// It translates hostnames into IP Addresses, and does reverse look ups also.
+// It make communication easier.
+// Instead of typing IP Addresses into the browser, we type hostnames.
+
+What is a query string?
+// A Query String allows us to further specify our Get request. 
+// Ex, when we use the search box on a web site, we are utilizing a Query String.
+// It starts with a ? and includes key/value pairs: ?key=value .
+// The & separates multiple key/value pairs: ?key=value&key=value .  
+
+What are two HTTP verbs and how are they different?
+// Get and Post. Get has no side effects. We are simply making a request, and receiving content.
+// Post has side effects to the server and/or database. Ex, creating a post, or updating database information.
+
+What is an HTTP request?
+// An HTTP request is a browser request to a server. 
+// It uses HTTP Protocol and sends information through a header.
+
+What is an HTTP response?
+// An HTTP response is the response we get back from the server.
+// It uses HTTP Protocol and sends information through a header
+
+What is an HTTP header? Give a couple examples of request and response headers you have seen.
+// An HTTP header contains information and metadata for requests and responses. 
+// Some information that might be seen in a Request Header is:  method, accept-language, and path.
+// Some information that might be seen in a Response Header is: content-type, the date, and time stamps.
+
+What are the processes that happen when you type “http://somesite.com/some/page.html” into a browser
+// The DNS translates the hostname into an IP Address. 
+// The browser makes a request to a server.
+// The information gets sent through a header. 
+// The server receives the information and looks for it.
+// If the server has the information, it sends it back to us through a header,
+// and includes a status code.
+// The browser creates a DOM from the HTML.
+// Depending on how many images, links, and scripts are in the HTML, 
+// the browser makes separate requests to the server for each of them.
+// The server sends responses to the browser for each of the extra requests.
+
+PART TWO: PRACTICE TOOLS
+
+Using curl, make a GET request to the icanhazdadjoke.com API to find all jokes involving the word “pirate”
+// curl https://icanhazdadjoke.com/search\?term\=pirate
+
+Use dig to find what the IP address is for icanhazdadjoke.com
+// SERVER: 2001:1998:f00:2::1#53(2001:1998:f00:2::1)
+
+Make a simple web page and serve it using python3 -m http.server. Visit the page in a browser.
+// localhost:8000 showed my python3 server site.
+
+PART THREE: EXPLORE DEV TOOLS
+
+Build a very simple HTML form that uses the GET method (it can use the same page URL for the action) when the form is submitted.
+
+Add a field or two to the form and, after submitting it, explore in Chrome Developer tools how you can view the request and response headers.
+// The request and response headers are in the Network tab. 
+// Select the All tab below the filter input and the request will show.
+
+Edit the page to change the form type to POST, refresh in the browser and re-submit. Do you still see the field in the query string?
+// The query string in the url does not show when the method is set to post.
+// The Requested URL within General does not show the query string either.
+
+Explore in Chrome how you can view the request and response headers, as well as the form data.
+// Within the request and response headers, we see data that tells us what type of method we used, and what the content type is. We are not able to see the input field data we submitted because we are not saving this information to a variable, database, or server. But, we are able to see the action attribute values.
+
+PART FOUR: EXPLORE THE URL API
+
+At times, it’s useful for your JavaScript to look at the URL of the browser window and change how the script works depending on parts of that (particularly the query string).
+
+https://developer.mozilla.org/en-US/docs/Web/API/URL
+
+Try some of the code examples in the Chrome Console so that you can get comfortable with the basic methods and properties for instances of the URL class.
+
+const url = new URL('/rhinos', 'http://www.example.com/snakes');
+// I inspected the URL Object data that returned.
+// This instance creates a new href of http://www.example.com/rhinos .
+// It takes http://www.example.com/snakes, and creates http://www.example.com/rhinos. 
+
+const parsedUrl = new URL(window.location.href);
+// This creates a variable where the assigned value is a URL Object.
+// The data of each property pertains to the current url the browser is on when we create the variable.
+// Ex, let's say we are on apple.com, and we go to our js console and type, const parsedUrl = new URL(window.location.href); .
+// When we access parsedUrl, we get, 
+// {origin: 'https://www.apple.com', protocol: 'https:', username: '', password: '', host: 'www.apple.com', …}      
