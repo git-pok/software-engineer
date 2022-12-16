@@ -1,0 +1,16 @@
+.bold {
+    font-weight: 900;
+    margin-right: 8px;
+}
+
+li {
+    font-weight: 100; 
+}
+
+.spaced-character {
+    margin: 0px 15px;
+}
+
+#episodesList li {
+    margin-bottom: 15px;
+}

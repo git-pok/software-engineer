@@ -1,0 +1,10 @@
+PROJECT DOCUMENTATION
+BUG 1 FIXED
+// Show a default image if the show has no image.
+
+BUG 2 FIXED
+// When a user searches a show, the show appears in the DOM.
+// Let's say the user hits the Episodes button,
+// then searches another show.
+// The episodes from the previously searched show,
+// would be in the new searched shows episodes lists.
