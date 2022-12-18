@@ -105,7 +105,7 @@ $searchForm.on("submit", async function (evt) {
 // argument for this funciton gets created and passed in, 
 // in displayEpisodes()
 async function getEpisodesOfShow(id) {
-  const url = `http://api.tvmaze.com/shows/${id}/episodes`; 
+  const url = `https://api.tvmaze.com/shows/${id}/episodes`; 
   const apiRes = await axios.get(url);
   const data = apiRes.data;
   return data;
