@@ -1,0 +1,73 @@
+DOCUMENTATION
+PART ! EXPLORE THE STARTER CODE
+
+Our front-end app consists of two parts:
+
+1. Classes and methods for the big data ideas: a Story class for 
+each story, a StoryList class for the list of stories, and a User class 
+for the logged-in user (if any). These methods also handle 
+interacting with the API. 
+
+2. Functions for the UI, handling things like reading form 
+values from forms and manipulating the DOM.
+
+Note, We’ve divided the code up into those different parts for readability and maintenance. 
+It’s often useful to think about the data and the UI separately, (a separation of concerns). 
+Many apps are written this way.
+
+There’s one JS file for the “data” layer of the app:
+js/models.js
+contains classes to manage the data of the app and the connection to the API. 
+The name models.js to describe a file containing these kinds of classes that focus 
+on the data and logic about the data. UI stuff shouldn’t go here.
+Read this file thoroughly. There is a new keyword here, static. 
+Make sure you understand what it means before moving on.
+
+For the UI layer, we’ve broken this into several files by topic:
+js/main.js
+contains code for starting the UI of the application, and other miscellaneous things.
+
+js/user.js
+contains code for UI about logging in/signing up/logging out, as well as code about 
+remembering a user when they refresh the page and logging them in automatically.
+
+js/stories.js
+contains code for UI about listing stories.
+
+js/nav.js
+contains code to show/hide things in the navigation bar, 
+and well as code for when a user clicks in that bar.
+
+PREPARING TO READ THE CODE
+When meeting a new codebase, be thoughtful about how to read the code. 
+It’s usually not helpful to just read everything in detail, top to bottom. 
+You won’t remember it all, and it won’t help you understand what 
+the pieces are and how they fit together.
+
+Instead, in the beginning, think about skimming the codebase first to just see 
+what the classes and functions are. Look at which functions call other functions. 
+Read the documentation comments before a function or class to get an idea 
+of what it should do and return.
+
+It can be very helpful to make a pen-and-paper drawing of the 
+names of the important functions and how the call the other functions.
+
+PART 2 CREATING NEW STORIES
+In this part, you’ll design and write the functionality to let logged-in users 
+add new stories. We’ve broken this task into two parts. It will help 
+you to tackle them in this order.
+
+SUBPART 2A: SENDING STORY DATA TO THE BACKEND API
+Here, you’ll need to write a method that adds a new story 
+by sending the right data to our API.
+
+We’ve given you a comment string and a stub method for this, addStory, in the StoryList class. 
+Complete this function, making sure your function takes in the same parameters and 
+returns the same result as our comment said.
+
+Test that this works, and that your method returns an instance of Story. 
+You can do this in the browser console with:
+let newStory = await storyList.addStory(currentUser,
+    {title: "Test", author: "Me", url: "http://meow.com"});
+And make sure that returns an instance of the Story class:
+newStory instanceof Story;      // should be true!
