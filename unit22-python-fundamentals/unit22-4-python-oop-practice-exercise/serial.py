@@ -31,7 +31,8 @@ class SerialGenerator:
         """
         initializes the objects start and next attributes for each instance
         """
-        self.start = self.next = start 
+        self.start = start 
+        self.next = start 
 
     def generate(self):
         """
