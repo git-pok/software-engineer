@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block head_title %}Test html file{% endblock %}
+{% block body_content %}
+<h1>Story Form</h1>
+<form id="madlib-form" action="/story">
+    <label for="place">Place</label>
+    <input type="text" id="place" placeholder="Type a place!" name="place">
+
+    <label for="noun">Noun</label>
+    <input type="text" id="noun" placeholder="Type a noun!" name="noun">
+
+    <label for="verb">Verb</label>
+    <input type="text" id="verb" placeholder="Type a verb!" name="verb">
+
+    <label for="adjective">Adjective</label>
+    <input type="text" id="adjective" placeholder="Type an adjective!" name="adjective">
+
+    <label for="plural_noun">Plural Noun</label>
+    <input type="text" id="plural_noun" placeholder="Type a plural noun!" name="plural_noun">
+
+    <button>Submit!</button>
+</form>
+{% endblock %}
