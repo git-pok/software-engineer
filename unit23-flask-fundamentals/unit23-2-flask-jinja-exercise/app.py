@@ -7,11 +7,27 @@ app.config['SECRET_KEY'] = 'madlibs'
 debug = DebugToolbarExtension(app)
 
 @app.route("/")
-def home_form(): 
+def home_form():
+    """
+    The route for the apps home page.
+    It repsonds with form.html, a form.
+    form.html allows users to type nouns and such.
+    Then, it creates a story from them,
+    when implemented to a template created from the class, Story.
+    """ 
     return render_template("form.html")
 
 @app.route("/story")
 def make_story():
+    """
+    Line 31 creates a variable that holds the query string data.
+    Line 32-36 creates variables for each value in query_dict.
+    Line 38 creates a dictionary with the query string variables.
+    Line 46 creates a story template with class, Story.
+    Line 52 fills the story template with the values from line 38, answers.
+    Line 54 responds with story.html,
+    a story made of the query string parameter values.
+    """
     query_dict = request.args
     place_val = query_dict.get("place")
     noun_val = query_dict.get("noun")
