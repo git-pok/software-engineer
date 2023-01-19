@@ -18,18 +18,6 @@ def survey_home_page():
     instructions = satisfaction_survey.instructions
     return render_template("survey_start.html", title=title, instructions=instructions)
 
-@app.route('/questions/0')
-def questions_0():
-    question_one = satisfaction_survey.questions[0].question
-    question_one_choices = satisfaction_survey.questions[0].choices
-    question_one_choice_one = question_one_choices[0]
-    question_one_choice_two = question_one_choices[1]
-     
-    return render_template("question-0.html", question_one=question_one, 
-        question_one_choice_one=question_one_choice_one,
-        question_one_choice_two=question_one_choice_two
-        )
-
 @app.route('/complete')
 def survey_complete(): 
     return render_template("survey_complete.html")
