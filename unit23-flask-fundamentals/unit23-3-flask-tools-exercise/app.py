@@ -7,7 +7,7 @@ app.config['SECRET_KEY'] = 'survey'
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 
-# Line 86 clears REPONSE, the answers to questions,
+# Line 48 clears REPONSE, the answers to questions,
 # so the survey may start up again.
 RESPONSE = []
 SURVEY_LEN = len(satisfaction_survey.questions)
