@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block head_tag_title %}Survey Start Page{% endblock %}
+{% block body_tag_content %}
+<div class="center">
+<h1>{{title}}</h1>
+<p>{{instructions}}</p>
+<form action="/set_responses_cookie" method="POST">
+    <button>Start Survey</button>
+</form>
+</div>
+{% endblock %}
