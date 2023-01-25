@@ -26,16 +26,6 @@ async function flaskServerRequest(evt) {
         alert(`${word} is not a valid word!`);
     }
 }
-// Old logic for if statement that starts in line 16.
-    // if (resData === 'not-word') {
-    //     alert(`${word} is not a valid word!`);
-    // } else if (resData === 'not-on-board') {
-    //     alert(`${word} is a valid word, but is not on board!`);
-    // } else {
-    //     score += word.length
-    //     changeScore();
-    //     alert(`${word} is on the board!`);
-    // }
 
 function changeScore() {
     scorePgh.innerText = `Score: ${score}`;
