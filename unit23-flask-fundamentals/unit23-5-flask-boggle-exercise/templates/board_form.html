@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head_title %}Board and Form Page{% endblock %}
+
+{% block game_board_content %}
+<h2>Board and Form</h2>
+{% for char in boggle_board %}
+{% for letter in char %}
+<div class="letter">{{letter}}</div>
+{% endfor %}
+{% endfor %}
+<form id="boggle-form" action="/check-word" method="POST">
+    <label for="guess">Guess</label>
+    <input type="text" id="guess" placeholder="Type a Guess!" name="boggle_guess">
+
+    <button class="submit">Submit!</button>
+</form>
+{% endblock %}
+
+{% block game_board_extras %}
+<p class="score">Score: 0</p>
+<p class="timer">Timer</p>
+{% endblock %}
