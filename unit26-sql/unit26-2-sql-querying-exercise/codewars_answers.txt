@@ -1,0 +1,10 @@
+Codewars Username for Completed Assignment Files
+fin-poc
+
+Answers:
+1. SELECT * FROM people WHERE age > 50 ORDER BY age DESC;
+2. SELECT SUM(age) AS age_sum FROM people;
+3. SELECT MIN(age) AS age_min, MAX(age) AS age_max FROM people;
+4. SELECT * FROM students WHERE IsActive;
+5. SELECT age, COUNT(age) AS people_count FROM people GROUP BY age;
+6. SELECT age, COUNT(age) AS total_people FROM people GROUP BY age HAVING age >= 10 AND COUNT(age) >= 10;
