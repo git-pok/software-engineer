@@ -74,17 +74,41 @@ INSERT INTO producers (producer_name)
     ('Shellback'), ('Benny Blanco'), ('The Matrix'),
     ('Darkchild'); 
 
-CREATE TABLE productions (
+CREATE TABLE albums_songs (
   id SERIAL PRIMARY KEY,
   song_id INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
-  artist_id INTEGER NOT NULL REFERENCES artists(id) ON DELETE CASCADE,
-  album_id INTEGER NOT NULL REFERENCES albums(id),
-  producer_id INTEGER NOT NULL REFERENCES producers(id)
+  album_id INTEGER NOT NULL REFERENCES albums(id) ON DELETE CASCADE
 );
 
-INSERT INTO productions (song_id, artist_id, album_id, producer_id)
+INSERT INTO albums_songs (song_id, album_id)
   VALUES
-    (1, 1, 1, 1), (1, 1, 1, 2), (2, 2, 2, 3), (3, 3, 3, 4), (3, 4, 3, 4),
-    (4, 5, 4, 5), (4, 6, 4, 5), (5, 7, 5, 6), (6, 8, 6, 7), (6, 9, 6, 7),
-    (7, 10, 7, 8), (7, 11, 7, 9), (8, 12, 8, 10), (8, 13, 8, 11),
-    (9, 14, 9, 12), (10, 15, 10, 13);
+    (1, 1), (2, 2), (3, 3),
+    (4, 4), (5, 5), (6, 6),
+    (7, 7), (8, 8),
+    (9, 9), (10, 10);
+
+CREATE TABLE albums_producers (
+  id SERIAL PRIMARY KEY,
+  album_id INTEGER NOT NULL REFERENCES albums(id) ON DELETE CASCADE,
+  producer_id INTEGER NOT NULL REFERENCES producers(id) ON DELETE CASCADE
+);
+
+INSERT INTO albums_producers (album_id, producer_id)
+  VALUES
+    (1, 1), (1, 2), (2, 3), (3, 4),
+    (4, 5), (5, 6), (6, 7),
+    (7, 8), (7, 9), (8, 10), (8, 11),
+    (9, 12), (10, 13);
+
+CREATE TABLE songs_artists (
+  id SERIAL PRIMARY KEY,
+  song_id INTEGER NOT NULL REFERENCES songs(id) ON DELETE CASCADE,
+  artist_id INTEGER NOT NULL REFERENCES artists(id) ON DELETE CASCADE
+);
+
+INSERT INTO songs_artists (song_id, artist_id)
+  VALUES
+    (1, 1), (2, 2), (3, 3), (3, 4),
+    (4, 5), (4, 6), (5, 7), (6, 8), (6, 9),
+    (7, 10), (7, 11), (8, 12), (8, 13),
+    (9, 14), (10, 15);
