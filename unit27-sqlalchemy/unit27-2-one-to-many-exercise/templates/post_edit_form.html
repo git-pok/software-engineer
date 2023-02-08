@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Blogly Application Edit Post Form{% endblock %}
+{% block h1 %}Post Edit Form{% endblock %}
+{% block body %}
+<form action="/posts/{{post_data.id}}/edit" method="POST">
+    <label for="title-edit">Title</label>
+    <input type="text" id="title-edit" name="title-edit" placeholder="Change Title!">
+
+    <label for="content-edit">Content</label>
+    <input type="text" id="content-edit" name="content-edit" placeholder="Change Content!">
+
+    <button>SUBMIT!</button>
+</form>
+
+<button type="button"><a href="/users/{{post_data.user_id}}">CANCEL</a></button>
+{% endblock %}
