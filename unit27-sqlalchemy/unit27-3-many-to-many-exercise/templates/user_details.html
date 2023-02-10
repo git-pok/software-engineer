@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Blogly Application User Details{% endblock %}
+{% block h1 %}User Details{% endblock %}
+{% block body %}
+<form action="/user/delete/{{user.id}}" method="POST">
+<h2>{{user.first_name}} {{user.last_name}}</h2>
+<img src="{{user.image_url}}">
+<button type="button"><a href="/users/{{user.id}}/edit">EDIT</a></button>
+<button type="submit">DELETE</button>
+</form>
+
+<h3>Posts</h3>
+<ul>
+    {% for post in posts_data %}
+    <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
+    {% endfor %}
+</ul>
+
+<button type="button"><a href="/users/{{user.id}}/posts/new">ADD POST</a></button>
+{% endblock %}

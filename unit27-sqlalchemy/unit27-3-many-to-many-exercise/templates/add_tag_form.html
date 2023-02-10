@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Blogly Application Create Tag Form{% endblock %}
+{% block h1 %}Create A Tag{% endblock %}
+{% block body %}
+<form action="/tags/new" method="POST">
+    <label for="tag-name">Tag Name</label>
+    <input type="text" id="tag-name" name="tag-name" placeholder="Create A Tag!">
+
+    <button type="submit">SUBMIT!</button>
+    <button type="button"><a href="/tags">CANCEL!</a></button>
+</form>
+{% endblock %}

@@ -1,0 +1,5 @@
+ROUTES TO TEST FOR THIS APP
+/
+/users
+/tags
+

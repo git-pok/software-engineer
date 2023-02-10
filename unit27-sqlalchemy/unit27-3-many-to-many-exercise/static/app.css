@@ -1,0 +1,105 @@
+body {
+    font-size: 10%;
+}
+
+h1 {
+    font-size: 25em;
+    margin-bottom: 0px;
+}
+
+h2, h3 {
+    font-size: 18em;
+}
+
+p, li {
+    font-size: 10em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form button, button {
+    width: 100px;
+    margin-bottom: 20px;
+    font-size: 7em;
+    transition: border 0.2s ease-in;
+}
+
+form button:hover, button:hover {
+    border-color: #7a0074;
+}
+
+form input {
+    width: 500px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 10em;
+}
+
+.checkbx {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    width: 120px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.checkbx > label {
+    width: 70px;
+}
+
+input[type="checkbox"] {
+    width: 40px;
+    
+    padding: 0px 0px;
+}
+
+ul {
+    margin-bottom: 30px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/*used unsplash for images.
+Left click the detail image and copy address
+*/
+img {
+    display: block;
+    width: 15%;
+    margin-bottom: 30px;
+}
+
+#tags {
+    display: flex;
+    align-items: baseline;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10%;
+    background-color: rgb(0, 54, 231);
+    color: rgb(255, 255, 255);
+    width: 80px;
+    height: 20px;
+    text-align: center;
+    margin: 0px 20px 30px 0px;
+    font-size: 15px;
+}
+
+#tag-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 30px;
+    height: 20px;
+}

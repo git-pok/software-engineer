@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Blogly Application Edit Post Form{% endblock %}
+{% block h1 %}Post Edit Form{% endblock %}
+{% block body %}
+<form action="/posts/{{post_data.id}}/edit" method="POST">
+    <label for="title-edit">Title</label>
+    <input type="text" id="title-edit" name="title-edit" placeholder="{{post_data.title}}">
+
+    <label for="content-edit">Content</label>
+    <input type="text" id="content-edit" name="content-edit" placeholder="{{post_data.content}}">
+    
+    <div class="checkbx">
+        {% for tag in tags %}
+            <label for="checkbox">{{tag.name}}</label>
+            <input type="checkbox" id="checkbox-{{tag.name}}" name="checkbox" value="{{tag.name}}">
+        {% endfor %}
+    </div>
+
+    <button>SUBMIT!</button>
+</form>
+
+<button type="button"><a href="/users/{{post_data.user_id}}">CANCEL</a></button>
+{% endblock %}

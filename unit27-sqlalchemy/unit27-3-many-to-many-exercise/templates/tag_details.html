@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Blogly Application Tag Details{% endblock %}
+{% block h1 %}Tag: {{tag.name.capitalize()}}{% endblock %}
+{% block body %}
+<h3>Posts for {{tag.name.capitalize()}}</h3>
+<ul>
+    {% for data in posts_for_tag %}
+    <li><a href="">{{data.title}}</a></li>
+    {% endfor %}
+</ul>
+
+<form action="/tags/{{tag.id}}/delete">
+    <button type="button"><a href="/tags/{{tag.id}}/edit">EDIT</a></button>
+    <button type="submit"><a href="/tags/{{tag.id}}/delete">DELETE</a></button>
+</form>
+{% endblock %}
