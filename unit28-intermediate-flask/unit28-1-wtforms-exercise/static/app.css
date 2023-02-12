@@ -1,0 +1,102 @@
+body {
+    font-size: 10%;
+}
+
+h1 {
+    font-size: 25em;
+    margin-bottom: 0px;
+}
+
+h2, h3 {
+    font-size: 18em;
+}
+
+p, li {
+    font-size: 10em;
+}
+
+.bold {
+    font-weight: 900;
+    color: rgb(0, 114, 0);
+}
+
+.pet-div {
+    margin-bottom: 90px;
+}
+
+.p1 {
+    font-size: 12em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form button, button {
+    width: 100px;
+    margin-bottom: 20px;
+    font-size: 7em;
+    transition: border 0.2s ease-in;
+}
+
+form button:hover, button:hover {
+    border-color: #7a0074;
+}
+
+form input {
+    width: 500px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#available {
+    width: 20px;
+    margin: 0px 0px 40px 0px;
+    border: solid 2px rgb(0, 117, 185); 
+}
+
+label[for="available"] {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    width: 10px;
+}
+
+.input {
+    height: 30px;
+    border: solid 2px rgb(0, 117, 185);
+}
+
+label {
+    font-size: 10em;
+}
+
+/* ul {
+    margin-bottom: 30px;
+}
+
+li {
+    margin-bottom: 10px;
+} */
+
+/*used unsplash for images.
+Left click the detail image and copy address
+*/
+img {
+    display: block;
+    width: 23%;
+    margin-bottom: 30px;
+}
+
+.errors {
+    color: rgb(0, 0, 0);
+    width: 500px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 8px;
+    background-color: rgb(255, 187, 187);
+    box-shadow: #717171 2px 2px 1px;
+}

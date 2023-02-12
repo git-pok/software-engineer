@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Pet Adoption Application Pet Details{% endblock %}
+{% block h1 %}{{pet.name}} Details{% endblock %}
+{% block body %}
+<div class="pet-div">
+<p>Name: {{pet.name}}</p>
+<p>Species: {{pet.species}}</p>
+<p>Age: {{pet.age}}</p>
+<img src="{{pet.photo_url}}">
+</div>
+
+<form method="POST">
+    <h3>Edit Pet</h3>
+    {{ form.hidden_tag() }}
+    {% for field in form if field.widget.input_type != 'hidden' %}
+    <div>
+        {{field.label}}
+        {{field(class_="input")}}
+        {% for err in field.errors %}
+            <p class="errors">{{err}}</p>
+        {% endfor %}    
+    </div>
+    {% endfor %}
+    <button type="submit">SUBMIT</button>
+</form>
+{% endblock %}

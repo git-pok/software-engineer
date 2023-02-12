@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Pet Adoption Application Home{% endblock %}
+{% block h1 %}Pet Adoption Agency{% endblock %}
+{% block body %}
+<div>
+    {% for pet in pets %}
+    <div class="pet-div">
+        <h3 class="p1"><a href="/{{pet.id}}">{{pet.name}}</a></h3>
+        <img src="{{pet.photo_url}}" alt="{{pet.name.lower()}}-photo">
+        {% if pet.available == True %}
+            <p class="bold">Available</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<button type="button"><a href="/add">Add Pet</a></button>
+{% endblock %}
