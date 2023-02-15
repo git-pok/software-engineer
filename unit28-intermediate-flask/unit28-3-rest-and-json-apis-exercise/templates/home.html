@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Cupcakes JSON API{% endblock %}
+{% block h1 %}CUPCAKES{% endblock %}
+{% block body %}
+<div>
+    <div class="cupcake-div">
+       <ul>
+
+       </ul> 
+    </div>
+</div>
+
+<form action="/api/cupcakes" method="POST">
+    <label for="flavor">Flavor</label>
+    <input id="flavor" type="text" name="flavor" placeholder="Enter a Flavor!">
+
+    <label for="rating"></label>
+    <input id="rating" type="number" name="rating" placeholder="Enter a Rating!">
+
+    <label for="size"></label>
+    <input id="size" type="text" name="size" placeholder="Enter a Size!">
+
+    <label for="image"></label>
+    <input id="image" type="text" name="image" placeholder="Enter an Image Url">
+    <button>SUBMIT!</button>
+</form>
+{% endblock %}

@@ -1,0 +1,50 @@
+body {
+    font-size: 10%;
+}
+
+h1 {
+    font-size: 20em;
+    margin-bottom: 0px;
+}
+
+li {
+    font-size: 14em;
+    margin-bottom: 18px;
+}
+
+.cupcake-div {
+    margin-bottom: 90px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form button, button {
+    width: 100px;
+    margin-bottom: 20px;
+    font-size: 7em;
+    transition: border 0.2s ease-in;
+}
+
+form button:hover, button:hover {
+    border-color: #7a0074;
+}
+
+form input {
+    width: 500px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+label {
+    font-size: 10em;
+}
+
+img {
+    display: block;
+    width: 14vw;
+    margin-bottom: 50px;
+}
