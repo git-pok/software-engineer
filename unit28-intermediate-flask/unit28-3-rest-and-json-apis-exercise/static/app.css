@@ -1,24 +1,45 @@
 body {
     font-size: 10%;
+    overflow-x: hidden;
 }
 
 h1 {
     font-size: 20em;
     margin-bottom: 0px;
+    text-shadow: #de28ba 1px 0px 10px;
+}
+
+h2, h3 {
+    font-size: 15em;
+    margin-bottom: 0px;
+    text-shadow: #2883de 1px 0px 10px;
 }
 
 li {
     font-size: 14em;
     margin-bottom: 18px;
+    width: 300px;
 }
 
 .cupcake-div {
     margin-bottom: 90px;
 }
 
+ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+}
+
+ul > div {
+    margin-right: 30px;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
 }
 
 form button, button {
