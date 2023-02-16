@@ -159,8 +159,9 @@ def tags():
 def tags_details(tag_id):
     """returns tag page with posts that have its tag"""
     tag = Tag.query.get(tag_id)
+    tag_name_cptl = tag.name.capitalize()
     posts_for_tag = tag.posts
-    return render_template('tag_details.html', tag=tag, posts_for_tag=posts_for_tag)
+    return render_template('tag_details.html', tag=tag, posts_for_tag=posts_for_tag, tag_cptl=tag_name_cptl)
 
 @app.route('/tags/new')
 def add_tag_form():
@@ -179,7 +180,8 @@ def submitted_add_tag_form():
 def edit_tag_form(tag_id):
     """requests the tag edit form"""
     tag = Tag.query.get(tag_id)
-    return render_template('edit_tag_form.html', tag=tag)
+    tag_name_cptl = tag.name.capitalize()
+    return render_template('edit_tag_form.html', tag=tag, tag_cptl=tag_name_cptl)
 
 @app.route('/tags/<int:tag_id>/edit', methods=['POST'])
 def submitted_edit_tag_form(tag_id):
