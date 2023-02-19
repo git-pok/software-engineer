@@ -7,9 +7,7 @@
     <div>
         {{field.label}}
         {{field(class_="input")}}
-        <!-- Note, these errors, err, wont show unless we delete, required,
-            attribute from the html input inpsection,
-            before we submit the form. -->
+        
         {% for err in field.errors %}
             <p class="error">{{err}}</p>
         {% endfor %}    
