@@ -4,6 +4,10 @@ body {
     margin: 8px 8px;
 }
 
+.bold {
+    font-weight: 900;
+}
+
 h1 {
     font-size: 20em;
     margin-bottom: 0px;
@@ -68,6 +72,14 @@ p {
     text-decoration: none;
     color: rgb(255, 255, 255);
     list-style: none;
+    text-align: center;
+}
+
+.nav-link:hover, .nav-li:hover {
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 12, 121);
+    list-style: none;
 }
 
 .div {
@@ -114,7 +126,7 @@ form input {
     justify-content: flex-end;
 }
 
-form #button-li, #button-li {
+button #button-li, #button-li {
     background-color: #000c79;
     border: none;
     text-decoration: none;
@@ -123,6 +135,13 @@ form #button-li, #button-li {
     font-size: 14em;
     display: flex;
     justify-content: center;
+}
+
+#button-li:hover {
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 12, 121);
+    list-style: none;
 }
 
 label {

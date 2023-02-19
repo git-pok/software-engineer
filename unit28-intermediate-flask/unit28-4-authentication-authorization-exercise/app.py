@@ -3,7 +3,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Feedback
 from forms import RegisterUserForm, LoginUserForm, FeedbackForm
 from app_methods import flash_error, flash_success, delete_user_feedback_and_session
-from app_methods import create_feedback, update_feedback, delete_feedback
+from app_methods import create_feedback, update_feedback, delete_feedback, create_db
 from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
@@ -24,12 +24,14 @@ debug = DebugToolbarExtension(app)
 # connect the app to sqlalchemy
 connect_db(app)
 
+with app.app_context():
+    create_db(db)
+
 @app.route('/')
 def take_to_register_page():
     """
     redirects to /register
     """
-    db.create_all()
     return redirect('/register')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -47,6 +49,7 @@ def register_page():
 
         user = User.register(username, pwd, eml, fn, ln)
         db.session.add(user)
+
         try:
             db.session.commit()
             session["username"] = user.username
@@ -108,6 +111,7 @@ def user_page(username):
     responds with user details page
     """   
     user = User.query.filter_by(username=username).first()
+
     try:
         feedback = db.session.query(
         Feedback.title,

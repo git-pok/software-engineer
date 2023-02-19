@@ -15,7 +15,7 @@
             </li>
             <ul class="nav-ul">
                 {% if session["username"] %}
-                <form action="/logout" method="POST" class="nav-li">
+                <form action="/logout" method="POST">
                     <button id="button-li">Logout</button>
                 </form>
                 {% else %}
@@ -42,11 +42,5 @@
 
     <h1>{% block h1 %}{% endblock %}</h1>
     {% block body %} {% endblock %}
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
-        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-        crossorigin="anonymous"></script>
-    <script src="static/app.js"></script> -->
 </body>
 </html>
