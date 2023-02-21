@@ -16,6 +16,7 @@
 </div>
 <div class="feedback-div">
     {% if feedback %}
+    <button><a href="/users/{{user.username}}/feedback/add">+FEEDBACK</a></button>
         {% for tuple in feedback %}
         <form action="/feedback/{{ tuple[2] }}/delete" mehtod="POST">
             <h2>Feedback: {{ tuple[0] }}</h2>
@@ -30,6 +31,7 @@
         {% endfor %}
     {% else %}
         <h2>No Feedback</h2>
+        <button><a href="/users/{{user.username}}/feedback/add">+FEEDBACK</a></button>
     {% endif %}
 </div>
 {% endblock %}

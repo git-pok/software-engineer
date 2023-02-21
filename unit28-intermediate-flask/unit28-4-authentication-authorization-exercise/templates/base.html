@@ -11,7 +11,11 @@
     <nav>
         <div class="container">
             <li class="header">
-                <a href="/" class="nav-link">Flask Authenticate App</a>
+                {% if session["username"] %}
+                <a href="/users/{{session['username']}}" class="nav-link">Flask Authenticate App</a>
+                {% else %}
+                <a href="/" class="nav-link">Flask Authenticate App</a>                
+                {% endif %}
             </li>
             <ul class="nav-ul">
                 {% if session["username"] %}

@@ -136,7 +136,7 @@ def delete_user(username):
     deletes user instance from database
     """
     if 'username' not in session:
-        flash_error("Must be logged in to visit the secret page!")
+        flash_error("Must be logged in to visit this page!")
         return render_template('user.html')
     else:
         delete_user_feedback_and_session(username)
