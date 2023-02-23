@@ -19,7 +19,7 @@ def create_db(db):
     """creates table and table object"""
     db.drop_all()
     db.create_all()
-    return User.query.all()
+    User.query.all()
 
 def delete_user_feedback_and_session(user):
     """

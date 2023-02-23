@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__)
 # sqlalchemy database connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///auth'
 # sqlalchemy test database connection
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pets_tests'
 # disable sqlalchemy track

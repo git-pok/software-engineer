@@ -1,5 +1,0 @@
-SEEDING THE DATABASE
-When seeding the database for this app,
-start the flask server and request localhost in the web browser.
-Then seed the file in a separate shell, in python.
-After, the database will have the data from the seed file
