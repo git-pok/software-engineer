@@ -2,4 +2,7 @@
 /unit23-flask-fundamentals/unit23-2-flask-jinja-exercise/venv/
 /unit23-flask-fundamentals/unit23-3-flask-tools-exercise/venv/
 /unit23-flask-fundamentals/unit23-3-flask-tools-exercise/.DS_Store/
-.DS_Store/
+**/.DS_Store
+/venv
+/.DS_Store
+/__pycache__
