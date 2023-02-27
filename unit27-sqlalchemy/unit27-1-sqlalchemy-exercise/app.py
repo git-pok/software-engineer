@@ -1,5 +1,6 @@
 # Blogly application
 from flask import Flask, request, render_template, redirect, flash
+from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension 
 from models import db, connect_db, User
 from app_blogly_methods import create_db, create_db_row, update_db_row, delete_db_row 

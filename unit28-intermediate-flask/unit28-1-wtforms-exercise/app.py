@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
-# from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy 
 from models import db, connect_db, Pet
 from forms import AddPetForm, EditPetForm
 from app_methods import create_new_pet, update_pet
