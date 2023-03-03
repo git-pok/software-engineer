@@ -261,8 +261,6 @@ const playCards = [
         "value": '10',
         "image": 'cards/10_of_hearts.png'
     },
-    
-
 ]
 
 const deckBaseUrl = 'https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1';
@@ -284,7 +282,7 @@ function logCard(cards) {
             "suit": cards[0].suit,
         }
     } catch {
-        alert('no more cards!');
+        alert('No more cards!');
         location.reload();
     } 
 }
@@ -294,17 +292,16 @@ let count = 0;
 function createCardHtml(obj) {
     const card = document.querySelector('.card');
     const img = document.createElement('img');
-    for (let val of playCards) {
-        if (count === 0 && obj.value === val.value && obj.suit === val.suit) {
-            count += 1;
-            img.setAttribute('src', val.image);
-            img.classList.add('card-front');
-            card.append(img);
-        } else if (count > 0 && obj.value === val.value && obj.suit === val.suit) {
-            img.setAttribute('src', val.image);
-            img.classList.add('card-front');
-            card.append(img);
-        }
+    match = playCards.find((val) => obj.value === val.value && obj.suit === val.suit)
+    if (count === 0 && match) {
+        count += 1;
+        img.setAttribute('src', match.image);
+        img.classList.add('card-front');
+        card.append(img);
+    } else if (count > 0 && match) {
+        img.setAttribute('src', match.image);
+        img.classList.add('card-front');
+        card.append(img);
     }
 }
 
