@@ -11,7 +11,7 @@ app = Flask(__name__)
 # sqlalchemy database connection
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///auth'
 # sqlalchemy test database connection
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///pets_tests'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///users_tests'
 # disable sqlalchemy track
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # enable sqlalchemy echo for terminal output when querying
@@ -24,7 +24,11 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 debug = DebugToolbarExtension(app)
 # connect the app to sqlalchemy
 connect_db(app)
-
+# debugger1
+# import pdb
+# pdb.set_trace()
+# debugger2
+# raise
 with app.app_context():
     create_db(db)
 
@@ -40,7 +44,6 @@ def register_page():
     """returns register form"""
     form = RegisterUserForm()
 
-    # checks for a post request and validates CSRF Token
     if form.validate_on_submit():
         username = form.username.data
         pwd = form.password.data
@@ -50,7 +53,10 @@ def register_page():
 
         user = User.register(username, pwd, eml, fn, ln)
         db.session.add(user)
-
+        # if these logics in try get put above the return,
+        # they will run even if the code fails;
+        # this led to unsuccessful registers gaining
+        # access to the secret page.
         try:
             db.session.commit()
             session["username"] = user.username
@@ -90,21 +96,27 @@ def secret_page():
     checks session for logged in username
     responds with secret page if username exists
     """
+    # if we dont use not in, or, gate = session.get("username", False),
+    # we would get a KeyError if the session key is not found.
     if 'username' not in session:
         flash_error("Must be logged in to visit the secret page!")
         return redirect('/')
     else:
         return render_template('secret.html')
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['GET', 'POST'])
 def logout():
     """
     logs user out
     clears session
     """
-    session.clear()
-    flash_success("Logged out successfully!")
-    return redirect('/')
+    if 'username' not in session:
+        flash_error("Must be logged in to visit this page!")
+        return redirect('/')
+    else:
+        session.clear()
+        flash_success("Logged out successfully!")
+        return redirect('/')
 
 @app.route('/users/<username>')
 def user_page(username):
@@ -131,14 +143,15 @@ def user_page(username):
         return render_template('user.html', user=user,
         feedback=feedback, username=username)
 
-@app.route('/users/<username>/delete', methods=['POST'])
+@app.route('/users/<username>/delete', methods=['GET', 'POST'])
 def delete_user(username):
     """
     deletes user instance from database
     """
-    if 'username' not in session:
-        flash_error("Must be logged in to visit this page!")
-        return render_template('user.html')
+    session_user = session.get("username", False)
+    if 'username' not in session or session_user != username:
+        flash_error("Can't visit this page!")
+        return redirect('/')
     else:
         delete_user_feedback_and_session(username)
         flash_success("Deleted user successfully!")
