@@ -1,0 +1,14 @@
+{
+  "name": "unit34-1-express-calculator-exercise",
+  "version": "1.0.0",
+  "description": "Build an Express.js application that performs three statistical operations given an arbitrary amount of numbers: mean, median, and mode.",
+  "main": "(calculator-app.js)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vincent Impreveduto",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
