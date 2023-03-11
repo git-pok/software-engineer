@@ -1,0 +1,17 @@
+{
+  "name": "unit34-2-routing-and-middleware-exercise",
+  "version": "1.0.0",
+  "description": "Build a simple JSON API application where we store a shopping list.",
+  "main": "(shoplist.js) ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vincent Impreveduto",
+  "license": "ISC",
+  "devDependencies": {
+    "supertest": "^6.3.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
