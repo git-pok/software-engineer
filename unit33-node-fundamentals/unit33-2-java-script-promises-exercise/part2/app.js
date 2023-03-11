@@ -275,15 +275,10 @@ function drawCard(deckId) {
 }
 
 function logCard(cards) {
-    try {
-        console.log(`${cards[0].value} of ${cards[0].suit}`);
-        return {
-            "value": cards[0].value,
-            "suit": cards[0].suit,
-        }
-    } catch {
-        alert('No more cards!');
-        location.reload();
+    console.log(`${cards[0].value} of ${cards[0].suit}`);
+    return {
+        "value": cards[0].value,
+        "suit": cards[0].suit,
     } 
 }
 
@@ -332,6 +327,10 @@ function drawCardGame() {
             const cards = resp.data.cards;
             obj = logCard(cards);
             createCardHtml(obj); 
+        })
+        .catch(resp => {
+            alert('No more cards!');
+            location.reload();
         })
     }       
 }
