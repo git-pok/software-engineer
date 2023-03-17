@@ -93,6 +93,10 @@ function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
     localStorage.setItem("token", currentUser.loginToken);
     localStorage.setItem("username", currentUser.username);
+    /* ADDED CUMULATIVE CODE */
+    const favArray = Array.from(currentUser.favorites);
+    localStorage.setItem("favorites", JSON.stringify(favArray));
+    /* END OF CUMULATIVE CODE */
   }
 }
 

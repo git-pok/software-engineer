@@ -38,12 +38,13 @@ function updateNavOnLogin() {
 /*ADDED CUMULATIVE CODE*/
 function showHideStoryForm() {
   if ($('.show-hide').css('display') === 'none') {
-    // console.log('NONE');
     $('.show-hide').show();
   } else {
     $('.show-hide').hide();
   }
 }
 
-$body.on("click", ".navbar-submit", showHideStoryForm);
+const $storySubmit = $(".navbar-submit");
+$storySubmit.on("click", showHideStoryForm);
+// $body.on("click", ".navbar-submit", showHideStoryForm);
 /*END OF ADDED CUMULATIVE CODE*/

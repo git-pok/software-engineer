@@ -74,55 +74,36 @@ class StoryList {
    */
 
   /*ADDED CUMULATIVE CODE*/
-  async addStory(user, {author, title, url}) {
+  async addStory(user, {author, title, url}) { 
+    // async addStory(user, {author, title, url}) {
     // UNIMPLEMENTED: complete this function!
     // created a token from the currentUser object,
     // that gets passed in to this function,
     // in place fo the user parameter
     // the object has a peoperty called loginToken  
     const token = user.loginToken;
+    console.log('author', author);
+    console.log('title', title);
+    console.log('URL', url);
+    // console.log('TOKEN', token);
+    // console.log('OBJECT', obj);
     // created a post request with the required API body format to create a story
     const res = await axios.post(`${BASE_URL}/stories`, 
       {token, story: { author, title, url }}
       );
-    // created a Story instance with the Story class    
-    const story = new Story(res.data.story);
+    // created a Story instance with the Story class
+    // This instance happens in getStories()     
+    // const story = new Story(res.data.story);
     // adds a story to the stories property,
     // within the APIs data object, within the stories property
-    this.stories.unshift(story);
+    // this.stories.unshift(story);
     // pushes the story variable into the ownStories property,
     // within the currentUser object
-    user.ownStories.unshift(story);
+    // user.ownStories.unshift(story);
 
-      return story;
+      // return story;
   }
 }
-
-// cant get a repsonse
-async function addStoryFromStoryForm(evt) {
-  evt.preventDefault();
-  const $storiesForm = $('#stories-form');
-
-  // variables like $author create errors and dont work 
-  const author = $("#author").val();
-  const title = $("#title").val();
-  const url = $("#url").val();
-  const username = currentUser.username;
-  // addStory() post body;
-  const storyData = { title, url, author, username };
-  // console.log('STORY DATA ', storyData); 
-  const story = await storyList.addStory(currentUser, storyData);
-  // creates html markup for story
-  const $story = generateStoryMarkup(story);
-  // adds story to page
-  $allStoriesList.prepend($story);
-
-  $("#author").val('');
-  $("#title").val('');
-  $("#url").val('');
-}
-
-$('#stories-form').on('submit', addStoryFromStoryForm);
   /*END OF CUMULATIVE CODE*/
 
 
