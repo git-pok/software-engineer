@@ -1,5 +1,4 @@
 "use strict";
-
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 
@@ -12,6 +11,15 @@ async function getAndShowStoriesOnStart() {
   putStoriesOnPage();
 }
 
+// ADDED CUMULATIVE CODE
+function checkForLoggedInUser() {
+  const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+  if (token || username) return true;
+  else return false;
+}
+// END OF CUMULATIVE CODE
+
 /**
  * A render method to render HTML for an individual Story instance
  * - story: an instance of Story
@@ -22,8 +30,45 @@ async function getAndShowStoriesOnStart() {
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
 
+  /* ADDED CUMULATIVE CODE */
   const hostName = story.getHostName();
-  return $(`
+  const loggedIn = checkForLoggedInUser();
+  
+  if (loggedIn) {
+    const jsonFavParse = JSON.parse(localStorage.getItem("favorites"));
+    const favTitles = jsonFavParse.map((val)=> val.storyId);
+    if (favTitles.includes(story.storyId)) {
+      console.log(story);   
+      return $(`
+        <li id="${story.storyId}">
+        <span>
+          <i class="fa-solid fa-star ${story.storyId}"></i>
+        </span>
+        <a href="${story.url}" target="a_blank" class="story-link">
+          ${story.title}
+        </a>
+        <small class="story-hostname">(${hostName})</small>
+        <small class="story-author">by ${story.author}</small>
+        <small class="story-user">posted by ${story.username}</small>
+        </li>
+      `);
+    } else {
+      return $(`
+        <li id="${story.storyId}">
+          <span>
+            <i class="fa-regular fa-star ${story.storyId}"></i>
+          </span>
+          <a href="${story.url}" target="a_blank" class="story-link">
+            ${story.title}
+          </a>
+          <small class="story-hostname">(${hostName})</small>
+          <small class="story-author">by ${story.author}</small>
+          <small class="story-user">posted by ${story.username}</small>
+        </li>
+      `);
+    }
+  } else {
+    return $(`
       <li id="${story.storyId}">
         <span>
           <i class="fa-regular fa-star ${story.storyId}"></i>
@@ -36,10 +81,30 @@ function generateStoryMarkup(story) {
         <small class="story-user">posted by ${story.username}</small>
       </li>
     `);
+  }
+  /* END OF CUMULATIVE CODE */
 }
 
-/** Gets list of stories from server, generates their HTML, and puts on page. */
+// function generateStoryMarkup(story) {
+  // console.debug("generateStoryMarkup", story);
 
+  // const hostName = story.getHostName();
+  // return $(`
+  //     <li id="${story.storyId}">
+  //       <span>
+  //         <i class="fa-regular fa-star ${story.storyId}"></i>
+  //       </span>
+  //       <a href="${story.url}" target="a_blank" class="story-link">
+  //       ${story.title}
+  //       </a>
+  //       <small class="story-hostname">(${hostName})</small>
+  //       <small class="story-author">by ${story.author}</small>
+  //       <small class="story-user">posted by ${story.username}</small>
+  //     </li>
+  //   `);
+// }
+
+/** Gets list of stories from server, generates their HTML, and puts on page. */
 function putStoriesOnPage() {
   console.debug("putStoriesOnPage");
 
@@ -67,12 +132,6 @@ async function addStoryFromStoryForm(evt) {
   // resulted in a bad request error.
   const storyObj = { title, url, author };
   await storyList.addStory(currentUser, storyObj);
-  // console.log('NEW STORY', newStory);
-  // console.log('STORY', newStory);
-  // creates html markup for story
-  // const $story = generateStoryMarkup(story);
-  // adds story to page
-  // $allStoriesList.prepend($story);
 
   $("#author").val('');
   $("#title").val('');
@@ -87,54 +146,108 @@ $('#stories-form').on('submit', addStoryFromStoryForm);
    * - story: a Story instance to add to favorites
    */
 
-  function addFavorite() {
-    const token = localStorage.getItem("token");
-    const username = localStorage.getItem("username")
-    if (token && username) console.log("LOGGED IN USER!!!");
-    // this.favorites.push(story);
-    // await this._addOrRemoveFavorite("add", story)
-  }
-
-async function addFav(e) {
-  // const clickedTitle = String(e.target.nextElementSibling.innerText);
-  // const clickedTitle = e.target.id
-  // const title = clickedTitle;
+function isClickedStoryFavStory(e) {
   const target = e.target; 
   const clickedStoryId = e.target.parentElement.parentElement.id;
   const storyId = clickedStoryId;
-  // const titleId = clickedTitle; 
-  // const clickedAuthor = e.target.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
-  // const slicedAuthor = clickedAuthor.slice(2);
-  // const author = slicedAuthor;
-  const stories = storyList.stories;
-  const storyArr = stories.filter((val)=> val);
   const jsonFavParse = JSON.parse(localStorage.getItem("favorites"));
   const favTitles = jsonFavParse.map((val)=> val.storyId);
   const isFavStory = favTitles.includes(storyId);
-  const storyIndx = jsonFavParse.findIndex((val)=> val.storyId === storyId); 
-  // console.log('storyArr', storyArr)
+  return isFavStory; 
+}
+
+function accessClickedStoryObj(e) {
+  const target = e.target; 
+  const clickedStoryId = e.target.parentElement.parentElement.id;
+  const storyId = clickedStoryId;
+  const stories = storyList.stories;
+  const storyArr = stories.filter((val)=> val);
   let clickedStory;
+  
   for (let story of storyArr) {
     if(story.storyId === storyId) clickedStory = story; 
     // if(story.storyId === storyId) console.log(story.title, story.storyId, story);
   }
-  console.log('CLICKED STORY', clickedStory);
-  // console.log(isFavStory);
-  // console.log(clickedStoryId);
-  // const $span = $(`.0-${storyId}`).get();
-  // Doesn't Work Yet
+
+  return clickedStory; 
+}
+
+async function addToHackOrSnoozeFav(storyId) {
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
+  const resp = await axios.post(`
+  https://hack-or-snooze-v3.herokuapp.com/users/${username}/favorites/${storyId}
+  `, { "token": token}
+  );
+  return resp;
+}
+
+async function deleteFromHackOrSnoozeFav(storyId) {
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
+  // Note, the delete request doesn't support both request body and headers.
+  // This is why I used data and headers properties. 
+  const resp = await axios.delete(
+  `https://hack-or-snooze-v3.herokuapp.com/users/${username}/favorites/${storyId}`, {
+    data: { "token": token }, "headers": { 'Content-Type': 'application/json' }}
+  );
+  return resp;
+}
+
+function addToCurrentUserFavorites(currentUser, clickedStory) {
+  const currentUserFavs = currentUser.favorites;
+  currentUserFavs.push(clickedStory);
+}
+
+function removeFromCurrentUserFavorites(currentUser, storyId) {
+  const currUsrFavs = currentUser.favorites;
+  const currUsrFavStryIndx = currUsrFavs.findIndex((val)=> val.storyId === storyId);
+  // console.log("CURR USER FAV STORY INDEX", currUsrFavStryIndx);
+  currUsrFavs.splice(currUsrFavStryIndx, 1);
+}
+
+async function addToLocalStorageFav(e) {
+  const loggedIn = checkForLoggedInUser();
+  let isFavStory = isClickedStoryFavStory(e);
+  let clickedStory = accessClickedStoryObj(e);
+
+  const target = e.target; 
+  const clickedStoryId = e.target.parentElement.parentElement.id;
+  const storyId = clickedStoryId;
+
+  const jsonFavParse = JSON.parse(localStorage.getItem("favorites"));
+
+  const storyIndx = jsonFavParse.findIndex((val)=> val.storyId === storyId);
+
   const span = document.getElementsByClassName(storyId);
-  span[0].classList.toggle('fa-solid');
+  // The toggle below without the setAttribute logic in the conditional below,
+  // works in changing the star to filled and not filled upon clicks also.
+  // span[0].classList.toggle('fa-solid');
   // console.log(span[0]);
-  // console.log('HGFHGHGFGHF', isFavStory, jsonFavParse);
-  if (isFavStory === true) {
+  if (loggedIn && isFavStory === true) {
+    // span[0].classList.remove('fa-solid');
+    // span[0].classList.add('fa-regular');
+    span[0].className = (`fa-regular fa-star ${storyId}`);
     jsonFavParse.splice(storyIndx, 1);
+    // console.log('DELETE PARSE', jsonFavParse);
     localStorage.setItem("favorites", JSON.stringify(jsonFavParse));
+    const resp = await deleteFromHackOrSnoozeFav(storyId);
+
+    removeFromCurrentUserFavorites(currentUser, storyId);
   } else {
+    // span[0].classList.remove('fa-regular');
+    // span[0].classList.add('fa-solid');
+    span[0].className = (`fa-solid fa-star ${storyId}`);
+    clickedStory.fav = true;
     jsonFavParse.push(clickedStory);
+
     localStorage.setItem("favorites", JSON.stringify(jsonFavParse));
+    const resp = await addToHackOrSnoozeFav(storyId);
+    // console.log(resp);
+    addToCurrentUserFavorites(currentUser, clickedStory);
   }
-  console.log(localStorage);
+
+  // console.log(localStorage);
   // e.target.id is what solves the undefined problem
   // I had a span that I was extracting the innerText from
   // the nextElementSiblings. This wasnt working with Boolean logic.
@@ -145,12 +258,10 @@ async function addFav(e) {
   // This forEach below allowed me see the value of val.title
   // is undefined which caused my values to neve compare.
   // console.log(jsonFavParse.forEach((val)=> typeof val.title))
-  // console.log(typeof title);
-  // console.log(favExists);
 }
 
-  const stories = document.querySelector(".stories-list");
-  stories.addEventListener("click", addFav);
+const stories = document.querySelector(".stories-list");
+stories.addEventListener("click", addToLocalStorageFav);
 
   // function addFavorite() {
   //   const token = localStorage.getItem("token");
