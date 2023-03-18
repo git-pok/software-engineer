@@ -1,17 +1,5 @@
 <!DOCTYPE html>
 
-<!-- Hack or Snooze
-
-     This is the only HTML page; the applications manipulates this DOM
-     during use.
-
-     Primary authors:
-     - Michael Hueter: initial creation, 2018
-     - Elie Schoppik: refactoring using OO, 2019
-     - Joel Burton: refactored and componentized, 2020
-     - You!
-  -->
-
 <html lang="en">
 
 <head>
@@ -50,7 +38,7 @@
   </div>
 </nav>
 
-<section class="stories-container container show-hide">
+<section class="stories-container container show-hide favs-container">
   <form id="stories-form">
     <label for="author">Author</label>
     <input id="author" type="text">
@@ -70,9 +58,9 @@
 
   <!-- loading message (removed by JS after stories loaded) -->
   <div id="stories-loading-msg">Loading&hellip;</div>
-
+  <div id="favs"></div>
   <!-- List of all stories -->
-  <ol id="all-stories-list" class="stories-list"></ol>
+  <ol id="favs-all-stories-list" class="stories-list favs"></ol>
 
 </section>
 

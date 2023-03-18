@@ -46,5 +46,4 @@ function showHideStoryForm() {
 
 const $storySubmit = $(".navbar-submit");
 $storySubmit.on("click", showHideStoryForm);
-// $body.on("click", ".navbar-submit", showHideStoryForm);
 /*END OF ADDED CUMULATIVE CODE*/
