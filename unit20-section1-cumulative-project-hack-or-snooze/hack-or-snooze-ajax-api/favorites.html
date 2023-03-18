@@ -38,7 +38,7 @@
   </div>
 </nav>
 
-<section class="stories-container container show-hide favs-container">
+<section class="stories-container container show-hide">
   <form id="stories-form">
     <label for="author">Author</label>
     <input id="author" type="text">
@@ -54,11 +54,11 @@
 </section>
 
 <!-- area for stories (all stories, user stories, favorites) -->
-<section class="stories-container container">
+<section class="stories-container container favs-container">
 
   <!-- loading message (removed by JS after stories loaded) -->
   <div id="stories-loading-msg">Loading&hellip;</div>
-  <div id="favs"></div>
+  <!-- <div id="favs"></div> -->
   <!-- List of all stories -->
   <ol id="favs-all-stories-list" class="stories-list favs"></ol>
 

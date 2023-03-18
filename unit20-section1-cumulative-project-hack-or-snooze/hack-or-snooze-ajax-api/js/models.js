@@ -74,8 +74,18 @@ class StoryList {
    */
 
   /*ADDED CUMULATIVE CODE*/
-  async addStory(user, {author, title, url}) {  
+  async addStory(user, {author, title, url}) { 
+    // async addStory(user, {author, title, url}) {
+    // UNIMPLEMENTED: complete this function!
+    // created a token from the currentUser object,
+    // that gets passed in to this function,
+    // in place fo the user parameter
+    // the object has a peoperty called loginToken  
     const token = user.loginToken;
+    // console.log('author', author);
+    // console.log('title', title);
+    // console.log('URL', url);
+    // created a post request with the required API body format to create a story
     const res = await axios.post(`${BASE_URL}/stories`, 
       {token, story: { author, title, url }}
       );
@@ -87,10 +97,23 @@ class StoryList {
  
     console.log(createdMessage);
     alert(createdMessage);
+    // created a Story instance with the Story class
+    // This instance happens in getStories()     
+    // const story = new Story(res.data.story);
+    // adds a story to the stories property,
+    // within the APIs data object, within the stories property
+    // this.stories.unshift(story);
+    // pushes the story variable into the ownStories property,
+    // within the currentUser object
+    // user.ownStories.unshift(story);
+
+      // return story;
   }
 
   async deleteStory(user, storyId) {   
     const token = user.loginToken;
+    // console.log('URL', url);
+    // created a post request with the required API body format to create a story
     try {
       const res = await axios.delete(`${BASE_URL}/stories/${storyId}`, { 
         data: { 
@@ -236,6 +259,14 @@ class User {
     const currUsrFavs = this.favorites;
     const currUsrFavStryIndx = currUsrFavs.findIndex((val)=> val.storyId === storyId);
     currUsrFavs.splice(currUsrFavStryIndx, 1);
+  }
+
+  noFavStories(storyContent) {
+    if (this.favorites.length === 0) {
+      const storyString = storyContent;
+      const $story = generateNoFavStoryMarkup(storyString);
+      $favsContainer.append($story);
+    };
   }
 /* END OF CUMULATIVE CODE */
 }

@@ -1,3 +1,9 @@
+# Note For When Running App
+When creating and deleteing stories, and adding favorites,
+refresh the page to see the updates. If a user
+has favorite stories, upon login, they will appear
+after the user refreshes the page.
+
 # AJAX with jQuery Exercise: Hack-or-Snooze
 In this exercise, you’ll add features to a news-aggregator site (based loosely on a popular one called Hacker News). It will allow users to create accounts, log in, create articles, mark articles as favorites, and more!
 

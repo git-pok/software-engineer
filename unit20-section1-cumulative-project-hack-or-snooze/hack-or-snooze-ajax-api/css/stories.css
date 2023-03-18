@@ -1,4 +1,9 @@
 /* Lists of stories */
+/* ADDED CUMULATIVE CODE */
+.delete:hover {
+  cursor: pointer;
+}
+/* END OF CUMULATIVE CODE */
 
 .stories-list {
   margin: 20px 5px;
