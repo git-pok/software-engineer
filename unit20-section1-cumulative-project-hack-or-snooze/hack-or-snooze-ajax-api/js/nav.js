@@ -10,9 +10,6 @@ function navAllStories(evt) {
   console.debug("navAllStories", evt);
   hidePageComponents();
   putStoriesOnPage();
-  /* ADDED CUMULATIVE CODE */
-  // putStoriesOnFavPage();
-  /* END OF CUMULATIVE CODE */
 }
 
 $body.on("click", "#nav-all", navAllStories);
@@ -49,5 +46,4 @@ function showHideStoryForm() {
 
 const $storySubmit = $(".navbar-submit");
 $storySubmit.on("click", showHideStoryForm);
-// $body.on("click", ".navbar-submit", showHideStoryForm);
 /*END OF ADDED CUMULATIVE CODE*/

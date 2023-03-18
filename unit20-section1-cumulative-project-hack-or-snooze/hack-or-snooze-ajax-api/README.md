@@ -1,3 +1,9 @@
+# My Fixes and Added Logic
+All logic I created and implememted is commented with,
+```
+/* ADDED CUMULATICE CODE */
+```
+
 # Note For When Running App
 When creating and deleteing stories, and adding favorites,
 refresh the page to see the updates. If a user
