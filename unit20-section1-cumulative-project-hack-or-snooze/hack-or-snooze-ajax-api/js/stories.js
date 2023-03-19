@@ -18,8 +18,7 @@ async function getAndShowStoriesOnStart() {
 function checkForLoggedInUser() {
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
-  if (token || username) return true;
-  else return false;
+  return (token || username);
 }
 // END OF CUMULATIVE CODE
 
@@ -31,66 +30,31 @@ function checkForLoggedInUser() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
-
   const hostName = story.getHostName();
   /* ADDED CUMULATIVE CODE */
   const loggedIn = checkForLoggedInUser();
   
-  if (loggedIn) {
-    const jsonFavParse = JSON.parse(localStorage.getItem("favorites"));
-    const favTitles = jsonFavParse.map((val)=> val.storyId);
-    if (favTitles.includes(story.storyId)) {
-      // console.log(story);   
-      return $(`
-        <li id="${story.storyId}">
-        <span>
-          <i class="fa-solid fa-star ${story.storyId}"></i>
-        </span>
-        <a href="${story.url}" target="a_blank" class="story-link">
-          ${story.title}
-        </a>
-        <small class="story-hostname">(${hostName})</small>
-        <small class="story-author">by ${story.author}</small>
-        <small class="story-user">posted by ${story.username}</small>
-        </li>
-        <span class="delete">
-          x
-        </span>
-      `);
-    } else {
-      return $(`
-        <li id="${story.storyId}">
-          <span>
-            <i class="fa-regular fa-star ${story.storyId}"></i>
-          </span>
-          <a href="${story.url}" target="a_blank" class="story-link">
-            ${story.title}
-          </a>
-          <small class="story-hostname">(${hostName})</small>
-          <small class="story-author">by ${story.author}</small>
-          <small class="story-user">posted by ${story.username}</small>
-        </li>
-        <span class="delete">
-            x
-        </span>
-      `);
-    }
-  } else {
+  const jsonFavParse = JSON.parse(localStorage.getItem("favorites"));
+  const favTitles = loggedIn ? jsonFavParse.map((val)=> val.storyId) : null;
+  const faSolidSpan = `<span><i class="fa-solid fa-star ${story.storyId}"></i></span>`;
+  const faReg = `<span><i class="fa-regular fa-star ${story.storyId}"></i></span>`;
+  const loggedInDeleteSpan = `<span class="delete">x</span>`;
+  const deleteSpan = loggedIn ? loggedInDeleteSpan : '';
+  const favSpan = loggedIn && favTitles.includes(story.storyId) ? faSolidSpan : faReg; 
+  const loggedOutSpan = `<span><i class="${story.storyId}"></i></span>`;
+  const renderedSpan = loggedIn ? favSpan : loggedOutSpan   
     return $(`
       <li id="${story.storyId}">
-        <span>
-          <i class="${story.storyId}"></i>
-        </span>
-        <a href="${story.url}" target="a_blank" class="story-link">
+      ${renderedSpan}
+      <a href="${story.url}" target="a_blank" class="story-link">
         ${story.title}
-        </a>
-        <small class="story-hostname">(${hostName})</small>
-        <small class="story-author">by ${story.author}</small>
-        <small class="story-user">posted by ${story.username}</small>
+      </a>
+      <small class="story-hostname">(${hostName})</small>
+      <small class="story-author">by ${story.author}</small>
+      <small class="story-user">posted by ${story.username}</small>
       </li>
+      ${deleteSpan}
     `);
-  }
   /* END OF CUMULATIVE CODE */
 }
 
@@ -100,8 +64,7 @@ function generateNoFavStoryMarkup(story) {
         <h1>
         ${story}
         </h1>
-        `
-  );
+      `);
 }
 /* END OF CUMULATIVE CODE */
 /** Gets list of stories from server, generates their HTML, and puts on page. */
@@ -120,13 +83,14 @@ function putStoriesOnPage() {
 }
 /*ADDED CUMULATIVE CODE*/
 /** Gets list of stories from server, generates their HTML, and puts on page. */
-function putStoriesOnFavPage() {
-  const currUserFavs = currentUser.favorites;
-  const currUser = currentUser; 
-  $favs.empty();  
+function putStoriesOnFavPage() {  
   const loggedIn = checkForLoggedInUser();
 
   if (loggedIn) {
+    const currUserFavs = currentUser.favorites;
+    const currUser = currentUser; 
+    $favs.empty();
+
     const storyContent = 'No Favorite Stories Yet!'; 
     currUser.noFavStories(storyContent);
     const jsonFavParse = JSON.parse(localStorage.getItem("favorites"));
@@ -149,12 +113,10 @@ async function addStoryFromStoryForm(evt) {
   evt.preventDefault();
   const $storiesForm = $('#stories-form');
 
-  // variables like $author create errors and dont work 
   const author = $("#author").val();
   const title = $("#title").val();
   const url = $("#url").val();
-  // using $ in fornt of variables like $author,
-  // resulted in a bad request error.
+
   const storyObj = { title, url, author };
   await storyList.addStory(currentUser, storyObj);
 
@@ -238,6 +200,7 @@ async function addToLocalStorageFav(e) {
     const span = document.getElementsByClassName(storyId);
 
     if (loggedIn && isFavStory === true) {
+
       span[0].className = (`fa-regular fa-star ${storyId}`);
       jsonFavParse.splice(storyIndx, 1);
 
@@ -251,6 +214,7 @@ async function addToLocalStorageFav(e) {
 
       localStorage.setItem("favorites", JSON.stringify(jsonFavParse));
       const resp = await addToHackOrSnoozeFav(storyId);
+
       currentUser.addToCurrentUserFavorites(clickedStory);
     }
   } else if (targetText === 'x') {

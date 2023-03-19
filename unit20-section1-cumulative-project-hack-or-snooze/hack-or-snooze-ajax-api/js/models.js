@@ -25,7 +25,13 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    const hostNameUrl = this.url;
+    const hostNamePfxIndx = hostNameUrl.indexOf('://') + 3;
+    const hostNamePfxSlice = hostNameUrl.slice(hostNamePfxIndx);
+    const hostNameRsrcIndx = hostNamePfxSlice.indexOf('/');
+    const hostNameRsrcSlice = hostNameRsrcIndx !== -1 ? hostNamePfxSlice.slice(0, hostNameRsrcIndx) : hostNamePfxSlice.slice(0);
+    const hostName = hostNameRsrcSlice; 
+    return hostName;
   }
 }
 
@@ -76,6 +82,7 @@ class StoryList {
   /*ADDED CUMULATIVE CODE*/
   async addStory(user, {author, title, url}) {  
     const token = user.loginToken;
+
     const res = await axios.post(`${BASE_URL}/stories`, 
       {token, story: { author, title, url }}
       );
@@ -85,12 +92,19 @@ class StoryList {
       refresh to see it
       appear on this web page.`;
  
-    console.log(createdMessage);
     alert(createdMessage);
+    const storyId = res.data.story.storyId;
+    const username = res.data.story.username;
+    const createdAt = res.data.story.createdAt;
+    const newStory = new Story({ storyId, title, author, url, username, createdAt });
+    return newStory;
+
+      // return story;
   }
 
   async deleteStory(user, storyId) {   
     const token = user.loginToken;
+    // created a post request with the required API body format to create a story
     try {
       const res = await axios.delete(`${BASE_URL}/stories/${storyId}`, { 
         data: { 
