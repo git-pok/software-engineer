@@ -10,9 +10,12 @@ const { companiesIndustriesJoin, addToIndustriesTable } = require('../app-method
 
 idstrRouter.get('/', async (req, res, next)=> {
     try {
-        const joinQuery = await selectAllFromDatabase('companies_industries');
-        const qMap = joinQuery.rows.map(val => val.industry_code);
+        // const joinQuery = await selectAllFromDatabase('companies_industries');
+        // const qMap = joinQuery.rows.map(val => val.industry_code);
+        const joinQuery = await selectAllFromDatabase('industries');
+        const qMap = joinQuery.rows.map(val => val.code);
         const set = new Set(qMap);
+        // console.log('qMap', qMap);
         const arrFromSet = Array.from(set);
         const IndustryCodes = new Map();
         await companiesIndustriesJoin(arrFromSet, IndustryCodes);

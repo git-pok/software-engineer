@@ -164,7 +164,24 @@ function deleteInvoicesTableRow(id) {
 
 
 async function companiesIndustriesJoin(arr, Map) {
+    // for (let val of arr) {
+    //     const query = await db.query(
+    //         `SELECT i.company_code
+    //         FROM companies_industries i JOIN companies c ON
+    //         i.company_code = c.code
+    //         WHERE i.industry_code = $1;`, [ val ]
+    //     );
+    //     const indCode = val;
+    //     const companies = query.rows;
+    //     Map.set( indCode, companies );
+    // }
+
     for (let val of arr) {
+        // const query = await db.query(
+        //     `SELECT j.company_code, j.industry_code, i.code
+        //     FROM companies_industries j RIGHT JOIN industries i
+        //     ON j.industry_code = i.code;`
+        // );
         const query = await db.query(
             `SELECT i.company_code
             FROM companies_industries i JOIN companies c ON
