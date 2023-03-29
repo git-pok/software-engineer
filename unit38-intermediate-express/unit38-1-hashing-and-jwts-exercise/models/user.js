@@ -146,30 +146,6 @@ class User {
       })
     }
     return combinedJoinData;
-
-    // LOOP SYNTAX-------------------------------------------
-    // const fromResults = await db.query(`
-    //   SELECT m.id, m.from_username, m.to_username, m.body,
-    //   m.sent_at, m.read_at FROM messages m JOIN users u
-    //   ON m.to_username = u.username WHERE from_username=$1;
-    // `, [username_from]);
-
-    // const toResults = await db.query(`
-    //   SELECT u.username, u.first_name,
-    //   u.last_name, u.phone FROM messages m JOIN users u
-    //   ON m.to_username = u.username WHERE from_username=$1;
-    // `, [username_from]);
-
-    // const fromResultsRows = fromResults.rows;
-    // if (fromResultsRows.length === 0) throw new ExpressError("No messages!", 400);
-    // const toUserResultsRows = toResults.rows;
-
-    // for (let i = 0; i < fromResultsRows.length; i++) {
-    //   fromResultsRows[i].to_user = toUserResultsRows[i];
-    // }
-    
-    // return fromResultsRows;
-    // END OF LOOP SYNTAX-------------------------------------------
   }
 
   /** Return messages to this user.
@@ -209,34 +185,6 @@ class User {
       })
     }
     return combinedJoinData;
-    
-    // LOOP SYNTAX-------------------------------------------
-    // const msgResults = await db.query(`
-    //   SELECT m.id, m.from_username, m.body,
-    //   m.sent_at, m.read_at FROM messages m JOIN users u
-    //   ON m.to_username = u.username WHERE to_username=$1;
-    // `, [username_to]);
-
-
-    // const fromUsrResults = await db.query(`
-    //   SELECT u.username, u.first_name,
-    //   u.last_name, u.phone FROM messages m JOIN users u
-    //   ON m.from_username = u.username WHERE to_username=$1;
-    // `, [username_to]);
-    
-    // const fromResultsRows = msgResults.rows;
-
-    // if (fromResultsRows.length === 0) throw new ExpressError("No messages!", 400);
-    
-    // const fromUsrResultsRows = fromUsrResults.rows;
-    // // FIX THIS LOGIC, from_user shows wrong data
-    // // when request is made on Insomnia.
-    // for (let i = 0; i < fromResultsRows.length; i++) {
-    //   fromResultsRows[i].from_user = fromUsrResultsRows[i];
-    // }
-
-    // return fromResultsRows;
-    // END OF LOOP SYNTAX-------------------------------------------
   }
 }
 
