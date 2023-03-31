@@ -22,7 +22,7 @@ class Story {
   }
 
   /** Parses hostname out of URL and returns it. */
-
+/*ADDED CUMULATIVE CODE*/
   getHostName() {
     // UNIMPLEMENTED: complete this function!
     const hostNameUrl = this.url;
@@ -33,6 +33,7 @@ class Story {
     const hostName = hostNameRsrcSlice; 
     return hostName;
   }
+/*END OF ADDED CUMULATIVE CODE*/
 }
 
 
