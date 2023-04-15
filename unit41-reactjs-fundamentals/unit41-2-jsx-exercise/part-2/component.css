@@ -1,0 +1,13 @@
+.ul-tweet {
+    width: 30%;
+    height: 100%;
+    padding: 20px 20px;
+    background-color: rgb(15, 16, 33);
+    color: rgb(229, 191, 229);
+    border: 5px inset rgb(176, 237, 156);
+}
+
+.ul-tweet li {
+    margin-bottom: 10px;
+}
+
