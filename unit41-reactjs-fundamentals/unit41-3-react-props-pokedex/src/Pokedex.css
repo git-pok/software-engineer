@@ -1,0 +1,24 @@
+body {
+  background-color: rgb(40, 64, 49);
+}
+
+.Pokedex {
+  background-color: rgb(40, 64, 49);
+}
+
+.Pokedex-cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 20px 70px;
+  background-color: rgb(40, 64, 49);
+}
+
+.Pokedex-header1 {
+  display: block;
+  padding: 0px 0px;
+  text-align: center;
+  font-size: 50px;
+  background-color: rgb(40, 64, 49);
+  color: #FF0000;
+}

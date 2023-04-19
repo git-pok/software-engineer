@@ -1,0 +1,36 @@
+.Pokecard {
+  width: 220px;
+  height: 290px;
+  margin: 10px 20px;
+  padding-top: 3%;
+  border-radius: 3%;
+  background-color: rgb(224, 212, 134);
+  border: 11px solid rgb(161, 140, 0);
+}
+
+.Pokecard-name {
+  font-size: 23px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(39, 52, 144);
+}
+
+.Pokecard-type {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(39, 52, 144);
+}
+
+.Pokecard-exp {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(39, 52, 144);
+}
+
+.Pokecard img {
+  display: block;
+  margin: 0px auto;
+  text-align: center;
+}
