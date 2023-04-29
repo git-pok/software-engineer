@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class="NewTodoForm-form"
+  >
+    <label
+      class="NewTodoForm-label"
+      for="todo"
+    >
+      Todo
+    </label>
+    <input
+      class="NewTodoForm-input"
+      id="todo"
+      name="todo"
+      placeholder="Create Todo!!!"
+      type="text"
+      value=""
+    />
+    <button
+      class="NewTodoForm-submit"
+    >
+      ADD TODO
+    </button>
+  </form>
+  <div
+    class="TodoList"
+  >
+    <ul>
+      <h1
+        class="TodoList-p"
+      >
+        No Todos
+      </h1>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot 2`] = `
+<DocumentFragment>
+  <form
+    class="NewTodoForm-form"
+  >
+    <label
+      class="NewTodoForm-label"
+      for="todo"
+    >
+      Todo
+    </label>
+    <input
+      class="NewTodoForm-input"
+      id="todo"
+      name="todo"
+      placeholder="Create Todo!!!"
+      type="text"
+      value=""
+    />
+    <button
+      class="NewTodoForm-submit"
+    >
+      ADD TODO
+    </button>
+  </form>
+  <div
+    class="TodoList"
+  >
+    <ul>
+      <h1
+        class="TodoList-p"
+      >
+        No Todos
+      </h1>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

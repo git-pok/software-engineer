@@ -1,0 +1,46 @@
+.Todo {
+  display: flex;
+  align-items: center;
+}
+
+.Todo-p {
+  font-size: 25px;
+  color: rgb(22, 21, 40);
+  width: 600px;
+}
+
+.Todo-delete-icon, .Todo-edit-icon {
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
+  font-weight: 900;
+  margin: 20px 20px;
+  background-color: rgb(22, 21, 40);
+  color: rgb(237, 220, 169);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 7px;
+  transition: background-color .3s ease-in-out;
+}
+
+.Todo-edit-icon {
+  width: 60px;
+  height: 35px;
+  font-size: 15px;
+  font-weight: 900;
+  margin: 20px 20px;
+  background-color: rgb(22, 21, 40);
+  color: rgb(237, 220, 169);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 7px;
+  transition: background-color .3s ease-in-out;
+}
+
+.Todo-delete-icon:hover, .Todo-edit-icon:hover {
+  background-color: rgb(7, 203, 0);
+  color: rgb(255, 0, 0);
+}
+
+.Todo-edit-icon:hover {
+  background-color: rgb(22, 21, 40);
+  color: rgb(255, 255, 255);
+}

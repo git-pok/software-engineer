@@ -1,0 +1,33 @@
+.NewTodoForm-form {
+  width: 100vw;
+  height: 250px;
+  padding-top: 30px;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgb(22, 21, 40);
+}
+
+.NewTodoForm-input {
+  margin-bottom: 40px;
+  width: 290px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.NewTodoForm-label {
+  font-size: 25px;
+  color: rgb(237, 220, 169);
+  margin-bottom: 5px;
+}
+
+.NewTodoForm-submit {
+  width: 110px;
+  height: 25px;
+  border-radius: 10px;
+  border: 2px solid rgb(255, 255, 255);
+  background-color: rgb(232, 169, 237);
+}
