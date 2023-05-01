@@ -3,7 +3,7 @@ import './DrawButton.css';
 const DrawButton = () => {
   return (
     <>
-      <h1>DrawButton</h1>
+      <button className="DrawButton-button">DRAW CARD</button>
     </>
   );
 }
