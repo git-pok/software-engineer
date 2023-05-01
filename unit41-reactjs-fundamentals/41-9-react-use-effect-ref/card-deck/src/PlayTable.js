@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import './PlayTable.css';
+import './PlayCard.css';
 import DrawButton from './DrawButton.js';
 
 const SHUFFLE_URL = `
@@ -55,7 +56,7 @@ const PlayTable = () => {
       { card &&
         <img
           ref={cardDiv}
-          className="PlayTable-card">
+          className="PlayCard-card">
         </img>
       }
       

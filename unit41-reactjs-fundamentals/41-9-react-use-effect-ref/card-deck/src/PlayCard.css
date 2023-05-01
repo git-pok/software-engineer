@@ -1,0 +1,6 @@
+.PlayCard-card {
+    display: block;
+    margin: 0px auto;
+    margin-top: 56px;
+    transform: rotate(15deg);
+}
