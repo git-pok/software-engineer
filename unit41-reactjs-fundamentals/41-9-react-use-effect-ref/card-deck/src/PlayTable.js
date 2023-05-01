@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import ShuffleButton from './ShuffleButton.js';
 import DrawButton from './DrawButton.js';
 import PlayCard from './PlayCard.js';
 import './PlayTable.css';
@@ -40,7 +41,7 @@ const PlayTable = () => {
 
     ShuffleDeck();
 
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (card) cardDiv.current.src = cardImage;
@@ -60,11 +61,21 @@ const PlayTable = () => {
     <>
     <h1 className="PlayTable-h1">Play Table</h1>
     <div className="PlayTable-div">
-      <DrawButton
-        deck={deckId}
-        currCard={currCard}
-        currImage={currImage}
-        newDeck={newDeck} />
+      <div className="PlayTable-buttons">
+        <DrawButton
+          deck={deckId}
+          currCard={currCard}
+          currImage={currImage}
+          newDeck={newDeck} />
+        {
+          card &&
+          <ShuffleButton
+            deck={deckId}
+            currCard={currCard}
+            currImage={currImage}
+            newDeck={newDeck} />
+        }
+      </div>
       {
         card &&
         <PlayCard cardDiv={cardDiv} />
