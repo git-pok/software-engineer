@@ -14,8 +14,8 @@ const PlayTable = () => {
   const [ card, setCard ] = useState(null);
   const [ cardImage, setCardImage ] = useState();
 
-  console.log("CURR CARD", card);
-  console.log("CURR CARD IMAGE", cardImage);
+  // console.log("CURR CARD", card);
+  // console.log("CURR CARD IMAGE", cardImage);
   const currCard = (code) => {
     setCard(card => code);
   }
@@ -46,6 +46,16 @@ const PlayTable = () => {
     if (card) cardDiv.current.src = cardImage;
   }, [card])
 
+  const newDeck = async () => {
+    try {
+      const res = await axios.get(SHUFFLE_URL);
+      setDeckId(data => res.data.deck_id);
+      console.log("DATA", res.data);
+    } catch(err) {
+      throw new Error(`ERROR!!!: \n${err}`);
+    }
+  }
+
   return (
     <>
     <h1 className="PlayTable-h1">Play Table</h1>
@@ -53,7 +63,8 @@ const PlayTable = () => {
       <DrawButton
         deck={deckId}
         currCard={currCard}
-        currImage={currImage} />
+        currImage={currImage}
+        newDeck={newDeck} />
       {
         card &&
         <PlayCard cardDiv={cardDiv} />
