@@ -4,6 +4,7 @@ const App = () => {
   return (
     <>
       <h1>Card Deck</h1>
+      <PlayTable />
     </>
   );
 }

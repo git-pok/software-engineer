@@ -1,4 +1,5 @@
 import './Deck.css';
+import axios from 'axios';
 
 const Deck = () => {
   return (
