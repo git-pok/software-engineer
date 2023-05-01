@@ -1,4 +1,5 @@
 import './App.css';
+import PlayTable from './PlayTable.js';
 
 const App = () => {
   return (
