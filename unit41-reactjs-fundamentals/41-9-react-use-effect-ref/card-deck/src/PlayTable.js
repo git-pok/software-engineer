@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import DrawButton from './DrawButton.js';
+import PlayCard from './PlayCard.js';
 import './PlayTable.css';
 import './PlayCard.css';
-import DrawButton from './DrawButton.js';
 
 const SHUFFLE_URL = `
     https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
@@ -53,11 +54,9 @@ const PlayTable = () => {
         deck={deckId}
         currCard={currCard}
         currImage={currImage} />
-      { card &&
-        <img
-          ref={cardDiv}
-          className="PlayCard-card">
-        </img>
+      {
+        card &&
+        <PlayCard cardDiv={cardDiv} />
       }
       
     </div>
