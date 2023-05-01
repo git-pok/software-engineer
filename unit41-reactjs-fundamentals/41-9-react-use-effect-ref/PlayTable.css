@@ -2,6 +2,10 @@
     background-color: rgb(0, 84, 11);
 }
 
+.PlayTable-div {
+    text-align: center;
+}
+
 /* .card {
     display: flex;
     justify-content: center;
