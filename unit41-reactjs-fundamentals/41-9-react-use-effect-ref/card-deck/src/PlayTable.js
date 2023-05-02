@@ -4,44 +4,67 @@ import ShuffleButton from './ShuffleButton.js';
 import DrawButton from './DrawButton.js';
 import PlayCard from './PlayCard.js';
 import './PlayTable.css';
-import './PlayCard.css';
+
+/**
+ * PlayTable
+ * Renders: DrawButton, ShuffleButton, PlayCard.
+ * State: deckId, card, cardImage.
+ * Effects: Defines a shuffled deck on first render only.
+ * Ref: cardDiv for img attribute.
+ */
 
 const SHUFFLE_URL = `
     https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1
 `;
+
 
 const PlayTable = () => {
   const [ deckId, setDeckId ] = useState(null);
   const [ card, setCard ] = useState(null);
   const [ cardImage, setCardImage ] = useState(null);
 
-  // console.log("CURR CARD", card);
-  // console.log("CURR CARD IMAGE", cardImage);
+  /**
+   * Sets card state with current card code.
+   */
   const currCard = (code) => {
     setCard(card => code);
   }
 
+  /**
+   * Sets card state with null.
+   */
   const resetCard = () => {
     setCard(card => null);
   }
 
+  /**
+   * Sets cardImage state with image. 
+   */
   const currImage = (image) => {
     setCardImage(cardImage => image);
   }
 
+  /**
+   * Sets cardImage with null.
+   */
   const resetImage = () => {
     setCardImage(cardImage => null);
   }
 
+
   const cardDiv = useRef();
 
+  /**
+   * Makes a request to API.
+   * Creates a shuffled deck.
+   * Runs once on the first component render.
+   */
   useEffect(() => {
 
     async function ShuffleDeck() {
       try {
         const res = await axios.get(SHUFFLE_URL);
         setDeckId(data => res.data.deck_id);
-        // console.log("DATA", res.data);
       } catch(err) {
         throw new Error(`ERROR!!!: \n${err}`);
       }
@@ -51,13 +74,21 @@ const PlayTable = () => {
 
   }, [])
 
-  useEffect(() => {
-    if (card) cardDiv.current.src = cardImage;
-  }, [card])
+  /**
+   * Sets cardDiv ref to "".
+   */
+  const clearCardDivImgSrc = () => {
+    cardDiv.current.src = "";
+  }
 
+  /**
+   * Makes a request to API.
+   * Sets deckId state with deck_id.
+   * Resets card and cardImage state.
+   */
   const newDeck = async () => {
     try {
-      cardDiv.current.src = "";
+      clearCardDivImgSrc();
       const res = await axios.get(SHUFFLE_URL);
       setDeckId(data => res.data.deck_id);
       resetCard();
@@ -67,9 +98,10 @@ const PlayTable = () => {
     }
   }
 
+
   return (
     <>
-    <h1 className="PlayTable-h1">Play Table</h1>
+    <h1 className="PlayTable-h1">Card Draw</h1>
     <div className="PlayTable-div">
       <div className="PlayTable-buttons">
         <DrawButton
@@ -85,7 +117,10 @@ const PlayTable = () => {
       </div>
       {
         card &&
-        <PlayCard cardDiv={cardDiv} />
+        <PlayCard
+          cardImage={cardImage}
+          card={card}
+          cardDiv={cardDiv} />
       }
       
     </div>
