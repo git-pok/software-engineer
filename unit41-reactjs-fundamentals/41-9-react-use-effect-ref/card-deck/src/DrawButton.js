@@ -13,7 +13,7 @@ const DrawButton = ({ deck, currCard, currImage, newDeck }) => {
     const cardsLeft = res.data.remaining;
     const noCards = { null: null }; 
     const { code } = res.data.cards[0] || noCards;
-    console.log("CARDS REMIANING", cardsLeft);
+
     if (!code) {
       newDeck();
       alert("No cards left! Here is a new deck!");
