@@ -11,12 +11,13 @@ const DrawButton = ({ deck, currCard, currImage, newDeck }) => {
   const drawCard = async (deck) => {
     const res = await axios.get(DRAW_URL);
     const cardsLeft = res.data.remaining;
+    const noCards = { null: null }; 
+    const { code } = res.data.cards[0] || noCards;
     console.log("CARDS REMIANING", cardsLeft);
-    if (cardsLeft === 0) {
+    if (!code) {
       newDeck();
       alert("No cards left! Here is a new deck!");
     } else {
-      const { code } = res.data.cards[0];
       const { image } = res.data.cards[0];
   
       currCard(code);
