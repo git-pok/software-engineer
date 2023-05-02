@@ -57,9 +57,7 @@ const PlayTable = () => {
 
   const newDeck = async () => {
     try {
-      // console.log("IMG SRC PRE DELETE", cardDiv.current.src);
       cardDiv.current.src = "";
-      // console.log("IMG SRC", cardDiv.current.src);
       const res = await axios.get(SHUFFLE_URL);
       setDeckId(data => res.data.deck_id);
       resetCard();
