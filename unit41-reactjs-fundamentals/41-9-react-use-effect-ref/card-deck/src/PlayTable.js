@@ -13,7 +13,7 @@ const SHUFFLE_URL = `
 const PlayTable = () => {
   const [ deckId, setDeckId ] = useState(null);
   const [ card, setCard ] = useState(null);
-  const [ cardImage, setCardImage ] = useState();
+  const [ cardImage, setCardImage ] = useState(null);
 
   // console.log("CURR CARD", card);
   // console.log("CURR CARD IMAGE", cardImage);
@@ -21,8 +21,16 @@ const PlayTable = () => {
     setCard(card => code);
   }
 
+  const resetCard = () => {
+    setCard(card => null);
+  }
+
   const currImage = (image) => {
     setCardImage(cardImage => image);
+  }
+
+  const resetImage = () => {
+    setCardImage(cardImage => null);
   }
 
   const cardDiv = useRef();
@@ -54,6 +62,8 @@ const PlayTable = () => {
       // console.log("IMG SRC", cardDiv.current.src);
       const res = await axios.get(SHUFFLE_URL);
       setDeckId(data => res.data.deck_id);
+      resetCard();
+      resetImage();
     } catch(err) {
       throw new Error(`ERROR!!!: \n${err}`);
     }
