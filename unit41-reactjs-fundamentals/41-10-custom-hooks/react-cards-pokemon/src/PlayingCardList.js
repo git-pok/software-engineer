@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// Fixed Bug
+// import uuid => import { v4 as uuid }.
 import { v4 as uuid } from "uuid";
 import axios from "axios";
 import PlayingCard from "./PlayingCard";
