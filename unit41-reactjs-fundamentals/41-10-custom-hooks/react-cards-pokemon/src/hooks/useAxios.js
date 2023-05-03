@@ -8,6 +8,8 @@ import {v4 as uuid} from 'uuid';
 // If !endpoint, returns function for URL.
 // Else, returns function for URL and endpoint.
 // Returns state and function that sets state.
+// State: Array of API data objects.
+// State Function: adds API data object to Array.
 const useAxios = (url, endpoint=false) => {
   const [ state, setState ] = useState([]);
 
