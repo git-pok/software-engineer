@@ -9,3 +9,5 @@ const useFlip = () => {
 
   return [ state, toggleState ];
 }
+
+export default useFlip;
