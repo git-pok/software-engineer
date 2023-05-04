@@ -17,6 +17,11 @@ function CardTable() {
     <div className="PlayingCardList">
       <h3>Pick a card, any card!</h3>
       <div>
+        {/* 
+        Called setCards as a callback.
+        If not, the event object gets passed in as an argument,
+        passes it in the API url as an endpoint, and throws
+        an error. */}
         <button onClick={() => setCards()}>Add a playing card!</button>
       </div>
       <div className="PlayingCardList-card-area">
