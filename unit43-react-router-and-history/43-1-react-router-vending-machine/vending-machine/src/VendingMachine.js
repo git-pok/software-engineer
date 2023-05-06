@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import Navbar from './Navbar.js';
 import Snack from './Snack.js';
 import './VendingMachine.css';
 
@@ -6,12 +7,12 @@ const VendingMachine = () => {
   return (
     <main>
     <BrowserRouter>
-      <nav className="VendingMachine-nav">
-        <NavLink exact to="/">HOME</NavLink>
-        <NavLink exact to="/mambas">Mambas</NavLink>
-        <NavLink exact to="/pretzels">Pretzels</NavLink>
-        <NavLink exact to="/twix">Twix</NavLink>
-      </nav>
+      <Navbar links={[
+            {route: "/", linkName: "HOME"},
+            {route: "/mambas", linkName: "MAMBAS"},
+            {route: "/pretzels", linkName: "PRETZELS"},
+            {route: "/twix", linkName: "TWIX"}
+      ]} />
 
       <Route exact path="/">
         <img src="https://i.giphy.com/media/VGDt57CysJa68fQ7Rd/giphy.webp"></img>
