@@ -1,13 +1,15 @@
-import { BrowserRouter, Route, NavLink } from 'react-router-dom@5.2.1';
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Snack from './Snack.js';
 import './VendingMachine.css';
 
 const VendingMachine = () => {
   return (
-    <>
+    <main>
     <BrowserRouter>
-      <nav>
-        <NavLink />
+      <nav className="VendingMachine-nav">
+        <NavLink exact to="/">HOME</NavLink>
+        <NavLink exact to="/SNACKI">SNACKI</NavLink>
+        <NavLink exact to="/SNACKII">SNACKII</NavLink>
       </nav>
 
       <Route exact path="/">
@@ -27,8 +29,7 @@ const VendingMachine = () => {
       </Route>
 
     </BrowserRouter>
-    <h1>VendingMachine COMPONENT</h1>
-    </>
+    </main>
   );
 }
 

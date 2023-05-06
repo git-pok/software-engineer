@@ -1,10 +1,11 @@
+import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import Snack from './Snack.js';
+import VendingMachine from './VendingMachine.js';
 import './App.css';
 
 const App = () => {
   return (
-    <>
-    <h1>APP COMPONENT</h1>
-    </>
+    <VendingMachine />
   );
 }
 
