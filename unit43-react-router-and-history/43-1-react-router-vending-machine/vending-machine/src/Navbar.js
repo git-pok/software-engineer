@@ -1,13 +1,16 @@
-import './Snack.css';
+import { NavLink } from 'react-router-dom';
+import './Navbar.css';
 
-const Snack = ({ name, img }) => {
-  // const nameCaps = name.toUpperCase();
+const Navbar = ({ route, linkName }) => {
+
   return (
-    <>
-    <h1>{name}</h1>
-    <img src={img} />
-    </>
+    <nav className="VendingMachine-nav">
+        <NavLink exact to={route}>{linkName}</NavLink>
+        <NavLink exact to={route}>{linkName}</NavLink>
+        <NavLink exact to={route}>{linkName}</NavLink>
+        <NavLink exact to={route}>{linkName}</NavLink>
+    </nav>
   );
 }
 
-export default Snack;
+export default Navbar;
