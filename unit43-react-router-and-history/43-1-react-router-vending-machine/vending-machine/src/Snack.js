@@ -1,9 +1,11 @@
 import './Snack.css';
 
-const Snack = () => {
+const Snack = ({ name, img }) => {
+  const nameCaps = name.toUpperCase();
   return (
     <>
-    <h1>SNACK COMPONENT</h1>
+    <h1>{nameCaps}</h1>
+    <img src={img} />
     </>
   );
 }
