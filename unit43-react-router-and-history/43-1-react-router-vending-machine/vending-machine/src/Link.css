@@ -1,0 +1,21 @@
+.Link {
+    width: 100%;
+    margin: 0px auto;
+    margin-top: 80px;
+}
+
+.Link a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+}
+
+.Link a:hover {
+    color: rgb(249, 147, 237);
+}

@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import './Navbar.css';
+import './Link.css';
 
-const Navbar = ({ links }) => {
+const Link = ({ links }) => {
   
   return (
-    <nav className="Navbar">
+    <div className="Link">
       { links.map((val, idx) => (
           <NavLink
             key={idx}
@@ -12,8 +12,8 @@ const Navbar = ({ links }) => {
             to={val.route}>{val.linkName}</NavLink>
         ))
       }
-    </nav>
+    </div>
   );
 }
 
-export default Navbar;
+export default Link;
