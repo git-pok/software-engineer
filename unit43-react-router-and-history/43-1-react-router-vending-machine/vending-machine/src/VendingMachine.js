@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import LinkDiv from './LinkDiv.js';
 import BackgroundImage from './BackgroundImage.js';
