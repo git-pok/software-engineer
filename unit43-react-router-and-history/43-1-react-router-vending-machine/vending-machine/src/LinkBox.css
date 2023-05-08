@@ -1,11 +1,13 @@
 .LinkBox {
     display: block;
     width: 50vw;
-    height: 50vh;
+    height: 40vh;
     margin: 0px auto;
     margin-top: 80px;
     background-color: rgb(14, 13, 26);
-    border: 50px solid rgb(141, 157, 251);
+    border: 30px outset #576a97;
+    border-width: 20px;
+    border-style: solid;
     border-radius: 25px;
     position: absolute;
     top: 0px;
