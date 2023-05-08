@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import LinkDiv from './LinkDiv.js';
-import Link from './Link.js';
 import BackgroundImage from './BackgroundImage.js';
 import Snack from './Snack.js';
 import './VendingMachine.css';
