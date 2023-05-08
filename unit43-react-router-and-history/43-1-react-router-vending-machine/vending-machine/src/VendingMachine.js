@@ -7,7 +7,7 @@ import Snack from './Snack.js';
 import './VendingMachine.css';
 
 const VendingMachine = () => {
-  
+
   return (
     <main>
       <BrowserRouter>
@@ -25,6 +25,8 @@ const VendingMachine = () => {
              }} />
 
             <LinkBox
+              title="SELECT A SNACK"
+              titleClass="VendingMachine-LinkBox-title"
               links={[
                   {route: "/worms", linkName: "WORMS"},
                   {route: "/pretzels", linkName: "PRETZELS"},
