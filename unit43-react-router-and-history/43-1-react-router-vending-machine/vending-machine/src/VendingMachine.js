@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Navbar from './Navbar.js';
 import LinkBox from './LinkBox.js';
+import BackgroundImage from './BackgroundImage.js';
 import Snack from './Snack.js';
 import './VendingMachine.css';
 
@@ -10,6 +11,16 @@ const VendingMachine = () => {
       <BrowserRouter>
 
         <Route exact path="/">
+          <BackgroundImage
+            img={{
+                img: `https://images.unsplash.com/photo-
+                1585341840941-98553e474d84?ixlib=rb-4.0
+                .3&ixid=MnwxMjA3fDB8MHxwaG90byhttps:
+                //images.unsplash.com/photo-1585341840941
+                -98553e474d84?ixlib=rb-4.0.3&ixid=
+                MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGV
+                ufDB8fHx8&auto=format&fit=crop&w=1472&q=80`
+             }} />
           <LinkBox
             links={[
                 {route: "/worms", linkName: "WORMS"},
