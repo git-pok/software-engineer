@@ -36,17 +36,38 @@ const VendingMachine = () => {
 
         <Route exact path="/worms">
           <Navbar links={[{route: "/", linkName: "HOME"}]} />
-          <Snack name="Worms" img="https://images.unsplash.com/photo-1499195333224-3ce974eecb47?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" />
+          <Snack
+            name="Worms"
+            img="https://images.unsplash.com/photo-1499195333224-3ce974eecb47?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+            snackInfo={{
+                          company: "Worms",
+                          price: "$1.00",
+                          calories: 200
+                      }} />
         </Route>
 
         <Route exact path="/pretzels">
           <Navbar links={[{route: "/", linkName: "HOME"}]} />
-          <Snack name="Pretzels" img="https://media4.giphy.com/media/XulKijZI11Hx8NA4mR/giphy.gif?cid=ecf05e47wknguiw70b33emgrd1s5rxin6xy3j7qjfs5ftlgx&ep=v1_gifs_search&rid=giphy.gif&ct=g" />
+          <Snack
+            name="Pretzels"
+            img="https://media4.giphy.com/media/XulKijZI11Hx8NA4mR/giphy.gif?cid=ecf05e47wknguiw70b33emgrd1s5rxin6xy3j7qjfs5ftlgx&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+            snackInfo={{
+                          company: "Pretzels",
+                          price: "$1.00",
+                          calories: 200
+                      }} />
         </Route>
 
         <Route exact path="/twix">
           <Navbar links={[{route: "/", linkName: "HOME"}]} />
-          <Snack name="Twix" img="https://i.giphy.com/media/ei9pMw3x3MYVhtlBla/giphy.webp" />
+          <Snack
+            name="Twix"
+            img="https://i.giphy.com/media/ei9pMw3x3MYVhtlBla/giphy.webp"
+            snackInfo={{
+                          company: "Twix",
+                          price: "$1.00",
+                          calories: 200
+                      }} />
         </Route>
 
       </BrowserRouter>
