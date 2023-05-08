@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
+import useToggle from './hooks/useToggle.js';
 import Navbar from './Navbar.js';
 import LinkBox from './LinkBox.js';
 import BackgroundImage from './BackgroundImage.js';
@@ -6,6 +7,8 @@ import Snack from './Snack.js';
 import './VendingMachine.css';
 
 const VendingMachine = () => {
+  const [ isVendMach, setIsVendMach ] = useToggle(false);
+  console.log(isVendMach);
   return (
     <main>
       <BrowserRouter>
@@ -21,12 +24,18 @@ const VendingMachine = () => {
                 MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGV
                 ufDB8fHx8&auto=format&fit=crop&w=1472&q=80`
              }} />
-          <LinkBox
-            links={[
-                {route: "/worms", linkName: "WORMS"},
-                {route: "/pretzels", linkName: "PRETZELS"},
-                {route: "/twix", linkName: "TWIX"}
-            ]} />
+
+          {
+            !isVendMach ? 
+              <button>SNACKS</button>
+            : 
+              <LinkBox
+                links={[
+                    {route: "/worms", linkName: "WORMS"},
+                    {route: "/pretzels", linkName: "PRETZELS"},
+                    {route: "/twix", linkName: "TWIX"}
+                ]} />
+          }
         </Route>
 
         <Route exact path="/worms">
