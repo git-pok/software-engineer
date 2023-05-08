@@ -1,14 +1,14 @@
 import Link from './Link.js';
-import './LinkBox.css';
+import './LinkDiv.css';
 
-const LinkBox = ({ title, titleClass, links }) => {
+const LinkDiv = ({ title, titleClass, links }) => {
   
   return (
-    <div className="LinkBox">
+    <div className="LinkDiv">
       <h1 className={titleClass}>{title}</h1>
       <Link links={links} />
     </div>
   );
 }
 
-export default LinkBox;
+export default LinkDiv;

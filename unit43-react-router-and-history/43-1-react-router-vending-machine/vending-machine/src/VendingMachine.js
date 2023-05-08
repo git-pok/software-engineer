@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, NavLink } from 'react-router-dom';
 import Navbar from './Navbar.js';
-import LinkBox from './LinkBox.js';
+import LinkDiv from './LinkDiv.js';
 import Link from './Link.js';
 import BackgroundImage from './BackgroundImage.js';
 import Snack from './Snack.js';
@@ -24,9 +24,9 @@ const VendingMachine = () => {
                 ufDB8fHx8&auto=format&fit=crop&w=1472&q=80`
              }} />
 
-            <LinkBox
+            <LinkDiv
               title="SELECT A SNACK"
-              titleClass="VendingMachine-LinkBox-title"
+              titleClass="VendingMachine-LinkDiv-title"
               links={[
                   {route: "/worms", linkName: "WORMS"},
                   {route: "/pretzels", linkName: "PRETZELS"},
