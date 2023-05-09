@@ -4,11 +4,11 @@ import {Route, Switch, useParams} from 'react-router-dom';
 const DogRoutes = ({ props }) => {
 
 const { name } = useParams();
-console.log(name); 
+console.log("URL PARAMS", name); 
   return (
     <Switch>
         <Route exact path="/dogs">
-            <DogsList />
+            <DogList />
         </Route>
 
         <Route exact path="/dogs/:name">

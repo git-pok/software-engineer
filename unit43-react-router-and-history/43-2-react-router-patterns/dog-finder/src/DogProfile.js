@@ -1,9 +1,9 @@
 import {NavLink} from 'react-router-dom';
 // import './DogNav.css';
 
-const DogProfile = ({ props, dogName }) => {
+const DogProfile = ({ props, name }) => {
     const findDog = props.dogs.filter(val => (
-        val.name === dogName
+        val.name === name
     ))
     console.log(findDog);
   return (
