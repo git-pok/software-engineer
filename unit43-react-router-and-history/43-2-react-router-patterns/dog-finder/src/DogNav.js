@@ -1,18 +1,24 @@
-import {BrowserRouter, Route, NavLink} from 'react-router-dom';
-import './DogNav.css';
+import {NavLink} from 'react-router-dom';
+// import './DogNav.css';
 
-const DogNav = (props) => {
-//   const src = props.dogs[2].src;
+const DogNav = ({ props }) => {
+//   console.log(props);
   return (
     <>
     <nav>
         {
-            props.map(val => (
-                <NavLink exact to={val.name}>{val.name}</NavLink>
+            props.dogs.map((val, idx) => (
+                <NavLink
+                    exact
+                    to={val.name}
+                    key={idx}
+                >
+                    {val.name}
+                </NavLink>
             ))
         }
     </nav>
-    <img src={src}></img>
+    {/* <img src={src}></img> */}
     </>
   );
 }

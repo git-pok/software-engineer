@@ -1,3 +1,5 @@
+import {BrowserRouter, Route} from 'react-router-dom';
+import DogNav from './DogNav.js';
 import './App.css';
 
 const App = (props) => {
@@ -5,7 +7,9 @@ const App = (props) => {
   return (
     <>
     <h1>APP COMPONENT</h1>
-    <img src={src}></img>
+    <BrowserRouter>
+    <DogNav props={props} />
+    </BrowserRouter>
     </>
   );
 }
