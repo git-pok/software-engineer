@@ -1,6 +1,7 @@
 import { Route, Switch, useParams } from 'react-router-dom';
 import './DogProfile.css';
 
+
 const DogProfile = ({ props }) => {
 
     const { name } = useParams();

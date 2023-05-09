@@ -1,4 +1,6 @@
-import {BrowserRouter, Route} from 'react-router-dom';
+import {
+  BrowserRouter
+} from 'react-router-dom';
 import DogRoutes from './DogRoutes.js';
 import DogNav from './DogNav.js';
 import './App.css';

@@ -1,6 +1,9 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import {
+  Route, Switch, Redirect, useParams
+} from 'react-router-dom';
 import DogProfile from './DogProfile.js';
 import DogList from './DogList.js';
+
 
 const DogRoutes = ({ props }) => {
 
