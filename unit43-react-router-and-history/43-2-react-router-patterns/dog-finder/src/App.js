@@ -1,5 +1,6 @@
 import {BrowserRouter, Route} from 'react-router-dom';
 import DogNav from './DogNav.js';
+import DogProfile from './DogProfile.js';
 import './App.css';
 
 const App = (props) => {
@@ -9,6 +10,7 @@ const App = (props) => {
     <h1>APP COMPONENT</h1>
     <BrowserRouter>
     <DogNav props={props} />
+    <DogProfile props={props} />
     </BrowserRouter>
     </>
   );
