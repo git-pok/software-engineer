@@ -1,12 +1,11 @@
 import { useParams } from 'react-router-dom';
-import './DogProfile.css';
 
 
-const DogProfile = ({ props }) => {
+const GetParams = ({ props }) => {
 
     const { name } = useParams();
 
-    const findDog = props.dogs.filter(val => (
+    const dog = props.dogs.filter(val => (
         val.name === name
     ))
 

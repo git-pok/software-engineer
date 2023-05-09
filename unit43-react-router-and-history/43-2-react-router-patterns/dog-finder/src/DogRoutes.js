@@ -1,5 +1,5 @@
 import {
-  Route, Switch, Redirect, useParams
+  Route, Switch, Redirect
 } from 'react-router-dom';
 import DogProfile from './DogProfile.js';
 import DogList from './DogList.js';
