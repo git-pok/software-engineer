@@ -10,7 +10,7 @@ const App = (props) => {
     <h1>APP COMPONENT</h1>
     <BrowserRouter>
     <DogNav props={props} />
-    <DogProfile props={props} />
+    <DogProfile props={props} dogName="Whiskey" />
     </BrowserRouter>
     </>
   );

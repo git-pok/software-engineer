@@ -1,12 +1,16 @@
 import {NavLink} from 'react-router-dom';
 // import './DogNav.css';
 
-const DogProfile = ({ props }) => {
-//   console.log(props);
+const DogProfile = ({ props, dogName }) => {
+    const findDog = props.dogs.filter(val => (
+        val.name === dogName
+    ))
+    console.log(findDog);
   return (
     <>
         {
-            props.dogs.map((val, idx) => (
+            findDog.map((val, idx) => (
+                
                 <div key={val.name}>
                 <h3>NAME</h3>
                 <p>{val.name}</p>
