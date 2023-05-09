@@ -1,10 +1,14 @@
-import {NavLink} from 'react-router-dom';
+import { Route, Switch, useParams } from 'react-router-dom';
 // import './DogNav.css';
 
-const DogProfile = ({ props, name }) => {
+const DogProfile = ({ props }) => {
+    const { name } = useParams();
+    console.log("URL PARAMS", name);
+
     const findDog = props.dogs.filter(val => (
         val.name === name
     ))
+    
     console.log(findDog);
   return (
     <>

@@ -6,17 +6,20 @@ const DogNav = ({ props }) => {
   return (
     <>
     <nav>
-        {
+        <NavLink exact to="/dogs">
+            Home
+        </NavLink>
+        {/* {
             props.dogs.map((val, idx) => (
                 <NavLink
                     exact
-                    to={val.name}
+                    to={val.name.toLowerCase()}
                     key={idx}
                 >
                     {val.name}
                 </NavLink>
             ))
-        }
+        } */}
     </nav>
     {/* <img src={src}></img> */}
     </>

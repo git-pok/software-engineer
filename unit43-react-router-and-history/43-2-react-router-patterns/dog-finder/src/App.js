@@ -6,14 +6,14 @@ import DogList from './DogList.js';
 import './App.css';
 
 const App = (props) => {
-  const src = props.dogs[2].src;
+
   return (
     <>
     <h1>APP COMPONENT</h1>
     <BrowserRouter>
     <DogNav props={props} />
-    <DogList props={props} />
-    <DogRoutes />
+    {/* <DogList props={props} /> */}
+    <DogRoutes props={props} />
     {/* <DogProfile props={props} name="Perry" /> */}
     </BrowserRouter>
     </>
