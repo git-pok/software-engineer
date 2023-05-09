@@ -7,11 +7,13 @@ import './App.css';
 
 const App = (props) => {
 
+  const getNames = (props) => props.dogs.map(val => val.name);
+  const dogNames = getNames(props);
+
   return (
     <>
-    <h1>APP COMPONENT</h1>
     <BrowserRouter>
-    <DogNav props={props} />
+    <DogNav dogNames={dogNames} />
     {/* <DogList props={props} /> */}
     <DogRoutes props={props} />
     {/* <DogProfile props={props} name="Perry" /> */}

@@ -1,25 +1,25 @@
 import {NavLink} from 'react-router-dom';
 // import './DogNav.css';
 
-const DogNav = ({ props }) => {
-//   console.log(props);
+const DogNav = ({ dogNames }) => {
+  console.log("NAV", dogNames);
   return (
     <>
     <nav>
         <NavLink exact to="/dogs">
             Home
         </NavLink>
-        {/* {
-            props.dogs.map((val, idx) => (
+        {
+            dogNames.map((val, idx) => (
                 <NavLink
                     exact
-                    to={val.name.toLowerCase()}
+                    to={`/dogs/${val}`}
                     key={idx}
                 >
-                    {val.name}
+                    {val}
                 </NavLink>
             ))
-        } */}
+        }
     </nav>
     {/* <img src={src}></img> */}
     </>

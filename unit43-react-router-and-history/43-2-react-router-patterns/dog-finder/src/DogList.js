@@ -10,7 +10,7 @@ const DogList = ({ props }) => {
             props.dogs.map((val, idx) => (
                 <Link
                     key={idx}
-                    exact
+                    exact="true"
                     to={`/dogs/${val.name}`}>{val.name}</Link>
             ))
         }
