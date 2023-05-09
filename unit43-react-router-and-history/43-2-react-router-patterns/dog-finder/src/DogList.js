@@ -5,13 +5,15 @@ const DogList = ({ props }) => {
 
   return (
     <>
-        <div>
+        <h1>DOGS</h1>
         {
             props.dogs.map((val, idx) => (
-                <Link exact to={`/dogs/${val.name}`}>{val.name}</Link>
+                <Link
+                    key={idx}
+                    exact
+                    to={`/dogs/${val.name}`}>{val.name}</Link>
             ))
         }
-        </div>
     </>
   );
 }
