@@ -1,7 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import DogProfile from './DogProfile.js';
 import DogList from './DogList.js';
-// import './DogNav.css';
 
 const DogRoutes = ({ props }) => {
 
