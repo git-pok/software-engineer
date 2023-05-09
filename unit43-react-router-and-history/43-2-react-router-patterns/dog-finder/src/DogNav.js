@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom';
-// import './DogNav.css';
+import './DogNav.css';
 
 const DogNav = ({ dogNames }) => {
 
   return (
     <>
-    <nav>
+    <nav className="DogNav-nav">
         <NavLink exact to="/dogs">
             Home
         </NavLink>

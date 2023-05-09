@@ -1,0 +1,27 @@
+.DogNav-nav {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 60px;
+    line-height: 60px;
+    background-color: rgb(51, 47, 36);
+}
+
+.DogNav-nav a {
+    padding: 0px 40px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 30px;
+    color: rgb(253, 253, 253);
+}
+
+.DogNav-nav a:hover {
+    color: rgb(253, 253, 253);
+    background-color: rgb(57, 61, 107);
+}
+
+.DogNav-nav .active {
+    text-decoration: none;
+    color: rgb(152, 158, 229);
+}
