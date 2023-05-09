@@ -1,4 +1,5 @@
 import { Route, Switch, useParams } from 'react-router-dom';
+// import images from './dog-images/alexandru-rotariu-o_QTeyGVWjQ-unsplash.jpg';
 import './DogProfile.css';
 
 const DogProfile = ({ props }) => {

@@ -2,6 +2,10 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import DogRoutes from './DogRoutes.js';
 import DogNav from './DogNav.js';
 import './App.css';
+import whiskey from '/Users/ivy/Documents/USF/git/unit43-react-router-and-history/43-2-react-router-patterns/dog-finder/src/dog-images/whiskey.jpg';
+import duke from '/Users/ivy/Documents/USF/git/unit43-react-router-and-history/43-2-react-router-patterns/dog-finder/src/dog-images/duke.jpg';
+import perry from '/Users/ivy/Documents/USF/git/unit43-react-router-and-history/43-2-react-router-patterns/dog-finder/src/dog-images/perry.jpg';
+import tubby from '/Users/ivy/Documents/USF/git/unit43-react-router-and-history/43-2-react-router-patterns/dog-finder/src/dog-images/tubby.jpg';
 
 const App = (props) => {
 
@@ -25,7 +29,7 @@ App.defaultProps = {
     {
       name: "Whiskey",
       age: 5,
-      src: "./dog-images/richard-brutyo-Sg3XwuEpybU-unsplash.jpg",
+      src: whiskey,
       facts: [
         "Whiskey loves eating popcorn.",
         "Whiskey is a terrible guard dog.",
@@ -35,7 +39,7 @@ App.defaultProps = {
     {
       name: "Duke",
       age: 3,
-      src: "./dog-images/richard-brutyo-Sg3XwuEpybU-unsplash.jpg",
+      src: duke,
       facts: [
         "Duke believes that ball is life.",
         "Duke likes snow.",
@@ -45,7 +49,7 @@ App.defaultProps = {
     {
       name: "Perry",
       age: 4,
-      src: "./dog-images/richard-brutyo-Sg3XwuEpybU-unsplash.jpg",
+      src: perry,
       facts: [
         "Perry loves all humans.",
         "Perry demolishes all snacks.",
@@ -55,7 +59,7 @@ App.defaultProps = {
     {
       name: "Tubby",
       age: 4,
-      src: "./dog-images/richard-brutyo-Sg3XwuEpybU-unsplash.jpg",
+      src: tubby,
       facts: [
         "Tubby is really stupid.",
         "Tubby does not like walks.",
