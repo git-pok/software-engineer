@@ -1,5 +1,5 @@
 import { Route, Switch, useParams } from 'react-router-dom';
-// import './DogNav.css';
+import './DogProfile.css';
 
 const DogProfile = ({ props }) => {
 
@@ -14,7 +14,8 @@ const DogProfile = ({ props }) => {
             {
                 findDog.map((val, idx) => (
                 
-                    <div key={val.name}>
+                    <div key={val.name} className="DogProfile">
+                        <img src={val.src}></img>
                         <h3>NAME</h3>
                         <p>{val.name}</p>
                         <h3>AGE</h3>
