@@ -1,0 +1,31 @@
+.DogList {
+    margin: 0px auto;
+    width: 600px;
+    height: 400px;
+}
+
+.DogList a {
+    display: block;
+    width: 100px;
+    height: 50px;
+    margin: 0px auto;
+    line-height: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 0px 30px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(51, 47, 36);
+}
+
+.DogList a:hover {
+    color: rgb(253, 253, 253);
+    background-color: rgb(57, 61, 107);
+}
+
+.DogList h1 {
+    text-align: center;
+    margin: 50px 0px 40px 0px;
+    color: rgb(57, 61, 107);
+}
