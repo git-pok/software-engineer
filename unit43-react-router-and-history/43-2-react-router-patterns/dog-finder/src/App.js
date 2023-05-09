@@ -16,9 +16,7 @@ const App = (props) => {
     <>
     <BrowserRouter>
     <DogNav dogNames={dogNames} />
-    {/* <DogList props={props} /> */}
     <DogRoutes props={props} />
-    {/* <DogProfile props={props} name="Perry" /> */}
     </BrowserRouter>
     </>
   );
