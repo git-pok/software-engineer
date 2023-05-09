@@ -1,8 +1,8 @@
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import './DogNav.css';
 
 const DogNav = ({ dogNames }) => {
-  console.log("NAV", dogNames);
+
   return (
     <>
     <nav>
@@ -21,7 +21,6 @@ const DogNav = ({ dogNames }) => {
             ))
         }
     </nav>
-    {/* <img src={src}></img> */}
     </>
   );
 }

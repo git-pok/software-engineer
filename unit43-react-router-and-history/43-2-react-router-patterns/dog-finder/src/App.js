@@ -1,8 +1,6 @@
 import {BrowserRouter, Route} from 'react-router-dom';
 import DogRoutes from './DogRoutes.js';
 import DogNav from './DogNav.js';
-import DogProfile from './DogProfile.js';
-import DogList from './DogList.js';
 import './App.css';
 
 const App = (props) => {
@@ -66,6 +64,5 @@ App.defaultProps = {
     }
   ]
 }
-// console.log(App);
 
 export default App;
