@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const useToggle = (boolean) => {
-    const [ state, setState ] = useState(boolean);
+const useLocalStorage = (key, defaultValue) => {
+    const [ state, setState ] = useState(() => {
+        const value = JSON.parse(
+                                    window.localStorage
+                                    .getItem(key)
+                                    || defaultValue
+                                )
+        return value;
+    });
 
-    const toggleState = () => {
-        setState(state => !state)
-    }
+    useEffect(() => {
+        window.localStorage.setItem(key, state);
+    }, [key, state]);
 
-    return [ state, toggleState];
+    return [ state, setState];
 }
 
-export default useToggle; 
+export default useLocalStorage; 
