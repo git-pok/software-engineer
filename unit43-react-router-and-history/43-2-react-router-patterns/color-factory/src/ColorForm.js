@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ColorForm = ({ addColor }) => {
 
+    const history = useHistory();
+    console.log(history);
     const initialState = {
         color: ""
     }
@@ -19,11 +22,10 @@ const ColorForm = ({ addColor }) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        // console.log("...formData!!!", {...formData});
         addColor(formData.color);
         setFormData(initialState);
-        console.log("SUBMITTED!!!");
-        console.log(formData);
+        history.push("/colors")
+        history.go();
     }
 
     return (
