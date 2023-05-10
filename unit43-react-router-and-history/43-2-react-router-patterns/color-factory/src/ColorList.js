@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom';
+import './ColorList.css';
 
 
 const ColorList = ({ colorArray }) => {
     
     return (
         <>
-        <Link exact="true" to="/colors/new">
-            ADD NEW COLOR
-        </Link>
+        <div className="ColorList-link">
+            <Link exact="true" to="/colors/new">
+                ADD NEW COLOR
+            </Link>
+        </div>
+
+        <div className="ColorList">
         {
             colorArray.map((val, idx) => (
                 <div
@@ -25,6 +30,7 @@ const ColorList = ({ colorArray }) => {
                 </div>
             ))
         }
+        </div>
         </>
     );
 }

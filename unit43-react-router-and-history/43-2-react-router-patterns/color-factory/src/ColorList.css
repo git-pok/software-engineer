@@ -1,0 +1,72 @@
+.ColorList {
+    width: 90vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ColorList-link {
+    display: block;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin: 20px auto 20px auto;
+    text-align: center;
+    background-color: rgb(162, 0, 122);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.ColorList-link a {
+    width: 200px;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s ease-out background-color;
+}
+
+.ColorList-link:hover {
+    background-color: rgb(25, 23, 41);
+}
+
+.ColorList-content-container {
+    width: 200px;
+    height: 200px;
+    margin: 30px 30px 20px 0px;
+}
+
+.ColorList-content {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+}
+
+.ColorList-text {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    position: relative;
+    top: 300px;
+    bottom: 0;
+    transition: top ease-in .2s;
+}
+
+.ColorList-content:hover .ColorList-text {
+    top: 0;
+    left: 0;
+    background-color: rgba(112, 108, 140, 0.382);
+}
+
+.ColorList-content a {
+    font-size: 30px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.ColorList-content a:hover {
+    font-weight: 600;
+}
