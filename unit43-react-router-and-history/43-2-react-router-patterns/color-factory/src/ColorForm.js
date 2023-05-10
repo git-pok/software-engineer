@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import './ColorForm.css';
+
 
 const ColorForm = ({ addColor }) => {
 
@@ -28,9 +30,11 @@ const ColorForm = ({ addColor }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            className="ColorForm"
+            onSubmit={handleSubmit}>
             <label htmlFor="color">
-                Color
+                Select A Color
             </label>
             <input
                 id="color"
