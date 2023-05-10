@@ -2,13 +2,14 @@ import {
     Route, Switch, Redirect 
 } from 'react-router-dom';
 import ColorForm from './ColorForm.js';
+import ColorList from './ColorList.js';
 
 
 const ColorRoutes = () => {
     return (
         <Switch>
             <Route exact path="/colors">
-                <h1>COLORS</h1>
+                <ColorList />
             </Route>
 
             <Route exact path="/colors/new">
