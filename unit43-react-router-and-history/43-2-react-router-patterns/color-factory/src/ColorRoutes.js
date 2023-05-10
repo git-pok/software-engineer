@@ -1,19 +1,23 @@
 import {
     Route, Switch, Redirect 
 } from 'react-router-dom';
-import { useState } from 'react';
+import useLocalStorage from './hooks/useLocalStorage.js';
 import ColorForm from './ColorForm.js';
 import ColorList from './ColorList.js';
 
 
 const ColorRoutes = () => {
-    const [ colors, setColors ] = useState([]);
+
+    const [ colors, setColors ] = useLocalStorage("colors", ["red"]);
 
     const addColor = color => {
         setColors(colors => ([
-            ...colors, color
+            color, ...colors 
         ]));
     }
+
+    console.log(colors);
+
 
     return (
         <Switch>
