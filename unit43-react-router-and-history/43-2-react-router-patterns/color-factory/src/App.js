@@ -1,8 +1,13 @@
+import { 
+  BrowserRouter
+} from 'react-router-dom';
 import './App.css';
 
 const App = () => {
   return (
-    <h1>APP COMPONENT</h1>
+    <BrowserRouter>
+    
+    </BrowserRouter>
   );
 }
 
