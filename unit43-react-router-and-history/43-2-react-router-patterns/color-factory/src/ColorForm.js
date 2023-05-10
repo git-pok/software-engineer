@@ -19,6 +19,7 @@ const ColorForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        setFormData(initialState);
         console.log("SUBMITTED!!!");
         console.log(formData);
     }
