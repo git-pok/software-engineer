@@ -3,7 +3,7 @@ import { useState } from 'react';
 const ColorForm = () => {
 
     const initialState = {
-        name: ""
+        color: ""
     }
 
     const [ formData, setFormData ] = useState(initialState);
@@ -11,15 +11,21 @@ const ColorForm = () => {
     const handleChange = e => {
         const { name, value } = e.target;
 
-        setFormData(formData => (
+        setFormData(formData => ({
             ...formData,
             [name]: value
-        ))
+        }))
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        console.log("SUBMITTED!!!");
+        console.log(formData);
     }
 
     return (
         <form onSubmit={handleSubmit}>
-            <label for="color">
+            <label htmlFor="color">
                 Color
             </label>
             <input
@@ -27,7 +33,8 @@ const ColorForm = () => {
                 type="text"
                 name="color"
                 value={formData.color}
-                onChange={handleChange} >
+                onChange={handleChange}
+                placeholder="Type a Color" >
             </input>
             <button>SUBMIT</button>
         </form>
