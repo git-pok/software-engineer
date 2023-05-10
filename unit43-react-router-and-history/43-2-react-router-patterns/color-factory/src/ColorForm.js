@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const ColorForm = () => {
+const ColorForm = ({ addColor }) => {
 
     const initialState = {
         color: ""
@@ -19,6 +19,8 @@ const ColorForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        // console.log("...formData!!!", {...formData});
+        addColor(formData.color);
         setFormData(initialState);
         console.log("SUBMITTED!!!");
         console.log(formData);
@@ -31,7 +33,7 @@ const ColorForm = () => {
             </label>
             <input
                 id="color"
-                type="text"
+                type="color"
                 name="color"
                 value={formData.color}
                 onChange={handleChange}

@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom';
 
-const ColorList = (props) => {
-    console.log(props);
+
+const ColorList = ({ colorArray }) => {
+    
+    // console.log("COLORS", colors);
     return (
-        props.dogs.map((val, idx) => (
+        colorArray.map((val, idx) => (
             <div
                 key={idx}
                 className="ColorList-content-container">
                 <div
                     className="ColorList-content"
-                    style={{backgroundColor: val.color}}>
+                    style={{backgroundColor: val}}>
                     <div className="ColorList-text">
-                        <Link exact="true" to={`/colors/${val.color}`}>
-                           {val.color} 
+                        <Link exact="true" to={`/colors/${val}`}>
+                           {val} 
                         </Link>
                     </div>
                 </div>
@@ -22,7 +24,7 @@ const ColorList = (props) => {
 }
 
 ColorList.defaultProps = { 
-    dogs: [
+    preSetColors: [
         {color: "red"}
     ]
 }
