@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 const ColorForm = ({ addColor }) => {
 
     const history = useHistory();
-    console.log(history);
+
     const initialState = {
         color: ""
     }
@@ -24,8 +24,7 @@ const ColorForm = ({ addColor }) => {
         e.preventDefault();
         addColor(formData.color);
         setFormData(initialState);
-        history.push("/colors")
-        history.go();
+        history.push("/colors");
     }
 
     return (

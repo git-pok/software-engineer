@@ -16,8 +16,6 @@ const ColorRoutes = () => {
         ]));
     }
 
-    console.log(colors);
-
 
     return (
         <Switch>
