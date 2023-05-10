@@ -1,6 +1,8 @@
 import {
     Route, Switch, Redirect 
 } from 'react-router-dom';
+import ColorForm from './ColorForm.js';
+
 
 const ColorRoutes = () => {
     return (
@@ -10,7 +12,7 @@ const ColorRoutes = () => {
             </Route>
 
             <Route exact path="/colors/new">
-                <h1>COLOR FORM</h1>
+                <ColorForm />
             </Route>
 
             <Route exact path="/colors/:color">
