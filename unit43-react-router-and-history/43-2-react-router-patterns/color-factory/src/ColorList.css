@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 60px;
 }
 
 .ColorList-link {
