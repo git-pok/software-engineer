@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import InputError from './InputError.js';
 import './ColorForm.css';
 
 
@@ -52,7 +53,7 @@ const ColorForm = ({ addColor }) => {
                 placeholder="Type a Color" >
             </input>
             <button>SUBMIT</button>
-            { isSubmit && !isTouched && <h1 style={{color: "red"}}>Invalid</h1> }
+            { isSubmit && !isTouched && <InputError text="Input can't be empty!" /> }
         </form>
     );
 }

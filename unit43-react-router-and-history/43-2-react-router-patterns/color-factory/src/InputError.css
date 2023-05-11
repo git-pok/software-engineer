@@ -1,0 +1,13 @@
+.InputError {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 40px;
+    margin: 40px 0px 0px 0px;
+    font-size: 20px;
+    font-weight: 500;
+    background-color: rgb(245, 70, 70);
+    color: rgb(255, 255, 255);
+    border-radius: 03px;
+}

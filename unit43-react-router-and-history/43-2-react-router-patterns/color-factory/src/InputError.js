@@ -1,8 +1,12 @@
-const InputError = () => {
-    
+import './InputError.css'; 
+
+const InputError = ({ text }) => {
+
     return (
         <div className="InputError">
-            <h1>Input can't be empty!</h1>
+            <p>{text}</p>
         </div>
     );
 }
+
+export default InputError;
