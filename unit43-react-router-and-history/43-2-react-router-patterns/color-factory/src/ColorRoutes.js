@@ -4,11 +4,12 @@ import {
 import useLocalStorage from './hooks/useLocalStorage.js';
 import ColorForm from './ColorForm.js';
 import ColorList from './ColorList.js';
+import ColorDetail from './ColorDetail.js';
 
 
 const ColorRoutes = () => {
 
-    const [ colors, setColors ] = useLocalStorage("colors", ["red"]);
+    const [ colors, setColors ] = useLocalStorage("colors", ["#ff0000"]);
 
     const addColor = color => {
         setColors(colors => ([
@@ -27,8 +28,8 @@ const ColorRoutes = () => {
                 <ColorForm addColor={addColor} />
             </Route>
 
-            <Route exact path="/colors/:color">
-                <h1>COLOR</h1>
+            <Route exact path="/colors/:id">
+                <ColorDetail />
             </Route>
 
             <Redirect to="/colors" />
