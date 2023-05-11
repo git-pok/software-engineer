@@ -1,10 +1,10 @@
 import {useParams} from 'react-router-dom';
 
 const ColorDetail = () => {
-    const { color } = useParams();
-    
+    const { id } = useParams();
+
     return (
-        <h1>{color}</h1>
+        <h1>{id}</h1>
     );
 }
 

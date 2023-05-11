@@ -7,9 +7,9 @@ import './App.css';
 const App = () => {
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <ColorRoutes />
-    </BrowserRouter>
+    // </BrowserRouter>
   );
 }
 

@@ -9,7 +9,7 @@ import ColorDetail from './ColorDetail.js';
 
 const ColorRoutes = () => {
 
-    const [ colors, setColors ] = useLocalStorage("colors", ["#ff0000"]);
+    const [ colors, setColors ] = useLocalStorage("colors", ["red", "blue"]);
 
     const addColor = color => {
         setColors(colors => ([
