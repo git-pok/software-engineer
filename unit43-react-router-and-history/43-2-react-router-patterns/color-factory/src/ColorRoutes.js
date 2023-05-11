@@ -9,7 +9,7 @@ import ColorDetail from './ColorDetail.js';
 
 const ColorRoutes = () => {
 
-    const [ colors, setColors ] = useLocalStorage("colors", ["red", "blue"]);
+    const [ colors, setColors ] = useLocalStorage("colors", ["ff0000"]);
 
     const addColor = color => {
         setColors(colors => ([
@@ -28,7 +28,7 @@ const ColorRoutes = () => {
                 <ColorForm addColor={addColor} />
             </Route>
 
-            <Route exact path="/colors/:id">
+            <Route exact path="/colors/:color">
                 <ColorDetail />
             </Route>
 

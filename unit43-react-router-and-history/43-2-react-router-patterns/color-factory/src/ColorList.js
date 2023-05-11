@@ -20,10 +20,10 @@ const ColorList = ({ colorArray }) => {
                     className="ColorList-content-container">
                     <div
                         className="ColorList-content"
-                        style={{backgroundColor: val}}>
+                        style={{backgroundColor: `#${val}`}}>
                         <div className="ColorList-text">
                             <Link exact="true" to={`/colors/${val}`}>
-                                {val} 
+                                {`#${val}`} 
                             </Link>
                         </div>
                     </div>

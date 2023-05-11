@@ -31,7 +31,8 @@ const ColorForm = ({ addColor }) => {
         e.preventDefault();
         setIsSubmit(() => true);
         if (formData.color) {
-            addColor(formData.color);
+            const colorNoHashTag = formData.color.slice(1);
+            addColor(colorNoHashTag);
             setFormData(initialState);
             history.push("/colors");
         }
