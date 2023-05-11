@@ -1,6 +1,3 @@
-import {
-  BrowserRouter
-} from 'react-router-dom';
 import DogRoutes from './DogRoutes.js';
 import DogNav from './DogNav.js';
 import './App.css';
@@ -17,10 +14,8 @@ const App = (props) => {
 
   return (
     <>
-    <BrowserRouter>
     <DogNav dogNames={dogNames} />
     <DogRoutes props={props} />
-    </BrowserRouter>
     </>
   );
 }
