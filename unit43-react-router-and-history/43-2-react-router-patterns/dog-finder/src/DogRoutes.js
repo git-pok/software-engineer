@@ -1,20 +1,32 @@
 import {
-  Route, Switch, Redirect
+  Route, Switch, Redirect, useLocation
 } from 'react-router-dom';
 import DogProfile from './DogProfile.js';
 import DogList from './DogList.js';
 
 
-const DogRoutes = ({ props }) => {
+const DogRoutes = ({ dogData }) => {
+
+  const { pathname } = useLocation();
+  const dogNameParam = pathname.slice(6);
+
+  const findDog = (name) => (
+    dogData.dogs.filter(val => (
+      val.name === name
+    ))
+  )
+
+  const pathLen = pathname.length;
+  const dog = pathLen > 6 ? findDog(dogNameParam) : null;
 
   return (
     <Switch>
         <Route exact path="/dogs">
-            <DogList props={props} />
+            <DogList dogData={dogData} />
         </Route>
 
         <Route exact path="/dogs/:name">
-            <DogProfile props={props} />
+            <DogProfile dog={dog} />
         </Route>
 
         <Redirect to="/dogs" />

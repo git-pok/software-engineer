@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import './DogList.css';
 
-const DogList = ({ props }) => {
+
+const DogList = ({ dogData }) => {
 
   return (
     <>
     <h1 className="DogList-h1">DOGS</h1>
     <div className="DogList">
         {
-            props.dogs.map((val, idx) => (
+            dogData.dogs.map((val, idx) => (
               <div
                 key={`${val.name} content-container`}
                 className="DogList-content-container">

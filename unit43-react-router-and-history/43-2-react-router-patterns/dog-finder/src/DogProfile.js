@@ -1,19 +1,12 @@
-import { useParams } from 'react-router-dom';
 import './DogProfile.css';
 
 
-const DogProfile = ({ props }) => {
-
-    const { name } = useParams();
-
-    const findDog = props.dogs.filter(val => (
-        val.name === name
-    ))
+const DogProfile = ({ dog }) => {
 
     return (
         <>
             {
-                findDog.map((val, idx) => (
+                dog.map((val, idx) => (
                 
                     <div key={val.name} className="DogProfile">
                         <img src={val.src}></img>

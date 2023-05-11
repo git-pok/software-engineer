@@ -7,15 +7,15 @@ import perry from '/Users/ivy/Documents/USF/git/unit43-react-router-and-history/
 import tubby from '/Users/ivy/Documents/USF/git/unit43-react-router-and-history/43-2-react-router-patterns/dog-finder/src/dog-images/tubby.jpg';
 
 
-const App = (props) => {
-
-  const getNames = (props) => props.dogs.map(val => val.name);
-  const dogNames = getNames(props);
+const App = (dogData) => {
+  
+  const getNames = (dogData) => dogData.dogs.map(val => val.name);
+  const dogNames = getNames(dogData);
 
   return (
     <>
     <DogNav dogNames={dogNames} />
-    <DogRoutes props={props} />
+    <DogRoutes dogData={dogData} />
     </>
   );
 }
