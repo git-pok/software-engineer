@@ -1,6 +1,7 @@
 import {useParams} from 'react-router-dom';
 import './ColorDetail.css';
 
+
 const ColorDetail = () => {
     const { color } = useParams();
 

@@ -1,5 +1,6 @@
 import './InputError.css'; 
 
+
 const InputError = ({ text }) => {
 
     return (
