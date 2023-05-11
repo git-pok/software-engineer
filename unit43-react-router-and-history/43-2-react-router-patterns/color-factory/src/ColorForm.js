@@ -40,7 +40,6 @@ const ColorForm = ({ addColor }) => {
         <form
             className="ColorForm"
             onSubmit={handleSubmit}>
-            { isSubmit && !isTouched && <h1>Invalid</h1> }
             <label htmlFor="color">
                 Select A Color
             </label>
@@ -53,6 +52,7 @@ const ColorForm = ({ addColor }) => {
                 placeholder="Type a Color" >
             </input>
             <button>SUBMIT</button>
+            { isSubmit && !isTouched && <h1 style={{color: "red"}}>Invalid</h1> }
         </form>
     );
 }
