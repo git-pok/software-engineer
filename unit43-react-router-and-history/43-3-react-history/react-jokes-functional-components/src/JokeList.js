@@ -7,11 +7,12 @@ const JokeList = ({ numJokesToGet }) => {
 
     const [ jokes, setJokes ] = useState(null);
     const [ isLoading, setIsLoading ] = useState();
-    const [ jokesLength, setJokesLength ] = useState(0);
+    // const [ votes, setJokes ] = useState(null);
+    // const [ jokesLength, setJokesLength ] = useState(0);
     const [ req, setReq ] = useState(false);
 
     // let seenJokes = new Set();
-    // console.log("TOP LEVEL JOKES", jokes);
+    console.log("COMPONENT RENDERED");
     const addJokes = (data) => {
 
         setJokes(jokes => {
@@ -29,12 +30,13 @@ const JokeList = ({ numJokesToGet }) => {
     }
 
     useEffect(() => {
+        console.log("USE EFFECT RENDERED");
         async function getJokes() {
         try {
             if (!req) return;
             else {
                 setJokes(jokes => null);
-                setJokesLength(jokesLength => 0);
+                // setJokesLength(jokesLength => 0);
                 let jokeDataJokes = 0;
                 const jokesData = [];
                 const jokeIds = {};
@@ -55,7 +57,7 @@ const JokeList = ({ numJokesToGet }) => {
                             votes: 0
                         })
 
-                        setJokesLength(jokesLength => jokesLength + 1);
+                        // setJokesLength(jokesLength => jokesLength + 1);
                         jokeDataJokes++;
                     }
                 }
