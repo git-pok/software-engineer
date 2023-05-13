@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Joke from "./Joke";
+import Joke from "./Joke.js";
 import "./JokeList.css";
 
 const JokeList = ({ numJokesToGet }) => {
@@ -10,16 +10,14 @@ const JokeList = ({ numJokesToGet }) => {
     const [ jokesLength, setJokesLength ] = useState(0);
     const [ req, setReq ] = useState(false);
 
-    // console.log("LEN", jokesLength);
-    // console.log("JOKES STATE", jokes);
-
-    let seenJokes = new Set();
-
+    // let seenJokes = new Set();
+    // console.log("TOP LEVEL JOKES", jokes);
     const addJokes = (data) => {
-        setJokes(jokes => ({
-            ...jokes,
-            ...data
-        }))
+
+        setJokes(jokes => {
+            if (!jokes || jokes.length === 0) return [...data];
+            else return [...jokes, data];
+        })
     }
 
     const reqMade = () => {
@@ -38,7 +36,8 @@ const JokeList = ({ numJokesToGet }) => {
                 setJokes(jokes => null);
                 setJokesLength(jokesLength => 0);
                 let jokeDataJokes = 0;
-                const jokesData = [{}];
+                const jokesData = [];
+                const jokeIds = {};
 
                 while (jokeDataJokes < 5) {
                     const res = await axios.get("https://icanhazdadjoke.com", {
@@ -46,15 +45,22 @@ const JokeList = ({ numJokesToGet }) => {
                     });
 
                     const jokeId = res.data.id;
+                    jokeIds[jokeId] = jokeId;
 
-                    if (!jokesData[0].jokeId) {
-                        jokesData[0][res.data.id] = res.data.joke;
+                    if (!jokeIds.jokeId) {
+
+                        jokesData.push({
+                            id: res.data.id,
+                            joke: res.data.joke,
+                            votes: 0
+                        })
+
                         setJokesLength(jokesLength => jokesLength + 1);
                         jokeDataJokes++;
                     }
                 }
 
-                addJokes(jokesData[0]);
+                addJokes(jokesData);
 
             }
             // }
@@ -135,6 +141,15 @@ const JokeList = ({ numJokesToGet }) => {
               vote={this.vote}
             />
           ))} */}
+          { jokes ? jokes.map(j => (
+            <Joke
+              text={j.joke}
+              key={j.id}
+              id={j.id}
+              votes={j.votes}
+            //   vote={this.vote}
+            />
+          )) : null}
         </div>
       );
     }
