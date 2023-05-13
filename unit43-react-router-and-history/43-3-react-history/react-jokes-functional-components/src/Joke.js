@@ -1,11 +1,11 @@
 import { useState } from "react";
-// import "./Joke.css";
+import "./Joke.css";
 
 
 const Joke = ({ id, votes, text }) => {
 
     const [ voteVal, setVoteVal ] = useState(votes);
-    console.log(voteVal);
+
     const addVote = () => {
         setVoteVal(votes => votes + 1);
     }
@@ -20,15 +20,16 @@ const Joke = ({ id, votes, text }) => {
     return (
       <div className="Joke">
         <div className="Joke-votearea">
-          <button onClick={addVote}>
-            <i className="fas fa-thumbs-up" />
-          </button>
 
           <button onClick={minusVote}>
             <i className="fas fa-thumbs-down" />
           </button>
 
-          {votes}
+          <button onClick={addVote}>
+            <i className="fas fa-thumbs-up" />
+          </button>
+
+          {voteVal}
         </div>
 
         <div className="Joke-text">{text}</div>

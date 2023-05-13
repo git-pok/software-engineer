@@ -3,25 +3,21 @@ import axios from "axios";
 import Joke from "./Joke.js";
 import "./JokeList.css";
 
+
 const JokeList = ({ numJokesToGet }) => {
 
     const [ jokes, setJokes ] = useState(null);
     const [ isLoading, setIsLoading ] = useState();
-    // const [ votes, setJokes ] = useState(null);
-    // const [ jokesLength, setJokesLength ] = useState(0);
     const [ req, setReq ] = useState(false);
 
-    // let seenJokes = new Set();
-    console.log("COMPONENT RENDERED");
     const addJokes = (data) => {
 
-        setJokes(jokes => {
-            if (!jokes || jokes.length === 0) return [...data];
-            else return [...jokes, data];
-        })
+        setJokes(jokes => (
+            !jokes || jokes.length === 0 ? [...data] : [...jokes, data]
+        ))
     }
 
-    const reqMade = () => {
+    const reqTrack = () => {
         setReq(() => {
         if (!req) return 1;
         else if (req === 1) return 2;
@@ -30,18 +26,17 @@ const JokeList = ({ numJokesToGet }) => {
     }
 
     useEffect(() => {
-        console.log("USE EFFECT RENDERED");
+
         async function getJokes() {
         try {
             if (!req) return;
             else {
                 setJokes(jokes => null);
-                // setJokesLength(jokesLength => 0);
                 let jokeDataJokes = 0;
                 const jokesData = [];
                 const jokeIds = {};
 
-                while (jokeDataJokes < 5) {
+                while (jokeDataJokes < numJokesToGet) {
                     const res = await axios.get("https://icanhazdadjoke.com", {
                         headers: { Accept: "application/json" }
                     });
@@ -57,7 +52,6 @@ const JokeList = ({ numJokesToGet }) => {
                             votes: 0
                         })
 
-                        // setJokesLength(jokesLength => jokesLength + 1);
                         jokeDataJokes++;
                     }
                 }
@@ -65,25 +59,6 @@ const JokeList = ({ numJokesToGet }) => {
                 addJokes(jokesData);
 
             }
-            // }
-
-            //   const { joke } = res.data;
-
-            //   addJokes(joke);
-      
-            //   if (!seenJokes.has(joke.id)) {
-            //     seenJokes.add(joke.id);
-            //     setJokes(jokes => ({
-            //         ...jokes,
-            //         ...joke,
-            //         votes: 0
-
-            //     }))
-                // jokes.push({ ...joke, votes: 0 });
-            //   } else {
-                // console.log("duplicate found!");
-            //   }
-            
       
           } catch (err) {
             console.error(err);
@@ -93,56 +68,16 @@ const JokeList = ({ numJokesToGet }) => {
         getJokes();
     
     }, [req])
-
-    // console.log("JOKES", jokes.length);
-  
-    /* empty joke list, set to loading state, and then call getJokes */
-  
-    // generateNewJokes() {
-    //   this.setState({ isLoading: true});
-    //   this.getJokes();
-    // }
-  
-    /* change vote for this id by delta (+1 or -1) */
-  
-    // vote(id, delta) {
-    //   this.setState(st => ({
-    //     jokes: st.jokes.map(j =>
-    //       j.id === id ? { ...j, votes: j.votes + delta } : j
-    //     )
-    //   }));
-    // }
-  
-    /* render: either loading spinner or list of sorted jokes. */
-    // let sortedJokes = [...jokes].sort((a, b) => b.votes - a.votes);
-    //   let sortedJokes = [...this.state.jokes].sort((a, b) => b.votes - a.votes);
-    //   if (this.state.isLoading) {
-    //     return (
-    //       <div className="loading">
-    //         <i className="fas fa-4x fa-spinner fa-spin" />
-    //       </div>
-    //     )
-    //   }
   
       return (
         <div className="JokeList">
           <button
             className="JokeList-getmore"
-            onClick={reqMade}
+            onClick={reqTrack}
           >
             Get New Jokes
           </button>
   
-          {/* {sortedJokes.map(j => ( */}
-          {/* {jokes.map(j => (
-            <Joke
-              text={j.joke}
-              key={j.id}
-              id={j.id}
-              votes={j.votes}
-              vote={this.vote}
-            />
-          ))} */}
           { jokes ? jokes.map(j => (
             <Joke
               text={j.joke}
