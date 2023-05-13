@@ -4,13 +4,20 @@ import Joke from "./Joke";
 import "./JokeList.css";
 
 const JokeList = ({ numJokesToGet }) => {
-    // console.log(numJokesToGet);
+
     const [ jokes, setJokes ] = useState(null);
     const [ isLoading, setIsLoading ] = useState();
+    const [ jokesLength, setJokesLength ] = useState(0);
     const [ req, setReq ] = useState(false);
+
+    // console.log("LEN", jokesLength);
+    // console.log("JOKES STATE", jokes);
+
     let seenJokes = new Set();
+
     const addJokes = (data) => {
-        setJokes(() => ({
+        setJokes(jokes => ({
+            ...jokes,
             ...data
         }))
     }
@@ -26,41 +33,31 @@ const JokeList = ({ numJokesToGet }) => {
     useEffect(() => {
         async function getJokes() {
         try {
-            // load jokes one at a time, adding not-yet-seen jokes
-            // let jokes = [];
-            let seenJokes = new Set();
-            // const jokesLen = jokes.length;
-            // while (seenJokes.length < 5)
             if (!req) return;
             else {
-                const jokesData = [];
-                console.log("ELSE RAN");
-                console.log("JOKES LENGTH", jokesData.length);
-                let jl = 0;
-                console.log("JL", jl);
-                while (jl < 5) {
-                // if (jl <= 5) {
-                    // for (let i = 0; i < numJokesToGet; i++) {
-            // if (req === null) return addJokes([ ]);
-                        const res = await axios.get("https://icanhazdadjoke.com", {
-                        // params: {limit: 5 },
-                        headers: { Accept: "application/json" }
-                        });
-                        console.log("RESULT", res);
-                        if (!res.data.id) {
-                            jokesData[res.data.id] = res.data.joke;
-                            jl++
-                        } else jl = jl;
-                    // }
-                }
-                // addJokes(jokesData);
-                console.log("JOKES", jokesData);
-            //   addJokes(res.data);
-            // addJokes({one: 1});
+                setJokes(jokes => null);
+                setJokesLength(jokesLength => 0);
+                let jokeDataJokes = 0;
+                const jokesData = [{}];
 
-            //   console.log("RESULT", res);
-                // console.log("JOKES", jokes.length);
-            
+                while (jokeDataJokes < 5) {
+                    const res = await axios.get("https://icanhazdadjoke.com", {
+                        headers: { Accept: "application/json" }
+                    });
+
+                    const jokeId = res.data.id;
+
+                    if (!jokesData[0].jokeId) {
+                        jokesData[0][res.data.id] = res.data.joke;
+                        setJokesLength(jokesLength => jokesLength + 1);
+                        jokeDataJokes++;
+                    }
+                }
+
+                addJokes(jokesData[0]);
+
+            }
+            // }
 
             //   const { joke } = res.data;
 
@@ -79,10 +76,6 @@ const JokeList = ({ numJokesToGet }) => {
                 // console.log("duplicate found!");
             //   }
             
-            console.log("JOKES DATA", jokesData);
-            addJokes(jokesData);
-            
-        }
       
           } catch (err) {
             console.error(err);
@@ -90,6 +83,7 @@ const JokeList = ({ numJokesToGet }) => {
         }
 
         getJokes();
+    
     }, [req])
 
     // console.log("JOKES", jokes.length);
