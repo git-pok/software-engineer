@@ -7,7 +7,7 @@ import "./JokeList.css";
 const JokeList = ({ numJokesToGet }) => {
 
     const [ jokes, setJokes ] = useState(null);
-    const [ isLoading, setIsLoading ] = useState();
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ req, setReq ] = useState(false);
 
     const addJokes = (data) => {
@@ -37,6 +37,7 @@ const JokeList = ({ numJokesToGet }) => {
                 const jokeIds = {};
 
                 while (jokeDataJokes < numJokesToGet) {
+                    setIsLoading(() => true);
                     const res = await axios.get("https://icanhazdadjoke.com", {
                         headers: { Accept: "application/json" }
                     });
@@ -57,6 +58,7 @@ const JokeList = ({ numJokesToGet }) => {
                 }
 
                 addJokes(jokesData);
+                setIsLoading(() => false);
 
             }
       
@@ -68,28 +70,38 @@ const JokeList = ({ numJokesToGet }) => {
         getJokes();
     
     }, [req])
-  
       return (
-        <div className="JokeList">
-          <button
-            className="JokeList-getmore"
-            onClick={reqTrack}
-          >
-            Get New Jokes
-          </button>
-  
-          { jokes ? jokes.map(j => (
-            <Joke
-              text={j.joke}
-              key={j.id}
-              id={j.id}
-              votes={j.votes}
+        <>
+        { isLoading
+          ?
+            <div className="loading">
+              <i className="fas fa-4x fa-spinner fa-spin" />
+            </div>
+          :
+            <div className="JokeList">
+              <button
+                className="JokeList-getmore"
+                onClick={reqTrack}>
+                  Get New Jokes
+              </button>
+              { jokes 
+                ? 
+                  jokes.map(j => (
+                    <Joke
+                      text={j.joke}
+                      key={j.id}
+                      id={j.id}
+                      votes={j.votes} />
             //   vote={this.vote}
-            />
-          )) : null}
-        </div>
-      );
-    }
+                  )) 
+                : 
+                  null 
+              }
+            </div>
+        }
+        </>
+      )
+}
 
   JokeList.defaultProps = {
     numJokesToGet: 5
