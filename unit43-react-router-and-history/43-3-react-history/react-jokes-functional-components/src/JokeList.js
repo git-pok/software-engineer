@@ -17,12 +17,10 @@ const JokeList = ({ numJokesToGet }) => {
     }
 
     const reqTrack = () => {
-        setReq(req => { 
-        // {
+        setReq(req => {
         if (!req) return 1;
         else if (req === 1) return 2;
-        else return 1; 
-        // });  
+        else return 1;  
     })
   }
 
@@ -33,9 +31,7 @@ const JokeList = ({ numJokesToGet }) => {
             if (!req) return;
             else {
                 setJokes(jokes => null);
-                // let jokeDataJokes = 0;
                 const jokesData = [];
-                // const jokeIds = {};
                 const jokeIds = [];
                 setIsLoading(() => true);
 
@@ -45,7 +41,7 @@ const JokeList = ({ numJokesToGet }) => {
                   });
 
                   const jokeId = res.data.id;
-
+                  // console.log(jokeIds.indexOf(jokeId) === -1);
                   if (jokeIds.indexOf(jokeId) === -1) {
                     jokesData.push({
                         id: res.data.id,
@@ -53,14 +49,11 @@ const JokeList = ({ numJokesToGet }) => {
                         votes: 0
                     })
                     jokeIds.push(jokeId);
-                    // jokeIds[jokeId] = jokeId;
                   }
 
-                  // console.log("JOKE IDS", jokeIds);
                   if (jokesData.length === 5) break;
                 }
 
-                console.log("JOKES DATA", jokesData);
                 addJokes(jokesData);
                 setIsLoading(() => false);
 
@@ -69,9 +62,6 @@ const JokeList = ({ numJokesToGet }) => {
           } catch (err) {
             setIsLoading(() => false);
             console.error(`ERROR!!!\n${err}`);
-            // setJokes(jokes => null);
-            // console.error(`STATUS!!!\n${err.status}`);
-            // window.location.reload();
           }
         }
 
@@ -109,9 +99,5 @@ const JokeList = ({ numJokesToGet }) => {
         </>
       )
 }
-
-  JokeList.defaultProps = {
-    numJokesToGet: 5
-  };
   
   export default JokeList;
