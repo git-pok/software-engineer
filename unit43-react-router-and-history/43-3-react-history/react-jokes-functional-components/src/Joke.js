@@ -11,10 +11,9 @@ const Joke = ({ id, votes, text }) => {
     }
 
     const minusVote = () => {
-        setVoteVal(votes => {
-            if (votes === 0) return 0;
-            else return votes - 1;
-        });
+        setVoteVal(votes => (
+          votes === 0 ? 0 : votes - 1
+        ));
     }
 
     return (
