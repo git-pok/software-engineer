@@ -19,8 +19,7 @@ const JokeList = ({ numJokesToGet }) => {
     const reqTrack = () => {
         setReq(req => {
         if (!req) return 1;
-        else if (req === 1) return 2;
-        else return 1;  
+        else return req === 1 ? 2 : 1;  
     })
   }
 
