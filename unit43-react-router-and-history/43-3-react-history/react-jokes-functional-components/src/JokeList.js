@@ -5,7 +5,6 @@ import "./JokeList.css";
 
 
 const JokeList = ({ numJokesToGet }) => {
-    // const [ jokeIds, setJokeIds ] = useState({});
     const [ jokes, setJokes ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ req, setReq ] = useState(false);
@@ -16,13 +15,6 @@ const JokeList = ({ numJokesToGet }) => {
             !jokes || jokes.length === 0 ? [...data] : [...jokes, data]
         ))
     }
-
-    // const addJokeIds = id => {
-    //   setJokeIds(jokeIds => ({
-    //     ...jokeIds,
-    //     id
-    //   }))
-    // }
 
     const reqTrack = () => {
         setReq(req => { 
@@ -43,8 +35,8 @@ const JokeList = ({ numJokesToGet }) => {
                 setJokes(jokes => null);
                 // let jokeDataJokes = 0;
                 const jokesData = [];
-                const jokeIds = {};
-                // const jokeIds = [];
+                // const jokeIds = {};
+                const jokeIds = [];
                 setIsLoading(() => true);
 
                 for (let i = 0; i < 6; i++) {
@@ -53,27 +45,18 @@ const JokeList = ({ numJokesToGet }) => {
                   });
 
                   const jokeId = res.data.id;
-                  // jokeIds[jokeId] = jokeId;
-                  // console.log("JOKE", res.data.joke);
-                  // console.log("JOKE ID", jokeIds.jokeId);
-                  // console.log(jokeIds.indexOf(jokeId));
-                  // if (jokeIds.indexOf(jokeId) === -1) {
-                    if (jokeIds.jokeId === undefined) {
+
+                  if (jokeIds.indexOf(jokeId) === -1) {
                     jokesData.push({
                         id: res.data.id,
                         joke: res.data.joke,
                         votes: 0
                     })
-
-                    // addJokeIds(res.data.id);
-                    // jokeIds.push(jokeId);
-                    jokeIds[jokeId] = jokeId;
-                    // addJokes(jokesData);
+                    jokeIds.push(jokeId);
+                    // jokeIds[jokeId] = jokeId;
                   }
 
-                  // jokeIds[jokeId] = jokeId;
-                  // console.log(jokesData);
-                  console.log("JOKE IDS", jokeIds);
+                  // console.log("JOKE IDS", jokeIds);
                   if (jokesData.length === 5) break;
                 }
 
@@ -84,8 +67,11 @@ const JokeList = ({ numJokesToGet }) => {
             }
       
           } catch (err) {
+            setIsLoading(() => false);
             console.error(`ERROR!!!\n${err}`);
-            window.location.reload();
+            // setJokes(jokes => null);
+            // console.error(`STATUS!!!\n${err.status}`);
+            // window.location.reload();
           }
         }
 
