@@ -32,15 +32,17 @@ const JokeList = ({ numJokesToGet }) => {
                 setJokes(jokes => null);
                 const jokesData = [];
                 const jokeIds = [];
+                let iterationCnt = 0;
                 setIsLoading(() => true);
 
-                for (let i = 0; i < 6; i++) {
+                // for (let i = 0; i < 6; i++) {
+                while (iterationCnt < 10) {
                   const res = await axios.get("https://icanhazdadjoke.com", {
                       headers: { Accept: "application/json" }
                   });
 
                   const jokeId = res.data.id;
-                  // console.log(jokeIds.indexOf(jokeId) === -1);
+                  console.log(jokeIds.indexOf(jokeId) === -1);
                   if (jokeIds.indexOf(jokeId) === -1) {
                     jokesData.push({
                         id: res.data.id,
@@ -51,6 +53,7 @@ const JokeList = ({ numJokesToGet }) => {
                   }
 
                   if (jokesData.length === 5) break;
+                  iterationCnt++
                 }
 
                 addJokes(jokesData);
