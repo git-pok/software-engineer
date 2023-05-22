@@ -10,22 +10,21 @@ const JoblyRoutes = () => {
   useEffect(() => {
     async function getCompanies (url) {
       const results = await JoblyApi.getCompany(url);
-      // console.log(results);
-      setCompanies(() => results); 
+      // console.log(results[0]);
+      setCompanies(data => [results.companies]); 
     }
 
     getCompanies("companies");
   }, [])
 
-  console.log(companies);
+  // console.log("CO", companies);
   return (
     <Switch>
       <Route exact path="/">
         <h1>HOME</h1>
       </Route>
       <Route exact path="/companies">
-        {/* <h1>COMPANIES</h1> */}
-        <JoblyCard title="TEST TITLE" details="TEST DETIALS" />
+        <JoblyCard companies={companies} />
       </Route>
       <Route exact path="/jobs">
         <h1>JOBS</h1>

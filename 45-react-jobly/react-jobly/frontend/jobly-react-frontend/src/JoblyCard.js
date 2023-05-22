@@ -1,16 +1,22 @@
 // import './JoblyCard.css';
 
-const JoblyCard = ({ title, subtitle, details, salary, equity }) => {
-  // console.log(linkNames);
+const JoblyCard = ({ companies, jobs}) => {
+  // const coData = companies;
+  // console.log("F CO", companies.map(val => ( val )));
+  console.log("F CO", companies);
   return (
     <>
-    <div className="JoblyCard">
-      <h2>{title}</h2>
-      { subtitle ? <h3>subtitle</h3> : null }
-      { details ? <p>{details}</p> : null }
-      { salary ? <p>{salary}</p> : null }
-      { equity ? <p>{equity}</p> : null }
-    </div>
+    {/* <h1>{companies}</h1> */}
+    <h1>COMPANIES</h1>
+    {/* { companies ?
+      companies.map((val, idx) => (
+        <div className="JoblyCard">
+        <h2>{val.name}</h2>
+        <p>{val.description}</p>
+        </div>
+      ))
+      : null
+    } */}
     </>
   );
 }
