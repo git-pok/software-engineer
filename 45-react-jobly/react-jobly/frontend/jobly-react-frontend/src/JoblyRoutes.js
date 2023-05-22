@@ -1,4 +1,5 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
+import JoblyCard from './JoblyCard.js';
 
 const JoblyRoutes = () => {
   return (
@@ -7,7 +8,8 @@ const JoblyRoutes = () => {
         <h1>HOME</h1>
       </Route>
       <Route exact path="/companies">
-        <h1>COMPANIES</h1>
+        {/* <h1>COMPANIES</h1> */}
+        <JoblyCard title="TEST TITLE" details="TEST DETIALS" />
       </Route>
       <Route exact path="/jobs">
         <h1>JOBS</h1>
