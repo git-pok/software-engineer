@@ -24,9 +24,7 @@ const JoblyRoutes = () => {
       <Route exact path="/users/:username">
 
       </Route>
-      <Redirect exact path="/">
-
-      </Redirect>
+      <Redirect to="/" />
     </Switch>
   );
 }
