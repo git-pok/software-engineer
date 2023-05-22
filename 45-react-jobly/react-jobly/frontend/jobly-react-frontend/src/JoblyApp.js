@@ -5,9 +5,8 @@ import JoblyNavbar from './JoblyNavbar.js';
 const JoblyApp = () => {
   return (
     <>
-      <h1>JOBLY APP</h1>
       <JoblyNavbar
-        linkNames={["companies", "jobs", "users"]} />
+        linkNames={["companies", "jobs", "profile"]} />
       <JoblyRoutes />
     </>
   );
