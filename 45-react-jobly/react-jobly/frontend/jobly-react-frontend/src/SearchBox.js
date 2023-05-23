@@ -6,7 +6,7 @@ import CompaniesContext from './context/CompaniesContext.js';
 const SearchBox = () => {
   const initialState = { name: "", minEmp: "", maxEmp: "" }
   const [ formData, setFormData ] = useState(initialState);
-  const setCompaniesState = useContext(CompaniesContext);
+  const setJobCoState = useContext(CompaniesContext);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -35,8 +35,12 @@ const SearchBox = () => {
                               }
                           )
     const queryData = queryResult.companies;
-    setCompaniesState(data => queryData);
-    setFormData(() => initialState);
+    setJobCoState(data => ({
+      jobs: data.jobs,
+      companies: queryData
+    }));
+
+    // setFormData(() => initialState);
   }
 
   return (

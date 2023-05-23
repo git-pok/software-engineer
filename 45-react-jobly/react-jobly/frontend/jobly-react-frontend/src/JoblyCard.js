@@ -1,18 +1,22 @@
 // import './JoblyCard.css';
 
-const JoblyCard = ({ companies, jobs}) => {
-  // console.log("F CO", companies);
+const JoblyCard = ({ data }) => {
+  // console.log("JOBLY CARD DATA", data);  
   return (
     <>
-    <h1>COMPANIES</h1>
-    { companies ?
-      companies.map((val, idx) => (
-        <div key={val.name} className="JoblyCard">
-        <h2>{val.name}</h2>
-        <p>{val.description}</p>
-        </div>
-      ))
-      : null
+    <h1>JBLY CARD</h1>
+    { data 
+      ?
+        data.map((val, idx) => (
+          <div key={val.name || val.id} className="JoblyCard">
+          <h2>{val.name || val.title}</h2>
+          <p>{val.description || val.companyName}</p>
+          { val.salary ? <p>Salary: {val.salary}</p> : null}
+          { val.equity ? <p>Equity: {val.equity || "N/A"}</p> : null}
+          </div>
+        ))
+      :
+        null
     }
     </>
   );

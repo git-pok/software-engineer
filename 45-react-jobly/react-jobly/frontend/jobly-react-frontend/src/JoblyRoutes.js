@@ -2,7 +2,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import JoblyCard from './JoblyCard.js';
 import SearchBox from './SearchBox.js';
 
-const JoblyRoutes = ({ companies }) => {
+const JoblyRoutes = ({ companies, jobs }) => {
 
   // console.log("CO", companies);
   return (
@@ -12,10 +12,10 @@ const JoblyRoutes = ({ companies }) => {
       </Route>
       <Route exact path="/companies">
         <SearchBox />
-        <JoblyCard companies={companies} />
+        <JoblyCard data={companies} />
       </Route>
       <Route exact path="/jobs">
-        <h1>JOBS</h1>
+      <JoblyCard data={jobs} />
       </Route>
       <Route exact path="/profile">
         <h1>PROFILE</h1>

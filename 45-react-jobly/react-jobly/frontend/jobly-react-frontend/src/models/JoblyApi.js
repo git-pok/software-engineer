@@ -31,11 +31,15 @@ class JoblyApi {
 
    /** Get details on a company by handle. */
    // Defined getCompany.
-   static async getCompany({ endpoint, data, method }) {
-      // console.log("getCompany", endpoint, data, method);
+    static async getCompany({ endpoint, data, method }) {
       let res = await this.request({ endpoint, data, method });
       return res.data;
-   }
+    }
+
+    static async companyJobReqs(...args) {
+      const reqs = args.map(async val => await this.request(val));
+      return reqs;
+    }
  
    // obviously, you'll add a lot here ...
  

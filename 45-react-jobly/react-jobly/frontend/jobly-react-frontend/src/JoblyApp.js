@@ -6,27 +6,48 @@ import CompaniesContext from './context/CompaniesContext.js';
 // import './JoblyApp.css';
 
 const JoblyApp = () => {
-  const [ companies, setCompanies ] = useState(null);
+  // const [ companies, setCompanies ] = useState({});
+  const [ jobCoData, setJobCoData ] = useState({});
 
   useEffect(() => {
-    async function getCompanies ({ endpoint, data, method }) {
-      console.log("USE EFFECT", endpoint);
-      const results = await JoblyApi.getCompany({ endpoint, data, method });
-      // console.log(results[0]);
-      setCompanies(data => results.companies); 
+    async function getJobsAndCos (...args) {
+      const reqResults = await JoblyApi.companyJobReqs(...args);
+      const data = await Promise.all(reqResults);
+      console.log("DATA", data[0].data.companies);
+      // console.log(data[1].data);
+      const dataObj = {};
+
+      // setJobCoData(() => ({
+      //   one: data[0].data.companies,
+      //   two: data[1].data.jobs
+      // }));
+
+      data.forEach(val => {
+        const data = val.data.companies || val.data.jobs;
+        const dataKeys = Object.keys(val.data);
+        console.log(dataKeys);
+        dataObj[dataKeys] = data;
+        // dataObj.set(dataKeys[0], data);
+      })
+
+      setJobCoData(data => (
+        dataObj
+      ));
     }
 
-    getCompanies({endpoint: "companies" });
-  }, [])
+    getJobsAndCos ({endpoint: "companies" }, {endpoint: "jobs" });
 
-  // console.log("CO", companies);
+  }, [])
+  // console.log("JOB CO DATA", jobCoData);
+
   return (
     <>
       <JoblyNavbar
         linkNames={["companies", "jobs", "profile"]} />
-      <CompaniesContext.Provider value={setCompanies} > 
+      <CompaniesContext.Provider value={setJobCoData} > 
       <JoblyRoutes
-        companies={companies} />
+        companies={jobCoData.companies}
+        jobs={jobCoData.jobs} />
       </CompaniesContext.Provider>
     </>
   );
