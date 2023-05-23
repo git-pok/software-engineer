@@ -41,13 +41,23 @@ const JoblyApp = () => {
 
   }, [])
   // console.log("JOB CO DATA", jobCoData);
+  const logOut = () => {
+    setToken(() => null);
+    setUserData(() => null);
+    JoblyApi.setToken(null);
+  }
 
   return (
     <>
       <JoblyNavbar
-        linkNames={["companies", "jobs", "profile"]} />
+        linkNames={["companies", "jobs", "profile"]}
+        userData={userData}
+        logOut={logOut} />
       <JoblyContext.Provider
-        value={{setJobCoData, setToken, setUserData}}>
+        value={{
+                setJobCoData, setToken,
+                setUserData, userData
+              }}>
       <JoblyRoutes
         companies={jobCoData.companies}
         jobs={jobCoData.jobs} />

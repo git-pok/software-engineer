@@ -1,9 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import { useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
+// import JoblyContext from './context/JoblyContext.js';
 import './JoblyNavbar.css';
 
-const Navbar = ({ linkNames }) => {
+const JoblyNavbar = ({ linkNames, userData, logOut }) => {
   // console.log(linkNames);
+  // const { userData } = useContext(JoblyContext);
   const token = JoblyApi.token;
   // console.log("token", JoblyApi.token);
   return (
@@ -12,6 +15,13 @@ const Navbar = ({ linkNames }) => {
       <NavLink exact to="/">
         JOBLY
       </NavLink>
+      {
+        token ? 
+          <span>
+              WELCOME {userData.username.toUpperCase()}!
+          </span> 
+        : null
+      }
       </div>
       <div className="right-links">
       { token 
@@ -27,7 +37,7 @@ const Navbar = ({ linkNames }) => {
       {
         token
           ?
-            <NavLink exact to="/logout">
+            <NavLink exact to="/logout" onClick={logOut}>
               LOG OUT
             </NavLink>
           :
@@ -49,4 +59,4 @@ const Navbar = ({ linkNames }) => {
   );
 }
 
-export default Navbar;
+export default JoblyNavbar;
