@@ -1,10 +1,11 @@
-// import './JoblyCard.css';
+import './JoblyCard.css';
 
-const JoblyCard = ({ data }) => {
-  // console.log("JOBLY CARD DATA", data);  
+const JoblyCard = ({ data, title }) => {
+  // console.log("JOBLY CARD DATA", data); 
   return (
     <>
-    <h1>JBLY CARD</h1>
+    <div className="JoblyCardDiv">
+    <h1>{title}</h1>
     { data 
       ?
         data.map((val, idx) => (
@@ -18,6 +19,7 @@ const JoblyCard = ({ data }) => {
       :
         null
     }
+    </div>
     </>
   );
 }

@@ -12,10 +12,10 @@ const JoblyRoutes = ({ companies, jobs }) => {
       </Route>
       <Route exact path="/companies">
         <SearchBox />
-        <JoblyCard data={companies} />
+        <JoblyCard data={companies} title="Companies" />
       </Route>
       <Route exact path="/jobs">
-      <JoblyCard data={jobs} />
+        <JoblyCard data={jobs} title="Jobs" />
       </Route>
       <Route exact path="/profile">
         <h1>PROFILE</h1>
