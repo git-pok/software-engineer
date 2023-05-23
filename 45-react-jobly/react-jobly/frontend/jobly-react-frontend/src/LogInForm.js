@@ -22,9 +22,6 @@ const LogInForm = () => {
     const { username, password } = formData;
     const res = await JoblyApi.logIn({endpoint: "auth/token", username, password});
     
-
-    // const queryResult = await JoblyApi.getEndpoint
-    // const queryData = queryResult.companies;
     // setJobCoState(data => ({
     //   jobs: data.jobs,
     //   companies: queryData
