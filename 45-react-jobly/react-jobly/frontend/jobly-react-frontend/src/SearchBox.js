@@ -1,17 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
+import CompaniesContext from './context/CompaniesContext.js';
 // import './SearchBox.css';
 
 const SearchBox = () => {
-  // const coData = companies;
-  // console.log("F CO", companies.map(val => ( val )));
-  // console.log("F CO", companies);
-  const initialState = { search: "" }
+  const initialState = { name: "", minEmp: "", maxEmp: "" }
   const [ formData, setFormData ] = useState(initialState);
-  
+  const setCompaniesState = useContext(CompaniesContext);
+
   const handleChange = (evt) => {
     const { name, value } = evt.target;
-    // console.log(name, value);
+
     setFormData(data => ({
       ...data,
       [name]: value
@@ -20,27 +19,52 @@ const SearchBox = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    const { search } = formData;
-    console.log(search);
+    const { name, minEmp, maxEmp } = formData;
+    const nameProp = name !== "" || name ? name : null;
+    const minEmpProp = minEmp !== "" || minEmp ? minEmp : null;
+    const maxEmpProp = maxEmp !== "" || maxEmp ? maxEmp : null;
+    // console.log("SEARCH TERMS", nameProp, minEmpProp, maxEmpProp);
     const queryResult = await JoblyApi.getCompany(
                               { 
                                 endpoint: "companies",
-                                data: {name: search}
+                                data: {
+                                        name: nameProp,
+                                        minEmployees: minEmpProp,
+                                        maxEmployees: maxEmpProp
+                                      }
                               }
                           )
-    const queryData = queryResult.companies;                       
-    // console.log(queryResult.companies);
+    const queryData = queryResult.companies;
+    setCompaniesState(data => queryData);
+    setFormData(() => initialState);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="search"></label>
+      <label htmlFor="name">Name</label>
       <input
         type="text"
-        id="search"
+        id="name"
         onChange={handleChange}
-        value={formData.search}
-        name="search"></input>
+        value={formData.name}
+        name="name"
+        placeholder="Type a name"></input>
+      <label htmlFor="minEmp">Minimum Employees</label>
+      <input
+        type="number"
+        id="minEmp"
+        onChange={handleChange}
+        value={formData.minEmp}
+        name="minEmp"
+        placeholder="Type a number"></input>
+      <label htmlFor="maxEmp">Maximum Employees</label>
+      <input
+        type="number"
+        id="maxEmp"
+        onChange={handleChange}
+        value={formData.maxEmp}
+        name="maxEmp"
+        placeholder="Type a number"></input>
       <button>SEARCH</button>
     </form>
   );

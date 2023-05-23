@@ -1,24 +1,10 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import JoblyCard from './JoblyCard.js';
 import SearchBox from './SearchBox.js';
-import JoblyApi from './models/JoblyApi.js';
 
 const JoblyRoutes = ({ companies }) => {
 
-  // const [ companies, setCompanies ] = useState(null);
-
-  // useEffect(() => {
-  //   async function getCompanies (url) {
-  //     const results = await JoblyApi.getCompany(url);
-  //     // console.log(results[0]);
-  //     setCompanies(data => results.companies); 
-  //   }
-
-  //   getCompanies("companies");
-  // }, [])
-
-  console.log("CO", companies);
+  // console.log("CO", companies);
   return (
     <Switch>
       <Route exact path="/">
