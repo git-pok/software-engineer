@@ -23,8 +23,8 @@ const SearchBox = () => {
     const nameProp = name !== "" || name ? name : null;
     const minEmpProp = minEmp !== "" || minEmp ? minEmp : null;
     const maxEmpProp = maxEmp !== "" || maxEmp ? maxEmp : null;
-    // console.log("SEARCH TERMS", nameProp, minEmpProp, maxEmpProp);
-    const queryResult = await JoblyApi.getCompany(
+
+    const queryResult = await JoblyApi.getEndpoint(
                               { 
                                 endpoint: "companies",
                                 data: {

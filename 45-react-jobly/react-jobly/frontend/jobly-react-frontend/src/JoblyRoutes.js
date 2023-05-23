@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import JoblyCard from './JoblyCard.js';
 import SearchBox from './SearchBox.js';
+import LogInForm from './LogInForm.js';
 
 const JoblyRoutes = ({ companies, jobs }) => {
 
@@ -25,6 +26,13 @@ const JoblyRoutes = ({ companies, jobs }) => {
       </Route>
       <Route exact path="/login">
         <h1>LOG IN</h1>
+        <LogInForm />
+      </Route>
+      <Route exact path="/logout">
+        <h1>LOG OUT</h1>
+      </Route>
+      <Route exact path="/signup">
+        <h1>SIGN UP</h1>
       </Route>
       <Route exact path="/companies/:handle">
 
