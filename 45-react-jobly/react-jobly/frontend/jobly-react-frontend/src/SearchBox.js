@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
-import CompaniesContext from './context/CompaniesContext.js';
+import JoblyContext from './context/JoblyContext.js';
 // import './SearchBox.css';
 
 const SearchBox = () => {
   const initialState = { name: "", minEmp: "", maxEmp: "" }
   const [ formData, setFormData ] = useState(initialState);
-  const setJobCoState = useContext(CompaniesContext);
+  const { setJobCoData } = useContext(JoblyContext);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -35,7 +35,7 @@ const SearchBox = () => {
                               }
                           )
     const queryData = queryResult.companies;
-    setJobCoState(data => ({
+    setJobCoData(data => ({
       jobs: data.jobs,
       companies: queryData
     }));

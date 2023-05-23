@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import JoblyRoutes from './JoblyRoutes.js';
 import JoblyNavbar from './JoblyNavbar.js';
 import JoblyApi from './models/JoblyApi.js';
-import CompaniesContext from './context/CompaniesContext.js';
+import JoblyContext from './context/JoblyContext.js';
 // import './JoblyApp.css';
 
 const JoblyApp = () => {
   // const [ companies, setCompanies ] = useState({});
   const [ jobCoData, setJobCoData ] = useState({});
+  const [ token, setToken ] = useState(null);
   const [ userData, setUserData ] = useState(null);
 
   useEffect(() => {
@@ -45,11 +46,12 @@ const JoblyApp = () => {
     <>
       <JoblyNavbar
         linkNames={["companies", "jobs", "profile"]} />
-      <CompaniesContext.Provider value={setJobCoData} > 
+      <JoblyContext.Provider
+        value={{setJobCoData, setToken, setUserData}}>
       <JoblyRoutes
         companies={jobCoData.companies}
         jobs={jobCoData.jobs} />
-      </CompaniesContext.Provider>
+      </JoblyContext.Provider>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
+import JoblyContext from './context/JoblyContext.js';
 import jwt_decode from 'jwt-decode';
 // import CompaniesContext from './context/CompaniesContext.js';
 // import './LogInForm.css';
@@ -7,6 +8,7 @@ import jwt_decode from 'jwt-decode';
 const LogInForm = () => {
   const initialState = { username: "", password: "" };
   const [ formData, setFormData ] = useState(initialState);
+  const { setToken, setUserData } = useContext(JoblyContext);
   // const setJobCoState = useContext(CompaniesContext);
 
   const handleChange = (evt) => {
@@ -23,15 +25,19 @@ const LogInForm = () => {
     const { username, password } = formData;
     const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
     const token = loginResult.data.token;
-    JoblyApi.token = token;
+    JoblyApi.setToken(token);
     const payload = await jwt_decode(token);
-    console.log(JoblyApi.token);
-    // setJobCoState(data => ({
-    //   jobs: data.jobs,
-    //   companies: queryData
-    // }));
+    // console.log(JoblyApi.token);
 
-    // setFormData(() => initialState);
+    setToken(() => (
+      token
+    ));
+
+    setUserData(() => (
+      payload
+    ));
+
+    setFormData(() => initialState);
   }
 
   return (
@@ -46,7 +52,7 @@ const LogInForm = () => {
         placeholder="Type a name"></input>
       <label htmlFor="password">Password</label>
       <input
-        type="text"
+        type="password"
         id="password"
         onChange={handleChange}
         value={formData.password}

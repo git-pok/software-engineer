@@ -49,6 +49,11 @@ class JoblyApi {
     const reqs = await this.request({endpoint, method: "post", data: {username, password}});
     return reqs;
   }
+
+  /** setToken. */
+  static async setToken(token) {
+    this.token = token;
+  }
  
 }
 

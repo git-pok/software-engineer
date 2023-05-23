@@ -2,6 +2,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import JoblyCard from './JoblyCard.js';
 import SearchBox from './SearchBox.js';
 import LogInForm from './LogInForm.js';
+import JoblyApi from './models/JoblyApi.js';
 
 const JoblyRoutes = ({ companies, jobs }) => {
 
@@ -11,13 +12,19 @@ const JoblyRoutes = ({ companies, jobs }) => {
       <Route exact path="/">
         <h1>HOME</h1>
       </Route>
+      { JoblyApi.token ?
       <Route exact path="/companies">
         <SearchBox />
         <JoblyCard data={companies} title="Companies" />
       </Route>
+      : null
+      }
+      { JoblyApi.token ?
       <Route exact path="/jobs">
         <JoblyCard data={jobs} title="Jobs" />
       </Route>
+      : null
+      }
       <Route exact path="/profile">
         <h1>PROFILE</h1>
       </Route>
