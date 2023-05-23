@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
+import jwt_decode from 'jwt-decode';
 // import CompaniesContext from './context/CompaniesContext.js';
 // import './LogInForm.css';
 
@@ -20,8 +21,11 @@ const LogInForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     const { username, password } = formData;
-    const res = await JoblyApi.logIn({endpoint: "auth/token", username, password});
-    
+    const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
+    const token = loginResult.data.token;
+    JoblyApi.token = token;
+    const payload = await jwt_decode(token);
+    console.log(JoblyApi.token);
     // setJobCoState(data => ({
     //   jobs: data.jobs,
     //   companies: queryData

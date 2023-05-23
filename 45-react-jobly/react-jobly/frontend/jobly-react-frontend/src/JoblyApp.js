@@ -8,6 +8,7 @@ import CompaniesContext from './context/CompaniesContext.js';
 const JoblyApp = () => {
   // const [ companies, setCompanies ] = useState({});
   const [ jobCoData, setJobCoData ] = useState({});
+  const [ userData, setUserData ] = useState(null);
 
   useEffect(() => {
     async function getJobsAndCos (...args) {
