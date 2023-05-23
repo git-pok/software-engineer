@@ -6,11 +6,12 @@ class JoblyApi {
    // the token for interactive with the API will be stored here.
     static token;
 
-   static async request(endpoint, data = {}, method = "get") {
+   static async request({ endpoint, data = {}, method = "get" }) {
     // console.debug("API Call:", endpoint, data, method);
     // console.log("ENDPOINT", endpoint, data, method);
     const url = `${BASE_URL}/${endpoint}`;
-    // console.log("URL", url);
+    console.log("URL FINISHED", url, data);
+    // "Content-Type": "application/json"
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
         ? data
@@ -31,8 +32,9 @@ class JoblyApi {
  
    /** Get details on a company by handle. */
  
-   static async getCompany(url) {
-      let res = await this.request(url);
+   static async getCompany({ endpoint, data, method }) {
+      console.log("getCompany", endpoint, data, method);
+      let res = await this.request({ endpoint, data, method });
       return res.data;
    }
  
