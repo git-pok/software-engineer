@@ -6,17 +6,16 @@ const JoblyCard = ({ companies, jobs}) => {
   console.log("F CO", companies);
   return (
     <>
-    {/* <h1>{companies}</h1> */}
     <h1>COMPANIES</h1>
-    {/* { companies ?
+    { companies ?
       companies.map((val, idx) => (
-        <div className="JoblyCard">
+        <div key={val.name} className="JoblyCard">
         <h2>{val.name}</h2>
         <p>{val.description}</p>
         </div>
       ))
       : null
-    } */}
+    }
     </>
   );
 }

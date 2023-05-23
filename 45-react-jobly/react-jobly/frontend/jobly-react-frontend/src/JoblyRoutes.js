@@ -11,13 +11,13 @@ const JoblyRoutes = () => {
     async function getCompanies (url) {
       const results = await JoblyApi.getCompany(url);
       // console.log(results[0]);
-      setCompanies(data => [results.companies]); 
+      setCompanies(data => results.companies); 
     }
 
     getCompanies("companies");
   }, [])
 
-  // console.log("CO", companies);
+  console.log("CO", companies);
   return (
     <Switch>
       <Route exact path="/">
