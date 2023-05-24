@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import useLocalStorage from './hooks/useLocalStorage.js';
+import useToggleState from './hooks/useToggleState.js';
 import jwt_decode from 'jwt-decode';
 // import './SignupForm.css';
 
@@ -16,8 +17,8 @@ const SignupForm = () => {
                       };
   const [ formData, setFormData ] = useState(initialState);
   const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
+  const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
   const { setUserData } = useContext(JoblyContext);
-  // const history = useHistory();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -55,11 +56,13 @@ const SignupForm = () => {
       payload
     ));
 
+    setIsSubmitted();
+
     setFormData(() => initialState);
 
-    <Redirect to="/" />
-    // history.push("/");
   }
+
+  if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
     <form onSubmit={handleSubmit}>

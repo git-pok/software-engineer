@@ -53,7 +53,7 @@ class JoblyApi {
 
   /** signUp. */
   static async signUp({username, password, firstName, lastName, email}) {
-    console.log(username, password, firstName, lastName, email);
+    console.log("JAPI", username, password, firstName, lastName, email);
     const reqs = await this.request(
                                     {
                                       endpoint: "auth/register",

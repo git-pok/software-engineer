@@ -3,17 +3,16 @@ import { Redirect } from 'react-router-dom';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import useLocalStorage from './hooks/useLocalStorage.js';
+import useToggleState from './hooks/useToggleState.js';
 import jwt_decode from 'jwt-decode';
 // import './LogInForm.css';
 
-const LogInForm = ({ redirect }) => {
+const LogInForm = () => {
   const initialState = { username: "", password: "" };
   const [ formData, setFormData ] = useState(initialState);
-  const [ isSubmitted, setIsSubmitted ] = useState(false);
+  const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
   const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
   const { setUserData } = useContext(JoblyContext);
-
-  // const history = useHistory();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -26,8 +25,6 @@ const LogInForm = ({ redirect }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    // history.push("/");
-    // if (isSubmitted) redirect("/");
     const { username, password } = formData;
     const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
     const token = loginResult.data.token;
@@ -43,11 +40,11 @@ const LogInForm = ({ redirect }) => {
     ));
 
     setFormData(() => initialState);
-    setIsSubmitted(state => !state);
+    setIsSubmitted();
    
   }
 
-  if (isSubmitted) return <Redirect exact to={redirect} />;
+  if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
     <form onSubmit={handleSubmit}>

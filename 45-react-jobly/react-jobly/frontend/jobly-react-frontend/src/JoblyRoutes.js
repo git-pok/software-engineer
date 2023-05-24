@@ -38,7 +38,7 @@ const JoblyRoutes = ({ companies, jobs }) => {
       </Route>
       <Route exact path="/login">
         <h1>LOG IN</h1>
-        <LogInForm redirect="/" />
+        <LogInForm />
       </Route>
       <Route exact path="/logout">
         <Redirect exact to="/" />
