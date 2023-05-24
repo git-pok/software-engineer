@@ -49,7 +49,8 @@ const LogInForm = () => {
         onChange={handleChange}
         value={formData.name}
         name="username"
-        placeholder="Type a name"></input>
+        placeholder="Type a name"
+        autoComplete="username"></input>
       <label htmlFor="password">Password</label>
       <input
         type="password"
@@ -57,7 +58,8 @@ const LogInForm = () => {
         onChange={handleChange}
         value={formData.password}
         name="password"
-        placeholder="Type a password"></input>
+        placeholder="Type a password"
+        autoComplete="current-password"></input>
       <button>SUBMIT</button>
     </form>
   );
