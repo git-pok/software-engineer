@@ -1,25 +1,29 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { useContext} from 'react';
 import JoblyCard from './JoblyCard.js';
 import SearchBox from './SearchBox.js';
 import LogInForm from './LogInForm.js';
-import JoblyApi from './models/JoblyApi.js';
+// import JoblyApi from './models/JoblyApi.js';
+import JoblyContext from './context/JoblyContext.js';
 
 const JoblyRoutes = ({ companies, jobs }) => {
 
-  // console.log("CO", companies);
+  const { userData } = useContext(JoblyContext);
+  const userToken = userData ? userData.token : null;
+
   return (
     <Switch>
       <Route exact path="/">
         <h1>HOME</h1>
       </Route>
-      { JoblyApi.token ?
+      { userToken ?
       <Route exact path="/companies">
         <SearchBox />
         <JoblyCard data={companies} title="Companies" />
       </Route>
       : null
       }
-      { JoblyApi.token ?
+      { userToken ?
       <Route exact path="/jobs">
         <JoblyCard data={jobs} title="Jobs" />
       </Route>

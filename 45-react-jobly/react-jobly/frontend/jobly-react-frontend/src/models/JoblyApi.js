@@ -5,6 +5,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 class JoblyApi {
     // the token for interactive with the API will be stored here.
     static token;
+    static userData;
     // Defined named parameters.
     static async request({ endpoint, data = {}, method = "get" }) {
     // console.debug("API Call:", endpoint, data, method);
@@ -43,18 +44,20 @@ class JoblyApi {
       return reqs;
     }
  
-   /** authenticate. */
+   /** logIn. */
    static async logIn({endpoint, username, password}) {
     console.log(endpoint, username, password);
     const reqs = await this.request({endpoint, method: "post", data: {username, password}});
     return reqs;
   }
 
-  /** setToken. */
-  static async setToken(token) {
-    this.token = token;
-  }
- 
+  /** signUp. */
+  // static async signUp({endpoint, username, password}) {
+  //   console.log(endpoint, username, password);
+  //   const reqs = await this.request({endpoint, method: "post", data: {username, password}});
+  //   return reqs;
+  // }
+
 }
 
 // for now, put token ("testuser" / "password" on class)

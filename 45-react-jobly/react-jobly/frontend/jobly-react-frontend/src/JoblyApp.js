@@ -6,30 +6,25 @@ import JoblyContext from './context/JoblyContext.js';
 // import './JoblyApp.css';
 
 const JoblyApp = () => {
-  // const [ companies, setCompanies ] = useState({});
+
   const [ jobCoData, setJobCoData ] = useState({});
-  const [ token, setToken ] = useState(null);
-  const [ userData, setUserData ] = useState(null);
+
+  const [ userData, setUserData ] = useState(() => (
+    JSON.parse(window.localStorage.getItem("userData")) || null
+  ));
+  // const [ userData, setUserData ] = useState(null);
 
   useEffect(() => {
     async function getJobsAndCos (...args) {
       const reqResults = await JoblyApi.companyJobReqs(...args);
       const data = await Promise.all(reqResults);
-      // console.log("DATA", data[0].data.companies);
-      // console.log(data[1].data);
       const dataObj = {};
-
-      // setJobCoData(() => ({
-      //   one: data[0].data.companies,
-      //   two: data[1].data.jobs
-      // }));
 
       data.forEach(val => {
         const data = val.data.companies || val.data.jobs;
         const dataKeys = Object.keys(val.data);
         console.log(dataKeys);
         dataObj[dataKeys] = data;
-        // dataObj.set(dataKeys[0], data);
       })
 
       setJobCoData(data => (
@@ -40,24 +35,23 @@ const JoblyApp = () => {
     getJobsAndCos ({endpoint: "companies" }, {endpoint: "jobs" });
 
   }, [])
-  // console.log("JOB CO DATA", jobCoData);
+  // console.log("STATE TOKEN", userData);
   const logOut = () => {
-    setToken(() => null);
     setUserData(() => null);
-    JoblyApi.setToken(null);
+    window.localStorage.clear();
   }
 
   return (
     <>
-      <JoblyNavbar
-        linkNames={["companies", "jobs", "profile"]}
-        userData={userData}
-        logOut={logOut} />
-      <JoblyContext.Provider
+    <JoblyContext.Provider
         value={{
-                setJobCoData, setToken,
+                setJobCoData,
                 setUserData, userData
               }}>
+      <JoblyNavbar
+        linkNames={["companies", "jobs", "profile"]}
+        // userData={userData}
+        logOut={logOut} />
       <JoblyRoutes
         companies={jobCoData.companies}
         jobs={jobCoData.jobs} />

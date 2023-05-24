@@ -1,15 +1,15 @@
 import { useState, useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
+import useLocalStorage from './hooks/useLocalStorage.js';
 import jwt_decode from 'jwt-decode';
-// import CompaniesContext from './context/CompaniesContext.js';
 // import './LogInForm.css';
 
 const LogInForm = () => {
   const initialState = { username: "", password: "" };
   const [ formData, setFormData ] = useState(initialState);
-  const { setToken, setUserData } = useContext(JoblyContext);
-  // const setJobCoState = useContext(CompaniesContext);
+  const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
+  const { setUserData } = useContext(JoblyContext);
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -25,12 +25,11 @@ const LogInForm = () => {
     const { username, password } = formData;
     const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
     const token = loginResult.data.token;
-    JoblyApi.setToken(token);
     const payload = await jwt_decode(token);
-    // console.log(JoblyApi.token);
+    payload.token = token;
 
-    setToken(() => (
-      token
+    setLocalStorage(() => (
+      payload
     ));
 
     setUserData(() => (

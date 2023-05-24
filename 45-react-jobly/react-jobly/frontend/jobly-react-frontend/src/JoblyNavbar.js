@@ -1,14 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
-import JoblyApi from './models/JoblyApi.js';
-// import JoblyContext from './context/JoblyContext.js';
+// import JoblyApi from './models/JoblyApi.js';
+import JoblyContext from './context/JoblyContext.js';
 import './JoblyNavbar.css';
 
-const JoblyNavbar = ({ linkNames, userData, logOut }) => {
-  // console.log(linkNames);
-  // const { userData } = useContext(JoblyContext);
-  const token = JoblyApi.token;
-  // console.log("token", JoblyApi.token);
+const JoblyNavbar = ({ linkNames, logOut }) => {
+
+  const { userData } = useContext(JoblyContext);
+  const userToken = userData ? userData.token : null;
+
   return (
     <nav className="Navbar">
       <div className="left-links">
@@ -16,7 +16,7 @@ const JoblyNavbar = ({ linkNames, userData, logOut }) => {
         JOBLY
       </NavLink>
       {
-        token ? 
+        userToken ? 
           <span>
               WELCOME {userData.username.toUpperCase()}!
           </span> 
@@ -24,7 +24,7 @@ const JoblyNavbar = ({ linkNames, userData, logOut }) => {
       }
       </div>
       <div className="right-links">
-      { token 
+      { userToken 
         ?
           linkNames.map((val, idx) => (
             <NavLink exact to={`/${val}`} key={val}>
@@ -35,7 +35,7 @@ const JoblyNavbar = ({ linkNames, userData, logOut }) => {
           null
       }
       {
-        token
+        userToken
           ?
             <NavLink exact to="/logout" onClick={logOut}>
               LOG OUT
@@ -46,7 +46,7 @@ const JoblyNavbar = ({ linkNames, userData, logOut }) => {
             </NavLink>
       }
       {
-        !token
+        !userToken
           ?
             <NavLink exact to="/signup">
               SIGN UP
