@@ -1,11 +1,12 @@
 import { useState, useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
-// import './SearchBox.css';
+import './SearchBox.css';
 
 const SearchBox = () => {
   const initialState = { name: "", minEmp: "", maxEmp: "" }
   const [ formData, setFormData ] = useState(initialState);
+  const [ isSearchClicked, setIsSearchClicked ] = useState(false);
   const { setJobCoData } = useContext(JoblyContext);
 
   const handleChange = (evt) => {
@@ -40,37 +41,71 @@ const SearchBox = () => {
       companies: queryData
     }));
 
-    // setFormData(() => initialState);
+  }
+
+  const searchClick = () => {
+    setIsSearchClicked(state => !state);
+  }
+
+  const resetFilters = async () => {
+    const queryResult = await JoblyApi.getEndpoint(
+      { 
+        endpoint: "companies"
+      }
+    )
+
+    const queryData = queryResult.companies;
+    
+    setFormData(() => initialState);
+
+    setJobCoData(data => ({
+      jobs: data.jobs,
+      companies: queryData
+    }));
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        onChange={handleChange}
-        value={formData.name}
-        name="name"
-        placeholder="Type a name"></input>
-      <label htmlFor="minEmp">Minimum Employees</label>
-      <input
-        type="number"
-        id="minEmp"
-        onChange={handleChange}
-        value={formData.minEmp}
-        name="minEmp"
-        placeholder="Type a number"></input>
-      <label htmlFor="maxEmp">Maximum Employees</label>
-      <input
-        type="number"
-        id="maxEmp"
-        onChange={handleChange}
-        value={formData.maxEmp}
-        name="maxEmp"
-        placeholder="Type a number"></input>
-      <button>SEARCH</button>
+    <>
+    <div className="SearchBox-icon" onClick={searchClick}>
+      <i
+        className="fa-solid fa-magnifying-glass"></i>
+    </div>
+    <form onSubmit={handleSubmit}
+      className={!isSearchClicked ? "SearchBox-hide" : "SearchBox-show"}>
+      <div className="SearchBox-input-container">
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          onChange={handleChange}
+          value={formData.name}
+          name="name"
+          placeholder="Type a name"></input>
+      </div>
+      <div className="SearchBox-input-container">
+        <label htmlFor="minEmp">Minimum Employees</label>
+        <input
+          type="number"
+          id="minEmp"
+          onChange={handleChange}
+          value={formData.minEmp}
+          name="minEmp"
+          placeholder="Type a number"></input>
+      </div>
+      <div className="SearchBox-input-container">
+        <label htmlFor="maxEmp">Maximum Employees</label>
+        <input
+          type="number"
+          id="maxEmp"
+          onChange={handleChange}
+          value={formData.maxEmp}
+          name="maxEmp"
+          placeholder="Type a number"></input>
+      </div>
+      <button type="submit">SEARCH</button>
+      <button type="button" onClick={resetFilters}>RESET</button>
     </form>
+    </>
   );
 }
 

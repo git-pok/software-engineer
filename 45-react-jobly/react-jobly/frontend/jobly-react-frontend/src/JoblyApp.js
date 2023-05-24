@@ -15,7 +15,7 @@ const JoblyApp = () => {
     async function getJobsAndCos (...args) {
       const reqResults = await JoblyApi.companyJobReqs(...args);
       const data = await Promise.all(reqResults);
-      console.log("DATA", data[0].data.companies);
+      // console.log("DATA", data[0].data.companies);
       // console.log(data[1].data);
       const dataObj = {};
 
