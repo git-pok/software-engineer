@@ -9,25 +9,25 @@ class JoblyApi {
     // Defined named parameters.
     static async request({ endpoint, data = {}, method = "get" }) {
     // console.debug("API Call:", endpoint, data, method);
-    console.log("ENDPOINT", endpoint, data, method);
-    const url = `${BASE_URL}/${endpoint}`;
-    // console.log("URL FINISHED", url, data);
+      console.log("REQUEST ENDPOINT", endpoint, data, method);
+      const url = `${BASE_URL}/${endpoint}`;
+      console.log("URL FINISHED", url, data);
     // "Content-Type": "application/json"
-    const headers = { Authorization: `Bearer ${JoblyApi.token}` };
-    const params = (method === "get")
-        ? data
-        : {};
+      const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+      const params = (method === "get")
+          ? data
+          : {};
  
-    try {
+      try {
       // FIXED BUG
       // deleted .data from request
-      return await axios({ url, method, data, params, headers });
-    } catch (err) {
-      console.error("API Error:", err.response);
-      let message = err.response.data.error.message;
-      throw Array.isArray(message) ? message : [message];
+        return await axios({ url, method, data, params, headers });
+      } catch (err) {
+        console.error("API Error:", err.response);
+        let message = err.response.data.error.message;
+        throw Array.isArray(message) ? message : [message];
+      }
     }
-   }
  
    // Individual API routes
 
@@ -45,28 +45,36 @@ class JoblyApi {
     }
  
    /** logIn. */
-   static async logIn({endpoint, username, password}) {
-    console.log(endpoint, username, password);
-    const reqs = await this.request({endpoint, method: "post", data: {username, password}});
-    return reqs;
-  }
+    static async logIn({endpoint, username, password}) {
+      console.log(endpoint, username, password);
+      const reqs = await this.request({endpoint, method: "post", data: {username, password}});
+      return reqs;
+    }
 
   /** signUp. */
-  static async signUp({username, password, firstName, lastName, email}) {
-    console.log("JAPI", username, password, firstName, lastName, email);
-    const reqs = await this.request(
-                                    {
-                                      endpoint: "auth/register",
-                                      method: "post",
-                                      data: {
-                                              username, password,
-                                              firstName, lastName,
-                                              email
-                                            }
-                                    }
-                                  );
-    return reqs;
-  }
+    static async signUp({username, password, firstName, lastName, email}) {
+      console.log("JAPI", username, password, firstName, lastName, email);
+      const reqs = await this.request(
+            {
+              endpoint: "auth/register",
+              method: "post",
+              data: {
+                      username, password,
+                      firstName, lastName,
+                      email
+                    }
+            }
+          );
+      return reqs;
+    }
+
+    /** getCompany. */
+    static async getCompany(resource) {
+      console.log("GET CO END", resource);
+      const endpoint = `companies/${resource}`
+      const reqs = await this.request({endpoint});
+      return reqs;
+    }
 
 }
 
