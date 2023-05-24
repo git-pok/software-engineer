@@ -52,11 +52,21 @@ class JoblyApi {
   }
 
   /** signUp. */
-  // static async signUp({endpoint, username, password}) {
-  //   console.log(endpoint, username, password);
-  //   const reqs = await this.request({endpoint, method: "post", data: {username, password}});
-  //   return reqs;
-  // }
+  static async signUp({username, password, firstName, lastName, email}) {
+    console.log(username, password, firstName, lastName, email);
+    const reqs = await this.request(
+                                    {
+                                      endpoint: "auth/register",
+                                      method: "post",
+                                      data: {
+                                              username, password,
+                                              firstName, lastName,
+                                              email
+                                            }
+                                    }
+                                  );
+    return reqs;
+  }
 
 }
 

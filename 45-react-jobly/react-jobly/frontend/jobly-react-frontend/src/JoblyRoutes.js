@@ -3,6 +3,7 @@ import { useContext} from 'react';
 import JoblyCard from './JoblyCard.js';
 import SearchBox from './SearchBox.js';
 import LogInForm from './LogInForm.js';
+import SignupForm from './SignupForm.js';
 // import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 
@@ -37,13 +38,14 @@ const JoblyRoutes = ({ companies, jobs }) => {
       </Route>
       <Route exact path="/login">
         <h1>LOG IN</h1>
-        <LogInForm />
+        <LogInForm redirect="/" />
       </Route>
       <Route exact path="/logout">
-        <h1>LOG OUT</h1>
+        <Redirect exact to="/" />
       </Route>
       <Route exact path="/signup">
         <h1>SIGN UP</h1>
+        <SignupForm />
       </Route>
       <Route exact path="/companies/:handle">
 

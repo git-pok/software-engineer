@@ -1,15 +1,19 @@
 import { useState, useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import jwt_decode from 'jwt-decode';
 // import './LogInForm.css';
 
-const LogInForm = () => {
+const LogInForm = ({ redirect }) => {
   const initialState = { username: "", password: "" };
   const [ formData, setFormData ] = useState(initialState);
+  const [ isSubmitted, setIsSubmitted ] = useState(false);
   const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
   const { setUserData } = useContext(JoblyContext);
+
+  // const history = useHistory();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -22,6 +26,8 @@ const LogInForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    // history.push("/");
+    // if (isSubmitted) redirect("/");
     const { username, password } = formData;
     const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
     const token = loginResult.data.token;
@@ -37,7 +43,11 @@ const LogInForm = () => {
     ));
 
     setFormData(() => initialState);
+    setIsSubmitted(state => !state);
+   
   }
+
+  if (isSubmitted) return <Redirect exact to={redirect} />;
 
   return (
     <form onSubmit={handleSubmit}>
