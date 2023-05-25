@@ -16,10 +16,10 @@ const JoblyCard = ({
     const request = await JoblyApi.getCompOrJob(
                                       endpoint, isJob
                                   );
-
-    if (isJob) request.data.job.company = [request.data.job.company];
-    // console.log("CO DTL", endpoint);
-    setDetails(state => [request.data[isJob ? "job" : "company"]]);
+    
+    const reqData = [ JSON.parse(JSON.stringify(request.data[isJob ? "job" : "company"]))];
+    if (isJob) reqData[0].company = [ JSON.parse(JSON.stringify(reqData[0].company))];
+    setDetails(state => reqData);
   }
 
   return (
