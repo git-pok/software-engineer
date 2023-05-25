@@ -1,7 +1,9 @@
 import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import JoblyCard from './JoblyCard.js';
-import DetailsCard from './DetailsCard.js';
+// import DetailsCard from './DetailsCard.js';
+import CompanyDetailsCard from './CompanyDetailsCard.js';
+import JobDetailsCard from './JobDetailsCard.js';
 import SearchBox from './SearchBox.js';
 import LogInForm from './LogInForm.js';
 import SignupForm from './SignupForm.js';
@@ -10,13 +12,9 @@ import JoblyContext from './context/JoblyContext.js';
 
 const JoblyRoutes = ({ companies, jobs }) => {
 
-  const [ compDetails, setCompDetails ] = useState(null);
+  const [ details, setDetails ] = useState([]);
   const { userData } = useContext(JoblyContext);
   const userToken = userData ? userData.token : null;
-  const currUrl = useLocation();
-  const compDtls = currUrl.pathname.split("/")[2];
-  // console.log(compDtls);
-  
 
   return (
     <Switch>
@@ -29,13 +27,19 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <JoblyCard
           data={companies}
           title="Companies"
-          setCoState={setCompDetails} />
+          setDetails={setDetails}
+          />
       </Route>
       : null
       }
       { userToken ?
       <Route exact path="/jobs">
-        <JoblyCard data={jobs} title="Jobs" />
+        <JoblyCard
+          data={jobs}
+          title="Jobs"
+          jobs={true}
+          setDetails={setDetails}
+          />
       </Route>
       : null
       }
@@ -57,10 +61,12 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <SignupForm />
       </Route>
       <Route exact path="/companies/:handle">
-        <DetailsCard data={compDetails} title="Company Details" />
+        <CompanyDetailsCard
+          data={details} />
       </Route>
       <Route exact path="/jobs/:id">
-
+        <JobDetailsCard
+          data={details} />
       </Route>
       <Route exact path="/users/:username">
 

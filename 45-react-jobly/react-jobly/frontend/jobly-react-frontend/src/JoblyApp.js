@@ -45,7 +45,8 @@ const JoblyApp = () => {
     <JoblyContext.Provider
         value={{
                 setJobCoData,
-                setUserData, userData
+                setUserData,
+                userData
               }}>
       <JoblyNavbar
         linkNames={["companies", "jobs", "profile"]}

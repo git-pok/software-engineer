@@ -1,15 +1,27 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import JoblyApi from './models/JoblyApi.js';
+import JoblyContext from './context/JoblyContext.js';
 import './JoblyCard.css';
 
-const JoblyCard = ({ data, title, setCoState }) => {
+const JoblyCard = ({
+    data, title, setDetails,
+    setJobDtlState, jobs=false}) => {
 
-  const getCompDetails = async (endpoint) => {
-    const request = await JoblyApi.getCompany(endpoint);
-    console.log([request.data.company]);
-    setCoState(state => [request.data.company]);
+  const getCompOrJob = async (endpoint, isJob) => {
+
+    setDetails(state => []);
+    isJob = jobs === true;
+
+    const request = await JoblyApi.getCompOrJob(
+                                      endpoint, isJob
+                                  );
+
+    if (isJob) request.data.job.company = [request.data.job.company];
+    // console.log("CO DTL", endpoint);
+    setDetails(state => [request.data[isJob ? "job" : "company"]]);
   }
-  // console.log("JOBLY CARD DATA", data[0].handle);
+
   return (
     <>
     <div className="JoblyCardDiv">
@@ -19,10 +31,13 @@ const JoblyCard = ({ data, title, setCoState }) => {
         data.map((val, idx) => (
           <Link
             exact="true"
-            to={`/companies/${val.handle}`}
-            key={`link-${val.name || val.id}`}
-            onClick={() => getCompDetails(val.handle)}>
-            <div key={val.name || val.id} className="JoblyCard">
+            to={!jobs ? `/companies/${val.handle}` : `/jobs/${val.id}`}
+            key={!jobs ? `link-${val.name}` : `link-${val.id}`}
+            onClick={() => getCompOrJob(val[!jobs ? "handle" : "id"])}
+          >
+            <div
+              key={!jobs ? `${val.name}` : `${val.id}`}
+              className="JoblyCard">
               <h2>{val.name || val.title}</h2>
               <p>{val.description || val.companyName}</p>
               { val.salary ? <p>Salary: {val.salary}</p> : null}

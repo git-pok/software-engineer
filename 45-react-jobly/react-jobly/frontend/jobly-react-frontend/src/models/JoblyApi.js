@@ -76,6 +76,22 @@ class JoblyApi {
       return reqs;
     }
 
+    /** getJob. */
+    static async getJob(resource) {
+      console.log("GET CO END", resource);
+      const endpoint = `jobs/${resource}`
+      const reqs = await this.request({endpoint});
+      return reqs;
+    }
+
+    /** getJob. */
+    static async getCompOrJob(resource, isJob=false) {
+      console.log("GET CO END", resource);
+      const endpoint = isJob ? `jobs/${resource}` : `companies/${resource}`;
+      const reqs = await this.request({endpoint});
+      return reqs;
+    }
+
 }
 
 // for now, put token ("testuser" / "password" on class)

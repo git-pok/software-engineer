@@ -1,0 +1,24 @@
+.CompanyDetailsCard-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.CompanyDetailsCard {
+  width: 70vw;
+  height: 100%;
+  background-color: white;
+  border: 4px solid rgb(48, 7, 47);
+  border-radius: 03px;
+  padding: 10px 10px;
+  margin-bottom: 60px;
+}
+
+.CompanyDetailsCard-job {
+  margin-bottom: 40px;
+}
+
+.CompanyDetailsCard-job ul {
+  margin-top: -10px;
+}

@@ -1,6 +1,7 @@
 import './DetailsCard.css';
 
-const DetailsCard = ({ data, title }) => {
+const DetailsCard = ({ data, title, isJobs=false }) => {
+
   return (
     <div className="DetailsCardDiv">
       <h1>{title}</h1>
@@ -10,27 +11,38 @@ const DetailsCard = ({ data, title }) => {
           ?
             data.map((val, idx) => (
               <div
-                key={val.name}
+                key={!isJobs ? `${val.name}` : `${val.id}`}
                 className="DetailsCard-company">
-                <h3>{val.name}</h3>
-                <p>{val.description}</p>
-                <p>Employees: {val.numEmployees}</p>
+                <h3>{ !isJobs ? `${val.name}` : `${val.title}`}</h3>
+                <p>
+                  { !isJobs ? `${val.description}` : `Job Id: ${val.id}`}
+                </p>
+                { !isJobs ?
+                      <p>Employees: {val.numEmployees}</p>
+                      : <p>Salary: {val.salary}</p>
+                }
+                { isJobs ? <p>Equity: {val.equity}</p> : null }
               </div>
             ))
           :
             null
         }
-        <h2>Jobs</h2>
-        { data
+        <h2>{ !isJobs ? "Jobs" : "Company Details"}</h2>
+        { data.length !== 0
           ?
-            data[0].jobs.map((val, idx) => (
+          data[0][!isJobs ? "jobs" : "company" ].map((val, idx) => (
               <div
                 key={val.id}
                 className="DetailsCard-job">
-                <h3>{val.title}</h3>
+                <h3>{val.title || val.name}</h3>
                 <ul>
-                  <li>Salary: {val.salary}</li>
-                  <li>Equity: {val.equity}</li>
+                  <li>
+                    { val.description ||`Salaray:` + " " + val.salary}
+                  </li>
+                  <li>
+                    {`Employees:` + " " + val.numEmployees || `Equity:` + " " + val.equity}
+                  </li>
+                  {!isJobs ? <li>Job Id: {val.id}</li> : null}
                 </ul>
               </div>
             ))
