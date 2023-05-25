@@ -2,9 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
-import useLocalStorage from './hooks/useLocalStorage.js';
 import useToggleState from './hooks/useToggleState.js';
-import jwt_decode from 'jwt-decode';
 // import './UserProfileEditForm.css';
 
 const UserProfileEditForm = () => {
@@ -16,8 +14,7 @@ const UserProfileEditForm = () => {
   const [ formData, setFormData ] = useState(initialState);
   const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
   const [ userEditData, setUserEditData ] = useState(null);
-  // const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
-  const { setUserData, userData } = useContext(JoblyContext);
+  const { userData } = useContext(JoblyContext);
   const userName = userData.username;
 
   useEffect(() => {
@@ -30,16 +27,15 @@ const UserProfileEditForm = () => {
                         }
                       );
 
-      console.log(patchResult);
+      console.log("PATCH RESULT", patchResult);
+      setUserEditData(() => null);
+      setIsSubmitted();
     }
 
     if (userEditData !== null) userEditReq();
     console.log("userEditData", userEditData);
 
   }, [userEditData])
-
-  console.log("userEditData", userEditData);
-  
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -61,34 +57,20 @@ const UserProfileEditForm = () => {
       formDataEntires[idx][1] !== ""
     ))));
 
-    console.log("DATA ARRAY", dataArray);
     const dataArrayLen = dataArray.length;
     const data = JSON.parse(JSON.stringify(Object.fromEntries(dataArray)));
-    console.log("FORM, DATA LEN", dataArrayLen);
-    console.log("DATA", data);
+
     setUserEditData(() => {
         if (dataArrayLen) return JSON.parse(JSON.stringify(data));
         else return null;
       }
     );
-    // const patchResult = dataArrayLen ? await JoblyApi.getEndpoint({endpoint: `users/${userName}`, method: "patch", data}) : null;
-    // console.log(patchResult);
-    // const token = loginResult.data.token;
-    // const payload = await jwt_decode(token);
-    // payload.token = token;
-
-    // setLocalStorage(() => (
-    //   payload
-    // ));
-
-    // setUserData(() => (
-    //   payload
-    // ));
-
+    console.log("LocalStorage", localStorage);
+    console.log("UserData", userData);
     // setFormData(() => initialState);
   }
 
-  // if (isSubmitted) return <Redirect exact to="/" />;
+  if (isSubmitted) return <Redirect exact to="/profile" />;
 
   return (
     <form onSubmit={handleSubmit}>
