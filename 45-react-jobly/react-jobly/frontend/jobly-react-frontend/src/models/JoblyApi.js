@@ -5,7 +5,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 class JoblyApi {
     // the token for interactive with the API will be stored here.
     static token;
-    static userData;
+    // static userData;
     // Defined named parameters.
     static async request({ endpoint, data = {}, method = "get" }) {
     // console.debug("API Call:", endpoint, data, method);
@@ -14,7 +14,7 @@ class JoblyApi {
       console.log("URL FINISHED", url, data);
     // "Content-Type": "application/json"
       const userData = JSON.parse(window.localStorage.getItem("userData") || null);
-      const token = userData.token;
+      const token = userData ? userData.token : null;
       const headers = { Authorization: `Bearer ${token}` };
       console.log("HEADER", headers);
       const params = (method === "get")

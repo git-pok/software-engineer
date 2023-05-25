@@ -5,8 +5,8 @@ const ButtonLink = ({ buttonArray }) => {
 
   return (
     buttonArray.map(val => (
-      <div className="Button">
-        <Link exact to={`/users/${val.username}/edit`}>
+      <div key={val.username} className="Button">
+        <Link exact="true" to={`/users/${val.username}/edit`}>
           <button>{val.buttonText}</button>
         </Link>
       </div>

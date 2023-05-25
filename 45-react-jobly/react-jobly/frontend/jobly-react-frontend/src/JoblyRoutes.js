@@ -8,6 +8,7 @@ import ProfileCard from './ProfileCard.js';
 import SearchBox from './SearchBox.js';
 import LogInForm from './LogInForm.js';
 import SignupForm from './SignupForm.js';
+import UserProfileEditForm from './UserProfileEditForm.js';
 // import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import JoblyApi from './models/JoblyApi.js';
@@ -16,22 +17,30 @@ const JoblyRoutes = ({ companies, jobs }) => {
 
   const [ details, setDetails ] = useState([]);
   const { userData } = useContext(JoblyContext);
-  const [ profileData, setProfileData ] = useState(null);
+  // const [ profileData, setProfileData ] = useState([]);
+  const [ profileRoute, setProfileRoute ] = useState(false);
   const userToken = userData ? userData.token : null;
   const currLocation = useLocation();
   const currUrl = currLocation.pathname;
   const userName = userData ? userData.username : null;
+  // console.log("CURR URL", currUrl);
+  // useEffect(() => {
+  //   const makeUserReq = async (endpoint) => {
+  //     if (currUrl === "/profile") {
+  //     const req = await JoblyApi.getEndpoint({endpoint});
+  //     const userData =  req.user;
+  //     const userDataArray = [ JSON.parse(JSON.stringify(userData))];
+  //     setProfileData(data => userDataArray);
+  //     console.log("RAN");
+  //     }
+  //   }
 
-  useEffect(() => {
-    const makeUserReq = async (endpoint) => {
-      const req = await JoblyApi.getEndpoint({endpoint});
-      const userData =  req.user;
-      const userDataArray = [ JSON.parse(JSON.stringify(userData))];
-      setProfileData(data => userDataArray);
-    }
-
-    if (currUrl === "/profile") makeUserReq (`users/${userName}`);
-  }, [])
+    // makeUserReq(`users/${userName}`);
+    // setProfileRoute(state => true);
+    // if (currUrl === "/profile") {
+      // makeUserReq(`users/${userName}`)
+    // };
+  // }, [])
 
   return (
     <Switch>
@@ -69,7 +78,8 @@ const JoblyRoutes = ({ companies, jobs }) => {
     }
     { userToken &&
       <Route exact path="/profile">
-        <ProfileCard data={profileData} />
+        <ProfileCard />
+        {/* <ProfileCard data={profileData} /> */}
       </Route>
     }
     { userToken &&
@@ -96,7 +106,7 @@ const JoblyRoutes = ({ companies, jobs }) => {
     }
     { userToken &&
       <Route exact path="/users/:username/edit">
-
+        <UserProfileEditForm />
       </Route>
     }
       <Redirect to="/" />

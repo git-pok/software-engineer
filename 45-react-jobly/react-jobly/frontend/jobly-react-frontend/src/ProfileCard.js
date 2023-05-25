@@ -1,21 +1,35 @@
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import ButtonLink from './ButtonLink.js';
 import JoblyContext from './context/JoblyContext.js';
+import JoblyApi from './models/JoblyApi.js';
 import './ProfileCard.css';
 
-const ProfileCard = ({ data }) => {
-  const isData = data && data.length !== 0;
+const ProfileCard = () => {
+  const [ profileData, setProfileData ] = useState(null);
   const { userData } = useContext(JoblyContext);
   const userName = userData.username;
-  // console.log("JDJDJDJDJ", isData);
+
+  useEffect(() => {
+    const makeUserReq = async (endpoint) => {
+      const req = await JoblyApi.getEndpoint({endpoint});
+      const userData =  req.user;
+      const userDataArray = [ JSON.parse(JSON.stringify(userData))];
+      setProfileData(data => userDataArray);
+      console.log("RAN");
+    }
+
+    makeUserReq(`users/${userName}`);
+
+  }, [])
+
   return (
     <div className="ProfileCard-div">
       <h1>User Profile</h1>
       <div className="ProfileCard">
       <h2>User Details</h2>
-        { isData
+        { profileData
           ?
-          data.map(val => (
+          profileData.map(val => (
               <div
                 key={val.firstName}
                 className="ProfileCard-user">
@@ -42,6 +56,7 @@ const ProfileCard = ({ data }) => {
           :
             null
         }
+        
         <ButtonLink
           buttonArray={[{
             buttonText: "EDIT",
