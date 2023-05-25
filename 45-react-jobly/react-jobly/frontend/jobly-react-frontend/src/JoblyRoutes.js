@@ -21,34 +21,6 @@ const JoblyRoutes = ({ companies, jobs }) => {
       <Route exact path="/">
         <h1>HOME</h1>
       </Route>
-      { userToken ?
-      <Route exact path="/companies">
-        <SearchBox />
-        <JoblyCard
-          data={companies}
-          title="Companies"
-          setDetails={setDetails}
-          />
-      </Route>
-      : null
-      }
-      { userToken ?
-      <Route exact path="/jobs">
-        <JoblyCard
-          data={jobs}
-          title="Jobs"
-          jobs={true}
-          setDetails={setDetails}
-          />
-      </Route>
-      : null
-      }
-      <Route exact path="/profile">
-        <h1>PROFILE</h1>
-      </Route>
-      <Route exact path="/users">
-        <h1>USERS</h1>
-      </Route>
       <Route exact path="/login">
         <h1>LOG IN</h1>
         <LogInForm />
@@ -60,17 +32,51 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <h1>SIGN UP</h1>
         <SignupForm />
       </Route>
+    { userToken &&
+      <Route exact path="/companies">
+        <SearchBox />
+        <JoblyCard
+          data={companies}
+          title="Companies"
+          setDetails={setDetails} />
+      </Route>
+    }
+    { userToken &&
+      <Route exact path="/jobs">
+        <JoblyCard
+          data={jobs}
+          title="Jobs"
+          jobs={true}
+          setDetails={setDetails} />
+      </Route>
+    }
+    { userToken &&
+      <Route exact path="/profile">
+        <h1>PROFILE</h1>
+      </Route>
+    }
+    { userToken &&
+      <Route exact path="/users">
+        <h1>USERS</h1>
+      </Route>
+    }
+    { userToken &&
       <Route exact path="/companies/:handle">
         <CompanyDetailsCard
           data={details} />
       </Route>
+    }
+    { userToken &&
       <Route exact path="/jobs/:id">
         <JobDetailsCard
           data={details} />
       </Route>
+    }
+    { userToken &&
       <Route exact path="/users/:username">
 
       </Route>
+    }
       <Redirect to="/" />
     </Switch>
   );

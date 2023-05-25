@@ -12,30 +12,24 @@ const JoblyNavbar = ({ linkNames, logOut }) => {
   return (
     <nav className="Navbar">
       <div className="left-links">
-      <NavLink exact to="/">
-        JOBLY
-      </NavLink>
-      {
-        userToken ? 
-          <span>
-              WELCOME {userData.username.toUpperCase()}!
-          </span> 
-        : null
+        <NavLink exact to="/">
+          JOBLY
+        </NavLink>
+      { userToken &&
+        <span>
+          WELCOME {userData.username.toUpperCase()}!
+        </span> 
       }
       </div>
       <div className="right-links">
-      { userToken 
-        ?
+        { userToken &&
           linkNames.map((val, idx) => (
             <NavLink exact to={`/${val}`} key={val}>
               {val.toUpperCase()}
             </NavLink>
-          )) 
-        : 
-          null
-      }
-      {
-        userToken
+          ))
+        }
+        { userToken
           ?
             <NavLink exact to="/logout" onClick={logOut}>
               LOG OUT
@@ -44,16 +38,12 @@ const JoblyNavbar = ({ linkNames, logOut }) => {
             <NavLink exact to="/login">
               LOG IN
             </NavLink>
-      }
-      {
-        !userToken
-          ?
-            <NavLink exact to="/signup">
-              SIGN UP
-            </NavLink>
-          :
-            null
-      }
+        }
+        { !userToken &&
+          <NavLink exact to="/signup">
+            SIGN UP
+          </NavLink>
+        }
       </div>
     </nav>
   );
