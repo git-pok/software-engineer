@@ -1,26 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import JoblyApi from './models/JoblyApi.js';
-import JoblyContext from './context/JoblyContext.js';
+// import JoblyApi from './models/JoblyApi.js';
+// import JoblyContext from './context/JoblyContext.js';
 import './JoblyCard.css';
 
-const JoblyCard = ({
-    data, title, setDetails,
-    setJobDtlState, jobs=false}) => {
-
-  const getCompOrJob = async (endpoint, isJob) => {
-
-    setDetails(state => []);
-    isJob = jobs === true;
-
-    const request = await JoblyApi.getCompOrJob(
-                                      endpoint, isJob
-                                  );
-    
-    const reqData = [ JSON.parse(JSON.stringify(request.data[isJob ? "job" : "company"]))];
-    if (isJob) reqData[0].company = [ JSON.parse(JSON.stringify(reqData[0].company))];
-    setDetails(state => reqData);
-  }
+const JoblyCard = ({ data, title, jobs=false }) => {
 
   return (
     <>
@@ -33,7 +17,6 @@ const JoblyCard = ({
             exact="true"
             to={!jobs ? `/companies/${val.handle}` : `/jobs/${val.id}`}
             key={!jobs ? `link-${val.name}` : `link-${val.id}`}
-            onClick={() => getCompOrJob(val[!jobs ? "handle" : "id"])}
           >
             <div
               key={!jobs ? `${val.name}` : `${val.id}`}

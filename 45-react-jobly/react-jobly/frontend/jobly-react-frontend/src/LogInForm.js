@@ -11,55 +11,30 @@ const LogInForm = () => {
   const initialState = { username: "", password: "" };
   const [ formData, setFormData ] = useState(initialState);
   const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
-  const [ submittedData, setSubmittedData ] = useToggleState(null);
   const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
-  const [ profileData, setProfileData ] = useState(null);
   const { setUserData, userData } = useContext(JoblyContext);
 
   useEffect(() => {
     const login = async () => {
-    const { username, password } = formData;
-    console.log("HFHFHFH", username, password);
-    const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
-    const token = loginResult.data.token;
-    const payload = await jwt_decode(token);
-    payload.token = token;
-    console.log("PAYLOAD", payload);
+      const { username, password } = formData;
+      console.log("HFHFHFH", username, password);
+      const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
+      const token = loginResult.data.token;
+      const payload = await jwt_decode(token);
+      payload.token = token;
   
-    setLocalStorage(() => (
-      payload
-    ));
+      setLocalStorage(() => (
+        payload
+      ));
   
-    setUserData(() => (
-      payload
-    ));
+      setUserData(() => (
+        payload
+      ));
 
-    // setFormData(() => initialState);
-    setIsSubmitted();
+      setIsSubmitted();
     }
-    // console.log("USERNAME USE EFFECT", userData);
-    // const getUserData = async (endpoint) => {
-    //   // const userName = userData.username;
-    //   // console.log("USERNAME USE EFFECT", userName)
-    //   const req = await JoblyApi.getEndpoint({endpoint});
-    //   const userReqData =  req.user;
-    //   console.log("userReqData", userReqData);
-    //   console.log("userData", userData);
-    //   const userApps = userReqData.applications;
-    //   const userAppsArray = JSON.parse(JSON.stringify(userApps));
-    //   setUserData(() => ({
-    //     ...userData,
-    //     userApps
-    //   }));
-
-    //   setFormData(() => initialState);
-    //   setIsSubmitted();
-    // }
 
     if (isSubmitted) login();
-    // // if (isSubmitted) getUserData();
-    // if (isSubmitted) getUserData(`users/${userData.username}`);
-    // makeUserReq(`users/${userData.username}`);
 
   }, [isSubmitted])
 
@@ -74,22 +49,6 @@ const LogInForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    // const { username, password } = formData;
-    // console.log("HFHFHFH", username, password);
-    // const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
-    // const token = loginResult.data.token;
-    // const payload = await jwt_decode(token);
-    // payload.token = token;
-    // console.log("PAYLOAD", payload);
-  
-    // setLocalStorage(() => (
-    //   payload
-    // ));
-  
-    // setUserData(() => (
-    //   payload
-    // ));
-
     // setFormData(() => initialState);
     setIsSubmitted();
   }

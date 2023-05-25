@@ -5,15 +5,16 @@ import ButtonReq from './ButtonReq.js';
 import JoblyContext from './context/JoblyContext.js';
 import './CompanyDetailsCard.css';
 
-const CompanyDetailsCard = ({ data }) => {
+const CompanyDetailsCard = () => {
   const { userData } = useContext(JoblyContext);
   const userName = userData ? userData.username : null;
 
   const currUrlObj = useParams();
   const currUrl = currUrlObj.handle;
-  console.log(currUrl)
+  console.log(currUrl);
   const [ jobDetail, setJobDetail ] = useState(null);
   const [ coDetail, setCoDetail ] = useState(null);
+  const [ userJobApps, setUserJobApps ] = useState(null);
   
   useEffect(() => {
     const getCompOrJob = async (endpoint, isJob) => {
@@ -31,9 +32,27 @@ const CompanyDetailsCard = ({ data }) => {
       setJobDetail(state => reqDataJobs);
     }
 
+    const getUserData = async () => {
+      const req = await JoblyApi.getEndpoint({endpoint: `users/${userData.username}`});
+      const userReqData =  req.user;
+      console.log("userReqData", userReqData);
+      const userApps = userReqData.applications;
+      const userAppsArray = JSON.parse(JSON.stringify([userApps]));
+      setUserJobApps(() => (
+        userAppsArray
+      ));
+    }
+
     getCompOrJob(currUrl, false);
+    getUserData();
 
   }, [currUrl])
+
+  const findJobApps = (data, id) => {
+    const jobApps = data.indexOf(id);
+    console.log(jobApps === -1);
+    return jobApps !== -1;
+  }
 
   return (
     <div className="CompanyDetailsCard-div">
@@ -81,7 +100,9 @@ const CompanyDetailsCard = ({ data }) => {
                     reqUrl: `users/${userName}/jobs/${val.id}`,
                     method: "post",
                     key: val.id,
-                    buttonText: "Apply"
+                    buttonText: "Apply",
+                    onClick: findJobApps,
+                    state: userJobApps
                   }} />
               </div>
             ))))

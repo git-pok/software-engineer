@@ -8,10 +8,6 @@ import JoblyApi from './models/JoblyApi.js';
 const ButtonReq = ({ buttonObj }) => {
   const [ request, setRequest ] = useState(null);
   const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
-  // const [ userEditData, setUserEditData ] = useState(null);
-  // const { userData } = useContext(JoblyContext);
-  // const userName = userData ? userData.username : null;
-  // console.log("USER NAME", userName);
 
   useEffect(() => {
 
@@ -34,7 +30,13 @@ const ButtonReq = ({ buttonObj }) => {
   }, [request])
 
   const jobApply = () => {
-    setRequest(req => true);
+    const findJobApp = buttonObj.onClick;
+    const jobApps = buttonObj.state;
+    const jobId = buttonObj.key;
+    const hasApplied = findJobApp(jobApps, jobId);
+    console.log(jobApps, jobId, hasApplied);
+    if (!hasApplied) setRequest(req => true);
+    else throw new Error("Applied to job already");
   }
 
   return (

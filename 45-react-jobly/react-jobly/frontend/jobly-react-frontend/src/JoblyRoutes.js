@@ -15,33 +15,12 @@ import JoblyApi from './models/JoblyApi.js';
 
 const JoblyRoutes = ({ companies, jobs }) => {
 
-  const [ details, setDetails ] = useState([]);
-  const { userData } = useContext(JoblyContext);
-  // const [ profileData, setProfileData ] = useState([]);
-  const [ profileRoute, setProfileRoute ] = useState(false);
+  const { userData, setUserData } = useContext(JoblyContext);
   const userToken = userData ? userData.token : null;
   const currLocation = useLocation();
-  const currUrl = currLocation.pathname;
-  const userName = userData ? userData.username : null;
-  // console.log("CURR URL", currUrl);
-  // useEffect(() => {
-  //   const makeUserReq = async (endpoint) => {
-  //     if (currUrl === "/profile") {
-  //     const req = await JoblyApi.getEndpoint({endpoint});
-  //     const userData =  req.user;
-  //     const userDataArray = [ JSON.parse(JSON.stringify(userData))];
-  //     setProfileData(data => userDataArray);
-  //     console.log("RAN");
-  //     }
-  //   }
+  // const currUrl = currLocation.pathname;
+  // const userName = userData ? userData.username : null;
 
-    // makeUserReq(`users/${userName}`);
-    // setProfileRoute(state => true);
-    // if (currUrl === "/profile") {
-      // makeUserReq(`users/${userName}`)
-    // };
-  // }, [])
-  console.log("user toke", userToken);
   return (
     <Switch>
       <Route exact path="/">
@@ -65,8 +44,7 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <SearchBox />
         <JoblyCard
           data={companies}
-          title="Companies"
-          setDetails={setDetails} />
+          title="Companies" />
       </Route>
     }
     { userToken &&
@@ -74,8 +52,7 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <JoblyCard
           data={jobs}
           title="Jobs"
-          jobs={true}
-          setDetails={setDetails} />
+          jobs={true} />
       </Route>
     }
     { userToken &&
@@ -91,14 +68,12 @@ const JoblyRoutes = ({ companies, jobs }) => {
     }
     { userToken &&
       <Route exact path="/companies/:handle">
-        <CompanyDetailsCard
-          data={details} />
+        <CompanyDetailsCard />
       </Route>
     }
     { userToken &&
       <Route exact path="/jobs/:id">
-        <JobDetailsCard
-          data={details} />
+        <JobDetailsCard />
       </Route>
     }
     { userToken &&
