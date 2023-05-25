@@ -3,15 +3,17 @@ import JoblyRoutes from './JoblyRoutes.js';
 import JoblyNavbar from './JoblyNavbar.js';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
+import useLocalStorage from './hooks/useLocalStorage.js';
 // import './JoblyApp.css';
 
 const JoblyApp = () => {
 
   const [ jobCoData, setJobCoData ] = useState({});
-
-  const [ userData, setUserData ] = useState(() => (
-    JSON.parse(window.localStorage.getItem("userData")) || null
-  ));
+  
+  const [ userData, setUserData ] = useLocalStorage("userData", null);
+  // const [ userData, setUserData ] = useState(() => (
+  //   JSON.parse(window.localStorage.getItem("userData")) || null
+  // ));
 
   useEffect(() => {
     async function getJobsAndCos (...args) {
@@ -31,6 +33,28 @@ const JoblyApp = () => {
       ));
     }
 
+    const getUserData = async (endpoint) => {
+      // const userName = userData.username;
+      // console.log("USERNAME USE EFFECT", userName)
+      const req = await JoblyApi.getEndpoint({endpoint});
+      const userReqData =  req.user;
+      console.log("userReqData", userReqData);
+      console.log("userData", userData);
+      const userApps = userReqData.applications;
+      const userAppsArray = JSON.parse(JSON.stringify(userApps));
+      setUserData(() => ({
+        ...userData,
+        userApps
+      }));
+
+      // setFormData(() => initialState);
+      // setIsSubmitted();
+    }
+
+    // if (isSubmitted) login();
+    // if (isSubmitted) getUserData();
+    // if (isSubmitted) getUserData(`users/${userData.username}`);
+    if (userData) getUserData(`users/${userData.username}`)
     getJobsAndCos ({endpoint: "companies" }, {endpoint: "jobs" });
 
   }, [])

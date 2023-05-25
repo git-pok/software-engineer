@@ -7,8 +7,9 @@ import './ProfileCard.css';
 const ProfileCard = () => {
   const [ profileData, setProfileData ] = useState(null);
   const { userData } = useContext(JoblyContext);
+  console.log("USER DATA", userData);
   const userName = userData.username;
-
+  console.log("PROFILE DATA", profileData);
   useEffect(() => {
     const makeUserReq = async (endpoint) => {
       const req = await JoblyApi.getEndpoint({endpoint});
@@ -36,13 +37,13 @@ const ProfileCard = () => {
                 <h3>{val.firstName} {val.lastName}</h3>
                 <ul>
                   <li>
+                    Username: {val.username}
+                  </li>
+                  <li>
                     First Name: {val.firstName}
                   </li>
                   <li>
                     Last Name: {val.lastName}
-                  </li>
-                  <li>
-                    Username: {val.username}
                   </li>
                   <li>
                     Email: {val.email}
@@ -56,11 +57,12 @@ const ProfileCard = () => {
           :
             null
         }
-        
+
         <ButtonLink
           buttonArray={[{
             buttonText: "EDIT",
-            username: userName
+            key: {userName},
+            link: `/users/${userName}/edit`
           }]}
         />
       </div>

@@ -1,16 +1,48 @@
+import { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import JoblyApi from './models/JoblyApi';
+import ButtonReq from './ButtonReq.js';
+import JoblyContext from './context/JoblyContext.js';
 import './CompanyDetailsCard.css';
 
 const CompanyDetailsCard = ({ data }) => {
-  // if (data) console.log("COMPANY DETAILS DATA", data);
-  // console.log("isJobs", isJobs);
+  const { userData } = useContext(JoblyContext);
+  const userName = userData ? userData.username : null;
+
+  const currUrlObj = useParams();
+  const currUrl = currUrlObj.handle;
+  console.log(currUrl)
+  const [ jobDetail, setJobDetail ] = useState(null);
+  const [ coDetail, setCoDetail ] = useState(null);
+  
+  useEffect(() => {
+    const getCompOrJob = async (endpoint, isJob) => {
+
+      setJobDetail(state => []);
+      setCoDetail(state => []);
+  
+      const request = await JoblyApi.getCompOrJob(
+                                        endpoint, isJob
+                                    );
+
+      const reqData = JSON.parse(JSON.stringify([request.data.company]));
+      const reqDataJobs = JSON.parse(JSON.stringify([reqData[0].jobs]));
+      setCoDetail(state => reqData);
+      setJobDetail(state => reqDataJobs);
+    }
+
+    getCompOrJob(currUrl, false);
+
+  }, [currUrl])
+
   return (
     <div className="CompanyDetailsCard-div">
       <h1>Company Details</h1>
       <div className="CompanyDetailsCard">
-        <h2>Company Details</h2>
-        { data.length !== 0
+      <h2>Company Details</h2>
+        { coDetail
           ?
-            data.map(val => (
+            coDetail.map(val => (
               <div
                 key={val.name}
                 className="CompanyDetailsCard-company">
@@ -27,9 +59,10 @@ const CompanyDetailsCard = ({ data }) => {
             null
         }
         <h2>Jobs</h2>
-        { data.length !== 0
+        { jobDetail
           ?
-          data[0]["jobs"].map(val => (
+          jobDetail.map(obj => (
+            obj.map(val => (
               <div
                 key={val.id}
                 className="CompanyDetailsCard-job">
@@ -43,8 +76,15 @@ const CompanyDetailsCard = ({ data }) => {
                   </li>
                   <li>Job Id: {val.id}</li>
                 </ul>
+                <ButtonReq buttonObj={
+                  {
+                    reqUrl: `users/${userName}/jobs/${val.id}`,
+                    method: "post",
+                    key: val.id,
+                    buttonText: "Apply"
+                  }} />
               </div>
-            ))
+            ))))
           :
             null
         }

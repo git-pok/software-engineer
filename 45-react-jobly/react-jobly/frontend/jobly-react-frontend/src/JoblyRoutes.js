@@ -41,16 +41,18 @@ const JoblyRoutes = ({ companies, jobs }) => {
       // makeUserReq(`users/${userName}`)
     // };
   // }, [])
-
+  console.log("user toke", userToken);
   return (
     <Switch>
       <Route exact path="/">
         <h1>HOME</h1>
       </Route>
+    { !userToken && 
       <Route exact path="/login">
         <h1>LOG IN</h1>
         <LogInForm />
       </Route>
+    }
       <Route exact path="/logout">
         <Redirect exact to="/" />
       </Route>
