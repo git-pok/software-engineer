@@ -13,7 +13,10 @@ class JoblyApi {
       const url = `${BASE_URL}/${endpoint}`;
       console.log("URL FINISHED", url, data);
     // "Content-Type": "application/json"
-      const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+      const userData = JSON.parse(window.localStorage.getItem("userData") || null);
+      const token = userData.token;
+      const headers = { Authorization: `Bearer ${token}` };
+      console.log("HEADER", headers);
       const params = (method === "get")
           ? data
           : {};
@@ -69,28 +72,36 @@ class JoblyApi {
     }
 
     /** getCompany. */
-    static async getCompany(resource) {
-      console.log("GET CO END", resource);
-      const endpoint = `companies/${resource}`
-      const reqs = await this.request({endpoint});
-      return reqs;
-    }
+    // static async getCompany(resource) {
+    //   console.log("GET CO END", resource);
+    //   const endpoint = `companies/${resource}`
+    //   const reqs = await this.request({endpoint});
+    //   return reqs;
+    // }
 
     /** getJob. */
-    static async getJob(resource) {
-      console.log("GET CO END", resource);
-      const endpoint = `jobs/${resource}`
-      const reqs = await this.request({endpoint});
-      return reqs;
-    }
+    // static async getJob(resource) {
+    //   console.log("GET CO END", resource);
+    //   const endpoint = `jobs/${resource}`
+    //   const reqs = await this.request({endpoint});
+    //   return reqs;
+    // }
 
-    /** getJob. */
+    /** getCompOrJob. */
     static async getCompOrJob(resource, isJob=false) {
       console.log("GET CO END", resource);
       const endpoint = isJob ? `jobs/${resource}` : `companies/${resource}`;
       const reqs = await this.request({endpoint});
       return reqs;
     }
+
+    /** reqProtectedRoute. */
+    // static async reqProtectedRoute(resource, cred) {
+    //   console.log("reqProtectedRoute", resource, cred);
+    //   const endpoint = resource;
+    //   const reqs = await this.request({endpoint});
+    //   return reqs;
+    // }
 
 }
 
