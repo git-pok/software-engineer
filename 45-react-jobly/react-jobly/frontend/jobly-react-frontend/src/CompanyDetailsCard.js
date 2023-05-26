@@ -2,10 +2,13 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import JoblyApi from './models/JoblyApi';
 import ButtonReq from './ButtonReq.js';
+import LoadingAnimation from './LoadingAnimation.js';
 import JoblyContext from './context/JoblyContext.js';
 import './CompanyDetailsCard.css';
 
 const CompanyDetailsCard = ({ findJobApps }) => {
+
+  const [ isLoading, setIsLoading ] = useState(false);
   const { userData } = useContext(JoblyContext);
   const userName = userData ? userData.username : null;
 
@@ -17,7 +20,7 @@ const CompanyDetailsCard = ({ findJobApps }) => {
   
   useEffect(() => {
     const getCompOrJob = async (endpoint, isJob) => {
-
+      setIsLoading(state => true);
       setJobDetail(state => []);
       setCoDetail(state => []);
   
@@ -29,6 +32,7 @@ const CompanyDetailsCard = ({ findJobApps }) => {
       const reqDataJobs = JSON.parse(JSON.stringify([reqData[0].jobs]));
       setCoDetail(state => reqData);
       setJobDetail(state => reqDataJobs);
+      setIsLoading(state => false);
     }
 
     const getUserData = async () => {
@@ -49,6 +53,14 @@ const CompanyDetailsCard = ({ findJobApps }) => {
 
   return (
     <div className="CompanyDetailsCard-div">
+      {
+        isLoading ?
+          <LoadingAnimation ldgObj={{
+            color: "#c07f00",
+            class: "fa-solid fa-sun fa-spin"
+          }} />
+        : null
+      }
       <h1>Company Details</h1>
       <div className="CompanyDetailsCard">
       <h2>Company Details</h2>

@@ -2,12 +2,14 @@ import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ButtonReq from './ButtonReq.js';
 import JoblyApi from './models/JoblyApi';
+import LoadingAnimation from './LoadingAnimation.js';
 import JoblyContext from './context/JoblyContext.js';
 import './JobDetailsCard.css';
 
 const JobDetailsCard = ({ findJobApps }) => {
   const currUrlObj = useParams();
   const currUrl = currUrlObj.id;
+  const [ isLoading, setIsLoading ] = useState(false);
   const [ jobDetail, setJobDetail ] = useState(null);
   const [ coDetail, setCoDetail ] = useState(null);
   const [ userJobApps, setUserJobApps ] = useState(null);
@@ -17,6 +19,7 @@ const JobDetailsCard = ({ findJobApps }) => {
   useEffect(() => {
     const getCompOrJob = async (endpoint, isJob) => {
 
+      setIsLoading(state => true);
       setJobDetail(state => []);
       setCoDetail(state => []);
   
@@ -28,6 +31,7 @@ const JobDetailsCard = ({ findJobApps }) => {
       const reqDataCompany = JSON.parse(JSON.stringify([reqData[0].company]));
       setCoDetail(state => reqDataCompany);
       setJobDetail(state => reqData);
+      setIsLoading(state => false);
     }
 
     const getUserData = async () => {
@@ -48,6 +52,14 @@ const JobDetailsCard = ({ findJobApps }) => {
 
   return (
     <div className="JobDetailsCard-div">
+      {
+        isLoading ?
+          <LoadingAnimation ldgObj={{
+            color: "#c07f00",
+            class: "fa-solid fa-sun fa-spin"
+          }} />
+        : null
+      }
       <h1>Job Details</h1>
       <div className="JobDetailsCard">
       <h2>Job Details</h2>
