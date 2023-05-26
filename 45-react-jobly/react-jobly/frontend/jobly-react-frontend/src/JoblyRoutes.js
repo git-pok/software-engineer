@@ -1,7 +1,6 @@
-import { Route, Switch, Redirect, useLocation, useParams } from 'react-router-dom';
-import { useContext, useState, useEffect } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { useContext } from 'react';
 import JoblyCard from './JoblyCard.js';
-// import DetailsCard from './DetailsCard.js';
 import CompanyDetailsCard from './CompanyDetailsCard.js';
 import JobDetailsCard from './JobDetailsCard.js';
 import ProfileCard from './ProfileCard.js';
@@ -15,17 +14,11 @@ const JoblyRoutes = ({ companies, jobs }) => {
 
   const { userData, setUserData } = useContext(JoblyContext);
   const userToken = userData ? userData.token : null;
-  const currLocation = useLocation();
 
   const findJobApps = (data, id) => {
     const jobApps = data.indexOf(id);
-    console.log(jobApps === -1);
     return jobApps !== -1;
   }
-  // const currUrl = currLocation.pathname;
-  // const userName = userData ? userData.username : null;
-  // console.log("GDGDGDG", currLocation);
-  // const [ userJobApps, setUserJobApps ] = useState(null);
 
   return (
     <Switch>

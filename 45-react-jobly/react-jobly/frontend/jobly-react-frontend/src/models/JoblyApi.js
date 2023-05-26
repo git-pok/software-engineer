@@ -3,21 +3,17 @@ import axios from 'axios';
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class JoblyApi {
-    // the token for interactive with the API will be stored here.
-    // static classToken;
-    // t = classToken ? classToken : null;
-    // static userData;
     // Defined named parameters.
     static async request({ endpoint, data = {}, method = "get" }) {
     // console.debug("API Call:", endpoint, data, method);
-      console.log("REQUEST ENDPOINT", endpoint, data, method);
+      console.log("REQUEST VALUES", endpoint, data, method);
       const url = `${BASE_URL}/${endpoint}`;
       console.log("URL FINISHED", url, data);
     // "Content-Type": "application/json"
       const userData = JSON.parse(window.localStorage.getItem("userData") || null);
       const token = userData ? userData.token : null;
       const headers = { Authorization: `Bearer ${token}` };
-      console.log("HEADER", headers);
+      console.log("HEADERS", headers);
       const params = (method === "get")
           ? data
           : {};
@@ -28,8 +24,8 @@ class JoblyApi {
         return await axios({ url, method, data, params, headers });
       } catch (err) {
         console.error("API Error:", err.response);
-        let message = err.response.data.error.message;
-        throw Array.isArray(message) ? message : [message];
+        // let message = err.response.data.error.message;
+        // throw Array.isArray(message) ? message : [message];
       }
     }
  
@@ -38,8 +34,12 @@ class JoblyApi {
    /** request an endpoint. */
    // Defined getCompany.
     static async getEndpoint({ endpoint, data, method }) {
-      let res = await this.request({ endpoint, data, method });
+      try {
+        let res = await this.request({ endpoint, data, method });
       return res.data;
+      } catch (err) {
+        console.error("API Error:", err.response);
+      }
     }
 
     /** request multiple endpoints. */
@@ -72,22 +72,6 @@ class JoblyApi {
       return reqs;
     }
 
-    /** getCompany. */
-    // static async getCompany(resource) {
-    //   console.log("GET CO END", resource);
-    //   const endpoint = `companies/${resource}`
-    //   const reqs = await this.request({endpoint});
-    //   return reqs;
-    // }
-
-    /** getJob. */
-    // static async getJob(resource) {
-    //   console.log("GET CO END", resource);
-    //   const endpoint = `jobs/${resource}`
-    //   const reqs = await this.request({endpoint});
-    //   return reqs;
-    // }
-
     /** getCompOrJob. */
     static async getCompOrJob(resource, isJob=false) {
       console.log("GET CO END", resource);
@@ -95,14 +79,6 @@ class JoblyApi {
       const reqs = await this.request({endpoint});
       return reqs;
     }
-
-    /** reqProtectedRoute. */
-    // static async reqProtectedRoute(resource, cred) {
-    //   console.log("reqProtectedRoute", resource, cred);
-    //   const endpoint = resource;
-    //   const reqs = await this.request({endpoint});
-    //   return reqs;
-    // }
 
 }
 

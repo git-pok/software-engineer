@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useToggleState from './hooks/useToggleState.js';
 import JoblyApi from './models/JoblyApi.js';
 // import './ButtonReq.css';
 
 const ButtonReq = ({ buttonObj }) => {
   const [ request, setRequest ] = useState(null);
-  const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
-
+  const [ hasApplied, setHasApplied ] = useToggleState(false);
+  
   useEffect(() => {
 
     const jobApplyReq = async () => {
@@ -16,8 +16,14 @@ const ButtonReq = ({ buttonObj }) => {
                           method: buttonObj.method
                         }
                       );
-      // setUserEditData(() => null);
-      setIsSubmitted();
+
+      if (!jobApplyResult) {
+        setHasApplied(state => true);
+        setTimeout(() => (
+          setHasApplied(state => false)
+        ), 2000);
+      }
+
       setRequest(req => null);
     }
 
@@ -30,14 +36,17 @@ const ButtonReq = ({ buttonObj }) => {
     const jobApps = buttonObj.state;
     const jobId = buttonObj.key;
     const hasApplied = findJobApp(jobApps, jobId);
-    console.log(jobApps, jobId, hasApplied);
     if (!hasApplied) setRequest(req => true);
-    else throw new Error("Applied to job already");
   }
 
   return (
       <div key={buttonObj.key} className="Button">
-          <button onClick={jobApply}>{buttonObj.buttonText}</button>
+        {hasApplied === true && <h1>Has Failed!!!</h1>}
+          <button
+            onClick={jobApply}
+          >
+              {buttonObj.buttonText}
+          </button>
       </div>
   );
 }
