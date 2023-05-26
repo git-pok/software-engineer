@@ -16,6 +16,12 @@ const JoblyRoutes = ({ companies, jobs }) => {
   const { userData, setUserData } = useContext(JoblyContext);
   const userToken = userData ? userData.token : null;
   const currLocation = useLocation();
+
+  const findJobApps = (data, id) => {
+    const jobApps = data.indexOf(id);
+    console.log(jobApps === -1);
+    return jobApps !== -1;
+  }
   // const currUrl = currLocation.pathname;
   // const userName = userData ? userData.username : null;
   // console.log("GDGDGDG", currLocation);
@@ -67,12 +73,12 @@ const JoblyRoutes = ({ companies, jobs }) => {
     }
     { userToken &&
       <Route exact path="/companies/:handle">
-        <CompanyDetailsCard />
+        <CompanyDetailsCard findJobApps={findJobApps} />
       </Route>
     }
     { userToken &&
       <Route exact path="/jobs/:id">
-        <JobDetailsCard />
+        <JobDetailsCard findJobApps={findJobApps} />
       </Route>
     }
     { userToken &&

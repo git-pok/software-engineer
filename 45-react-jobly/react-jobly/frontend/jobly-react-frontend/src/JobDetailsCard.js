@@ -5,7 +5,7 @@ import JoblyApi from './models/JoblyApi';
 import JoblyContext from './context/JoblyContext.js';
 import './JobDetailsCard.css';
 
-const JobDetailsCard = () => {
+const JobDetailsCard = ({ findJobApps }) => {
   const currUrlObj = useParams();
   const currUrl = currUrlObj.id;
   const [ jobDetail, setJobDetail ] = useState(null);
@@ -45,12 +45,6 @@ const JobDetailsCard = () => {
     getUserData();
 
   }, [currUrl])
-
-  const findJobApps = (data, id) => {
-    const jobApps = data.indexOf(id);
-    console.log(jobApps === -1);
-    return jobApps !== -1;
-  }
 
   return (
     <div className="JobDetailsCard-div">

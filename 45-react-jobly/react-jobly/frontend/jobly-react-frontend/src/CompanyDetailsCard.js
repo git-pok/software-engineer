@@ -5,7 +5,7 @@ import ButtonReq from './ButtonReq.js';
 import JoblyContext from './context/JoblyContext.js';
 import './CompanyDetailsCard.css';
 
-const CompanyDetailsCard = () => {
+const CompanyDetailsCard = ({ findJobApps }) => {
   const { userData } = useContext(JoblyContext);
   const userName = userData ? userData.username : null;
 
@@ -45,12 +45,6 @@ const CompanyDetailsCard = () => {
     getUserData();
 
   }, [currUrl])
-
-  const findJobApps = (data, id) => {
-    const jobApps = data.indexOf(id);
-    console.log(jobApps === -1);
-    return jobApps !== -1;
-  }
 
   return (
     <div className="CompanyDetailsCard-div">
