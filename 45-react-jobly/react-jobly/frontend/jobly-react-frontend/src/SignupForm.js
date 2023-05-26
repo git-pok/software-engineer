@@ -65,6 +65,8 @@ const SignupForm = () => {
   if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
+    <>
+    <h1 className="SignupForm-h1">Sign Up</h1>
     <form onSubmit={handleSubmit} className="SignupForm">
       <label htmlFor="username">Username</label>
       <input
@@ -110,6 +112,7 @@ const SignupForm = () => {
         placeholder="Type an email"></input>
       <button>SUBMIT</button>
     </form>
+    </>
   );
 }
 

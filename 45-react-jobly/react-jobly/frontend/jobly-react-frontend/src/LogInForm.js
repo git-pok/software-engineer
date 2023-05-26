@@ -31,6 +31,7 @@ const LogInForm = () => {
       ));
 
       setIsSubmitted();
+      setFormData(() => initialState);
     }
 
     if (isSubmitted) login();
@@ -48,13 +49,14 @@ const LogInForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    // setFormData(() => initialState);
     setIsSubmitted();
   }
 
   if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
+    <>
+    <h1 className="LogInForm-h1">Log In</h1>
     <form onSubmit={handleSubmit} className="LogInForm">
       <label htmlFor="username">Username</label>
       <input
@@ -76,6 +78,7 @@ const LogInForm = () => {
         autoComplete="current-password"></input>
       <button>SUBMIT</button>
     </form>
+    </>
   );
 }
 

@@ -16,7 +16,7 @@ class JoblyApi {
  
       try {
       // FIXED BUG
-      // deleted .data from request
+      // Deleted .data from request
         return await axios({ url, method, data, params, headers });
       } catch (err) {
         console.error("API Error:", err.response);
@@ -28,7 +28,7 @@ class JoblyApi {
    // Individual API routes
 
    /** request an endpoint. */
-   // Defined getCompany.
+   // Defined getEndpoint.
     static async getEndpoint({ endpoint, data, method }) {
       try {
         let res = await this.request({ endpoint, data, method });
@@ -38,19 +38,19 @@ class JoblyApi {
       }
     }
 
-    /** request multiple endpoints. */
+    /** Defined companyJobReqs. */
     static async companyJobReqs(...args) {
       const reqs = args.map(async val => await this.request(val));
       return reqs;
     }
  
-   /** logIn. */
+   /** Defined logIn. */
     static async logIn({endpoint, username, password}) {
       const reqs = await this.request({endpoint, method: "post", data: {username, password}});
       return reqs;
     }
 
-  /** signUp. */
+  /** Defined signUp. */
     static async signUp({username, password, firstName, lastName, email}) {
 
       const reqs = await this.request(
@@ -67,7 +67,7 @@ class JoblyApi {
       return reqs;
     }
 
-    /** getCompOrJob. */
+    /** Defined getCompOrJob. */
     static async getCompOrJob(resource, isJob=false) {
       const endpoint = isJob ? `jobs/${resource}` : `companies/${resource}`;
       const reqs = await this.request({endpoint});
@@ -76,7 +76,7 @@ class JoblyApi {
 
 }
 
-// for now, put token ("testuser" / "password" on class)
+// Develop phase token ("testuser" / "password" on class)
 //  JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
 //      "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
 //      "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";

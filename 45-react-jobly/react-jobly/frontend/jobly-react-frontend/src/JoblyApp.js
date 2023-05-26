@@ -48,7 +48,6 @@ const JoblyApp = () => {
               }}>
       <JoblyNavbar
         linkNames={["companies", "jobs", "profile"]}
-        // userData={userData}
         logOut={logOut} />
       <JoblyRoutes
         companies={jobCoData.companies}

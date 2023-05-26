@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useContext } from 'react';
-import JoblyCard from './JoblyCard.js';
+import CoOrJobCard from './CoOrJobCard.js';
+import ContentCard from './ContentCard.js';
 import CompanyDetailsCard from './CompanyDetailsCard.js';
 import JobDetailsCard from './JobDetailsCard.js';
 import ProfileCard from './ProfileCard.js';
@@ -23,11 +24,15 @@ const JoblyRoutes = ({ companies, jobs }) => {
   return (
     <Switch>
       <Route exact path="/">
-        <h1>HOME</h1>
+        <ContentCard
+          dataObj={{
+            title: "Welcome to the Jobly App!",
+            description: "Enjoy!" 
+          }}
+        />
       </Route>
     { !userToken && 
       <Route exact path="/login">
-        <h1>LOG IN</h1>
         <LogInForm />
       </Route>
     }
@@ -35,20 +40,19 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <Redirect exact to="/" />
       </Route>
       <Route exact path="/signup">
-        <h1>SIGN UP</h1>
         <SignupForm />
       </Route>
     { userToken &&
       <Route exact path="/companies">
         <SearchBox />
-        <JoblyCard
+        <CoOrJobCard
           data={companies}
           title="Companies" />
       </Route>
     }
     { userToken &&
       <Route exact path="/jobs">
-        <JoblyCard
+        <CoOrJobCard
           data={jobs}
           title="Jobs"
           jobs={true} />
@@ -57,11 +61,6 @@ const JoblyRoutes = ({ companies, jobs }) => {
     { userToken &&
       <Route exact path="/profile">
         <ProfileCard />
-      </Route>
-    }
-    { userToken &&
-      <Route exact path="/users">
-        <h1>USERS</h1>
       </Route>
     }
     { userToken &&
