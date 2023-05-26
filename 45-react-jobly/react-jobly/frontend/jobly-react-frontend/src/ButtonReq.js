@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Message from './Message.js';
 import useToggleState from './hooks/useToggleState.js';
 import JoblyApi from './models/JoblyApi.js';
@@ -8,7 +8,7 @@ const ButtonReq = ({ buttonObj }) => {
   const [ request, setRequest ] = useState(null);
   const [ hasApplied, setHasApplied ] = useToggleState(false);
   const [ appliedSuccs, setAppliedSuccs ] = useToggleState(false);
-  
+
   useEffect(() => {
 
     const jobApplyReq = async () => {
@@ -32,6 +32,7 @@ const ButtonReq = ({ buttonObj }) => {
       } else {
         setAppliedSuccs();
         setTimeout(setAppliedSuccs, 2000);
+        jobApps.push(jobId);
         setRequest(req => null);
       }
     }
