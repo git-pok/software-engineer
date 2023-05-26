@@ -35,7 +35,8 @@ const JobDetailsCard = ({ findJobApps }) => {
       const userReqData =  req.user;
       console.log("userReqData", userReqData);
       const userApps = userReqData.applications;
-      const userAppsArray = JSON.parse(JSON.stringify([userApps]));
+      const userAppsArray = JSON.parse(JSON.stringify(userApps));
+
       setUserJobApps(() => (
         userAppsArray
       ));

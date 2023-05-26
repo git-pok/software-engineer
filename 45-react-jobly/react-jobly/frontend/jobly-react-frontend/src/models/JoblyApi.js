@@ -6,14 +6,10 @@ class JoblyApi {
     // Defined named parameters.
     static async request({ endpoint, data = {}, method = "get" }) {
     // console.debug("API Call:", endpoint, data, method);
-      console.log("REQUEST VALUES", endpoint, data, method);
       const url = `${BASE_URL}/${endpoint}`;
-      console.log("URL FINISHED", url, data);
-    // "Content-Type": "application/json"
       const userData = JSON.parse(window.localStorage.getItem("userData") || null);
       const token = userData ? userData.token : null;
       const headers = { Authorization: `Bearer ${token}` };
-      console.log("HEADERS", headers);
       const params = (method === "get")
           ? data
           : {};
@@ -50,14 +46,13 @@ class JoblyApi {
  
    /** logIn. */
     static async logIn({endpoint, username, password}) {
-      console.log(endpoint, username, password);
       const reqs = await this.request({endpoint, method: "post", data: {username, password}});
       return reqs;
     }
 
   /** signUp. */
     static async signUp({username, password, firstName, lastName, email}) {
-      console.log("JAPI", username, password, firstName, lastName, email);
+
       const reqs = await this.request(
             {
               endpoint: "auth/register",
@@ -74,7 +69,6 @@ class JoblyApi {
 
     /** getCompOrJob. */
     static async getCompOrJob(resource, isJob=false) {
-      console.log("GET CO END", resource);
       const endpoint = isJob ? `jobs/${resource}` : `companies/${resource}`;
       const reqs = await this.request({endpoint});
       return reqs;

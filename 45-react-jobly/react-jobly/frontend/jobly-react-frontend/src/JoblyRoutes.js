@@ -17,7 +17,7 @@ const JoblyRoutes = ({ companies, jobs }) => {
 
   const findJobApps = (data, id) => {
     const jobApps = data.indexOf(id);
-    return jobApps !== -1;
+    return jobApps === -1;
   }
 
   return (

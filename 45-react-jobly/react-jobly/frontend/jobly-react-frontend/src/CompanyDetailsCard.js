@@ -35,7 +35,8 @@ const CompanyDetailsCard = ({ findJobApps }) => {
       const req = await JoblyApi.getEndpoint({endpoint: `users/${userData.username}`});
       const userReqData =  req.user;
       const userApps = userReqData.applications;
-      const userAppsArray = JSON.parse(JSON.stringify([userApps]));
+      const userAppsArray = JSON.parse(JSON.stringify(userApps));
+
       setUserJobApps(() => (
         userAppsArray
       ));
