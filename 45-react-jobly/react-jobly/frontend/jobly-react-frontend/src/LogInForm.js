@@ -17,7 +17,6 @@ const LogInForm = () => {
   useEffect(() => {
     const login = async () => {
       const { username, password } = formData;
-      console.log("HFHFHFH", username, password);
       const loginResult = await JoblyApi.logIn({endpoint: "auth/token", username, password});
       const token = loginResult.data.token;
       const payload = await jwt_decode(token);

@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect, useLocation } from 'react-router-dom';
+import { Route, Switch, Redirect, useLocation, useParams } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import JoblyCard from './JoblyCard.js';
 // import DetailsCard from './DetailsCard.js';
@@ -9,9 +9,7 @@ import SearchBox from './SearchBox.js';
 import LogInForm from './LogInForm.js';
 import SignupForm from './SignupForm.js';
 import UserProfileEditForm from './UserProfileEditForm.js';
-// import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
-import JoblyApi from './models/JoblyApi.js';
 
 const JoblyRoutes = ({ companies, jobs }) => {
 
@@ -20,6 +18,8 @@ const JoblyRoutes = ({ companies, jobs }) => {
   const currLocation = useLocation();
   // const currUrl = currLocation.pathname;
   // const userName = userData ? userData.username : null;
+  // console.log("GDGDGDG", currLocation);
+  // const [ userJobApps, setUserJobApps ] = useState(null);
 
   return (
     <Switch>
@@ -58,7 +58,6 @@ const JoblyRoutes = ({ companies, jobs }) => {
     { userToken &&
       <Route exact path="/profile">
         <ProfileCard />
-        {/* <ProfileCard data={profileData} /> */}
       </Route>
     }
     { userToken &&

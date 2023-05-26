@@ -27,13 +27,11 @@ const UserProfileEditForm = () => {
                         }
                       );
 
-      console.log("PATCH RESULT", patchResult);
       setUserEditData(() => null);
       setIsSubmitted();
     }
 
     if (userEditData !== null) userEditReq();
-    console.log("userEditData", userEditData);
 
   }, [userEditData])
 
@@ -49,7 +47,6 @@ const UserProfileEditForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     setIsSubmitted();
-    const { firstName, lastName, email, password } = formData;
     
     const formDataEntires = JSON.parse(JSON.stringify(Object.entries(formData)));
    
@@ -65,8 +62,6 @@ const UserProfileEditForm = () => {
         else return null;
       }
     );
-    console.log("LocalStorage", localStorage);
-    console.log("UserData", userData);
     // setFormData(() => initialState);
   }
 

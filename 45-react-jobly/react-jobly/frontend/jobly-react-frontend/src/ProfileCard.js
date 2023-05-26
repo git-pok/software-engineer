@@ -7,16 +7,14 @@ import './ProfileCard.css';
 const ProfileCard = () => {
   const [ profileData, setProfileData ] = useState(null);
   const { userData } = useContext(JoblyContext);
-  console.log("USER DATA", userData);
   const userName = userData.username;
-  console.log("PROFILE DATA", profileData);
+
   useEffect(() => {
     const makeUserReq = async (endpoint) => {
       const req = await JoblyApi.getEndpoint({endpoint});
       const userData =  req.user;
-      const userDataArray = [ JSON.parse(JSON.stringify(userData))];
+      const userDataArray = JSON.parse(JSON.stringify([userData]));
       setProfileData(data => userDataArray);
-      console.log("RAN");
     }
 
     makeUserReq(`users/${userName}`);

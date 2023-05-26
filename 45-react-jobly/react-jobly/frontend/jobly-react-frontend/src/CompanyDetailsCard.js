@@ -11,7 +11,6 @@ const CompanyDetailsCard = () => {
 
   const currUrlObj = useParams();
   const currUrl = currUrlObj.handle;
-  console.log(currUrl);
   const [ jobDetail, setJobDetail ] = useState(null);
   const [ coDetail, setCoDetail ] = useState(null);
   const [ userJobApps, setUserJobApps ] = useState(null);
@@ -35,7 +34,6 @@ const CompanyDetailsCard = () => {
     const getUserData = async () => {
       const req = await JoblyApi.getEndpoint({endpoint: `users/${userData.username}`});
       const userReqData =  req.user;
-      console.log("userReqData", userReqData);
       const userApps = userReqData.applications;
       const userAppsArray = JSON.parse(JSON.stringify([userApps]));
       setUserJobApps(() => (

@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-// import JoblyApi from './models/JoblyApi.js';
-// import JoblyContext from './context/JoblyContext.js';
 import './JoblyCard.css';
 
 const JoblyCard = ({ data, title, jobs=false }) => {

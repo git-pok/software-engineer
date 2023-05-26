@@ -11,9 +11,6 @@ const JoblyApp = () => {
   const [ jobCoData, setJobCoData ] = useState({});
   
   const [ userData, setUserData ] = useLocalStorage("userData", null);
-  // const [ userData, setUserData ] = useState(() => (
-  //   JSON.parse(window.localStorage.getItem("userData")) || null
-  // ));
 
   useEffect(() => {
     async function getJobsAndCos (...args) {

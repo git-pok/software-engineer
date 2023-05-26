@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import useToggleState from './hooks/useToggleState.js';
-// import JoblyContext from './context/JoblyContext.js';
 import JoblyApi from './models/JoblyApi.js';
-// import useToggleState from './hooks/useToggleState.js';
 // import './ButtonReq.css';
 
 const ButtonReq = ({ buttonObj }) => {
@@ -18,8 +16,6 @@ const ButtonReq = ({ buttonObj }) => {
                           method: buttonObj.method
                         }
                       );
-
-      console.log("PATCH RESULT", jobApplyResult);
       // setUserEditData(() => null);
       setIsSubmitted();
       setRequest(req => null);

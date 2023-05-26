@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import ButtonReq from './ButtonReq.js';
 import JoblyApi from './models/JoblyApi';
+import JoblyContext from './context/JoblyContext.js';
 import './JobDetailsCard.css';
 
 const JobDetailsCard = () => {
@@ -8,6 +10,9 @@ const JobDetailsCard = () => {
   const currUrl = currUrlObj.id;
   const [ jobDetail, setJobDetail ] = useState(null);
   const [ coDetail, setCoDetail ] = useState(null);
+  const [ userJobApps, setUserJobApps ] = useState(null);
+  const { userData } = useContext(JoblyContext);
+  const userName = userData ? userData.username : null;
 
   useEffect(() => {
     const getCompOrJob = async (endpoint, isJob) => {
@@ -24,8 +29,28 @@ const JobDetailsCard = () => {
       setCoDetail(state => reqDataCompany);
       setJobDetail(state => reqData);
     }
+
+    const getUserData = async () => {
+      const req = await JoblyApi.getEndpoint({endpoint: `users/${userData.username}`});
+      const userReqData =  req.user;
+      console.log("userReqData", userReqData);
+      const userApps = userReqData.applications;
+      const userAppsArray = JSON.parse(JSON.stringify([userApps]));
+      setUserJobApps(() => (
+        userAppsArray
+      ));
+    }
+
     getCompOrJob(currUrl);
+    getUserData();
+
   }, [currUrl])
+
+  const findJobApps = (data, id) => {
+    const jobApps = data.indexOf(id);
+    console.log(jobApps === -1);
+    return jobApps !== -1;
+  }
 
   return (
     <div className="JobDetailsCard-div">
@@ -50,6 +75,15 @@ const JobDetailsCard = () => {
                     Equity: {val.equity}
                   </li>
                 </ul>
+                <ButtonReq buttonObj={
+                  {
+                    reqUrl: `users/${userName}/jobs/${val.id}`,
+                    method: "post",
+                    key: val.id,
+                    buttonText: "Apply",
+                    onClick: findJobApps,
+                    state: userJobApps
+                  }} />
               </div>
             ))
           :
