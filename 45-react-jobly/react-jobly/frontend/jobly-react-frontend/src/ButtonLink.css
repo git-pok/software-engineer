@@ -1,24 +1,16 @@
-.ProfileCard-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
+.ButtonLink button {
+  display: block;
+  width: 190px;
+  height: 30px;
+  margin-top: 10px;
+  border: 3px inset rgb(221, 230, 237);
+  background-color: rgb(39, 55, 77);
+  color: rgb(221, 230, 237);
+  transition: .5s ease-in-out background-color;
 }
-
-.ProfileCard {
-  width: 70vw;
-  height: 100%;
-  background-color: white;
-  border: 4px solid rgb(48, 7, 47);
-  border-radius: 03px;
-  padding: 10px 10px;
-  margin-bottom: 60px;
-}
-
-.ProfileCard-user {
-  margin-bottom: 40px;
-}
-
-.ProfileCard-user ul {
-  margin-top: -10px;
+  
+.ButtonLink button:hover {
+  border-color: rgb(221, 230, 237);
+  background-color: rgb(221, 230, 237);
+  color: rgb(39, 55, 77);
 }

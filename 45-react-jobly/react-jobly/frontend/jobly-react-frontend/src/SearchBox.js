@@ -72,7 +72,6 @@ const SearchBox = () => {
     </div>
     <form onSubmit={handleSubmit}
       className={!isSearchClicked ? "SearchBox-hide" : "SearchBox-show"}>
-      <div className="SearchBox-input-container">
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -81,8 +80,6 @@ const SearchBox = () => {
           value={formData.name}
           name="name"
           placeholder="Type a name"></input>
-      </div>
-      <div className="SearchBox-input-container">
         <label htmlFor="minEmp">Minimum Employees</label>
         <input
           type="number"
@@ -91,8 +88,6 @@ const SearchBox = () => {
           value={formData.minEmp}
           name="minEmp"
           placeholder="Type a number"></input>
-      </div>
-      <div className="SearchBox-input-container">
         <label htmlFor="maxEmp">Maximum Employees</label>
         <input
           type="number"
@@ -101,7 +96,6 @@ const SearchBox = () => {
           value={formData.maxEmp}
           name="maxEmp"
           placeholder="Type a number"></input>
-      </div>
       <button type="submit">SEARCH</button>
       <button type="button" onClick={resetFilters}>RESET</button>
     </form>

@@ -1,7 +1,7 @@
 .Navbar {
   width: 100vw;
   height: 80px;
-  background-color: rgb(17, 18, 39);
+  background-color: rgb(39, 55, 77);
   display: flex;
   align-items: center;
 }
@@ -11,10 +11,23 @@
   height: 28px;
   line-height: 28px;
   margin: 0px 10px 0px 10px;
+  padding: 0px 10px;
   text-decoration: none;
   font-size: 20px;
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: rgb(221, 230, 237);
+  transition: .5s ease-in-out background-color;
+}
+
+.Navbar .active {
+  color: #27374D;
+  border: 2px inset rgb(221, 230, 237);
+  background-color: rgb(221, 230, 237);
+}
+
+.Navbar a:hover {
+  background-color: rgb(221, 230, 237);
+  color: rgb(39, 55, 77);
 }
 
 .left-links {

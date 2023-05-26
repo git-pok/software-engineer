@@ -1,0 +1,43 @@
+.UserProfileEditForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  margin: 0px auto;
+  margin-top: 100px;
+  padding: 50px 0px;
+  background-color: rgb(39, 55, 77);
+  border-radius: 10px;
+}
+
+.UserProfileEditForm label {
+  width: 260px;
+  height: 30px;
+  color: rgb(221, 230, 237);
+}
+
+.UserProfileEditForm input {
+  width: 260px;
+  height: 30px;
+  margin-bottom: 30px;
+}
+
+.UserProfileEditForm button {
+  display: block;
+  width: 260px;
+  height: 30px;
+  margin-top: 10px;
+  border: 3px inset rgb(221, 230, 237);
+  background-color: rgb(221, 230, 237);
+  color: rgb(39, 55, 77);
+  transition: .5s ease-in-out background-color;
+}
+
+.UserProfileEditForm button:hover {
+  border-color: rgb(39, 55, 77);
+  background-color: rgb(39, 55, 77);
+  color: rgb(221, 230, 237);
+}
+
+

@@ -70,7 +70,7 @@ const CompanyDetailsCard = ({ findJobApps }) => {
           :
             null
         }
-        <h2>Jobs</h2>
+        <h2 className="CompanyDetailsCard-nested-h2">Jobs</h2>
         { jobDetail
           ?
           jobDetail.map(obj => (

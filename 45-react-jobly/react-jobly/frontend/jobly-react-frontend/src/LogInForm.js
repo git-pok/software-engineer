@@ -5,7 +5,7 @@ import JoblyContext from './context/JoblyContext.js';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import useToggleState from './hooks/useToggleState.js';
 import jwt_decode from 'jwt-decode';
-// import './LogInForm.css';
+import './LogInForm.css';
 
 const LogInForm = () => {
   const initialState = { username: "", password: "" };
@@ -55,7 +55,7 @@ const LogInForm = () => {
   if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="LogInForm">
       <label htmlFor="username">Username</label>
       <input
         type="text"

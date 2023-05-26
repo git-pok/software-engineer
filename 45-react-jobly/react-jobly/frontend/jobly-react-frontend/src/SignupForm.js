@@ -5,7 +5,7 @@ import JoblyContext from './context/JoblyContext.js';
 import useLocalStorage from './hooks/useLocalStorage.js';
 import useToggleState from './hooks/useToggleState.js';
 import jwt_decode from 'jwt-decode';
-// import './SignupForm.css';
+import './SignupForm.css';
 
 const SignupForm = () => {
   const initialState = {
@@ -65,7 +65,7 @@ const SignupForm = () => {
   if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="SignupForm">
       <label htmlFor="username">Username</label>
       <input
         type="text"
@@ -84,7 +84,7 @@ const SignupForm = () => {
         name="password"
         placeholder="Type a password"
         autoComplete="current-password"></input>
-      <label htmlFor="firstName">firstName</label>
+      <label htmlFor="firstName">First Name</label>
       <input
         type="text"
         id="firstName"
@@ -92,7 +92,7 @@ const SignupForm = () => {
         value={formData.firstName}
         name="firstName"
         placeholder="Type a first name"></input>
-      <label htmlFor="lastName">lastName</label>
+      <label htmlFor="lastName">Last Name</label>
       <input
         type="text"
         id="lastName"
@@ -108,13 +108,6 @@ const SignupForm = () => {
         value={formData.email}
         name="email"
         placeholder="Type an email"></input>
-      {/* <label htmlFor="isAdmin">Admin</label>
-      <input
-        type="checkbox"
-        id="isAdmin"
-        onChange={handleChange}
-        value={formData.isAdmin}
-        name="isAdmin"></input> */}
       <button>SUBMIT</button>
     </form>
   );

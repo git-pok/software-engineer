@@ -9,7 +9,7 @@
   width: 70vw;
   height: 100%;
   background-color: white;
-  border: 4px solid rgb(48, 7, 47);
+  border: 4px solid rgb(192, 127, 0);
   border-radius: 03px;
   padding: 10px 10px;
   margin-bottom: 60px;
@@ -21,4 +21,8 @@
 
 .CompanyDetailsCard-job ul {
   margin-top: -10px;
+}
+
+.CompanyDetailsCard-nested-h2 {
+  margin-top: 50px;
 }

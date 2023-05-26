@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
-// import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import './JoblyNavbar.css';
 

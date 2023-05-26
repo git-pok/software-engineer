@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import useToggleState from './hooks/useToggleState.js';
-// import './UserProfileEditForm.css';
+import './UserProfileEditForm.css';
 
 const UserProfileEditForm = () => {
   const initialState = {
@@ -62,13 +62,13 @@ const UserProfileEditForm = () => {
         else return null;
       }
     );
-    // setFormData(() => initialState);
+
   }
 
   if (isSubmitted) return <Redirect exact to="/profile" />;
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="UserProfileEditForm">
       <label htmlFor="firstName">First Name</label>
       <input
         type="text"

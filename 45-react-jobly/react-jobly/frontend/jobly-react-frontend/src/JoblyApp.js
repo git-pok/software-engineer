@@ -21,7 +21,6 @@ const JoblyApp = () => {
       data.forEach(val => {
         const data = val.data.companies || val.data.jobs;
         const dataKeys = Object.keys(val.data);
-        console.log(dataKeys);
         dataObj[dataKeys] = data;
       })
 

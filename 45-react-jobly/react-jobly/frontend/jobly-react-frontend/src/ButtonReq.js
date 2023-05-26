@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import Message from './Message.js';
 import useToggleState from './hooks/useToggleState.js';
 import JoblyApi from './models/JoblyApi.js';
-// import './ButtonReq.css';
+import './ButtonReq.css';
 
 const ButtonReq = ({ buttonObj }) => {
   const [ request, setRequest ] = useState(null);
@@ -45,7 +45,7 @@ const ButtonReq = ({ buttonObj }) => {
   }
 
   return (
-      <div key={buttonObj.key} className="Button">
+      <div key={buttonObj.key} className="ButtonReq">
         { 
           hasApplied &&
           <Message msgObj={
