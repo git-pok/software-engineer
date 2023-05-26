@@ -14,3 +14,7 @@
   background-color: rgb(221, 230, 237);
   color: rgb(39, 55, 77);
 }
+
+.ButtonLink a {
+  text-decoration: none;
+}
