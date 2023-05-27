@@ -32,7 +32,7 @@ class JoblyApi {
     static async getEndpoint({ endpoint, data, method }) {
       try {
         let res = await this.request({ endpoint, data, method });
-      return res.data;
+        return res.data;
       } catch (err) {
         console.error("API Error:", err.response);
       }
