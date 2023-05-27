@@ -68,6 +68,8 @@ const UserProfileEditForm = () => {
   if (isSubmitted) return <Redirect exact to="/profile" />;
 
   return (
+    <>
+    <h1 className="UserProfileEditForm-h1">Edit Profile</h1>
     <form onSubmit={handleSubmit} className="UserProfileEditForm">
       <label htmlFor="firstName">First Name</label>
       <input
@@ -107,6 +109,7 @@ const UserProfileEditForm = () => {
         autoComplete="password"></input>
       <button>SUBMIT</button>
     </form>
+    </>
   );
 }
 

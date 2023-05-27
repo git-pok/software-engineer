@@ -17,14 +17,13 @@ const SignupForm = () => {
                           email: ""
                       };
   const [ formData, setFormData ] = useState(initialState);
-  const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
   const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
   const [ invalidForm, setInvalidForm ] = useToggleState(false);
-  const { setUserData } = useContext(JoblyContext);
+  const { userData, setUserData } = useContext(JoblyContext);
 
   useEffect(() => {
     const signup = async () => {
-      const { username, password } = formData;
+
       try {
         const { 
           username, password, firstName,
@@ -38,21 +37,14 @@ const SignupForm = () => {
                                                     lastName,
                                                     email
                                                   });
-
         const token = loginResult.data.token;
         const payload = await jwt_decode(token);
         payload.token = token;
-
-        setLocalStorage(() => (
-          payload
-        ));
-
-        setUserData(() => (
+        setUserData(data => (
           payload
         ));
 
         setIsSubmitted();
-
         setFormData(() => initialState);
         <Redirect exact to="/" />
 
