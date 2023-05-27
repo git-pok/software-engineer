@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Message from './Message.js';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
@@ -15,8 +15,6 @@ const LogInForm = () => {
   const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
   const { setUserData, userData } = useContext(JoblyContext);
   const [ invalidForm, setInvalidForm ] = useToggleState(false);
-
-  const history = useHistory();
 
   useEffect(() => {
     const login = async () => {

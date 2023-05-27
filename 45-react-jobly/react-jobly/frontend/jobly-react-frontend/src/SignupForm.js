@@ -1,5 +1,6 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import Message from './Message.js';
 import JoblyApi from './models/JoblyApi.js';
 import JoblyContext from './context/JoblyContext.js';
 import useLocalStorage from './hooks/useLocalStorage.js';
@@ -18,7 +19,54 @@ const SignupForm = () => {
   const [ formData, setFormData ] = useState(initialState);
   const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
   const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
+  const [ invalidForm, setInvalidForm ] = useToggleState(false);
   const { setUserData } = useContext(JoblyContext);
+
+  useEffect(() => {
+    const signup = async () => {
+      const { username, password } = formData;
+      try {
+        const { 
+          username, password, firstName,
+          lastName, email
+        } = formData;
+
+        const loginResult = await JoblyApi.signUp({
+                                                    username,
+                                                    password,
+                                                    firstName,
+                                                    lastName,
+                                                    email
+                                                  });
+
+        const token = loginResult.data.token;
+        const payload = await jwt_decode(token);
+        payload.token = token;
+
+        setLocalStorage(() => (
+          payload
+        ));
+
+        setUserData(() => (
+          payload
+        ));
+
+        setIsSubmitted();
+
+        setFormData(() => initialState);
+        <Redirect exact to="/" />
+
+      } catch (err) {
+        <Redirect exact to="/signup" />
+        setInvalidForm();
+        setTimeout(setInvalidForm, 3000);
+        setTimeout(setIsSubmitted, 3000);
+      }
+    }
+
+    if (isSubmitted) signup();
+
+  }, [isSubmitted])
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -31,38 +79,10 @@ const SignupForm = () => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    const { 
-            username, password, firstName,
-            lastName, email
-          } = formData;
-
-    const loginResult = await JoblyApi.signUp({
-                                                username,
-                                                password,
-                                                firstName,
-                                                lastName,
-                                                email
-                                              });
-
-    const token = loginResult.data.token;
-    const payload = await jwt_decode(token);
-    payload.token = token;
-
-    setLocalStorage(() => (
-      payload
-    ));
-
-    setUserData(() => (
-      payload
-    ));
-
     setIsSubmitted();
-
-    setFormData(() => initialState);
-
   }
 
-  if (isSubmitted) return <Redirect exact to="/" />;
+  // if (isSubmitted) return <Redirect exact to="/" />;
 
   return (
     <>
@@ -110,6 +130,15 @@ const SignupForm = () => {
         value={formData.email}
         name="email"
         placeholder="Type an email"></input>
+      {
+        invalidForm &&
+        <Message msgObj={
+          {
+            class: "fail",
+            msg: "Invalid form data!"
+          }
+        } />
+      }
       <button>SUBMIT</button>
     </form>
     </>
