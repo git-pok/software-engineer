@@ -13,8 +13,6 @@ class JoblyApi {
       const params = (method === "get")
           ? data
           : {};
-
-      console.log("API DATA", "URL ", url, "userData", userData, "HEADERS", headers, "DATA", data);
  
       try {
       // FIXED BUG
@@ -55,7 +53,6 @@ class JoblyApi {
   /** Defined signUp. */
     static async signUp({username, password, firstName, lastName, email}) {
 
-      console.log("SUGN UP API data", username, password, firstName, lastName, email);
       const reqs = await this.request(
             {
               endpoint: "auth/register",
@@ -67,7 +64,6 @@ class JoblyApi {
                     }
             }
           );
-      console.log("SUGN UP API RES", reqs);
       return reqs;
     }
 

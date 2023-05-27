@@ -12,7 +12,6 @@ const LogInForm = () => {
   const initialState = { username: "", password: "" };
   const [ formData, setFormData ] = useState(initialState);
   const [ isSubmitted, setIsSubmitted ] = useToggleState(false);
-  const [ localStorage, setLocalStorage ] = useLocalStorage("userData", null);
   const { setUserData, userData } = useContext(JoblyContext);
   const [ invalidForm, setInvalidForm ] = useToggleState(false);
 
@@ -24,10 +23,6 @@ const LogInForm = () => {
         const token = loginResult.data.token;    
         const payload = await jwt_decode(token);
         payload.token = token;
-
-        setLocalStorage(() => (
-          payload
-        ));
         setUserData(() => (
           payload
         ));
