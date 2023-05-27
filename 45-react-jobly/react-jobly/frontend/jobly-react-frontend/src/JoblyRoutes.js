@@ -83,7 +83,7 @@ const JoblyRoutes = ({ companies, jobs }) => {
         <UserProfileEditForm />
       </Route>
     }
-      <Redirect to="/" />
+      <Redirect exact to="/" />
     </Switch>
   );
 }
