@@ -1,12 +1,12 @@
 const INITIAL_STATE = {
-  img: "",
-  topText: "",
-  btmText: ""
+  img: "https://www.indiewire.com/wp-content/uploads/2012/05/Gangster-Squad-Sean-Penn.jpg",
+  topText: "SAY HELLO",
+  btmText: "TO MY LITTLE FRIEND!!!"
 };
 
 const rootReducer = (state=INITIAL_STATE, action) => {
   switch(action.type) {
-    case "MAKE_MEME":
+    case "CREATE":
       return { 
         ...state, 
         img: state.img,
