@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { v4 as uuid } from 'uuid';
 import './MemeForm.css';
 
 const MemeForm = ({ updateMeme }) => {
@@ -23,8 +23,7 @@ const MemeForm = ({ updateMeme }) => {
   const handleSubmit = evt => {
     evt.preventDefault();
     const { img, topText, btmText } = formData;
-    console.log("SUBMIT");
-    updateMeme({ img, topText, btmText });
+    updateMeme({ img, topText, btmText, id: uuid() });
   }
 
   return (
