@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import './Meme.css';
 
-function App() {
+const Meme = ({ t, b, i}) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Meme">
+      <img src={i}></img>
+      <h1 className="Meme-top-h1">{t}</h1>
+      <h1 className="Meme-btm-h1">{b}</h1>
     </div>
   );
 }
 
-export default App;
+export default Meme;
