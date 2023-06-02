@@ -6,7 +6,7 @@ const TodoForm = ({ createTodo }) => {
 
   const INITIAL_STATE = {
     todo: "",
-    complete: false
+    status: false
   }
 
   const [ formData, setFormData ] = useState(INITIAL_STATE);
@@ -24,9 +24,8 @@ const TodoForm = ({ createTodo }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    const { todo, complete } = formData;
-    console.log(todo, complete);
-    createTodo({ todo, complete, id: uuid() });
+    const { todo, status } = formData;
+    createTodo({ todo, status, id: uuid() });
   }
 
   return (
@@ -45,13 +44,13 @@ const TodoForm = ({ createTodo }) => {
         </input>
       </div>
       <div className="TodoForm-input-container">
-        <label htmlFor="complete">Complete</label>
+        <label htmlFor="status">Complete</label>
         <input
-          name="complete"
+          name="status"
           type="checkbox"
-          value={formData.complete}
+          value={formData.status}
           onChange={handleChange}
-          id="complete">
+          id="status">
         </input>
       </div>
       <button>SUBMIT</button>

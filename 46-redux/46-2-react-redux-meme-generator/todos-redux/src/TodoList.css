@@ -1,0 +1,41 @@
+.TodoList-ul {
+  width: 100vw;
+  height: 100vh;
+  margin: 0px 0px;
+  padding: 0px 0px;
+  background-color: rgb(252, 252, 252);
+  list-style: none;
+}
+
+.TodoList-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  padding: 0px 0px 0px 20px;
+  margin: 20px 0px 0px 0px;
+}
+
+.TodoList-container li {
+  padding: 0px 0px 0px 0px;
+}
+
+.TodoList-container button {
+  margin: 0px 10px 0px 0px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  border: 2px inset rgb(255, 255, 255);
+  background-color: rgb(168, 170, 214);
+  transition: ease-in-out .4s background-color;
+}
+
+.TodoList-true {
+  text-decoration: line-through;
+}
+
+.TodoList-container button:hover {
+  background-color: rgb(44, 43, 63);
+  border-color: rgb(44, 43, 63);
+  color: rgb(255, 255, 255);
+}

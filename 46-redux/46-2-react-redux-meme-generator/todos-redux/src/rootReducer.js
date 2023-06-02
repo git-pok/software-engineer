@@ -3,8 +3,6 @@ const INITIAL_STATE = { todos: [] };
 const rootReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "CREATE_TODO":
-      console.log("STATE", state);
-      console.log("ACTION", action);
       const stateData = state.todos;
       const newTodo = action.payload;
       return {
@@ -12,6 +10,13 @@ const rootReducer = (state = INITIAL_STATE, action) => {
           ...stateData,
           newTodo
         ]
+      }
+    case "DELETE_TODO":
+      const todoId = action.payload;
+      const reduxTodos = state.todos;
+      const filteredTodos = reduxTodos.filter(val => val.id !== todoId);
+      return {
+        todos: filteredTodos
       }
     default:
       return state;

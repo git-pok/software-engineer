@@ -22,6 +22,12 @@
   height: 20px;
 }
 
+.TodoForm input[type=checkbox] {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
 .TodoForm button {
   display: block;
   width: 120px;

@@ -1,5 +1,5 @@
 import TodoForm from "./TodoForm";
-// import TodoList from "./TodoList";
+import TodoList from "./TodoList";
 import { useDispatch } from "react-redux";
 
 const TodoApp = () => {
@@ -12,7 +12,7 @@ const TodoApp = () => {
   return (
     <>
       <TodoForm createTodo={createTodo} />
-      {/* <TodoList /> */}
+      <TodoList />
     </>
   );
 }
