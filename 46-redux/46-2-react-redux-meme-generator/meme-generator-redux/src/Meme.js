@@ -31,7 +31,13 @@ const Meme = () => {
 
   return (
     <>
-      { memes.length !== 0 ? reduxMemes : <h1>CRETAE A MEME!</h1> }
+      {
+        memes.length !== 0
+          ?
+            reduxMemes
+          : 
+            <h1 className="Meme-h1">CRETAE A MEME!</h1>
+      }
     </>
   );
 }
