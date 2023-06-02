@@ -2,28 +2,30 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import './TodoForm.css';
 
-const TodoForm = ({ updateMeme }) => {
+const TodoForm = () => {
 
   const INITIAL_STATE = {
     todo: "",
-    complete: ""
+    complete: false
   }
 
   const [ formData, setFormData ] = useState(INITIAL_STATE);
 
   const handleChange = evt => {
     const { name, value } = evt.target;
+    const targetId = evt.target.id;
+    const isChecked = evt.target.checked;
 
     setFormData(data => ({
       ...data,
-      [name]: value
+      [name]: targetId === "todo" ? value : isChecked
     }))
   }
 
   const handleSubmit = evt => {
     evt.preventDefault();
     const { todo, complete } = formData;
-    console.log(complete);
+    console.log(todo, complete);
     // updateMeme({ todo, complete, id: uuid() });
   }
 
