@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import rootReducer from "./rootReducer";
 import { createStore } from "redux";
-
+// { latency: 0 }
 const store = createStore(
   rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__

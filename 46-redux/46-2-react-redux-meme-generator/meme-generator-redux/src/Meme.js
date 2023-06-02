@@ -4,27 +4,34 @@ import './Meme.css';
 
 const Meme = () => {
   const store = useSelector(state => state);
+  const memes = store.meme;
   const dispatch = useDispatch();
 
   const deleteMeme = id => {
-    dispatch({ type: "DELETE", id });
+    dispatch({ type: "DELETE", payload: id });
   }
-
-  const reduxMemes = store.map((val, idx) => (
+  
+  const reduxMemes = memes.map((val, idx) => (
     <div
-      className="Meme"
       id={val.id}
       key={val.id}
-      onClick={() => deleteMeme(val.id)}>
-      <img src={val.img}></img>
-      <h1 className="Meme-top-h1">{val.topText}</h1>
-      <h1 className="Meme-btm-h1">{val.btmText}</h1>
+      className="Meme-container">
+      <div className="Meme">
+        <img src={val.img}></img>
+        <h1 className="Meme-top-h1">{val.topText}</h1>
+        <h1 className="Meme-btm-h1">{val.btmText}</h1>
+      </div>
+      <button
+        className="Meme-button"
+        onClick={() => deleteMeme(val.id)}>
+          DELETE
+      </button>
     </div>
-  ))
+  ));
 
   return (
     <>
-      {reduxMemes}
+      { memes.length !== 0 ? reduxMemes : <h1>CRETAE A MEME!</h1> }
     </>
   );
 }
