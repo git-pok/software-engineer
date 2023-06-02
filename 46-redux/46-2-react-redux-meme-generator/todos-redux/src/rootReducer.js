@@ -5,14 +5,16 @@ const rootReducer = (state = INITIAL_STATE, action) => {
     case "CREATE_TODO":
       console.log("STATE", state);
       console.log("ACTION", action);
-      const state = state.todos;
+      const stateData = state.todos;
       const newTodo = action.payload;
       return {
         todos: [
-          ...state,
+          ...stateData,
           newTodo
         ]
       }
+    default:
+      return state;
   }
 }
 

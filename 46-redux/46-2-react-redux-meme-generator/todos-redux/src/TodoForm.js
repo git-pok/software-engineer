@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import './TodoForm.css';
 
-const TodoForm = () => {
+const TodoForm = ({ createTodo }) => {
 
   const INITIAL_STATE = {
     todo: "",
@@ -26,7 +26,7 @@ const TodoForm = () => {
     evt.preventDefault();
     const { todo, complete } = formData;
     console.log(todo, complete);
-    // updateMeme({ todo, complete, id: uuid() });
+    createTodo({ todo, complete, id: uuid() });
   }
 
   return (
