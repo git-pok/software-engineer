@@ -1,8 +1,8 @@
-// import logo from './logo.svg';
 import { useSelector, useDispatch } from "react-redux";
 import './Meme.css';
 
 const Meme = () => {
+
   const store = useSelector(state => state);
   const memes = store.meme;
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ const Meme = () => {
     dispatch({ type: "DELETE", payload: id });
   }
   
-  const reduxMemes = memes.map((val, idx) => (
+  const reduxMemes = memes.map(val => (
     <div
       id={val.id}
       key={val.id}

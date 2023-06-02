@@ -1,18 +1,9 @@
-import Meme from "./Meme";
-import MemeForm from "./MemeForm";
-import { useDispatch } from "react-redux";
+import MemeApp from "./MemeApp";
 
 function App() {
-  const dispatch = useDispatch();
-
-  const updateMeme = (meme) => {
-    dispatch({ type: "UPDATE", payload: meme });
-  }
-
   return (
     <>
-      <MemeForm updateMeme={updateMeme} />
-      <Meme />
+      <MemeApp />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 import './MemeForm.css';
 
 const MemeForm = ({ updateMeme }) => {
+
   const INITIAL_STATE = {
     img: "",
     topText: "",
@@ -42,26 +43,26 @@ const MemeForm = ({ updateMeme }) => {
         </input>
       </div>
       <div className="MemeForm-input-container">
-      <label htmlFor="topText">Top Text</label>
-      <input
-        name="topText"
-        type="text"
-        placeholder="Type top text"
-        value={formData.topText}
-        onChange={handleChange}
-        id="topText">
-      </input>
+        <label htmlFor="topText">Top Text</label>
+        <input
+          name="topText"
+          type="text"
+          placeholder="Type top text"
+          value={formData.topText}
+          onChange={handleChange}
+          id="topText">
+        </input>
       </div>
       <div className="MemeForm-input-container">
-      <label htmlFor="btmText">Bottom Text</label>
-      <input
-        name="btmText"
-        type="text"
-        placeholder="Type bottom text"
-        value={formData.btmText}
-        onChange={handleChange}
-        id="btmText">
-      </input>
+        <label htmlFor="btmText">Bottom Text</label>
+        <input
+          name="btmText"
+          type="text"
+          placeholder="Type bottom text"
+          value={formData.btmText}
+          onChange={handleChange}
+          id="btmText">
+        </input>
       </div>
       <button>SUBMIT</button>
     </form>
