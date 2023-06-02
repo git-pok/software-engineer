@@ -1,0 +1,38 @@
+.TodoForm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-evenly;
+  align-content: space-around;
+  width: 100vw;
+  height: 20vh;
+  background-color: rgb(44, 43, 63);
+}
+
+.TodoForm label {
+  display: block;
+  width: 120px;
+  height: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.TodoForm input {
+  display: block;
+  width: 180px;
+  height: 20px;
+}
+
+.TodoForm button {
+  display: block;
+  width: 120px;
+  height: 30px;
+  border: 2px inset rgb(255, 255, 255);
+  background-color: rgb(168, 170, 214);
+  transition: ease-in-out .4s background-color;
+}
+
+.TodoForm button:hover {
+  background-color: rgb(44, 43, 63);
+  border-color: rgb(44, 43, 63);
+  color: rgb(255, 255, 255);
+}
