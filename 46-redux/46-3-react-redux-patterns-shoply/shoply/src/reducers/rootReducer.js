@@ -1,4 +1,4 @@
-import products from "../reducers/productsReducer";
+import products from "./productsReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({ products });
