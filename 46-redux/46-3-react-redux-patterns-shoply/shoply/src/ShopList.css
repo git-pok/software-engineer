@@ -1,0 +1,22 @@
+.ShopList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(245, 241, 245);
+}
+
+.ShopList-container {
+  box-sizing: border-box;
+  width: 30vw;
+  padding: 20px 20px;
+  /* border: 4px inset rgb(21, 55, 143); */
+  /* background-color: blue; */
+  margin: 0px 0px 30px 0px;
+}
+
+.ShopList img {
+  width: 30%;
+}
