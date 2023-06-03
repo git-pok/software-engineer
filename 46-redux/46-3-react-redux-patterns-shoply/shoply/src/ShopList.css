@@ -25,8 +25,14 @@
 }
 
 .ShopList-fa-cart-plus, .ShopList-fa-cart-minus {
-  font-size: 20px;
+  font-size: 25px;
   margin: 0px 10px 0px 0px;
+  transition: ease-in-out .3s color;
+  /* margin: 0px 0px 30px 0px; */
+}
+
+.ShopList-fa-cart-plus:hover, .ShopList-fa-cart-minus:hover {
+  color: rgb(191, 0, 191);
   /* margin: 0px 0px 30px 0px; */
 }
 
