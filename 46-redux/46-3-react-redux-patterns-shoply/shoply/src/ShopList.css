@@ -5,15 +5,17 @@
   justify-content: space-around;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(245, 241, 245);
+  background-color: rgb(255, 255, 255);
 }
 
 .ShopList-container {
   box-sizing: border-box;
   width: 30vw;
+  height: 400px;
   padding: 20px 20px;
-  /* border: 4px inset rgb(21, 55, 143); */
-  /* background-color: blue; */
+  border: 4px inset rgb(234, 234, 234);
+  border-radius: 04px;
+  background-color: rgb(244, 244, 244);
   margin: 0px 0px 30px 0px;
 }
 
@@ -21,7 +23,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* margin: 0px 0px 30px 0px; */
 }
 
 .ShopList-fa-cart-plus, .ShopList-fa-cart-minus {
