@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import ShoplyContext from "./context/ShoplyContext";
 import './ProductDetails.css';
 
@@ -15,11 +15,13 @@ const ProductDetails = () => {
 
   const dispatch = useDispatch();
   const product = productsStore.filter(val => val.id === id)[0];
+  if (!product) return <Redirect exact to="/" />;
   console.log("PRODUCTS STORE", productsStore);
   console.log("PRODUCT", product);
 
   return (
     <>
+    {/* {!product ? <Redirect exact to="/" /> : null} */}
     <div className="ProductDetails">
           <div
             key={product.id}

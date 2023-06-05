@@ -15,6 +15,7 @@ const Routes = () => {
       <Route exact path="/products/:id">
         <ProductDetails />
       </Route>
+      
       <Redirect exact to="/" />
     </Switch>
     </>
