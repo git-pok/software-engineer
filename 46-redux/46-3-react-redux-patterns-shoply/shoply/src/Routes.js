@@ -1,56 +1,23 @@
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { addToCart, deleteFromCart } from "./actions/actions";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import './ShopList.css';
+import { Switch, Redirect, Route } from "react-router-dom";
+import ShopList from "./ShopList";
+// import './Routes.css';
 
-const ShopList = () => {
-  // console.log("COMP ACTIONS", addToCart, deleteFromCart);
-  // const store = useSelector(store => store, shallowEqual);
-  const dispatch = useDispatch();
-  const productsStore = useSelector(store => store.products, shallowEqual);
-  const cartStore = useSelector(store => store.cart, shallowEqual);
-  
-  const addItemToCart = id => {
-    const clickedItem = productsStore.filter(val => val.id === id);
-    dispatch(addToCart(clickedItem[0]));
-  };
+const Routes = () => {
 
-  const deleteItemFromCart = id => {
-    dispatch(deleteFromCart(id));
-  };
-  console.log("COMP RAN");
-  // console.log("Store", store);
-  // console.log("productsStore", productsStore);
-  // console.log("cartStore", cartStore);
   return (
     <>
-    <div className="ShopList">
-      {
-        productsStore.map(val => (
-          <div
-            key={val.id}
-            className="ShopList-container">
-            <img src={val.image_url}></img>
-            <h2>{val.name}</h2>
-            <p>Price: {val.price}</p>
-            <p>{val.description}</p>
-            <div className="ShopList-buttons">
-              <FontAwesomeIcon
-                className="ShopList-fa-cart-plus"
-                icon={faCartPlus}
-                onClick={() => addItemToCart(val.id)} />
-              <FontAwesomeIcon
-                className="ShopList-fa-cart-minus"
-                icon={faMinus}
-                onClick={() => deleteItemFromCart(val.id)} />
-            </div>
-          </div>
-        ))
-      }
-    </div>
+    <Switch>
+      <Route exact path="/">
+        <ShopList />
+      </Route>
+
+      <Route exact path="/products/:id">
+
+      </Route>
+      <Redirect exact to="/" />
+    </Switch>
     </>
   );
 }
 
-export default ShopList;
+export default Routes;

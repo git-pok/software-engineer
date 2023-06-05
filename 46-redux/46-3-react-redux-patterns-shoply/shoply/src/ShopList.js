@@ -2,6 +2,7 @@ import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { addToCart, deleteFromCart } from "./actions/actions";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 import './ShopList.css';
 
 const ShopList = () => {
@@ -35,7 +36,13 @@ const ShopList = () => {
             <h2>{val.name}</h2>
             <p>Price: {val.price}</p>
             <p>{val.description}</p>
-            <div className="ShopList-buttons">
+            <Link
+              exact
+              to={`/products/${val.id}`}
+              className="ShopList-button">
+              CLICK FOR DETAILS
+            </Link>
+            <div className="ShopList-icons">
               <FontAwesomeIcon
                 className="ShopList-fa-cart-plus"
                 icon={faCartPlus}
