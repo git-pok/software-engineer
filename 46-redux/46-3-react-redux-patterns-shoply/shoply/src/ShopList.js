@@ -1,24 +1,28 @@
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { addToCart, deleteFromCart } from "./actions/actions";
+// import { useSelector, useDispatch, shallowEqual } from "react-redux";
+// import { addToCart, deleteFromCart } from "./actions/actions";
+import { useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
+import ShoplyContext from "./context/ShoplyContext";
 import './ShopList.css';
 
 const ShopList = () => {
 
-  const dispatch = useDispatch();
-  const productsStore = useSelector(store => store.products, shallowEqual);
-  const cartStore = useSelector(store => store.cart, shallowEqual);
+  const {addItemToCart, deleteItemFromCart, productsStore} = useContext(ShoplyContext);
+  console.log("CONTEXT", addItemToCart, deleteItemFromCart, productsStore);
+  // const dispatch = useDispatch();
+  // const productsStore = useSelector(store => store.products, shallowEqual);
+  // const cartStore = useSelector(store => store.cart, shallowEqual);
   
-  const addItemToCart = id => {
-    const clickedItem = productsStore.filter(val => val.id === id);
-    dispatch(addToCart(clickedItem[0]));
-  };
+  // const addItemToCart = id => {
+  //   const clickedItem = productsStore.filter(val => val.id === id);
+  //   dispatch(addToCart(clickedItem[0]));
+  // };
 
-  const deleteItemFromCart = id => {
-    dispatch(deleteFromCart(id));
-  };
+  // const deleteItemFromCart = id => {
+  //   dispatch(deleteFromCart(id));
+  // };
 
   return (
     <>
@@ -33,7 +37,7 @@ const ShopList = () => {
             <p>Price: {val.price}</p>
             <p>{val.description}</p>
             <Link
-              exact
+              exact="true"
               to={`/products/${val.id}`}
               className="ShopList-button">
               CLICK FOR DETAILS
