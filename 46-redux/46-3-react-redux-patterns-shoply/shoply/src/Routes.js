@@ -1,7 +1,8 @@
 import { Switch, Redirect, Route } from "react-router-dom";
 import ShopList from "./ShopList";
+import ShopCart from "./ShopCart";
 import ProductDetails from "./ProductDetails";
-// import './Routes.css';
+
 
 const Routes = () => {
 
@@ -15,7 +16,11 @@ const Routes = () => {
       <Route exact path="/products/:id">
         <ProductDetails />
       </Route>
-      
+
+      <Route exact path="/cart">
+        <ShopCart />
+      </Route>
+
       <Redirect exact to="/" />
     </Switch>
     </>

@@ -11,17 +11,14 @@ const ProductDetails = () => {
   const {addItemToCart, deleteItemFromCart, productsStore} = useContext(ShoplyContext);
 
   const { id } = useParams();
-  console.log(id);
 
   const dispatch = useDispatch();
   const product = productsStore.filter(val => val.id === id)[0];
   if (!product) return <Redirect exact to="/" />;
-  console.log("PRODUCTS STORE", productsStore);
-  console.log("PRODUCT", product);
+  console.log("PRODUCT DETAILS RAN");
 
   return (
     <>
-    {/* {!product ? <Redirect exact to="/" /> : null} */}
     <div className="ProductDetails">
           <div
             key={product.id}
