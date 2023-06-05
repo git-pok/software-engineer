@@ -1,8 +1,12 @@
-import { Switch, Redirect, Route } from "react-router-dom";
+import { Switch, Redirect, Route, useParams } from "react-router-dom";
 import ShopList from "./ShopList";
+import ProductDetails from "./ProductDetails";
 // import './Routes.css';
 
 const Routes = () => {
+
+  const id = useParams();
+  console.log(id);
 
   return (
     <>
@@ -12,7 +16,7 @@ const Routes = () => {
       </Route>
 
       <Route exact path="/products/:id">
-
+        <ProductDetails />
       </Route>
       <Redirect exact to="/" />
     </Switch>

@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import './ShopList.css';
 
 const ShopList = () => {
-  // console.log("COMP ACTIONS", addToCart, deleteFromCart);
-  // const store = useSelector(store => store, shallowEqual);
+
   const dispatch = useDispatch();
   const productsStore = useSelector(store => store.products, shallowEqual);
   const cartStore = useSelector(store => store.cart, shallowEqual);
@@ -20,10 +19,7 @@ const ShopList = () => {
   const deleteItemFromCart = id => {
     dispatch(deleteFromCart(id));
   };
-  console.log("COMP RAN");
-  // console.log("Store", store);
-  // console.log("productsStore", productsStore);
-  // console.log("cartStore", cartStore);
+
   return (
     <>
     <div className="ShopList">
