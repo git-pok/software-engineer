@@ -1,0 +1,28 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 0px 30px 0px;
+  width: 100vw;
+  height: 10vh;
+  background-color: rgb(73, 76, 105);
+}
+
+nav a {
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  background-color: rgb(25, 27, 40);
+  border: 2px inset rgb(73, 76, 105);
+  transition: ease-in-out .4s background-color;
+}
+
+nav a:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(73, 76, 105);
+}
