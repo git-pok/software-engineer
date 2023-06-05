@@ -1,5 +1,3 @@
-// import { useSelector, useDispatch, shallowEqual } from "react-redux";
-// import { addToCart, deleteFromCart } from "./actions/actions";
 import { useContext } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -10,19 +8,6 @@ import './ShopList.css';
 const ShopList = () => {
 
   const {addItemToCart, deleteItemFromCart, productsStore} = useContext(ShoplyContext);
-  console.log("CONTEXT", addItemToCart, deleteItemFromCart, productsStore);
-  // const dispatch = useDispatch();
-  // const productsStore = useSelector(store => store.products, shallowEqual);
-  // const cartStore = useSelector(store => store.cart, shallowEqual);
-  
-  // const addItemToCart = id => {
-  //   const clickedItem = productsStore.filter(val => val.id === id);
-  //   dispatch(addToCart(clickedItem[0]));
-  // };
-
-  // const deleteItemFromCart = id => {
-  //   dispatch(deleteFromCart(id));
-  // };
 
   return (
     <>
