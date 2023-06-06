@@ -44,7 +44,6 @@ def create_user():
     name_last = request.form['lname']
     url_img = request.form['img-url'] 
     usr_id = create_db_row(name_first, name_last, url_img)
-
     return redirect("/users")
 
 @app.route('/users/<int:user_id>')
@@ -52,7 +51,6 @@ def user_details(user_id):
     """repsonds with user details page"""
     user = User.query.get_or_404(user_id)
     posts_data = user.posts_table
-
     return render_template('user_details.html', user=user, posts_data=posts_data)
 
 @app.route('/users/<int:user_id>/edit')
@@ -64,13 +62,9 @@ def user_edit_form(user_id):
 @app.route('/user/edit/<int:sbmtd_user_id>', methods=['POST'])
 def edited_user_post(sbmtd_user_id):
     """saves user edits"""
+    form_data = (request.form)
     user_edit = User.query.get_or_404(sbmtd_user_id)
-    edit_first_name = request.form['fname-edit']
-    edit_last_name = request.form['lname-edit']
-    edit_url_img = request.form['img-url-edit']
-     
-    update_db_row(edit_first_name, edit_last_name, edit_url_img, user_edit)
-
+    update_db_row(form_data, user_edit)
     return redirect("/users")
 
 @app.route('/user/delete/<int:sbmtd_user_id>', methods=['POST'])
@@ -94,14 +88,14 @@ def post_form(user_id):
 @app.route('/users/<int:user_id>/posts/new', methods=['POST'])
 def submitted_post_form(user_id):
     """requests a POST, and saves the body to the Post database"""
-    
+    user_data = User.query.get_or_404(user_id)
     post_title = request.form['post-title']
     user_content = request.form['post-content']
     post_user_id = user_id 
     user_post_id = create_post_db_row(post_title, user_content, post_user_id)
     # BLOGLY APP PART III code
     post_tags = request.form.getlist('checkbox')
-    
+    # user_post = Post.query.filter_by(title=post_title).first()
     user_post = Post.query.get(user_post_id)
     
     create_post_tag_table_row(user_post, post_tags)
@@ -114,6 +108,7 @@ def post_details(post_id):
     post_data = Post.query.get_or_404(post_id)
 
     # BLOGLY APP PART III code
+    # post = Post.query.filter_by(user_id=user.id).all()
     post = Post.query.filter_by(id=post_id).all()
     posts_for_tags = post[0].tags
     # END OF BLOGLY APP PART III code
@@ -130,19 +125,17 @@ def edit_post_form(post_id):
 
 @app.route('/posts/<int:post_id>/edit', methods=['POST'])
 def submitted_post_edits(post_id):
-    """requests a POST request with edited post data"""
-    new_post_title = request.form['title-edit']
-    new_post_content = request.form['content-edit']
+    """requests a POST rewuest with edited post data"""
+    form_data = (request.form)
     post_edit = Post.query.get_or_404(post_id)
     # BLOGLY APP PART III code
     post_tags = request.form.getlist('checkbox')
     # END OF BLOGLY APP PART III code
-    update_post_db_row(new_post_title, new_post_content, post_edit, post_tags)
+    update_post_db_row(form_data, post_edit, post_tags)
     return redirect(f"/posts/{post_id}")
 
 @app.route('/posts/<int:post_id>/delete', methods=['POST'])
 def delete_post_db_row_request(post_id):
-    """deletes a row in the Post table"""
     post_edit = Post.query.get_or_404(post_id)
     post_user_id = post_edit.user_id
     delete_post_db_row(post_edit)
@@ -166,7 +159,7 @@ def tags_details(tag_id):
 
 @app.route('/tags/new')
 def add_tag_form():
-    """requests add tag form"""
+    """returns add tag form"""
     return render_template('add_tag_form.html')
 
 @app.route('/tags/new', methods=['POST'])
@@ -181,7 +174,7 @@ def submitted_add_tag_form():
 def edit_tag_form(tag_id):
     """requests the tag edit form"""
     tag = Tag.query.get(tag_id)
-    tag_name_cptl = tag.name.capitalize()
+    tag_name_cptl = tag.name.capitalize() 
     return render_template('edit_tag_form.html', tag=tag, tag_cptl=tag_name_cptl)
 
 @app.route('/tags/<int:tag_id>/edit', methods=['POST'])
@@ -198,6 +191,7 @@ def submitted_edit_tag_form(tag_id):
 def delete_tag(tag_id):
     """deletes a row in Tag table"""
     tag_row = Tag.query.get_or_404(tag_id)
+    # tag_row_id = tag_row.id
  
     delete_tag_table_row(tag_row)
 
