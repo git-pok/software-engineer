@@ -22,7 +22,7 @@ const ShoplyApp = () => {
     <>
       <ShoplyContext.Provider
         value={
-          { addItemToCart, deleteItemFromCart }
+          { addItemToCart, deleteItemFromCart, productsStore }
         }>
         <Navbar />
         <Routes />
