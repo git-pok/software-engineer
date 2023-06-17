@@ -9,7 +9,7 @@
 7. O(1000 * n * log(n) + n) => O(n log n)
 8. O(2ⁿ + n²) => O(n²)
 9. O(5 + 3 + 1) => O(1)
-10. O(n + n^(1/2) + n² + n * log(n)¹⁰) => O(n²)
+10. O(n + n^(1/2) + n² + n * log(n)¹⁰) => O(n² log n)
 
 ## Step Two: Calculating Time Complexity
 Determine the time complexities for each of the following functions. If you’re not sure what these functions do, copy and paste them into the console and experiment with different inputs!
@@ -97,7 +97,7 @@ O(n)
 Answer the following questions
 
 1. True or false: n^2 + n is O(n^2). True
-2. True or false: n^2 * n is O(n^3). True
+2. True or false: n^2 * n is O(n^3). False
 3. True or false: n^2 + n is O(n). False
 4. What’s the time complexity of the .indexOf array method? O(n)
 5. What’s the time complexity of the .includes array method? O(n)
