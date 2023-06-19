@@ -89,6 +89,49 @@ sortedFrequency([1,1,2,2,2,2,3],1) // 2
 sortedFrequency([1,1,2,2,2,2,3],4) // -1
 ```
 
+Solution:
+```
+function sortedFrequency(arr, val) {
+    let leftIdx = 0;
+    let rightIdx = arr.length - 1;
+    let middleIdx = Math.floor((rightIdx - leftIdx) / 2);
+    let totalFreq = 0;
+    const arrLen = arr.length;
+    const whileBreak = arr.length + 1;
+    while ( leftIdx <= rightIdx ) {
+        if (arr[middleIdx] > val) {
+            rightIdx = middleIdx - 1;
+            middleIdx = Math.floor((rightIdx - leftIdx) / 2);
+        } else if (arr[middleIdx] < val) {
+            leftIdx = middleIdx + 1;
+            middleIdx = Math.floor((rightIdx - leftIdx) / 2);
+        } else if (
+            arr[middleIdx] === val
+            && arr[leftIdx] === val
+            && arr[rightIdx] === val
+            && arr[leftIdx - 1] !== val
+            && arr[rightIdx + 1] !== val) {
+                totalFreq = arr.length - (rightIdx - leftIdx);
+                leftIdx = arr.length + 1;
+        } else if (
+            arr[middleIdx] === val
+            && arr[leftIdx] === val
+            && arr[rightIdx] === val) {
+                totalFreq = arr.length - (rightIdx - leftIdx);
+                leftIdx = leftIdx + 1;
+                rightIdx = rightIdx - 1;
+        } else if (arr[middleIdx] === val
+            && arr[leftIdx] !== val
+            && arr[rightIdx] !== val) {
+                totalFreq = arr.length - (rightIdx - leftIdx);
+                leftIdx = leftIdx + 1;
+                rightIdx = rightIdx - 1;
+        }
+    }
+    return totalFreq;
+}
+```
+
 ## findRotatedIndex
 Write a function called findRotatedIndex which accepts a rotated array of sorted numbers and an integer. The function should return the index of num in the array. If the value is not found, return -1.
 
