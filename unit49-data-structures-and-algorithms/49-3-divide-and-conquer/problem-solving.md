@@ -15,26 +15,63 @@ countZeroes([0,0,0]) // 3
 countZeroes([1,1,1,1]) // 0
 ```
 
-Solution:
+Solution One:
 ```
-function countZeroes(arr) {
+function countZeros(arr) {
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
-    let totalZeroes = 0;
-
-    while (leftIdx <= rightIdx) {
-        let middleIdx = Math.floor((leftIdx + rightIdx)/2);
-        let middleVal = arr[middleIdx];
-        if (middleVal === 1) {
-            let leftIdx = middleIdx + 1;
-        } else if (middleVal === 0) {
-            totalZeroes++;
-            let rightIdx = rightIdx - 1;
+    let middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+    let totalZeros = 0;
+    const arrLen = arr.length;
+    const whileBreak = arr.length + 1;
+    while ( leftIdx <= rightIdx ) {
+        if (arr[arrLen - 1] === 1) {
+            leftIdx = whileBreak;
+            return -1;
+        } else if (arr[middleIdx] === 1 && arr[middleIdx + 1] === 1) {
+            leftIdx = middleIdx;
+            middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+        } else if (arr[middleIdx] === 0 && arr[middleIdx - 1] === 1) {
+            totalZeros = arrLen - middleIdx;
+            leftIdx = whileBreak;
+        } else if (arr[middleIdx] === 1 && arr[middleIdx + 1] === 0) {
+            totalZeros = arrLen - (middleIdx + 1);
+            leftIdx = whileBreak;
+        } else if (arr[middleIdx] === 0 && arr[middleIdx - 1] === 0) {
+            rightIdx = rightIdx - 1;
+            middleIdx = middleIdx - 1;
+        } else if (arr[0] === 0) {
+            totalZeros = arrLen;
+            leftIdx = whileBreak;
         } else {
-            return totalZeroes;
+            leftIdx = whileBreak;
+            return -1;
         }
     }
-    return -1;
+    return totalZeros;
+}
+```
+Solution Two:
+```
+function countZeros(arr) {
+    let firstVal = 0;
+    let secondVal = 1;
+    const arrLen = arr.length - 1;
+    while ( firstVal <=  arrLen) {
+        if (arr[firstVal] === 1 && arr[secondVal] === 0) {
+            totalZeros = arr.length - secondVal;
+            firstVal = arrLen + 1;
+        } else if (arr[firstVal] === 1 && arr[secondVal] === 1) {
+            firstVal = firstVal + 1;
+            secondVal = secondVal + 1;
+        } else if (arr[firstVal] === 0 && arr[secondVal] === 0) {
+            totalZeros = arr.length;
+            firstVal = arrLen + 1;
+        } else if (arr[arr.length - 1] === 1) {
+            return -1;
+        }
+    }
+    return totalZeros;
 }
 ```
 
