@@ -95,37 +95,26 @@ function sortedFrequency(arr, val) {
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
     let middleIdx = Math.floor((rightIdx - leftIdx) / 2);
+    let middleLeftIdx;
+    let middleRightIdx;
     let totalFreq = 0;
-    const arrLen = arr.length;
-    const whileBreak = arr.length + 1;
-    while ( leftIdx <= rightIdx ) {
+
+    while ( middleRightIdx <= arr.length - 1 ) {
         if (arr[middleIdx] > val) {
             rightIdx = middleIdx - 1;
             middleIdx = Math.floor((rightIdx - leftIdx) / 2);
         } else if (arr[middleIdx] < val) {
             leftIdx = middleIdx + 1;
             middleIdx = Math.floor((rightIdx - leftIdx) / 2);
-        } else if (
-            arr[middleIdx] === val
-            && arr[leftIdx] === val
-            && arr[rightIdx] === val
-            && arr[leftIdx - 1] !== val
-            && arr[rightIdx + 1] !== val) {
-                totalFreq = arr.length - (rightIdx - leftIdx);
-                leftIdx = arr.length + 1;
-        } else if (
-            arr[middleIdx] === val
-            && arr[leftIdx] === val
-            && arr[rightIdx] === val) {
-                totalFreq = arr.length - (rightIdx - leftIdx);
-                leftIdx = leftIdx + 1;
-                rightIdx = rightIdx - 1;
-        } else if (arr[middleIdx] === val
-            && arr[leftIdx] !== val
-            && arr[rightIdx] !== val) {
-                totalFreq = arr.length - (rightIdx - leftIdx);
-                leftIdx = leftIdx + 1;
-                rightIdx = rightIdx - 1;
+        } else if (arr[middleIdx] === val) {
+            middleLeftIdx = middleIdx;
+            middleRightIdx = middleIdx;
+        } else if (middleLeftIdx && arr[middleLeftIdx] === val && middleLeftIdx !== 0) {
+            totalFreq++;
+            middleLeftIdx = middleLeftIdx - 1;
+        } else if (middleLeftIdx === 0 && arr[middleRightIdx] === val) {
+            totalFreq++;
+            middleRightIdx = middleRightIdx  + 1;
         }
     }
     return totalFreq;
