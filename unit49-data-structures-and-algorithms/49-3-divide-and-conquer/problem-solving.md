@@ -95,26 +95,37 @@ function sortedFrequency(arr, val) {
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
     let middleIdx = Math.floor((rightIdx - leftIdx) / 2);
-    let middleLeftIdx;
-    let middleRightIdx;
+    let valLeftIdx = Math.floor((rightIdx - leftIdx) / 2);
+    let valRightIdx = Math.floor((rightIdx - leftIdx) / 2) + 1;
     let totalFreq = 0;
-
-    while ( middleRightIdx <= arr.length - 1 ) {
+    let t = val;
+    let m = val;
+    while ( t && m ) {
         if (arr[middleIdx] > val) {
             rightIdx = middleIdx - 1;
-            middleIdx = Math.floor((rightIdx - leftIdx) / 2);
+            middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+            valLeftIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+            valRightIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2) + 1);
+            console.log( "leftIdx, rightIdx, and middleIdx", leftIdx, rightIdx, middleIdx );
         } else if (arr[middleIdx] < val) {
             leftIdx = middleIdx + 1;
-            middleIdx = Math.floor((rightIdx - leftIdx) / 2);
-        } else if (arr[middleIdx] === val) {
-            middleLeftIdx = middleIdx;
-            middleRightIdx = middleIdx;
-        } else if (middleLeftIdx && arr[middleLeftIdx] === val && middleLeftIdx !== 0) {
+            middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+            valLeftIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+            valRightIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2) + 1);
+            console.log("leftIdx, rightIdx, and middleIdx", leftIdx, rightIdx, middleIdx);
+        } else if (arr[valLeftIdx] === val) {
+            console.log( "valLeftIdx and valRightIdx", valLeftIdx,  valRightIdx);
             totalFreq++;
-            middleLeftIdx = middleLeftIdx - 1;
-        } else if (middleLeftIdx === 0 && arr[middleRightIdx] === val) {
+            valLeftIdx--;
+            t = arr[valLeftIdx];
+        } else if (arr[valRightIdx] === val) {
+            console.log( "valLeftIdx and valRightIdx", valLeftIdx,  valRightIdx );
             totalFreq++;
-            middleRightIdx = middleRightIdx  + 1;
+            valRightIdx++;
+            m = arr[valRightIdx];
+        } else if (t !== val && m !== val) {
+            console.log("t and m", t, m);
+            break;
         }
     }
     return totalFreq;
