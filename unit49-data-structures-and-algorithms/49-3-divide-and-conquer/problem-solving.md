@@ -161,6 +161,69 @@ findRotatedIndex([37,44,66,102,10,22],14) // -1
 findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 12) // -1
 ```
 
+Solution:
+function findRotatedIndex(arr, val) {
+    let leftNumsLeftIdx = 0;
+    let leftNumsMidIdx;
+    let leftNumsRightIdx;
+    let rightNumsLeftIdx;
+    let rightNumsMidIdx;
+    let rightNumsRightIdx = arr.length - 1;
+    let binaryStatus = false;
+    while (!binaryStatus) {
+        if (rightNumsLeftIdx === val || leftNumsrightIdx === val) {
+            return middleIdx;
+        } else if ( leftIdx === arr.length ) {
+            return -1;
+        } else if (arr[leftIdx] > arr[rightIdx]) {
+            rightNumsLeftIdx = rightIdx;
+            rightNumsMidIdx = rightNumsLeftIdx + (Math.floor(
+                    (rightNumsRightIdx - rightNumsLeftIdx)/2)
+            )
+            leftNumsRightIdx = leftIdx;
+            leftNumsMidIdx = 0 + (Math.floor(
+                    (leftNumsRightIdx - 0)/2)
+            )
+            console.log(0, leftNumsRightIdx, rightNumsLeftIdx, rightNumsMidIdx arr.length - 1);
+            binaryStatus = true;
+        }
+    }
+
+    while (binaryStatus) {
+        if (val >= rightNumsLeftIdx && arr[rightNumsMidIdx] !== val) {
+            if (arr[rightNumsMidIdx] > val) {
+                rightNumsRightIdx = rightNumsMidIdx - 1;
+                rightNumsMidIdx = rightNumsLeftIdx + (Math.floor(
+                        (rightNumsRightIdx - rightNumsLeftIdx)/2)
+                )
+            } else if (arr[rightNumsMidIdx] < val) {
+                rightNumsLeftIdx = rightNumsMidIdx + 1;
+                rightNumsMidIdx = rightNumsLeftIdx + (Math.floor(
+                        (rightNumsRightIdx - rightNumsLeftIdx)/2)
+                )
+            }
+        } else if (val < rightNumsLeftIdx && arr[leftNumsMidIdx] !== val) {
+            if (arr[leftNumsMidIdx] > val) {
+                leftNumsRightIdx = leftNumsMidIdx - 1;
+                leftNumsMidIdx = leftNumsLeftIdx + (Math.floor(
+                        (leftNumsRightIdx - leftNumsLeftIdx)/2)
+                )
+            } else if (arr[leftNumsMidIdx] < val) {
+                leftNumsLeftIdx = leftNumsMidIdx + 1;
+                leftNumsMidIdx = leftNumsLeftIdx + (Math.floor(
+                        (leftNumsRightIdx - leftNumsLeftIdx)/2)
+                )
+            }
+        } else if (arr[leftNumsMidIdx] === val) {
+                return leftNumsMidIdx;
+                break;
+        } else if (arr[rightNumsMidIdx] === val) {
+                return rightNumsMidIdx;
+                break;
+        }
+    }
+}
+
 ## findRotationCount
 Write a function called findRotationCount which accepts an array of distinct numbers sorted in increasing order. The array has been rotated counter-clockwise n number of times. Given such an array, find the value of n.
 
