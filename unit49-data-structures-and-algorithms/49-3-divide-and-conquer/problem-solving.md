@@ -95,37 +95,51 @@ function sortedFrequency(arr, val) {
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
     let middleIdx = Math.floor((rightIdx - leftIdx) / 2);
-    let valLeftIdx = Math.floor((rightIdx - leftIdx) / 2);
-    let valRightIdx = Math.floor((rightIdx - leftIdx) / 2) + 1;
+    let valMidLeftIdx = middleIdx;
+    let valMidRightIdx = valMidLeftIdx + 1;
     let totalFreq = 0;
-    let t = val;
-    let m = val;
-    while ( t && m ) {
-        if (arr[middleIdx] > val) {
-            rightIdx = middleIdx - 1;
-            middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
-            valLeftIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
-            valRightIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2) + 1);
-            console.log( "leftIdx, rightIdx, and middleIdx", leftIdx, rightIdx, middleIdx );
-        } else if (arr[middleIdx] < val) {
+    let binaryStatus = false;
+
+    while ( !binaryStatus ) {
+        if (arr[valMidLeftIdx] === val) {
+            valMidLeftIdx = valMidLeftIdx;
+            valMidRightIdx = valMidLeftIdx + 1;
+            binaryStatus = true;
+        } else if ( leftIdx === arr.length || rightIdx === -1 ) {
+            binaryStatus = true;
+        } else if (arr[valMidLeftIdx] < val) {
             leftIdx = middleIdx + 1;
             middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
-            valLeftIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
-            valRightIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2) + 1);
-            console.log("leftIdx, rightIdx, and middleIdx", leftIdx, rightIdx, middleIdx);
-        } else if (arr[valLeftIdx] === val) {
-            console.log( "valLeftIdx and valRightIdx", valLeftIdx,  valRightIdx);
+            valMidLeftIdx = middleIdx;
+            valMidRightIdx = valMidLeftIdx + 1;
+        } else if (arr[valMidLeftIdx] > val) {
+            rightIdx = middleIdx - 1;
+            middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+            valMidLeftIdx = middleIdx;
+            valMidRightIdx = valMidLeftIdx + 1;
+        }
+    }
+
+    while ( binaryStatus ) {
+        if (arr[valMidLeftIdx] === val) {
             totalFreq++;
-            valLeftIdx--;
-            t = arr[valLeftIdx];
-        } else if (arr[valRightIdx] === val) {
-            console.log( "valLeftIdx and valRightIdx", valLeftIdx,  valRightIdx );
+            valMidLeftIdx--;
+        } else if (arr[valMidRightIdx] === val) {
             totalFreq++;
-            valRightIdx++;
-            m = arr[valRightIdx];
-        } else if (t !== val && m !== val) {
-            console.log("t and m", t, m);
-            break;
+            valMidRightIdx++;
+        } else if (
+            arr[valMidLeftIdx] !== val
+            && arr[valMidRightIdx] !== val
+            && totalFreq > 0
+            ) {
+                break;
+        } else if (
+            arr[valMidLeftIdx] !== val
+            && arr[valMidRightIdx] !== val
+            && totalFreq === 0
+            )  {
+                totalFreq = -1;
+                break;
         }
     }
     return totalFreq;
