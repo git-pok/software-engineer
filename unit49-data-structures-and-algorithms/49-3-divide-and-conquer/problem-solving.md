@@ -216,6 +216,33 @@ findRotationCount([7, 9, 11, 12, 5]) // 4
 findRotationCount([7, 9, 11, 12, 15]) // 0
 ```
 
+Solution:
+```
+function findRotationCount(arr, n) {
+    let leftIdx = 0;
+    let rightIdx = arr.length - 1;
+    let midIdx = Math.floor((rightIdx - leftIdx)/2);
+    let leftPivIdx = 0;
+    let rightPivIdx = arr.length - 1;
+    let rotatedIdx;
+
+    while ( leftIdx <= rightIdx ) {
+        if ( arr[midIdx] < arr[midIdx - 1] ) {
+            rotatedIdx = midIdx;
+            leftIdx = rightIdx + 1;
+        } else if ( arr[midIdx] > arr[leftPivIdx] ) {
+            leftIdx = midIdx + 1;
+            midIdx = leftIdx + Math.floor((rightIdx - leftIdx)/2);
+        } else if ( arr[midIdx] < arr[leftPivIdx] ) {
+            rightIdx = midIdx - 1;
+            leftIdx =  rightIdx - 1;
+            midIdx = leftIdx + Math.floor((rightIdx - leftIdx)/2);
+        }
+    }
+    return rotatedIdx ? rotatedIdx : 0;
+}
+```
+
 ## findFloor
 Write a function called findFloor which accepts a sorted array and a value x, and returns the floor of x in the array. The floor of x in an array is the largest element in the array which is smaller than or equal to x. If the floor does not exist, return -1.
 
