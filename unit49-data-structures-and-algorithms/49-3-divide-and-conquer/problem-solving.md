@@ -163,63 +163,38 @@ findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 12) // -1
 
 Solution:
 function findRotatedIndex(arr, val) {
-    let leftNumsLeftIdx = 0;
-    let leftNumsMidIdx;
-    let leftNumsRightIdx;
-    let rightNumsLeftIdx;
-    let rightNumsMidIdx;
-    let rightNumsRightIdx = arr.length - 1;
+    let leftIdx = 0;
+    let rightIdx = arr.length - 1;
+    let midIdx = Math.floor((rightIdx - leftIdx)/2);
+    let leftPivIdx = 0;
+    let rightPivIdx = arr.length - 1;
     let binaryStatus = false;
-    while (!binaryStatus) {
-        if (rightNumsLeftIdx === val || leftNumsrightIdx === val) {
-            return middleIdx;
-        } else if ( leftIdx === arr.length ) {
-            return -1;
-        } else if (arr[leftIdx] > arr[rightIdx]) {
-            rightNumsLeftIdx = rightIdx;
-            rightNumsMidIdx = rightNumsLeftIdx + (Math.floor(
-                    (rightNumsRightIdx - rightNumsLeftIdx)/2)
-            )
-            leftNumsRightIdx = leftIdx;
-            leftNumsMidIdx = 0 + (Math.floor(
-                    (leftNumsRightIdx - 0)/2)
-            )
-            console.log(0, leftNumsRightIdx, rightNumsLeftIdx, rightNumsMidIdx arr.length - 1);
-            binaryStatus = true;
-        }
-    }
-
-    while (binaryStatus) {
-        if (val >= rightNumsLeftIdx && arr[rightNumsMidIdx] !== val) {
-            if (arr[rightNumsMidIdx] > val) {
-                rightNumsRightIdx = rightNumsMidIdx - 1;
-                rightNumsMidIdx = rightNumsLeftIdx + (Math.floor(
-                        (rightNumsRightIdx - rightNumsLeftIdx)/2)
-                )
-            } else if (arr[rightNumsMidIdx] < val) {
-                rightNumsLeftIdx = rightNumsMidIdx + 1;
-                rightNumsMidIdx = rightNumsLeftIdx + (Math.floor(
-                        (rightNumsRightIdx - rightNumsLeftIdx)/2)
-                )
-            }
-        } else if (val < rightNumsLeftIdx && arr[leftNumsMidIdx] !== val) {
-            if (arr[leftNumsMidIdx] > val) {
-                leftNumsRightIdx = leftNumsMidIdx - 1;
-                leftNumsMidIdx = leftNumsLeftIdx + (Math.floor(
-                        (leftNumsRightIdx - leftNumsLeftIdx)/2)
-                )
-            } else if (arr[leftNumsMidIdx] < val) {
-                leftNumsLeftIdx = leftNumsMidIdx + 1;
-                leftNumsMidIdx = leftNumsLeftIdx + (Math.floor(
-                        (leftNumsRightIdx - leftNumsLeftIdx)/2)
-                )
-            }
-        } else if (arr[leftNumsMidIdx] === val) {
-                return leftNumsMidIdx;
-                break;
-        } else if (arr[rightNumsMidIdx] === val) {
-                return rightNumsMidIdx;
-                break;
+    let foundVal = null;
+    while (foundVal === null) {
+        if ( arr[midIdx] === val ) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            foundVal = midIdx;
+            return foundVal;
+        } else if ( val < arr[midIdx] && val > arr[rightPivIdx] ) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            rightIdx = midIdx - 1;
+            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
+        } else if ( val > arr[midIdx] && val > arr[rightPivIdx] ) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            leftIdx = midIdx;
+            rightIdx = rightIdx + 1;
+            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
+        } else if ( val < arr[midIdx] && val < arr[leftPivIdx] ) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            leftIdx = midIdx + 1; 
+            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
+        } else if ( val > arr[midIdx] && val < arr[leftPivIdx] ) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            leftIdx = midIdx + 1;
+            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
+        } else if ( leftIdx > rightIdx || rightIdx < leftIdx ) {
+            foundVal = -1;
+            return foundVal;
         }
     }
 }
