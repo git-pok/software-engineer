@@ -17,19 +17,18 @@ countZeroes([1,1,1,1]) // 0
 
 Solution One:
 ```
-function countZeros(arr) {
+function countZeroes(arr) {
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
-    let middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
+    let middleIdx = (Math.floor((rightIdx - leftIdx) / 2));
     let totalZeros = 0;
     const arrLen = arr.length;
     const whileBreak = arr.length + 1;
     while ( leftIdx <= rightIdx ) {
         if (arr[arrLen - 1] === 1) {
             leftIdx = whileBreak;
-            return -1;
         } else if (arr[middleIdx] === 1 && arr[middleIdx + 1] === 1) {
-            leftIdx = middleIdx;
+            leftIdx = middleIdx + 1;
             middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
         } else if (arr[middleIdx] === 0 && arr[middleIdx - 1] === 1) {
             totalZeros = arrLen - middleIdx;
@@ -38,14 +37,11 @@ function countZeros(arr) {
             totalZeros = arrLen - (middleIdx + 1);
             leftIdx = whileBreak;
         } else if (arr[middleIdx] === 0 && arr[middleIdx - 1] === 0) {
-            rightIdx = rightIdx - 1;
-            middleIdx = middleIdx - 1;
+            rightIdx = middleIdx - 1;
+            middleIdx = leftIdx + (Math.floor((rightIdx - leftIdx) / 2));
         } else if (arr[0] === 0) {
             totalZeros = arrLen;
             leftIdx = whileBreak;
-        } else {
-            leftIdx = whileBreak;
-            return -1;
         }
     }
     return totalZeros;
@@ -171,6 +167,7 @@ function findRotatedIndex(arr, val) {
     let rightPivIdx = arr.length - 1;
     let binaryStatus = false;
     let foundVal = null;
+    
     while (foundVal === null) {
         if ( arr[midIdx] === val ) {
             foundVal = midIdx;
