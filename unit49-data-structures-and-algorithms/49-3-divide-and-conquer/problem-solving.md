@@ -184,17 +184,19 @@ function findRotatedIndex(arr, val) {
             leftIdx = midIdx;
             rightIdx = rightIdx + 1;
             midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
-        } else if ( val < arr[midIdx] && val < arr[leftPivIdx] ) {
-            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
-            leftIdx = midIdx + 1; 
-            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
-        } else if ( val > arr[midIdx] && val < arr[leftPivIdx] ) {
+        } else if ( val < arr[midIdx] && val < arr[leftPivIdx] && arr[midIdx] > arr[rightPivIdx]) {
             console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
             leftIdx = midIdx + 1;
             midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
-        } else if ( leftIdx > rightIdx || rightIdx < leftIdx ) {
-            foundVal = -1;
-            return foundVal;
+        } else if ( val < arr[midIdx] && val < arr[leftPivIdx] && arr[midIdx] <= arr[rightPivIdx]) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            rightIdx = midIdx;
+            leftIdx = midIdx - 2;
+            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
+        } else if ( val > arr[midIdx] && val < arr[leftPivIdx] && arr[midIdx] < arr[leftPivIdx] ) {
+            console.log("lIdx, mIdx, rIdx", leftIdx, midIdx, rightIdx);
+            leftIdx = midIdx + 1;
+            midIdx = leftIdx + (Math.floor((rightIdx - leftIdx)/2));
         }
     }
 }
