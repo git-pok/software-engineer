@@ -162,6 +162,7 @@ findRotatedIndex([6, 7, 8, 9, 1, 2, 3, 4], 12) // -1
 ```
 
 Solution:
+```
 function findRotatedIndex(arr, val) {
     let leftIdx = 0;
     let rightIdx = arr.length - 1;
@@ -200,6 +201,7 @@ function findRotatedIndex(arr, val) {
         }
     }
 }
+```
 
 ## findRotationCount
 Write a function called findRotationCount which accepts an array of distinct numbers sorted in increasing order. The array has been rotated counter-clockwise n number of times. Given such an array, find the value of n.
@@ -226,3 +228,26 @@ findFloor([1,2,8,10,10,12,19], 0) // -1
 
 Constraints
 Time Complexity: O(log N)
+
+Solution:
+```
+function findFloor(arr, n) {
+    let leftIdx = 0;
+    let rightIdx = arr.length - 1;
+    let midIdx = Math.floor((rightIdx - leftIdx)/2);
+    let highestNum = -Infinity;
+
+    while ( leftIdx <= rightIdx ) {
+        if ( arr[midIdx] > n || arr[midIdx] === n ) {
+            highestNum = arr[midIdx] === n && arr[midIdx] > highestNum ? arr[midIdx] : highestNum;
+            rightIdx = midIdx - 1;
+            midIdx = leftIdx + Math.floor((rightIdx - leftIdx)/2);
+        } else if ( arr[midIdx] < n ) {
+            highestNum = arr[midIdx] > highestNum ? arr[midIdx] : highestNum;
+            leftIdx = midIdx + 1;
+            midIdx = leftIdx + Math.floor((rightIdx - leftIdx)/2);
+        }
+    }
+    return highestNum !== -Infinity ? highestNum : -1;
+}
+```
