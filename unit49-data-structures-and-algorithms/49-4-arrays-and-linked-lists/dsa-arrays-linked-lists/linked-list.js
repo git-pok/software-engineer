@@ -25,9 +25,12 @@ class LinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
+      this.length ++;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+      this.length ++;
     }
-    this.tail.next = newNode;
-    this.tail = newNode;
   }
 
   /** unshift(val): add new value to start of list. */
@@ -37,17 +40,41 @@ class LinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
+      this.length ++;
+    } else {
+      const ogHead = this.head;
+      this.head = newNode;
+      this.head.next = ogHead;
+      this.length ++;
     }
-
-    const ogHead = this.head;
-    this.head = newNode;
-    this.head.next = ogHead;
   }
 
   /** pop(): return & remove last item. */
 
   pop() {
+    if (this.length === 0) {
+      return -1;
+    } else if (this.length === 1) {
+      const oldTail = this.tail;
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+      return oldTail;
+    } else {
+      let currentNode = this.head;
 
+      while (currentNode.next) {
+        if (currentNode.next.next === null) {
+          const oldTail = currentNode.next;
+          this.tail = currentNode;
+          this.tail.next = null;
+          this.length --;
+          return oldTail;
+        } else {
+          currentNode = currentNode.next;
+        }
+      }
+    }
   }
 
   /** shift(): return & remove first item. */
