@@ -53,7 +53,7 @@ class LinkedList {
 
   pop() {
     if (this.length === 0) {
-      return -1;
+      throw new Error("Empty List");
     } else if (this.length === 1) {
       const oldTail = this.tail;
       this.head = null;
