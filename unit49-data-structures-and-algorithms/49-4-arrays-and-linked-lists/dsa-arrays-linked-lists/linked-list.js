@@ -146,7 +146,30 @@ class LinkedList {
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
-
+    const newNode = new Node(val);
+    if (idx === 0) {
+      const ogHead = this.head ? this.head : null;
+      this.head = newNode;
+      newNode.next = ogHead;
+      if (!this.tail) this.tail = newNode;
+      this.length++;
+    } else if (idx > this.length - 1) {
+      throw new Error(`${idx} index doesn't exist.`);
+    } else {
+      let currentNode = this.head;
+      while (idx > 0) {
+        if (idx === 1) {
+          const newNodeNext = currentNode.next;
+          newNode.next = newNodeNext;
+          currentNode.next = newNode;
+          this.length++;
+          idx--;
+        } else {
+          currentNode = currentNode.next
+          idx--;
+        }
+      }
+    }
   }
 
   /** removeAt(idx): return & remove item at idx, */
