@@ -10,12 +10,10 @@ class Node {
 /** LinkedList: chained together nodes. */
 
 class LinkedList {
-  constructor(vals = []) {
+  constructor() {
     this.head = null;
     this.tail = null;
     this.length = 0;
-
-    for (let val of vals) this.push(val);
   }
 
   /** push(val): add new value to end of list. */
@@ -53,7 +51,7 @@ class LinkedList {
 
   pop() {
     if (this.length === 0) {
-      throw new Error("Empty List");
+      throw new Error("Empty List!");
     } else if (this.length === 1) {
       const oldTail = this.tail;
       this.head = null;
@@ -62,7 +60,6 @@ class LinkedList {
       return oldTail;
     } else {
       let currentNode = this.head;
-
       while (currentNode.next) {
         if (currentNode.next.next === null) {
           const oldTail = currentNode.next;
@@ -81,7 +78,7 @@ class LinkedList {
 
   shift() {
     if (this.length === 0) {
-      throw new Error("Empty List");
+      throw new Error("Empty List!");
     } else if (this.length === 1) {
       const oldHead = this.head;
       this.head = null;
@@ -101,13 +98,13 @@ class LinkedList {
 
   getAt(idx) {
     if (this.length === 0) {
-      throw new Error("Empty List");
+      throw new Error("Empty List!");
     } else if (idx === 0) {
       return JSON.parse(JSON.stringify(this.head));
     } else if (idx === this.length - 1) {
       return JSON.parse(JSON.stringify(this.tail));
     } else if (idx >= this.length) {
-      throw new Error(`No Value At Idx: ${idx}`);
+      throw new Error(`No Value At Index: ${idx}`);
     } else {
       let currentNode = this.head;
       while (idx > 0) {
@@ -123,12 +120,12 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-    if (idx === 0) {
+    if (idx >= this.length) {
+      throw new Error(`No Value At Index: ${idx}`);
+    } else if (idx === 0) {
       this.head.val = val;
     } else if (idx === this.length - 1) {
       this.tail.val = val;
-    } else if (idx >= this.length) {
-      throw new Error(`No Value At Idx: ${idx}`);
     } else {
       let currentNode = this.head;
       while (idx > 0) {
@@ -147,14 +144,14 @@ class LinkedList {
 
   insertAt(idx, val) {
     const newNode = new Node(val);
-    if (idx === 0) {
+    if (idx > this.length - 1) {
+      throw new Error(`Index ${idx} doesn't exist.`);
+    } else if (idx === 0) {
       const ogHead = this.head ? this.head : null;
       this.head = newNode;
       newNode.next = ogHead;
       if (!this.tail) this.tail = newNode;
       this.length++;
-    } else if (idx > this.length - 1) {
-      throw new Error(`${idx} index doesn't exist.`);
     } else {
       let currentNode = this.head;
       while (idx > 0) {
@@ -176,7 +173,7 @@ class LinkedList {
 
   removeAt(idx) {
     if (idx > this.length - 1) {
-      throw new Error(`${idx} index doesn't exist.`);
+      throw new Error(`Index ${idx} doesn't exist.`);
     } else if (idx === 0) {
       const ogHead = this.head ? this.head : null;
       if (!ogHead) return new Error("Empty List!");
