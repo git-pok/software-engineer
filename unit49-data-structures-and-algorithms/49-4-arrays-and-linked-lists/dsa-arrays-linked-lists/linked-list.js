@@ -25,11 +25,11 @@ class LinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
-      this.length ++;
+      this.length++;
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
-      this.length ++;
+      this.length++;
     }
   }
 
@@ -40,12 +40,12 @@ class LinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
-      this.length ++;
+      this.length++;
     } else {
       const ogHead = this.head;
       this.head = newNode;
       this.head.next = ogHead;
-      this.length ++;
+      this.length++;
     }
   }
 
@@ -68,7 +68,7 @@ class LinkedList {
           const oldTail = currentNode.next;
           this.tail = currentNode;
           this.tail.next = null;
-          this.length --;
+          this.length--;
           return oldTail;
         } else {
           currentNode = currentNode.next;
@@ -80,7 +80,21 @@ class LinkedList {
   /** shift(): return & remove first item. */
 
   shift() {
-
+    if (this.length === 0) {
+      throw new Error("Empty List");
+    } else if (this.length === 1) {
+      const oldHead = this.head;
+      this.head = null;
+      this.tail = null;
+      this.length = 0;
+      return oldHead;
+    } else {
+      let currentNode = this.head;
+      const oldHead = currentNode;
+      this.head = currentNode.next;
+      this.length--;
+      return oldHead;
+    }
   }
 
   /** getAt(idx): get val at idx. */
