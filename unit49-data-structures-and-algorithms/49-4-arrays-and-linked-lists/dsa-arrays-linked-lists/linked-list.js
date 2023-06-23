@@ -123,7 +123,24 @@ class LinkedList {
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
-
+    if (idx === 0) {
+      this.head.val = val;
+    } else if (idx === this.length - 1) {
+      this.tail.val = val;
+    } else if (idx >= this.length) {
+      throw new Error(`No Value At Idx: ${idx}`);
+    } else {
+      let currentNode = this.head;
+      while (idx > 0) {
+        if (idx === 1) {
+          currentNode.next.val = val;
+          idx--;
+        } else {
+          currentNode = currentNode.next
+          idx--;
+        }
+      }
+    }
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
