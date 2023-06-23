@@ -172,10 +172,42 @@ class LinkedList {
     }
   }
 
-  /** removeAt(idx): return & remove item at idx, */
+  /** removeAt(idx): remove & return item at idx, */
 
   removeAt(idx) {
-
+    if (idx > this.length - 1) {
+      throw new Error(`${idx} index doesn't exist.`);
+    } else if (idx === 0) {
+      const ogHead = this.head ? this.head : null;
+      if (!ogHead) return new Error("Empty List!");
+      if (this.length === 1) {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+        return ogHead;
+      }
+      this.head = this.head.next;
+      this.length--;
+      if (this.length === 1) this.tail = this.head;
+      return ogHead;
+    } else {
+      let currentNode = this.head;
+      while (idx > 0) {
+        if (idx === 1) {
+          const ogHead = currentNode.next;
+          const prevNode = currentNode;
+          const ogHeadNext = currentNode.next.next;
+          prevNode.next = ogHeadNext;
+          this.length--;
+          if (this.length === 1) this.tail = this.head;
+          else if (!ogHeadNext) this.tail = prevNode;
+          return ogHead;
+        } else {
+          currentNode = currentNode.next
+          idx--;
+        }
+      }
+    }
   }
 
   /** average(): return an average of all values in the list */
