@@ -213,7 +213,16 @@ class LinkedList {
   /** average(): return an average of all values in the list */
 
   average() {
-    
+    let listLen = this.length;
+    let total = 0;
+    let currentNode = this.head;
+    while (listLen > 0) {
+      total += currentNode.val;
+      if (currentNode.next) currentNode = currentNode.next;
+      listLen--;
+    }
+    const average = total / this.length;
+    return average;
   }
 }
 
