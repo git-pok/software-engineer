@@ -99,12 +99,12 @@ class LinkedList {
   getAt(idx) {
     if (this.length === 0) {
       throw new Error("Empty List!");
+    } else if (idx >= this.length) {
+      throw new Error(`No Value At Index: ${idx}`);
     } else if (idx === 0) {
       return JSON.parse(JSON.stringify(this.head));
     } else if (idx === this.length - 1) {
       return JSON.parse(JSON.stringify(this.tail));
-    } else if (idx >= this.length) {
-      throw new Error(`No Value At Index: ${idx}`);
     } else {
       let currentNode = this.head;
       while (idx > 0) {
