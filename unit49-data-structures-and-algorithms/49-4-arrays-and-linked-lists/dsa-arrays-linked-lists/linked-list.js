@@ -100,7 +100,24 @@ class LinkedList {
   /** getAt(idx): get val at idx. */
 
   getAt(idx) {
-
+    if (this.length === 0) {
+      throw new Error("Empty List");
+    } else if (idx === 0) {
+      return JSON.parse(JSON.stringify(this.head));
+    } else if (idx === this.length - 1) {
+      return JSON.parse(JSON.stringify(this.tail));
+    } else if (idx >= this.length) {
+      throw new Error(`No Value At Idx: ${idx}`);
+    } else {
+      let currentNode = this.head;
+      while (idx > 0) {
+        if (idx === 1) return JSON.parse(JSON.stringify(currentNode.next));
+        else {
+          currentNode = currentNode.next
+          idx--;
+        }
+      }
+    }
   }
 
   /** setAt(idx, val): set val at idx to val */
