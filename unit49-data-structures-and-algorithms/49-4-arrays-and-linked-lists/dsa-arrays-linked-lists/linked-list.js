@@ -146,6 +146,8 @@ class LinkedList {
     const newNode = new Node(val);
     if (idx > this.length - 1) {
       throw new Error(`Index ${idx} doesn't exist.`);
+    } else if (idx === undefined || val === undefined) {
+      throw new Error(`Missing method argument!`);
     } else if (idx === 0) {
       const ogHead = this.head ? this.head : null;
       this.head = newNode;
