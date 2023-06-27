@@ -22,8 +22,11 @@ function everyOther(str, i = 0) {
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
-function isPalindrome(str) {
-
+function isPalindrome(str, i = 0) {
+  str = str.replaceAll(/[.,\/?#!$%\^&\*;:{}=\-_`~()]/g, "").replaceAll(/\s{1,}/g, "").toLowerCase();
+  if (i === str.length - 1) return true;
+  else if (str[i] === str[str.length - 1 - i]) return isPalindrome(str, i + 1);
+  else if (str[i] !== str[str.length - 1 - i]) return false;
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
