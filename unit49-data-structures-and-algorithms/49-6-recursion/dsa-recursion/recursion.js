@@ -32,9 +32,9 @@ function isPalindrome(str, i = 0) {
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
 function findIndex(arr, val) {
-  debugger;
-  if (i === arr.length - 1) return arr[arr.length - 1];
-  return arr[i] === val ? arr.indexOf(val) : findIndex(arr, val, i + 1);
+  if (i === arr.length) return -1;
+  else if (arr[i] === val) return i;
+  else return findIndex(arr, val, i + 1);
 }
 
 /** revString: return a copy of a string, but in reverse. */
