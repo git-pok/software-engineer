@@ -61,7 +61,7 @@ function gatherStrings(obj, i = 0) {
 }
 
 // Worser Big O Time Complexity Solution.
-function gatherStrings(obj, i = 0) {
+function gatherStringsII(obj, i = 0) {
   const arrayKeys = Object.keys(obj);
   if ( i === arrayKeys.length ) return;
   if (typeof obj[arrayKeys[i]] !== "string") {
