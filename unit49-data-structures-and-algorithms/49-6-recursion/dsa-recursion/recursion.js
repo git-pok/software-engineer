@@ -45,7 +45,22 @@ function revString(str, i = 0) {
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
+// Better Big O Time Complexity Solution.
+function gatherStrings(obj, i = 0) {
+    const arrayKeys = Object.keys(obj);
+    if ( arrayKeys.length === 1 || arrayKeys.length === 0 ) return;
+    if (typeof obj[arrayKeys[0]] !== "string") {
+        delete obj[arrayKeys[0]];
+        gatherStrings(obj);
+    } else {
+        obj.strings = obj.strings ? [...obj.strings, obj[arrayKeys[0]] ] : [ obj[arrayKeys[0]] ]
+        delete obj[arrayKeys[0]]
+        gatherStrings(obj);
+    }
+    return obj.strings || "No string values!";
+}
 
+// Worser Big O Time Complexity Solution.
 function gatherStrings(obj, i = 0) {
   const arrayKeys = Object.keys(obj);
   if ( i === arrayKeys.length ) return;
