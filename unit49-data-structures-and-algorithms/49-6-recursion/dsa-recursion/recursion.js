@@ -73,6 +73,44 @@ function gatherStringsII(obj, i = 0) {
   return Object.values(obj);
 }
 
+function gatherStrings(obj, i = 0) {
+  debugger;
+  const arrayKeys = Object.keys(obj);
+    const arrayKeysIdx = arrayKeys[0] !== "strings" ? arrayKeys[0] : arrayKeys[1];
+    if ( arrayKeys.length === 1 && arrayKeys[0] === "strings" || arrayKeys.length === 0 ) {
+        return obj.strings || "No string values!"; 
+    } else if (arrayKeysIdx !== "strings" && typeof obj[arrayKeysIdx] === "object") {
+        if (Object.keys(obj[arrayKeysIdx]).length === 0) {
+            delete obj[arrayKeysIdx]
+            gatherStrings(obj);
+        } else if (arrayKeys.length !== 1 && arrayKeysIdx !== "strings") {
+            for (let val in obj[arrayKeysIdx]) {
+                if (typeof obj[arrayKeysIdx][val] === "string") {
+                    obj.strings = obj.strings ? [...obj.strings, obj[arrayKeysIdx][val] ] : obj[arrayKeysIdx][val]
+                    delete obj[arrayKeysIdx][val]
+                    gatherStrings(obj);
+                } else if (typeof obj[arrayKeysIdx][val] === "object") {
+                    obj[val] = obj[arrayKeysIdx][val];
+                    delete obj[arrayKeysIdx][val];
+                    gatherStrings(obj);
+                } else if (typeof obj[arrayKeysIdx][val] !== "string") {
+                    delete obj[arrayKeysIdx][val];
+                    gatherStrings(obj);
+                    obj[arrayKeysIdx][val]
+                }
+            }
+        }
+    } else if (arrayKeysIdx !== "strings" && typeof obj[arrayKeysIdx] !== "string" && typeof obj[arrayKeysIdx] !== "object") {
+        delete obj[arrayKeysIdx];
+        gatherStrings(obj);
+    } else {
+        obj.strings = obj.strings ? [...obj.strings, obj[arrayKeysIdx] ] : [ obj[arrayKeysIdx] ]
+        delete obj[arrayKeysIdx]
+        gatherStrings(obj);
+    }
+    // return obj.strings || "No string values!";
+}
+
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
