@@ -23,7 +23,7 @@ function everyOther(str, i = 0) {
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
 function isPalindrome(str, i = 0) {
-  str = str.replaceAll(/[.,\/?#!$%\^&\*;:{}=\-_`~()]/g, "").replaceAll(/\s{1,}/g, "").toLowerCase();
+  str = str.replaceAll(/\W/ig, "").replaceAll(/[.,\/?#!$%\^&\*;:{}=\-_`~()]/g, "").replaceAll(/\s{1,}/g, "").toLowerCase();
   if (i === str.length - 1) return true;
   else if (str[i] === str[str.length - 1 - i]) return isPalindrome(str, i + 1);
   else if (str[i] !== str[str.length - 1 - i]) return false;
@@ -31,7 +31,7 @@ function isPalindrome(str, i = 0) {
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
+function findIndex(arr, val, i = 0) {
   if (i === arr.length) return -1;
   else if (arr[i] === val) return i;
   else return findIndex(arr, val, i + 1);
@@ -46,8 +46,16 @@ function revString(str, i = 0) {
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {
-
+function gatherStrings(obj, i = 0) {
+  const arrayKeys = Object.keys(obj);
+  if ( i === arrayKeys.length ) return;
+  if (typeof obj[arrayKeys[i]] !== "string") {
+    delete obj[arrayKeys[i]];
+    gatherStrings(obj, i);
+  } else {
+    gatherStrings(obj, i + 1);
+  }
+  return Object.values(obj);
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
