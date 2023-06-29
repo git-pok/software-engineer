@@ -45,8 +45,42 @@ function revString(str, i = 0) {
 }
 
 /** gatherStrings: given an object, return an array of all of the string values. */
-// Better Big O Time Complexity Solution.
-function gatherStrings(obj, i = 0) {
+// Nested Objects Solution:
+function gatherStrings(obj, nestedObj = null) {
+  const objToIterate = nestedObj ? nestedObj : obj;
+  for (let val in objToIterate) {
+      if (typeof objToIterate[val] === "string") {
+        obj.strings = obj.strings ? [...obj.strings, objToIterate[val] ] : [objToIterate[val]];
+      } else if (typeof objToIterate[val] === "object") {
+        gatherStrings(obj, objToIterate[val]);
+      }
+  }
+  return obj.strings || "No string values!";
+}
+
+function gatherStringsNonRefactored(obj, nestedObj = null) {
+  if (nestedObj) {
+      for (let val in nestedObj) {
+          if (typeof nestedObj[val] === "string") {
+              obj.strings = obj.strings ? [...obj.strings, nestedObj[val] ] : [nestedObj[val]];
+          } else if (typeof nestedObj[val] === "object") {
+              gatherStrings(obj, nestedObj[val]);
+          }
+      }
+  } else {
+      for (let val in obj) {
+          if (typeof obj[val] === "string") {
+              obj.strings = obj.strings ? [...obj.strings, obj[val] ] : [obj[val]];
+          } else if (typeof obj[val] === "object") {
+              gatherStrings(obj, obj[val]);
+          }
+      }
+  }
+return obj.strings || "No string values!";
+}
+
+// Better Big O Time Complexity Solution: Non Nested Objects.
+function gatherStringsII(obj, i = 0) {
     const arrayKeys = Object.keys(obj);
     if ( arrayKeys.length === 1 || arrayKeys.length === 0 ) return;
     if (typeof obj[arrayKeys[0]] !== "string") {
@@ -60,8 +94,8 @@ function gatherStrings(obj, i = 0) {
     return obj.strings || "No string values!";
 }
 
-// Worser Big O Time Complexity Solution.
-function gatherStringsII(obj, i = 0) {
+// Worser Big O Time Complexity Solution: Non Nested Objects.
+function gatherStringsIII(obj, i = 0) {
   const arrayKeys = Object.keys(obj);
   if ( i === arrayKeys.length ) return;
   if (typeof obj[arrayKeys[i]] !== "string") {
@@ -71,97 +105,6 @@ function gatherStringsII(obj, i = 0) {
     gatherStrings(obj, i + 1);
   }
   return Object.values(obj);
-}
-
-function gatherStrings(obj, i = 0) {
-  debugger;
-  const arrayKeys = Object.keys(obj);
-    const arrayKeysIdx = arrayKeys[0] !== "strings" ? arrayKeys[0] : arrayKeys[1];
-    if ( arrayKeys.length === 1 && arrayKeys[0] === "strings" || arrayKeys.length === 0 ) {
-        return obj.strings || "No string values!";
-    } else if (arrayKeysIdx !== "strings" && typeof obj[arrayKeysIdx] === "object") {
-        if (Object.keys(obj[arrayKeysIdx]).length === 0) {
-            delete obj[arrayKeysIdx]
-            gatherStrings(obj);
-        } else if (arrayKeys.length !== 1 && arrayKeysIdx !== "strings") {
-            for (let val in obj[arrayKeysIdx]) {
-                if (typeof obj[arrayKeysIdx][val] === "string") {
-                    obj.strings = obj.strings ? [...obj.strings, obj[arrayKeysIdx][val] ] : obj[arrayKeysIdx][val]
-                    delete obj[arrayKeysIdx][val]
-                    gatherStrings(obj);
-                } else if (typeof obj[arrayKeysIdx][val] === "object") {
-                    obj[val] = obj[arrayKeysIdx][val];
-                    delete obj[arrayKeysIdx][val];
-                    gatherStrings(obj);
-                } else if (typeof obj[arrayKeysIdx][val] !== "string") {
-                    delete obj[arrayKeysIdx][val];
-                    gatherStrings(obj);
-                    obj[arrayKeysIdx][val]
-                }
-            }
-        }
-    } else if (arrayKeysIdx !== "strings" && typeof obj[arrayKeysIdx] !== "string" && typeof obj[arrayKeysIdx] !== "object") {
-        delete obj[arrayKeysIdx];
-        gatherStrings(obj);
-    } else {
-        obj.strings = obj.strings ? [...obj.strings, obj[arrayKeysIdx] ] : [ obj[arrayKeysIdx] ]
-        delete obj[arrayKeysIdx]
-        gatherStrings(obj);
-    }
-    // return obj.strings || "No string values!";
-}
-
-function gatherStrings(obj, i = 0) {
-  debugger;
-  // const arrayKeys = Object.keys(obj);
-  const arrayValues = Object.values(obj);
-          for (let val of arrayValues) {
-              if (typeof val === "string") {
-                  // obj.strings = obj.strings ? [...obj.strings, obj[val] ] : obj[val]
-                  obj.strings = obj.strings ? [...obj.strings, val ] : [val]
-                  // delete obj[val];
-                  // gatherStrings(obj);
-              } else if (typeof val === "object") {
-                  // obj[val] = obj[arrayKeysIdx][val];
-                  // delete obj[arrayKeysIdx][val];
-                  gatherStrings(val);
-              }
-          }
-  return obj.strings || "No string values!";
-}
-
-function gatherStrings(obj, nstdObj = null) {
-  debugger;
-  const arrayKeys = Object.keys(obj);
-  const arrayValues = Object.values(obj);
-      if (nstdObj) {
-          for (let val in nstdObj) {
-              if (typeof nstdObj[val] === "string") {
-                  // obj.strings = obj.strings ? [...obj.strings, obj[val] ] : obj[val]
-                  obj.strings = obj.strings ? [...obj.strings, nstdObj[val] ] : [nstdObj[val]]
-                  // delete obj[val];
-                  // gatherStrings(obj);
-              } else if (typeof nstdObj[val] === "object") {
-                  // obj.val = obj[val];
-                  // delete obj[val];
-                  gatherStrings(obj, nstdObj[val]);
-              }
-          }
-      } else {
-          for (let val in obj) {
-              if (typeof obj[val] === "string") {
-                  // obj.strings = obj.strings ? [...obj.strings, obj[val] ] : obj[val]
-                  obj.strings = obj.strings ? [...obj.strings, obj[val] ] : [obj[val]]
-                  // delete obj[val];
-                  // gatherStrings(obj);
-              } else if (typeof obj[val] === "object") {
-                  // obj.val = obj[val];
-                  // delete obj[val];
-                  gatherStrings(obj, obj[val]);
-              }
-          }
-      }
-  return obj.strings || "No string values!";
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
