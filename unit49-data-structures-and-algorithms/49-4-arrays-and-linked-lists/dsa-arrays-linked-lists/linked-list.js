@@ -53,7 +53,7 @@ class LinkedList {
     if (this.length === 0) {
       throw new Error("Empty List!");
     } else if (this.length === 1) {
-      const oldTail = this.tail;
+      const oldTail = this.tail.val;
       this.head = null;
       this.tail = null;
       this.length = 0;
@@ -62,7 +62,7 @@ class LinkedList {
       let currentNode = this.head;
       while (currentNode.next) {
         if (currentNode.next.next === null) {
-          const oldTail = currentNode.next;
+          const oldTail = currentNode.next.val;
           this.tail = currentNode;
           this.tail.next = null;
           this.length--;
@@ -80,7 +80,7 @@ class LinkedList {
     if (this.length === 0) {
       throw new Error("Empty List!");
     } else if (this.length === 1) {
-      const oldHead = this.head;
+      const oldHead = this.head.val;
       this.head = null;
       this.tail = null;
       this.length = 0;
@@ -90,7 +90,7 @@ class LinkedList {
       const oldHead = currentNode;
       this.head = currentNode.next;
       this.length--;
-      return oldHead;
+      return oldHead.val;
     }
   }
 
@@ -102,13 +102,13 @@ class LinkedList {
     } else if (idx >= this.length) {
       throw new Error(`No Value At Index: ${idx}`);
     } else if (idx === 0) {
-      return JSON.parse(JSON.stringify(this.head));
+      return JSON.parse(JSON.stringify(this.head.val));
     } else if (idx === this.length - 1) {
-      return JSON.parse(JSON.stringify(this.tail));
+      return JSON.parse(JSON.stringify(this.tail.val));
     } else {
       let currentNode = this.head;
       while (idx > 0) {
-        if (idx === 1) return JSON.parse(JSON.stringify(currentNode.next));
+        if (idx === 1) return JSON.parse(JSON.stringify(currentNode.next.val));
         else {
           currentNode = currentNode.next
           idx--;
@@ -144,7 +144,7 @@ class LinkedList {
 
   insertAt(idx, val) {
     const newNode = new Node(val);
-    if (idx > this.length - 1) {
+    if (idx > this.length - 1 && idx !== 0) {
       throw new Error(`Index ${idx} doesn't exist.`);
     } else if (idx === undefined || val === undefined) {
       throw new Error(`Missing method argument!`);
@@ -221,7 +221,7 @@ class LinkedList {
       listLen--;
     }
     const average = total / this.length;
-    return average;
+    return average || 0;
   }
 }
 
