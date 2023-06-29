@@ -78,7 +78,7 @@ function gatherStrings(obj, i = 0) {
   const arrayKeys = Object.keys(obj);
     const arrayKeysIdx = arrayKeys[0] !== "strings" ? arrayKeys[0] : arrayKeys[1];
     if ( arrayKeys.length === 1 && arrayKeys[0] === "strings" || arrayKeys.length === 0 ) {
-        return obj.strings || "No string values!"; 
+        return obj.strings || "No string values!";
     } else if (arrayKeysIdx !== "strings" && typeof obj[arrayKeysIdx] === "object") {
         if (Object.keys(obj[arrayKeysIdx]).length === 0) {
             delete obj[arrayKeysIdx]
@@ -109,6 +109,59 @@ function gatherStrings(obj, i = 0) {
         gatherStrings(obj);
     }
     // return obj.strings || "No string values!";
+}
+
+function gatherStrings(obj, i = 0) {
+  debugger;
+  // const arrayKeys = Object.keys(obj);
+  const arrayValues = Object.values(obj);
+          for (let val of arrayValues) {
+              if (typeof val === "string") {
+                  // obj.strings = obj.strings ? [...obj.strings, obj[val] ] : obj[val]
+                  obj.strings = obj.strings ? [...obj.strings, val ] : [val]
+                  // delete obj[val];
+                  // gatherStrings(obj);
+              } else if (typeof val === "object") {
+                  // obj[val] = obj[arrayKeysIdx][val];
+                  // delete obj[arrayKeysIdx][val];
+                  gatherStrings(val);
+              }
+          }
+  return obj.strings || "No string values!";
+}
+
+function gatherStrings(obj, nstdObj = null) {
+  debugger;
+  const arrayKeys = Object.keys(obj);
+  const arrayValues = Object.values(obj);
+      if (nstdObj) {
+          for (let val in nstdObj) {
+              if (typeof nstdObj[val] === "string") {
+                  // obj.strings = obj.strings ? [...obj.strings, obj[val] ] : obj[val]
+                  obj.strings = obj.strings ? [...obj.strings, nstdObj[val] ] : [nstdObj[val]]
+                  // delete obj[val];
+                  // gatherStrings(obj);
+              } else if (typeof nstdObj[val] === "object") {
+                  // obj.val = obj[val];
+                  // delete obj[val];
+                  gatherStrings(obj, nstdObj[val]);
+              }
+          }
+      } else {
+          for (let val in obj) {
+              if (typeof obj[val] === "string") {
+                  // obj.strings = obj.strings ? [...obj.strings, obj[val] ] : obj[val]
+                  obj.strings = obj.strings ? [...obj.strings, obj[val] ] : [obj[val]]
+                  // delete obj[val];
+                  // gatherStrings(obj);
+              } else if (typeof obj[val] === "object") {
+                  // obj.val = obj[val];
+                  // delete obj[val];
+                  gatherStrings(obj, obj[val]);
+              }
+          }
+      }
+  return obj.strings || "No string values!";
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
