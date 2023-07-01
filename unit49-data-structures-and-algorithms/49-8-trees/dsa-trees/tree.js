@@ -17,6 +17,7 @@ class Tree {
   sumValues() {
     let total = 0;
     const toIterateStack = [this.root];
+    if (toIterateStack[0] === null) return total;
     while (toIterateStack.length) {
       const current = toIterateStack.pop();
       if (typeof current.val === "number") total += current.val;
@@ -32,6 +33,7 @@ class Tree {
   countEvens() {
     let total = 0;
     const toIterateStack = [this.root];
+    if (toIterateStack[0] === null) return total;
     while (toIterateStack.length) {
       const current = toIterateStack.pop();
       if (typeof current.val === "number" && current.val % 2 === 0) total++;
@@ -48,6 +50,7 @@ class Tree {
   numGreater(lowerBound) {
     let total = 0;
     const toIterateStack = [this.root];
+    if (toIterateStack[0] === null) return total;
     while (toIterateStack.length) {
       const current = toIterateStack.pop();
       if (typeof current.val === "number" && current.val > lowerBound) total ++;
