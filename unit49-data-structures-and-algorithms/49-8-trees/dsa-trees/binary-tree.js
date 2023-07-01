@@ -19,19 +19,16 @@ class BinaryTree {
   minDepth() {
     let treeLgth = 0;
     const toIterateQueue = [this.root];
-    console.log("toIterateQueue", toIterateQueue);
-    // if (toIterateStack[0] === null) return 0;
+    // console.log("toIterateQueue", toIterateQueue);
+    if (toIterateQueue[0] === null) return 0;
     while (toIterateQueue.length) {
       const current = toIterateQueue.shift();
-      delete current.val;
+      // if (current.val) delete current.val;
       console.log("current", current);
       console.log("current left", current.left);
       console.log("current right", current.right);
-      if (typeof current.left.left !== "object" || typeof current.right.right !== "object") return treeLgth;
-      for (let node in current) {
-        console.log(current[node]);
-        toIterateQueue.push(current[node]);
-      }
+      if (typeof current.left !== "object" || typeof current.right !== "object") return treeLgth;
+      toIterateQueue.push({left: current.left.left, right: current.right.right});
       treeLgth++;
     }
     return treeLgth;
@@ -89,22 +86,25 @@ class BinaryTree {
   }
 }
 
-const binaryNodesLg = new BinaryTreeNode("binary", new BinaryTreeNode(1, new BinaryTreeNode(2, new BinaryTreeNode(3, 4, new BinaryTreeNode(5, 6, 7)), 8), 9), new BinaryTreeNode(2, new BinaryTreeNode(5, new BinaryTreeNode(5, 6, 7), 8), 9));
-const binaryNodesMed = new BinaryTreeNode("binary", new BinaryTreeNode(1, new BinaryTreeNode(3, new BinaryTreeNode(5, 6, new BinaryTreeNode(7, 8, 9)), 4), 4), new BinaryTreeNode(2, 3, 4));
-const binaryNodesSm = new BinaryTreeNode("binary", new BinaryTreeNode(1, new BinaryTreeNode(3, new BinaryTreeNode(5, 6, 7), 4), 4), 2);
-const newBinaryTree = new BinaryTree(binaryNodes);
+const binaryNodes = new BinaryTreeNode(1,
+  new BinaryTreeNode(1, 2, 3), new BinaryTreeNode(3, new BinaryTreeNode(3, 2, 1), 4));
+// const lgBinaryNodes = new BinaryTreeNode(3, new BinaryTreeNode(5, new BinaryTreeNode(5, 5, 6), new BinaryTreeNode(3, 5, 6)), new BinaryTreeNode(5, new BinaryTreeNode(5, 6, 7), new BinaryTreeNode(3, 5, 6)));
+// const binaryNodesLg = new BinaryTreeNode("binary", new BinaryTreeNode(1, new BinaryTreeNode(2, new BinaryTreeNode(3, 4, new BinaryTreeNode(5, 6, 7)), 8), 9), new BinaryTreeNode(2, new BinaryTreeNode(5, new BinaryTreeNode(5, 6, 7), 8), 9));
+// const binaryNodesMed = new BinaryTreeNode("binary", new BinaryTreeNode(1, new BinaryTreeNode(3, new BinaryTreeNode(5, 6, new BinaryTreeNode(7, 8, 9)), 4), 4), new BinaryTreeNode(2, 3, 4));
+// const binaryNodesSm = new BinaryTreeNode("binary", new BinaryTreeNode(1, new BinaryTreeNode(3, new BinaryTreeNode(5, 6, 7), 4), 4), 2);
+// const newBinaryTree = new BinaryTree(binaryNodes);
 
-const binaryNodes = new BinaryTreeNode("binary",
-    new BinaryTreeNode(1,
-    new BinaryTreeNode(2,
-    new BinaryTreeNode(3, 4, new BinaryTreeNode(5, 6, 7)),
-        new BinaryTreeNode(5, 6, 7)),
-        new BinaryTreeNode(5, 6, 7)),
-          new BinaryTreeNode(2,
-          new BinaryTreeNode(5,
-          new BinaryTreeNode(5, 6, 7),
-          new BinaryTreeNode(5, 6, 7)),
-          new BinaryTreeNode(5, 6, 7)));
+// const binaryNodes = new BinaryTreeNode("binary",
+//     new BinaryTreeNode(1,
+//     new BinaryTreeNode(2,
+//     new BinaryTreeNode(3, 4, new BinaryTreeNode(5, 6, 7)),
+//         new BinaryTreeNode(5, 6, 7)),
+//         new BinaryTreeNode(5, 6, 7)),
+//           new BinaryTreeNode(2,
+//           new BinaryTreeNode(5,
+//           new BinaryTreeNode(5, 6, 7),
+//           new BinaryTreeNode(5, 6, 7)),
+//           new BinaryTreeNode(5, 6, 7)));
 
 
 module.exports = { BinaryTree, BinaryTreeNode };
