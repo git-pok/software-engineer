@@ -15,17 +15,16 @@ class Tree {
   /** sumValues(): add up all of the values in the tree. */
 
   sumValues() {
-    // let total = 0;
-    // const toIterateStack = [this.root.children];
-    // const current = this;
-    // const rootVal = this.root.val;
-    // const children = this.root.children;
-    // console.log(toIterateStack);
-    // if (typeof rootVal === "number") toSumStack.push(rootVal);
-    // while (toIterateStack.length) {
-    //   if (toIterateStack[0].val) total += children.val;
-    //   else
-    // }
+    let total = 0;
+    const toIterateStack = [this.root];
+    while (toIterateStack.length) {
+      const current = toIterateStack.pop();
+      if (typeof current.val === "number") total += current.val;
+      for (let node of current.children) {
+        toIterateStack.push(node);
+      }
+    }
+    return total;
   }
 
   /** countEvens(): count all of the nodes in the tree with even values. */
@@ -42,9 +41,9 @@ class Tree {
   }
 }
 
-const htmlEl = new Node("html", [
-  new Node("head", [new Node("title")]),
-  new Node("body", [new Node("ul", [new Node("li"), new Node(“li2”)])])
+const htmlEl = new TreeNode("html", [
+  new TreeNode("head", [new TreeNode("title")]),
+  new TreeNode("body", [new TreeNode("ul", [new TreeNode("li"), new TreeNode("li2")])])
   ]);
 
 const naryTree = new Tree(htmlEl);
