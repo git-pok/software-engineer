@@ -42,4 +42,13 @@ class Tree {
   }
 }
 
+const htmlEl = new Node("html", [
+  new Node("head", [new Node("title")]),
+  new Node("body", [new Node("ul", [new Node("li"), new Node(“li2”)])])
+  ]);
+
+const naryTree = new Tree(htmlEl);
+naryTree.sumValues();
+
+
 module.exports = { Tree, TreeNode };
