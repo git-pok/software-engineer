@@ -6,39 +6,34 @@ let largeTree;
 let emptyTree;
 
 beforeEach(function() {
-  emptyTree = new BinaryTree();
+  // emptyTree = new BinaryTree();
 
   // build small tree;
-  // let smallLeft = new BinaryTreeNode(5);
-  // let smallRight = new BinaryTreeNode(5);
-  // let smallRoot = new BinaryTreeNode(6, smallLeft, smallRight);
-  // smallTree = new BinaryTree(smallRoot);
-  const treeI = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), new BinaryTreeNodes(3, 2, 3, [5, 6], [7, 8]));
-  const treeII = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), [6, 7]);
-  const treeIII = new BinaryTreeNodes(1, 2, 3);
-  const treeIIII = new BinaryTreeNodes();
-  largeTree = new BinaryTree(treeI);
-  medTree = new BinaryTree(treeII);
-  smallTree = new BinaryTree(treeIII);
-  emptyTree = new BinaryTree(treeIIII);
-  // build large tree
-  // let node6 = new BinaryTreeNode(1);
-  // let node5 = new BinaryTreeNode(1);
-  // let node4 = new BinaryTreeNode(2);
-  // let node3 = new BinaryTreeNode(3, node4, node6);
-  // let node2 = new BinaryTreeNode(5, node3, node5);
-  // let node1 = new BinaryTreeNode(5);
-  // let root = new BinaryTreeNode(6, node1, node2);
-  // largeTree = new BinaryTree(root);
+  // const treeI = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), new BinaryTreeNodes(3, 2, 3, [5, 6], [7, 8]));
+  // const treeII = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), [6, 7]);
+  // const treeIII = new BinaryTreeNodes(1, 2, 3);
+  // const treeIIII = new BinaryTreeNodes();
+  // largeTree = new BinaryTree(treeI);
+  // medTree = new BinaryTree(treeII);
+  // smallTree = new BinaryTree(treeIII);
+  // emptyTree = new BinaryTree(treeIIII);
+  const newTreeSmall = new BinaryTreeNodes(1, 2, 3, 1);
+  smallTree = new BinaryTree(newTreeSmall);
+  const newTreeMed = new BinaryTreeNodes(1, 2, 3, 1, new BinaryTreeNodes(2, 3, 4, 2, new BinaryTreeNodes(3, 4, 5, 2)));
+  medTree = new BinaryTree(newTreeMed);
+  const newTreeLrg = new BinaryTreeNodes(1, 2, 3, 1, new BinaryTreeNodes(2, 4, 5, 2, new BinaryTreeNodes(3, 6, 7, 2, new BinaryTreeNodes(4, 8, 9, 3, new BinaryTreeNodes(5, 10, 11, 3, new BinaryTreeNodes(6, 12, 13, 3))))));
+  largeTree = new BinaryTree(newTreeLrg);
+  emptyTreeNode = new BinaryTree();
+  emptyTree = new BinaryTree(emptyTreeNode);
 });
 
 describe("minDepth", function() {
   it("handles simple trees", function() {
-    expect(smallTree.minDepth()).toBe(1);
+    expect(smallTree.minDepth()).toBe(2);
   });
 
   it("handles more complex trees", function() {
-    expect(largeTree.minDepth()).toBe(3);
+    expect(largeTree.minDepth()).toBe(4);
   });
 
   it("handles empty trees", function() {
