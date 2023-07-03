@@ -148,4 +148,4 @@ class BinaryTree {
 //           new BinaryTreeNode(5, 6, 7)));
 
 
-module.exports = { BinaryTree, BinaryTreeNode };
+module.exports = { BinaryTree, BinaryTreeNodes };

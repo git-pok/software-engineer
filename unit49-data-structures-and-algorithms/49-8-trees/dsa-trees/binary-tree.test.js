@@ -1,6 +1,7 @@
-const { BinaryTree, BinaryTreeNode } = require("./binary-tree");
+const { BinaryTree, BinaryTreeNodes } = require("./binary-tree");
 
 let smallTree;
+let medTree;
 let largeTree;
 let emptyTree;
 
@@ -8,29 +9,36 @@ beforeEach(function() {
   emptyTree = new BinaryTree();
 
   // build small tree;
-  let smallLeft = new BinaryTreeNode(5);
-  let smallRight = new BinaryTreeNode(5);
-  let smallRoot = new BinaryTreeNode(6, smallLeft, smallRight);
-  smallTree = new BinaryTree(smallRoot);
-
+  // let smallLeft = new BinaryTreeNode(5);
+  // let smallRight = new BinaryTreeNode(5);
+  // let smallRoot = new BinaryTreeNode(6, smallLeft, smallRight);
+  // smallTree = new BinaryTree(smallRoot);
+  const treeI = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), new BinaryTreeNodes(3, 2, 3, [5, 6], [7, 8]));
+  const treeII = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), [6, 7]);
+  const treeIII = new BinaryTreeNodes(1, 2, 3);
+  const treeIIII = new BinaryTreeNodes();
+  largeTree = new BinaryTree(treeI);
+  medTree = new BinaryTree(treeII);
+  smallTree = new BinaryTree(treeIII);
+  emptyTree = new BinaryTree(treeIIII);
   // build large tree
-  let node6 = new BinaryTreeNode(1);
-  let node5 = new BinaryTreeNode(1);
-  let node4 = new BinaryTreeNode(2);
-  let node3 = new BinaryTreeNode(3, node4, node6);
-  let node2 = new BinaryTreeNode(5, node3, node5);
-  let node1 = new BinaryTreeNode(5);
-  let root = new BinaryTreeNode(6, node1, node2);
-  largeTree = new BinaryTree(root);
+  // let node6 = new BinaryTreeNode(1);
+  // let node5 = new BinaryTreeNode(1);
+  // let node4 = new BinaryTreeNode(2);
+  // let node3 = new BinaryTreeNode(3, node4, node6);
+  // let node2 = new BinaryTreeNode(5, node3, node5);
+  // let node1 = new BinaryTreeNode(5);
+  // let root = new BinaryTreeNode(6, node1, node2);
+  // largeTree = new BinaryTree(root);
 });
 
 describe("minDepth", function() {
   it("handles simple trees", function() {
-    expect(smallTree.minDepth()).toBe(2);
+    expect(smallTree.minDepth()).toBe(1);
   });
 
   it("handles more complex trees", function() {
-    expect(largeTree.minDepth()).toBe(2);
+    expect(largeTree.minDepth()).toBe(3);
   });
 
   it("handles empty trees", function() {
