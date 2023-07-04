@@ -28,7 +28,7 @@ class BinaryTree {
     const toVisitStack = [this.root];
     while(toVisitStack.length) {
       const current = toVisitStack.pop();
-      console.log("CURRENT", current);
+      // console.log("CURRENT", current);
       if (current.val === val && current.branch === branch) {
         return current;
       }
@@ -42,7 +42,7 @@ class BinaryTree {
     const toVisitQueue = [this.root];
     while(toVisitQueue.length) {
       const current = toVisitQueue.shift();
-      console.log("CURRENT", current);
+      // console.log("CURRENT", current);
       if (current.val === val && current.branch === branch) {
         return current;
       }
@@ -61,7 +61,7 @@ class BinaryTree {
     let lowestBranch;
     while (toIterateQueue.length) {
       const current = toIterateQueue.shift();
-      console.log("CURRENT", current);
+      // console.log("CURRENT", current);
       if (!current.children.length) return lowestBranch = current.branch + 1;
       for (let child of current.children) {
         toIterateQueue.push(child);
@@ -79,7 +79,7 @@ class BinaryTree {
     let maxBranchDep = 0;
     while (toIterateQueue.length) {
       const current = toIterateQueue.pop();
-      console.log("CURRENT", current);
+      // console.log("CURRENT", current);
       maxBranchDep = current.branch + 1 >= maxBranchDep ? current.branch + 1 : maxBranchDep;
       for (let child of current.children) {
         toIterateQueue.push(child);
@@ -98,7 +98,7 @@ class BinaryTree {
     let nodeSum = 0;
     while (toIterateQueue.length) {
       const current = toIterateQueue.pop();
-      console.log("CURRENT", current);
+      // console.log("CURRENT", current);
       nodeSum = current.val + current.left + current.right;
       maxSum = nodeSum >= maxSum ? nodeSum : maxSum;
       for (let child of current.children) {
@@ -160,6 +160,7 @@ class BinaryTree {
     
   }
 }
+/* SAMPLE TREES */
 // const newTree = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 5, 6)]);
 // const tree = new BinaryTree(newTree);
 // const newTreeLrg = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4, [new BinaryTreeNode(3, 3, 7, 8)]), new BinaryTreeNode(2, 3, 5, 6)]);
@@ -168,37 +169,7 @@ class BinaryTree {
 // const treeLrgII = new BinaryTree(newTreeLrgII);
 // const newTreeEmpty = new BinaryTreeNode();
 // const treeEmpty = new BinaryTree(newTreeEmpty);
+// const newTreeNeg = new BinaryTreeNode(1, -1, 2, -3, [new BinaryTreeNode(2, 2, 3, -4, [new BinaryTreeNode(3, 3, 7, -8)]), new BinaryTreeNode(2, 3, -5, 6)]);
+// const treeNeg = new BinaryTree(newTreeNeg);
 
-/* SAMPLE TREES */
-// const newTreeSmall = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, null, null, 2)));
-// const treeSm = new BinaryTree(newTreeSmall);
-// const newTreeMed = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 4, 5, 3)));
-// const treeMed = new BinaryTree(newTreeMed);
-// const newTreeLrg = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 5, 6, 3, new BinaryTreeNode(3, 7, 8, 4, new BinaryTreeNode(4, 9, 10, 4, new BinaryTreeNode(5, null, null, 3, new BinaryTreeNode(6, 11, 12, 4)))))));
-// const treeLrg = new BinaryTree(newTreeLrg);
-// const emptyTree = new BinaryTreeNode();
-// const treeEmpty = new BinaryTree(emptyTree);
-
-
-// const newTreeSmallNode = new BinaryTreeNode(1, 2, 3, 2);
-// const newTreeSmall = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, null, null, 2));
-// const treeSm = new BinaryTree(newTreeSmallNode, newTreeSmall);
-// const newTreeMedNode = new BinaryTreeNode(1, 2, 3, 2);
-// const newTreeMed = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 4, 5, 3));
-// const treeMed = new BinaryTree(newTreeMedNode, newTreeMed);
-// const newTreeLrgNode = new BinaryTreeNode(1, 2, 3, 2);
-// const newTreeLrg = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 5, 6, 3, new BinaryTreeNode(3, 7, 8, 4, new BinaryTreeNode(4, 9, 10, 4, new BinaryTreeNode(5, null, null, 3, new BinaryTreeNode(6, 11, 12, 4))))));
-// const treeLrg = new BinaryTree(newTreeLrgNode, newTreeLrg);
-
-/** OLD SOLUTION SAMPLE TREES
-// const newTree = new BinaryTreeNodes(1, 2, 3, 1,  new BinaryTreeNodes(2, 3, 4, 2, [3, 4], [5, 6]), new BinaryTreeNodes(3, 2, 3, 2, [5, 6], [7, 8]));
-// const tree = new BinaryTree(newTree);
-// const newTreeII = new BinaryTreeNodes(1, 2, 3,  new BinaryTreeNodes(2, 3, 4, [3, 4], [5, 6]), [6, 7]);
-*/
-
-// The binary structure is wrong and inefficient.
-// This logic shows how the val prop breaks the left and right traits.
-// const binaryNodes = new BinaryTreeNode("binary", new BinaryTreeNode("binary", new BinaryTreeNode(1, 2, 3), new BinaryTreeNode(1, 2, 3)), 3);
-
-
-module.exports = { BinaryTree, BinaryTreeNodes };
+module.exports = { BinaryTree, BinaryTreeNode };
