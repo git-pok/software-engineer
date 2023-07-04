@@ -71,6 +71,20 @@ class BinaryTree {
     return lowestBranch;
   }
 
+  // minDepth() {
+  //   if (!this.root.val) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let lowestBranch = 0;
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.shift();
+  //     console.log("CURRENT", current);
+  //     if (!current.left || !current.right) return lowestBranch;
+  //     toIterateQueue.push(current.left, current.right);
+  //     if (current.left && current.right) lowestBranch++;
+  //   }
+  //   return lowestBranch;
+  // }
+
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
   maxDepth() {
@@ -171,5 +185,43 @@ class BinaryTree {
 // const treeEmpty = new BinaryTree(newTreeEmpty);
 // const newTreeNeg = new BinaryTreeNode(1, -1, 2, -3, [new BinaryTreeNode(2, 2, 3, -4, [new BinaryTreeNode(3, 3, 7, -8)]), new BinaryTreeNode(2, 3, -5, 6)]);
 // const treeNeg = new BinaryTree(newTreeNeg);
+
+/* SAMPLE TREES */
+// const E = new Node(1);
+// const A = new Node(2);
+// const B = new Node(3);
+// const C = new Node(4);
+// const D = new Node(5);
+// const F = new Node(6);
+// const G = new Node(7);
+// E.left = A;
+// E.right = B;
+// B.left = C;
+// B.right = D;
+// A.left = F;
+// const tree = new BinaryTree(E);
+
+// const one = new Node(1);
+// const two = new Node(2);
+// const three = new Node(3);
+// const four = new Node(4);
+// const five = new Node(5);
+// const six = new Node(6);
+// const seven = new Node(7);
+// const eight = new Node(8);
+// const nine = new Node(9);
+// const ten = new Node(10);
+// const elvn = new Node(11);
+// one.left = two;
+// one.right = three;
+// three.left = four;
+// three.right = five;
+// two.left = six;
+// two.right = seven;
+// six.left = eight;
+// six.right = nine;
+// seven.left = ten;
+// seven.right = elvn;
+// const treeMed = new BinaryTree(one);
 
 module.exports = { BinaryTree, BinaryTreeNode };
