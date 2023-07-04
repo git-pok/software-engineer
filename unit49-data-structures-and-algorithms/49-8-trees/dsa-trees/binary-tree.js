@@ -19,21 +19,26 @@
 // new Node(2, 2, 3, 4, [new Node(3, 3, 5, 6)]),
 // new Node(3, 2, 4, 5, [new Node(4, 3, 6, 7)])
 // ]);
+// class BinaryTreeNode {
+//   constructor(val, left, right, branch, children=[]) {
+//     this.val = val;
+//     this.left = left;
+//     this.right = right;
+//     this.branch = branch;
+//     this.children = children;
+//   }
+// }
+
 class BinaryTreeNode {
-  constructor(val, left, right, branch, children=[]) {
+  constructor(branch, val, left, right, children=[]) {
+    this.branch = branch;
     this.val = val;
     this.left = left;
     this.right = right;
-    this.branch = branch;
-    this.children = children;
+    this.children = children;   
   }
 }
 // const tree = new BinaryTreeNode(1, 1, new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 4, 5));
-// class BinaryTree {
-//   constructor(root = null) {
-//     this.root = root;
-//   }
-// }
 class BinaryTree {
   constructor(root = null) {
     // this.rootNode = rootNode;
@@ -41,6 +46,39 @@ class BinaryTree {
     this.root = root;
   }
 
+  findDFS(val, branch) {
+    const toVisitStack = [this.root];
+    while(toVisitStack.length) {
+      const current = toVisitStack.pop();
+      console.log("CURRENT", current);
+      if (current.val === val && current.branch === branch) {
+        return current;
+      }
+
+      for (let child of current.children) {
+        toVisitStack.push(child);
+      }
+    }
+  }
+
+  findBFS(val, branch) {
+    const toVisitQueue = [this.root];
+    while(toVisitQueue.length) {
+      const current = toVisitQueue.shift();
+      console.log("CURRENT", current);
+      if (current.val === val && current.branch === branch) {
+        return current;
+      }
+
+      for (let child of current.children) {
+        toVisitQueue.push(child);
+      }
+    }
+  }
+
+  /** minDepth()
+   * return the minimum depth of the tree -- that is,
+   * the length of the shortest path from the root to a leaf. */
   minDepth() {
     if (!this.root.val) return 0;
     const toIterateQueue = [this.root];
@@ -48,57 +86,34 @@ class BinaryTree {
     while (toIterateQueue.length) {
       const current = toIterateQueue.shift();
       console.log("CURRENT", current);
-      if (Array.isArray(current) && !current.length) return lowestBranch;
-      else if (!current.left || !current.right) return lowestBranch = current.branch;
+      if (Array.isArray(current) && !current.children.length) return lowestBranch;
+      else if (!current.children.length) return lowestBranch = current.branch + 1;
+      for (let child of current.children) {
+        toIterateQueue.push(child);
+      }
       lowestBranch = current.branch;
-      toIterateQueue.push(current.children);
+      // toIterateQueue.push(current.children);
     }
     return lowestBranch;
   }
+  // minDepth() {
+  //   if (!this.root.val) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let lowestBranch;
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.shift();
+  //     console.log("CURRENT", current);
+  //     if (Array.isArray(current) && !current.length) return lowestBranch;
+  //     else if (!current.left || !current.right) return lowestBranch = current.branch;
+  //     lowestBranch = current.branch;
+  //     toIterateQueue.push(current.children);
+  //   }
+  //   return lowestBranch;
+  // }
 
   /** OLD minDepth() SOLUTION
    * minDepth(): return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
-  // minDepth() {
-  //   let minTreeDepth;
-  //   const toIterateQueue = [this.root];
-  //   console.log("toIterateQueue", toIterateQueue);
-  //   if (!toIterateQueue[0].parent) return 0;
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.shift();
-  //     console.log("current", current);
-  //     if (
-  //       Array.isArray(current.leftChildren) || current.leftChildren
-  //       || Array.isArray(current.rightChildren) || current.rightChildren
-  //     ) minTreeDepth = current.branch + 2;
-  //     if (
-  //       Array.isArray(current.leftChildren)
-  //       || Array.isArray(current.rightChildren) 
-  //       ) return minTreeDepth;
-  //     console.log("current.leftChildren", current.leftChildren);
-  //     console.log("minTreeDepth", minTreeDepth);
-  //     toIterateQueue.push(current.leftChildren, current.rightChildren);
-  //   }
-  //   return minTreeDepth;
-  // }
-
-  // minDepth() {
-  //   let treeLgth = 0;
-  //   const toIterateQueue = [this.root];
-  //   // console.log("toIterateQueue", toIterateQueue);
-  //   if (toIterateQueue[0] === null) return 0;
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.shift();
-  //     // if (current.val) delete current.val;
-  //     console.log("current", current);
-  //     console.log("current left", current.left);
-  //     console.log("current right", current.right);
-  //     if (typeof current.left !== "object" || typeof current.right !== "object") return treeLgth;
-  //     toIterateQueue.push({left: current.left.left, right: current.right.right});
-  //     treeLgth++;
-  //   }
-  //   return treeLgth;
-  // }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
@@ -109,12 +124,29 @@ class BinaryTree {
     while (toIterateQueue.length) {
       const current = toIterateQueue.pop();
       console.log("CURRENT", current);
-      if (Array.isArray(current) && !current.length) return maxBranchDep;
-      if (current.branch >= maxBranchDep) maxBranchDep = current.branch;
-      toIterateQueue.push(current.children);
+      if (Array.isArray(current) && !current.children.length) return maxBranchDep;
+      maxBranchDep = current.branch + 1 >= maxBranchDep ? current.branch + 1 : maxBranchDep;
+      for (let child of current.children) {
+        toIterateQueue.push(child);
+      }
+      // maxBranchDep = current.branch;
+      // toIterateQueue.push(current.children);
     }
-    return lowestBranch;
+    return maxBranchDep;
   }
+  // maxDepth() {
+  //   if (!this.root.val) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let maxBranchDep = 0;
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.pop();
+  //     console.log("CURRENT", current);
+  //     if (Array.isArray(current) && !current.length) return maxBranchDep;
+  //     if (current.branch >= maxBranchDep) maxBranchDep = current.branch;
+  //     toIterateQueue.push(current.children);
+  //   }
+  //   return lowestBranch;
+  // }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
@@ -160,6 +192,15 @@ class BinaryTree {
     
   }
 }
+// const newTree = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 5, 6)]);
+// const tree = new BinaryTree(newTree);
+// const newTreeLrg = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4, [new BinaryTreeNode(3, 3, 7, 8)]), new BinaryTreeNode(2, 3, 5, 6)]);
+// const treeLrg = new BinaryTree(newTreeLrg);
+// const newTreeLrgII = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 5, 6, [new BinaryTreeNode(3, 6, 7, 8)])]);
+// const treeLrgII = new BinaryTree(newTreeLrgII);
+// const newTreeEmpty = new BinaryTreeNode();
+// const treeEmpty = new BinaryTree(newTreeEmpty);
+
 /* SAMPLE TREES */
 // const newTreeSmall = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, null, null, 2)));
 // const treeSm = new BinaryTree(newTreeSmall);
