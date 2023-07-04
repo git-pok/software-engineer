@@ -34,11 +34,12 @@
 //     this.children = children;
 //     }
 // }
-class BinaryTreeNodes {
-  constructor(val, left, right, children=[]) {
+class BinaryTreeNode {
+  constructor(val, left, right, branch, children=[]) {
     this.val = val;
     this.left = left;
     this.right = right;
+    this.branch = branch;
     this.children = children;
   }
 }
@@ -60,26 +61,19 @@ class BinaryTreeNodes {
 class BinaryTree {
   constructor(rootNode = null, root = null) {
     this.rootNode = rootNode;
-    this.root = root;
+    this.children = root;
   }
 
   minDepth() {
-    const toIterateQueue = [this.root];
-    let lowestBranch;
-    console.log("toIterateQueue", toIterateQueue);
     if (!this.rootNode) return 0;
+    const toIterateQueue = [this.children];
+    let lowestBranch;
     while (toIterateQueue.length) {
       const current = toIterateQueue.shift();
-      // console.log("CURRENT", current);
-      // if (Array.isArray(current) && !current.length) return lowestBranch;
-      // lowestBranch = current.children ? current.branch : current.branch - 1;
-      // if (Array.isArray(current) && !current.length) return lowestBranch;
-      
-      if (!current.left && !current.right) return lowestBranch
-      // console.log("CURRENT", current);
-      // console.log("CURRENT BRANCH", current.nodeEndsOnIdx);
-      // lowestBranch = current.children.length ? current.branch : current.branch - 1; 
-      console.log("lowestBranch", lowestBranch);
+      console.log("CURRENT", current);
+      if (Array.isArray(current) && !current.length) return lowestBranch;
+      else if (!current.left || !current.right) return lowestBranch = current.branch;
+      lowestBranch = current.branch;
       toIterateQueue.push(current.children);
     }
     return lowestBranch;
@@ -194,14 +188,14 @@ class BinaryTree {
   }
 }
 /* SAMPLE TREES */
-// const newTreeSmallNode = new BinaryTreeNodes(1, 2, 3);
-// const newTreeSmall = new BinaryTreeNodes(2, 3, 4);
+// const newTreeSmallNode = new BinaryTreeNode(1, 2, 3, 2);
+// const newTreeSmall = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, null, null, 2));
 // const treeSm = new BinaryTree(newTreeSmallNode, newTreeSmall);
-// const newTreeMedNode = new BinaryTreeNodes(1, 2, 3);
-// const newTreeMed = new BinaryTreeNodes(1, 2, 3, new BinaryTreeNodes(2, 3, 4, new BinaryTreeNodes(3, 4, 5)));
+// const newTreeMedNode = new BinaryTreeNode(1, 2, 3, 2);
+// const newTreeMed = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 4, 5, 3));
 // const treeMed = new BinaryTree(newTreeMedNode, newTreeMed);
-// const newTreeLrgNode = new BinaryTreeNodes(1, 2, 3);
-// const newTreeLrg = new BinaryTreeNodes(2, 3, 4, new BinaryTreeNodes(3, 4, 5, new BinaryTreeNodes(3, 6, 7, new BinaryTreeNodes(4, 8, 9, new BinaryTreeNodes(5, 10, 11, new BinaryTreeNodes(6, 12, 13))))));
+// const newTreeLrgNode = new BinaryTreeNode(1, 2, 3, 2);
+// const newTreeLrg = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 5, 6, 3, new BinaryTreeNode(3, 7, 8, 4, new BinaryTreeNode(4, 9, 10, 4, new BinaryTreeNode(5, null, null, 3, new BinaryTreeNode(6, 11, 12, 4))))));
 // const treeLrg = new BinaryTree(newTreeLrgNode, newTreeLrg);
 
 /** OLD SOLUTION SAMPLE TREES
