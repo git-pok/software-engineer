@@ -6,34 +6,19 @@
 //     this.right = right;
 //   }
 // }
-
-/** I had to create a new Binary Tree Structure. */
-/**
- * OLD SOLUTION
- * BinaryTreeNode: node for a general tree.
- * */
-// class BinaryTreeNodes {
-//   constructor(parent = null, left = null, right = null, branch = null, leftNodes = [], rightNodes = []) {
-//     this.parent = parent;
-//     this.left = left;
-//     this.right = right;
-//     this.branch = branch;
-//     this.leftChildren = leftNodes;
-//     this.rightChildren = rightNodes;
-//   }
+// class Node {
+// constructor(val, branch, left, right, children = []) {
+// this.val = val;
+// this.branch = branch;
+// this.left = left;
+// this.right = right;
+// this.children = children;
 // }
-
-/** I had to create a new Binary Tree Structure. */
-/** NEW BinaryTreeNodes: node for a general tree. */
-// class BinaryTreeNodes {
-//   constructor(parent, left, right, branch, children=[]) {
-//     this.parent = parent;
-//     this.left = left;
-//     this.right = right;
-//     this.nodeEndsOnIdx = branch;
-//     this.children = children;
-//     }
 // }
+// let htmlEl = new Node(1, 1, 2, 3, [
+// new Node(2, 2, 3, 4, [new Node(3, 3, 5, 6)]),
+// new Node(3, 2, 4, 5, [new Node(4, 3, 6, 7)])
+// ]);
 class BinaryTreeNode {
   constructor(val, left, right, branch, children=[]) {
     this.val = val;
@@ -43,15 +28,6 @@ class BinaryTreeNode {
     this.children = children;
   }
 }
-
-// class BinaryTreeNode {
-//   constructor(branch = null, val = null, left = null, right = null) {
-//     this.branch = branch;
-//     this.val = val;
-//     this.left = left;
-//     this.right = right;
-//   }
-// }
 // const tree = new BinaryTreeNode(1, 1, new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 4, 5));
 // class BinaryTree {
 //   constructor(root = null) {
@@ -59,14 +35,15 @@ class BinaryTreeNode {
 //   }
 // }
 class BinaryTree {
-  constructor(rootNode = null, root = null) {
-    this.rootNode = rootNode;
-    this.children = root;
+  constructor(root = null) {
+    // this.rootNode = rootNode;
+    // this.children = root;
+    this.root = root;
   }
 
   minDepth() {
-    if (!this.rootNode) return 0;
-    const toIterateQueue = [this.children];
+    if (!this.root.val) return 0;
+    const toIterateQueue = [this.root];
     let lowestBranch;
     while (toIterateQueue.length) {
       const current = toIterateQueue.shift();
@@ -125,22 +102,18 @@ class BinaryTree {
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
-
   maxDepth() {
-    // const toIterateQueue = [this.root];
-    // let lowestBranch;
-    // console.log("toIterateQueue", toIterateQueue);
-    // if (!this.root.parent) return 0;
-    // while (toIterateQueue.length) {
-    //   const current = toIterateQueue.shift();
-    //   if (Array.isArray(current) && !current.length) return lowestBranch;
-    //   console.log("CURRENT", current);
-    //   console.log("CURRENT BRANCH", current.branch);
-    //   console.log("lowestBranch", lowestBranch);
-    //   lowestBranch = current.;
-    //   toIterateQueue.push(current.children);
-    // }
-    // return lowestBranch + 1;
+    if (!this.root.val) return 0;
+    const toIterateQueue = [this.root];
+    let maxBranchDep = 0;
+    while (toIterateQueue.length) {
+      const current = toIterateQueue.pop();
+      console.log("CURRENT", current);
+      if (Array.isArray(current) && !current.length) return maxBranchDep;
+      if (current.branch >= maxBranchDep) maxBranchDep = current.branch;
+      toIterateQueue.push(current.children);
+    }
+    return lowestBranch;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
@@ -188,6 +161,16 @@ class BinaryTree {
   }
 }
 /* SAMPLE TREES */
+// const newTreeSmall = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, null, null, 2)));
+// const treeSm = new BinaryTree(newTreeSmall);
+// const newTreeMed = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 4, 5, 3)));
+// const treeMed = new BinaryTree(newTreeMed);
+// const newTreeLrg = new BinaryTreeNode(1, 2, 3, 2, new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, 5, 6, 3, new BinaryTreeNode(3, 7, 8, 4, new BinaryTreeNode(4, 9, 10, 4, new BinaryTreeNode(5, null, null, 3, new BinaryTreeNode(6, 11, 12, 4)))))));
+// const treeLrg = new BinaryTree(newTreeLrg);
+// const emptyTree = new BinaryTreeNode();
+// const treeEmpty = new BinaryTree(emptyTree);
+
+
 // const newTreeSmallNode = new BinaryTreeNode(1, 2, 3, 2);
 // const newTreeSmall = new BinaryTreeNode(2, 3, 4, 3, new BinaryTreeNode(3, null, null, 2));
 // const treeSm = new BinaryTree(newTreeSmallNode, newTreeSmall);
