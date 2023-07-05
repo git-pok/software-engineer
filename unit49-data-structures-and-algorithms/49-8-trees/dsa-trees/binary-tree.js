@@ -1,4 +1,5 @@
 /** OG BinaryTreeNode: node for a general tree. */
+/* THIS FILE IS NOT COMPLETE YET. I AM MAKING CHNAGES. */
 class BinaryTreeNode {
   constructor(val, left = null, right = null) {
     this.val = val;
@@ -71,33 +72,39 @@ class BinaryTree {
   //   return lowestBranch;
   // }
   /* RIGHT BINARY TREE NODE CLASS minDepth */
-  minDepth() {
-    if (!this.root) return 1;
-    const toIterateQueue = [this.root];
-    let branch = 1;
-    const branchDepths = [];
-    while (toIterateQueue.length) {
-      const current = toIterateQueue.pop();
-      console.log("toIterateQueue", toIterateQueue);
-      console.log("CURRENT", current);
-      console.log("branch", branch);
-      if ((!current.left || !current.right) && !toIterateQueue.length) {
-        branchDepths.push(branch);
-      } else if (!current.left || !current.right) {
-        console.log("POPPED");
-        // console.log("toIterateQueue", toIterateQueue);
-        toIterateQueue.pop();
-        console.log("toIterateQueue", toIterateQueue);
-        branchDepths.push(branch);
-        branch--;
-        console.log("branchDepths", branchDepths);
-      } else {
-        branch++;
-      }
-      if (current.left) toIterateQueue.push(current.left);
-      if (current.right) toIterateQueue.push(current.right);
-    }
-    return Math.min(...branchDepths);
+  // minDepth() {
+  //   if (!this.root) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let branch = 1;
+  //   const branchDepths = [];
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.pop();
+  //     console.log("toIterateQueue", toIterateQueue);
+  //     console.log("toIterateQueueLen", toIterateQueue.length);
+  //     console.log("CURRENT", current);
+  //     console.log("branch", branch);
+  //     if ((!current.left || !current.right) && !toIterateQueue.length) {
+  //       branchDepths.push(branch);
+  //     } else if (!current.left || !current.right) {
+  //       console.log("POPPED");
+  //       // console.log("toIterateQueue", toIterateQueue);
+  //       if (toIterateQueue.length !== 1) toIterateQueue.pop();
+  //       console.log("toIterateQueue", toIterateQueue);
+  //       branchDepths.push(branch);
+  //       branch--;
+  //       console.log("branchDepths", branchDepths);
+  //     } else {
+  //       branch++;
+  //     }
+  //     if (current.left) toIterateQueue.push(current.left);
+  //     if (current.right) toIterateQueue.push(current.right);
+  //   }
+  //   return Math.min(...branchDepths);
+  // }
+
+  minDepth(root) {
+    
+    // return Math.min(...branchDepths);
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
@@ -238,5 +245,26 @@ class BinaryTree {
 // seven.left = ten;
 // seven.right = elvn;
 // const treeMed = new BinaryTree(one);
+
+// const one = new BinaryTreeNode(1);
+// const two = new BinaryTreeNode(2);
+// const three = new BinaryTreeNode(3);
+// const four = new BinaryTreeNode(4);
+// const five = new BinaryTreeNode(5);
+// const six = new BinaryTreeNode(6);
+// const seven = new BinaryTreeNode(7);
+// const eight = new BinaryTreeNode(8);
+// const nine = new BinaryTreeNode(9);
+// const ten = new BinaryTreeNode(10);
+// const elvn = new BinaryTreeNode(11);
+// one.left = two;
+// one.right = three;
+// two.left = six;
+// two.right = seven;
+// six.left = eight;
+// six.right = nine;
+// seven.left = ten;
+// seven.right = elvn;
+// const treeMedII = new BinaryTree(one);
 
 module.exports = { BinaryTree, BinaryTreeNode };
