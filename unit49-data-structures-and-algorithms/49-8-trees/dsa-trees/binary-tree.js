@@ -8,49 +8,9 @@ class BinaryTreeNode {
   }
 }
 
-// class BinaryTreeNode {
-//   constructor(branch, val, left, right, children=[]) {
-//     this.branch = branch;
-//     this.val = val;
-//     this.left = left;
-//     this.right = right;
-//     this.children = children;   
-//   }
-// }
-
 class BinaryTree {
   constructor(root = null) {
-    // this.rootNode = rootNode;
-    // this.children = root;
     this.root = root;
-  }
-
-  findDFS(val, branch) {
-    const toVisitStack = [this.root];
-    while(toVisitStack.length) {
-      const current = toVisitStack.pop();
-      // console.log("CURRENT", current);
-      if (current.val === val && current.branch === branch) {
-        return current;
-      }
-      for (let child of current.children) {
-        toVisitStack.push(child);
-      }
-    }
-  }
-
-  findBFS(val, branch) {
-    const toVisitQueue = [this.root];
-    while(toVisitQueue.length) {
-      const current = toVisitQueue.shift();
-      // console.log("CURRENT", current);
-      if (current.val === val && current.branch === branch) {
-        return current;
-      }
-      for (let child of current.children) {
-        toVisitQueue.push(child);
-      }
-    }
   }
 
   /** minDepth()
@@ -101,27 +61,70 @@ class BinaryTree {
   //   }
   //   return Math.min(...branchDepths);
   // }
-
+  // ALMOST RIGHT
+  // minDepth(root) {
+  //   if (!this.root) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let branch = 1;
+  //   const branchDepths = [];
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.pop();
+  //     console.log("toIterateQueue", toIterateQueue);
+  //     console.log("toIterateQueueLen", toIterateQueue.length);
+  //     console.log("CURRENT", current);
+  //     console.log("branch", branch);
+  //     if (current.left && current.right) {
+  //       toIterateQueue.push(current.left);
+  //       toIterateQueue.push(current.right);
+  //       branch++;
+  //     }
+  //     else if (current.left) {
+  //       toIterateQueue.push(current.left);
+  //       branch++;
+  //     }
+  //     else if (current.right) {
+  //       toIterateQueue.push(current.right);
+  //       branch++;
+  //     }
+  //   }
+  //   return Math.min(...branchDepths);
+  // }
   minDepth(root) {
-    
-    // return Math.min(...branchDepths);
+    // minDepth solution is from Geeks for Geeks:
+    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
+    debugger;
+    if (root === null) return 0;
+    if (root.left === null && root.right === null) return 1;
+    if (root.left === null) return this.minDepth(root.right) + 1;
+    if (root.right === null) return this.minDepth(root.left) + 1;
+    return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
-  maxDepth() {
-    if (!this.root.val) return 0;
-    const toIterateQueue = [this.root];
-    let maxBranchDep = 0;
-    while (toIterateQueue.length) {
-      const current = toIterateQueue.pop();
-      // console.log("CURRENT", current);
-      maxBranchDep = current.branch + 1 >= maxBranchDep ? current.branch + 1 : maxBranchDep;
-      for (let child of current.children) {
-        toIterateQueue.push(child);
-      }
-    }
-    return maxBranchDep;
+  // maxDepth() {
+  //   if (!this.root.val) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let maxBranchDep = 0;
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.pop();
+  //     // console.log("CURRENT", current);
+  //     maxBranchDep = current.branch + 1 >= maxBranchDep ? current.branch + 1 : maxBranchDep;
+  //     for (let child of current.children) {
+  //       toIterateQueue.push(child);
+  //     }
+  //   }
+  //   return maxBranchDep;
+  // }
+  maxDepth(root) {
+    // minDepth solution is from Geeks for Geeks:
+    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
+    debugger;
+    if (root === null) return 0;
+    if (root.left === null && root.right === null) return 1;
+    if (root.left === null) return this.maxDepth(root.right) + 1;
+    if (root.right === null) return this.maxDepth(root.left) + 1;
+    return Math.max(this.maxDepth(root.left), this.maxDepth(root.right)) + 1;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
