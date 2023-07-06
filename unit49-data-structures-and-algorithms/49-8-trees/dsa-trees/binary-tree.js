@@ -17,92 +17,36 @@ class BinaryTree {
    * return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
   // minDepth() {
-  //   if (!this.root.val) return 0;
-  //   const toIterateQueue = [this.root];
-  //   let lowestBranch;
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.shift();
-  //     // console.log("CURRENT", current);
-  //     if (!current.children.length) return lowestBranch = current.branch + 1;
-  //     for (let child of current.children) {
-  //       toIterateQueue.push(child);
-  //     }
-  //     lowestBranch = current.branch;
-  //   }
-  //   return lowestBranch;
-  // }
-  /* RIGHT BINARY TREE NODE CLASS minDepth */
-  // minDepth() {
-  //   if (!this.root) return 0;
-  //   const toIterateQueue = [this.root];
-  //   let branch = 1;
-  //   const branchDepths = [];
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.pop();
-  //     console.log("toIterateQueue", toIterateQueue);
-  //     console.log("toIterateQueueLen", toIterateQueue.length);
-  //     console.log("CURRENT", current);
-  //     console.log("branch", branch);
-  //     if ((!current.left || !current.right) && !toIterateQueue.length) {
-  //       branchDepths.push(branch);
-  //     } else if (!current.left || !current.right) {
-  //       console.log("POPPED");
-  //       // console.log("toIterateQueue", toIterateQueue);
-  //       if (toIterateQueue.length !== 1) toIterateQueue.pop();
-  //       console.log("toIterateQueue", toIterateQueue);
-  //       branchDepths.push(branch);
-  //       branch--;
-  //       console.log("branchDepths", branchDepths);
-  //     } else {
-  //       branch++;
-  //     }
-  //     if (current.left) toIterateQueue.push(current.left);
-  //     if (current.right) toIterateQueue.push(current.right);
-  //   }
-  //   return Math.min(...branchDepths);
-  // }
-  // ALMOST RIGHT
-  // minDepth() {
-  //   if (!this.root) return 0;
-  //   const toIterateQueue = [this.root];
   //   let branch = 0;
-  //   const branchDepths = [];
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.pop();
-  //     console.log("toIterateQueue", toIterateQueue);
-  //     console.log("toIterateQueueLen", toIterateQueue.length);
+  //   const queue = [this.root];
+  //   console.log("QUEUE");
+
+  //   while (queue.length) {
+  //     console.log("QUEUE RAN", queue);
+  //     const current = queue.shift();
   //     console.log("CURRENT", current);
-  //     // console.log("branchDepths", branchDepths);
-  //     if (!current.left && !current.right) {
-  //       // toIterateQueue.push(current.left);
-  //       // toIterateQueue.push(current.right);
-  //       // branch++;
-  //       // toIterateQueue.push(this.root.right);
-  //       branchDepths.push(branch);
-  //       // branch = 1;
-  //     } else if (!current.left) {
-  //       toIterateQueue.push(current.right);
-  //       branch++;
-  //     } else if (!current.right) {
-  //       toIterateQueue.push(current.left);
-  //       branch++;
-  //     } else {
-  //       toIterateQueue.push(current.left);
-  //       toIterateQueue.push(current.right);
+  //     branch++;
+  //     for (let node in current) {
+  //       console.log("IDV NODE", node[current]);
+  //       if (node[current] === null) return branch;
+  //       else {
+  //         // branch++;
+  //         queue.length = 0;
+  //         // console.log("NODE PUSH LEFT", node.left);
+  //         // console.log("NODE PUSH RIGHT", node.right);
+  //         queue.push([current.left, current.right]);
+  //         // queue.length = 0;
+  //       }
   //     }
-      
   //   }
-  //   return branchDepths;
-  //   return Math.min(...branchDepths) + 1;
   // }
-  minDepth(root) {
-    // minDepth solution is from Geeks for Geeks:
-    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
-    if (root.val === undefined) return 0;
-    if (root.left === null && root.right === null) return 1;
+
+  minDepth(root, branch) {
+    // debugger;
+    if (root.left === null && root.right === null) return branch = 1;
     if (root.left === null) return this.minDepth(root.right) + 1;
     if (root.right === null) return this.minDepth(root.left) + 1;
-    return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;
+    return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;  
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
@@ -119,22 +63,30 @@ class BinaryTree {
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
-
-  maxSum() {
-    if (!this.root.val) return 0;
-    const toIterateQueue = [this.root];
-    let maxSum = 0;
-    let nodeSum = 0;
-    while (toIterateQueue.length) {
-      const current = toIterateQueue.pop();
-      nodeSum = current.val + current.left + current.right;
-      maxSum = nodeSum >= maxSum ? nodeSum : maxSum;
-      for (let child of current.children) {
-        toIterateQueue.push(child);
-      }
-    }
-    return maxSum;
+  maxSum(root) {
+    debugger;
+    if (root.val === undefined) return 0;
+    if (root.left === null && root.right === null) return root.val;
+    if (root.left === null) return this.maxSum(root.right) + root.val;
+    if (root.right === null) return this.maxSum(root.left) + root.val;
+    return Math.max(this.maxSum(root.left), this.maxSum(root.right)) + root.val;
   }
+
+  // maxSum() {
+  //   if (!this.root.val) return 0;
+  //   const toIterateQueue = [this.root];
+  //   let maxSum = 0;
+  //   let nodeSum = 0;
+  //   while (toIterateQueue.length) {
+  //     const current = toIterateQueue.pop();
+  //     nodeSum = current.val + current.left + current.right;
+  //     maxSum = nodeSum >= maxSum ? nodeSum : maxSum;
+  //     for (let child of current.children) {
+  //       toIterateQueue.push(child);
+  //     }
+  //   }
+  //   return maxSum;
+  // }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
    * which is larger than lowerBound. Return null if no such value exists. */
@@ -192,6 +144,7 @@ class BinaryTree {
 let smallTree;
 let largeTree;
 let largeTreeII;
+let largeTreeIII;
 let emptyTree;
 const emptyTreeNode = new BinaryTreeNode(1);
   emptyTree = new BinaryTree(emptyTreeNode);
@@ -251,5 +204,40 @@ const emptyTreeNode = new BinaryTreeNode(1);
   largeTreeII7.left = largeTreeII10;
   largeTreeII7.right = largeTreeII11;
   largeTreeII = new BinaryTree(largeTreeII1);
+
+  const largeTreeIII1 = new BinaryTreeNode(1);
+  const largeTreeIII2 = new BinaryTreeNode(2);
+  const largeTreeIII3 = new BinaryTreeNode(3);
+  const largeTreeIII4 = new BinaryTreeNode(4);
+  const largeTreeIII5 = new BinaryTreeNode(5);
+  const largeTreeIII6 = new BinaryTreeNode(6);
+  const largeTreeIII7 = new BinaryTreeNode(7);
+  const largeTreeIII8 = new BinaryTreeNode(8);
+  const largeTreeIII9 = new BinaryTreeNode(9);
+  const largeTreeIII10 = new BinaryTreeNode(10);
+  const largeTreeIII11 = new BinaryTreeNode(11);
+  const largeTreeIII12 = new BinaryTreeNode(12);
+  const largeTreeIII13 = new BinaryTreeNode(13);
+  const largeTreeIII14 = new BinaryTreeNode(14);
+  const largeTreeIII15 = new BinaryTreeNode(15);
+  const largeTreeIII16 = new BinaryTreeNode(16);
+  const largeTreeIII17 = new BinaryTreeNode(17);
+  largeTreeIII1.left = largeTreeIII2;
+  largeTreeIII1.right = largeTreeIII3;
+  largeTreeIII2.left = largeTreeIII4;
+  largeTreeIII2.right = largeTreeIII5;
+  largeTreeIII3.left = largeTreeIII6;
+  largeTreeIII3.right = largeTreeIII7;
+  largeTreeIII4.left = largeTreeIII8;
+  largeTreeIII4.right = largeTreeIII9;
+  largeTreeIII5.left = largeTreeIII10;
+  largeTreeIII5.right = largeTreeIII11;
+  largeTreeIII6.left = largeTreeIII12;
+  largeTreeIII6.right = largeTreeIII13;
+  largeTreeIII7.left = largeTreeIII14;
+  largeTreeIII7.right = largeTreeIII15;
+  largeTreeIII10.left = largeTreeIII16;
+  largeTreeIII10.right = largeTreeIII17;
+  largeTreeIII = new BinaryTree(largeTreeIII1);
 
 module.exports = { BinaryTree, BinaryTreeNode };
