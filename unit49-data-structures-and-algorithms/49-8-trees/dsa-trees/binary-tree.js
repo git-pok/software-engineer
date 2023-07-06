@@ -24,18 +24,22 @@ class BinaryTree {
   //   while (queue.length) {
   //     console.log("QUEUE RAN", queue);
   //     const current = queue.shift();
+  //     const currVals = Object.values(current);
   //     console.log("CURRENT", current);
+  //     console.log("currVals", currVals);
   //     branch++;
-  //     for (let node in current) {
-  //       console.log("IDV NODE", node[current]);
-  //       if (node[current] === null) return branch;
+  //     for (let node of currVals) {
+  //       console.log("IDV NODE", node);
+  //       if (node === "val") delete current[node];
+  //       if (node === "left" && current[node] === null) return branch;
+  //       if (node === "right" && current[node] === null) return branch;
   //       else {
-  //         // branch++;
+  //         branch++;
   //         queue.length = 0;
-  //         // console.log("NODE PUSH LEFT", node.left);
-  //         // console.log("NODE PUSH RIGHT", node.right);
-  //         queue.push([current.left, current.right]);
-  //         // queue.length = 0;
+  //         console.log("NODE PUSH LEFT", node.left);
+  //         console.log("NODE PUSH RIGHT", node.right);
+  //         queue.push(current[node], current[node].branch = branch);
+  //         queue.length = 0;
   //       }
   //     }
   //   }
