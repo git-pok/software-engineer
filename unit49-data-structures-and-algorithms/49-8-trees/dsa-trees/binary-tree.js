@@ -62,38 +62,43 @@ class BinaryTree {
   //   return Math.min(...branchDepths);
   // }
   // ALMOST RIGHT
-  // minDepth(root) {
+  // minDepth() {
   //   if (!this.root) return 0;
   //   const toIterateQueue = [this.root];
-  //   let branch = 1;
+  //   let branch = 0;
   //   const branchDepths = [];
   //   while (toIterateQueue.length) {
   //     const current = toIterateQueue.pop();
   //     console.log("toIterateQueue", toIterateQueue);
   //     console.log("toIterateQueueLen", toIterateQueue.length);
   //     console.log("CURRENT", current);
-  //     console.log("branch", branch);
-  //     if (current.left && current.right) {
-  //       toIterateQueue.push(current.left);
+  //     // console.log("branchDepths", branchDepths);
+  //     if (!current.left && !current.right) {
+  //       // toIterateQueue.push(current.left);
+  //       // toIterateQueue.push(current.right);
+  //       // branch++;
+  //       // toIterateQueue.push(this.root.right);
+  //       branchDepths.push(branch);
+  //       // branch = 1;
+  //     } else if (!current.left) {
   //       toIterateQueue.push(current.right);
   //       branch++;
-  //     }
-  //     else if (current.left) {
+  //     } else if (!current.right) {
   //       toIterateQueue.push(current.left);
   //       branch++;
-  //     }
-  //     else if (current.right) {
+  //     } else {
+  //       toIterateQueue.push(current.left);
   //       toIterateQueue.push(current.right);
-  //       branch++;
   //     }
+      
   //   }
-  //   return Math.min(...branchDepths);
+  //   return branchDepths;
+  //   return Math.min(...branchDepths) + 1;
   // }
   minDepth(root) {
     // minDepth solution is from Geeks for Geeks:
     // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
-    debugger;
-    if (root === null) return 0;
+    if (root.val === undefined) return 0;
     if (root.left === null && root.right === null) return 1;
     if (root.left === null) return this.minDepth(root.right) + 1;
     if (root.right === null) return this.minDepth(root.left) + 1;
@@ -102,25 +107,10 @@ class BinaryTree {
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
-  // maxDepth() {
-  //   if (!this.root.val) return 0;
-  //   const toIterateQueue = [this.root];
-  //   let maxBranchDep = 0;
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.pop();
-  //     // console.log("CURRENT", current);
-  //     maxBranchDep = current.branch + 1 >= maxBranchDep ? current.branch + 1 : maxBranchDep;
-  //     for (let child of current.children) {
-  //       toIterateQueue.push(child);
-  //     }
-  //   }
-  //   return maxBranchDep;
-  // }
   maxDepth(root) {
     // minDepth solution is from Geeks for Geeks:
     // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
-    debugger;
-    if (root === null) return 0;
+    if (root.val === undefined) return 0;
     if (root.left === null && root.right === null) return 1;
     if (root.left === null) return this.maxDepth(root.right) + 1;
     if (root.right === null) return this.maxDepth(root.left) + 1;
@@ -137,7 +127,6 @@ class BinaryTree {
     let nodeSum = 0;
     while (toIterateQueue.length) {
       const current = toIterateQueue.pop();
-      // console.log("CURRENT", current);
       nodeSum = current.val + current.left + current.right;
       maxSum = nodeSum >= maxSum ? nodeSum : maxSum;
       for (let child of current.children) {
@@ -200,74 +189,67 @@ class BinaryTree {
   }
 }
 /* SAMPLE TREES */
-// const newTree = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 5, 6)]);
-// const tree = new BinaryTree(newTree);
-// const newTreeLrg = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4, [new BinaryTreeNode(3, 3, 7, 8)]), new BinaryTreeNode(2, 3, 5, 6)]);
-// const treeLrg = new BinaryTree(newTreeLrg);
-// const newTreeLrgII = new BinaryTreeNode(1, 1, 2, 3, [new BinaryTreeNode(2, 2, 3, 4), new BinaryTreeNode(2, 3, 5, 6, [new BinaryTreeNode(3, 6, 7, 8)])]);
-// const treeLrgII = new BinaryTree(newTreeLrgII);
-// const newTreeEmpty = new BinaryTreeNode();
-// const treeEmpty = new BinaryTree(newTreeEmpty);
-// const newTreeNeg = new BinaryTreeNode(1, -1, 2, -3, [new BinaryTreeNode(2, 2, 3, -4, [new BinaryTreeNode(3, 3, 7, -8)]), new BinaryTreeNode(2, 3, -5, 6)]);
-// const treeNeg = new BinaryTree(newTreeNeg);
+let smallTree;
+let largeTree;
+let largeTreeII;
+let emptyTree;
+const emptyTreeNode = new BinaryTreeNode(1);
+  emptyTree = new BinaryTree(emptyTreeNode);
 
-/* SAMPLE TREES */
-// const E = new BinaryTreeNode(1);
-// const A = new BinaryTreeNode(2);
-// const B = new BinaryTreeNode(3);
-// const C = new BinaryTreeNode(4);
-// const D = new BinaryTreeNode(5);
-// const F = new BinaryTreeNode(6);
-// const G = new BinaryTreeNode(7);
-// E.left = A;
-// E.right = B;
-// B.left = C;
-// B.right = D;
-// A.left = F;
-// const tree = new BinaryTree(E);
+  const smallTree1 = new BinaryTreeNode(1);
+  const smallTree2 = new BinaryTreeNode(2);
+  const smallTree3 = new BinaryTreeNode(3);
+  const smallTree4 = new BinaryTreeNode(4);
+  const smallTree5 = new BinaryTreeNode(5);
+  const smallTree6 = new BinaryTreeNode(6);
+  const smallTree7 = new BinaryTreeNode(7);
+  smallTree1.left = smallTree2;
+  smallTree1.right = smallTree3;
+  smallTree2.left = smallTree4;
+  smallTree = new BinaryTree(smallTree1);
 
-// const one = new BinaryTreeNode(1);
-// const two = new BinaryTreeNode(2);
-// const three = new BinaryTreeNode(3);
-// const four = new BinaryTreeNode(4);
-// const five = new BinaryTreeNode(5);
-// const six = new BinaryTreeNode(6);
-// const seven = new BinaryTreeNode(7);
-// const eight = new BinaryTreeNode(8);
-// const nine = new BinaryTreeNode(9);
-// const ten = new BinaryTreeNode(10);
-// const elvn = new BinaryTreeNode(11);
-// one.left = two;
-// one.right = three;
-// three.left = four;
-// three.right = five;
-// two.left = six;
-// two.right = seven;
-// six.left = eight;
-// six.right = nine;
-// seven.left = ten;
-// seven.right = elvn;
-// const treeMed = new BinaryTree(one);
+  const largeTree1 = new BinaryTreeNode(1);
+  const largeTree2 = new BinaryTreeNode(2);
+  const largeTree3 = new BinaryTreeNode(3);
+  const largeTree4 = new BinaryTreeNode(4);
+  const largeTree5 = new BinaryTreeNode(5);
+  const largeTree6 = new BinaryTreeNode(6);
+  const largeTree7 = new BinaryTreeNode(7);
+  const largeTree8 = new BinaryTreeNode(8);
+  const largeTree9 = new BinaryTreeNode(9);
+  const largeTree10 = new BinaryTreeNode(10);
+  const largeTree11 = new BinaryTreeNode(11);
+  largeTree1.left = largeTree2;
+  largeTree1.right = largeTree3;
+  largeTree3.left = largeTree4;
+  largeTree3.right = largeTree5;
+  largeTree2.left = largeTree6;
+  largeTree2.right = largeTree7;
+  largeTree6.left = largeTree8;
+  largeTree6.right = largeTree9;
+  largeTree7.left = largeTree10;
+  largeTree7.right = largeTree11;
+  largeTree = new BinaryTree(largeTree1);
 
-// const one = new BinaryTreeNode(1);
-// const two = new BinaryTreeNode(2);
-// const three = new BinaryTreeNode(3);
-// const four = new BinaryTreeNode(4);
-// const five = new BinaryTreeNode(5);
-// const six = new BinaryTreeNode(6);
-// const seven = new BinaryTreeNode(7);
-// const eight = new BinaryTreeNode(8);
-// const nine = new BinaryTreeNode(9);
-// const ten = new BinaryTreeNode(10);
-// const elvn = new BinaryTreeNode(11);
-// one.left = two;
-// one.right = three;
-// two.left = six;
-// two.right = seven;
-// six.left = eight;
-// six.right = nine;
-// seven.left = ten;
-// seven.right = elvn;
-// const treeMedII = new BinaryTree(one);
+  const largeTreeII1 = new BinaryTreeNode(1);
+  const largeTreeII2 = new BinaryTreeNode(2);
+  const largeTreeII3 = new BinaryTreeNode(3);
+  const largeTreeII4 = new BinaryTreeNode(4);
+  const largeTreeII5 = new BinaryTreeNode(5);
+  const largeTreeII6 = new BinaryTreeNode(6);
+  const largeTreeII7 = new BinaryTreeNode(7);
+  const largeTreeII8 = new BinaryTreeNode(8);
+  const largeTreeII9 = new BinaryTreeNode(9);
+  const largeTreeII10 = new BinaryTreeNode(10);
+  const largeTreeII11 = new BinaryTreeNode(11);
+  largeTreeII1.left = largeTreeII2;
+  largeTreeII1.right = largeTreeII3;
+  largeTreeII2.left = largeTreeII6;
+  largeTreeII2.right = largeTreeII7;
+  largeTreeII6.left = largeTreeII8;
+  largeTreeII6.right = largeTreeII9;
+  largeTreeII7.left = largeTreeII10;
+  largeTreeII7.right = largeTreeII11;
+  largeTreeII = new BinaryTree(largeTreeII1);
 
 module.exports = { BinaryTree, BinaryTreeNode };
