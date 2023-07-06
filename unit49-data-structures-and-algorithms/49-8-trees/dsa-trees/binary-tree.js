@@ -16,47 +16,48 @@ class BinaryTree {
   /** minDepth()
    * return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
+  // minDepth(root) {
+    // minDepth solution is from Geeks for Geeks:
+    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
+  //   if (root.val === undefined) return 0;
+  //   if (root.left === null && root.right === null) return 1;
+  //   if (root.left === null) return this.minDepth(root.right) + 1;
+  //   if (root.right === null) return this.minDepth(root.left) + 1;
+  //   return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;  
+  // }
   // minDepth() {
-  //   let branch = 0;
   //   const queue = [this.root];
-  //   console.log("QUEUE");
+  //   let depth = 0;
 
   //   while (queue.length) {
-  //     console.log("QUEUE RAN", queue);
-  //     const current = queue.shift();
-  //     const currVals = Object.values(current);
-  //     console.log("CURRENT", current);
-  //     console.log("currVals", currVals);
-  //     branch++;
-  //     for (let node of currVals) {
-  //       console.log("IDV NODE", node);
-  //       if (node === "val") delete current[node];
-  //       if (node === "left" && current[node] === null) return branch;
-  //       if (node === "right" && current[node] === null) return branch;
-  //       else {
-  //         branch++;
-  //         queue.length = 0;
-  //         console.log("NODE PUSH LEFT", node.left);
-  //         console.log("NODE PUSH RIGHT", node.right);
-  //         queue.push(current[node], current[node].branch = branch);
-  //         queue.length = 0;
+  //     let numberOfNodes = queue.length;
+
+  //     while (numberOfNodes > 0) {
+  //       console.log("numberOfNodes", numberOfNodes);
+  //       console.log("depth", depth);
+  //       console.log("queue", queue);
+  //       let current = queue.shift();
+  //       console.log("current", current);
+  //       if (current.left === null && current.right === null) {
+  //         depth++;
+  //         return depth;
   //       }
+  //       if (current.left === null) {
+  //         queue.push(current.right);
+  //       }
+  //       if (current.right === null) {
+  //         queue.push(current.left);
+  //       }
+  //       numberOfNodes--;
   //     }
+  //     depth++;
   //   }
   // }
-
-  minDepth(root, branch) {
-    // debugger;
-    if (root.left === null && root.right === null) return branch = 1;
-    if (root.left === null) return this.minDepth(root.right) + 1;
-    if (root.right === null) return this.minDepth(root.left) + 1;
-    return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;  
-  }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
   maxDepth(root) {
-    // minDepth solution is from Geeks for Geeks:
+    // maxDepth solution is from Geeks for Geeks:
     // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
     if (root.val === undefined) return 0;
     if (root.left === null && root.right === null) return 1;
