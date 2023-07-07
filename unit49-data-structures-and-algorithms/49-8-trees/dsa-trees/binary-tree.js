@@ -44,28 +44,6 @@ class BinaryTree {
     }
   }
 
-  // minDepth(root) {
-    // minDepth recursive solution is from Geeks for Geeks:
-    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
-  //   if (root.val === undefined) return 0;
-  //   if (root.left === null && root.right === null) return 1;
-  //   if (root.left === null) return this.minDepth(root.right) + 1;
-  //   if (root.right === null) return this.minDepth(root.left) + 1;
-  //   return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;  
-  // }
-
-  /** maxDepth(): return the maximum depth of the tree -- that is,
-   * the length of the longest path from the root to a leaf. */
-  // maxDepth(root) {
-    // maxDepth recursive solution is from Geeks for Geeks:
-    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
-  //   if (root.val === undefined) return 0;
-  //   if (root.left === null && root.right === null) return 1;
-  //   if (root.left === null) return this.maxDepth(root.right) + 1;
-  //   if (root.right === null) return this.maxDepth(root.left) + 1;
-  //   return Math.max(this.maxDepth(root.left), this.maxDepth(root.right)) + 1;
-  // }
-
   maxDepth() {
     const queue = [this.root];
     let depth = 1;
@@ -94,30 +72,31 @@ class BinaryTree {
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
-  maxSum(root) {
-    debugger;
-    if (root.val === undefined) return 0;
-    if (root.left === null && root.right === null) return root.val;
-    if (root.left === null) return this.maxSum(root.right) + root.val;
-    if (root.right === null) return this.maxSum(root.left) + root.val;
-    return Math.max(this.maxSum(root.left), this.maxSum(root.right)) + root.val;
-  }
 
-  // maxSum() {
-  //   if (!this.root.val) return 0;
-  //   const toIterateQueue = [this.root];
-  //   let maxSum = 0;
-  //   let nodeSum = 0;
-  //   while (toIterateQueue.length) {
-  //     const current = toIterateQueue.pop();
-  //     nodeSum = current.val + current.left + current.right;
-  //     maxSum = nodeSum >= maxSum ? nodeSum : maxSum;
-  //     for (let child of current.children) {
-  //       toIterateQueue.push(child);
-  //     }
-  //   }
-  //   return maxSum;
-  // }
+  maxSum() {
+    const queue = [this.root];
+    let nodeMaxSum = -Infinity;
+    while (queue.length) {
+      const current = queue.shift();
+      let sum = 0;
+      // console.log("queue", queue);
+      // console.log("current", current);
+      const nodeVal = current.val ? current.val : 0;
+      const nodeLeft = current.left ? current.left.val : 0;
+      const nodeRight = current.right ? current.right.val : 0;
+      sum = nodeVal + nodeLeft + nodeRight;
+      // console.log("sum", sum);
+      nodeMaxSum = sum > nodeMaxSum ? sum : nodeMaxSum;
+      if (current.left === null && current.right === null) sum = 0;
+      else if (current.left === null) queue.push(current.right);
+      else if (current.right === null) queue.push(current.left);
+      else if (current.left !== null && current.right !== null) {
+        queue.push(current.left);
+        queue.push(current.right);
+      }
+    }
+    return nodeMaxSum;
+  }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
    * which is larger than lowerBound. Return null if no such value exists. */
@@ -140,6 +119,16 @@ class BinaryTree {
     }
     return nextLargerNum === Infinity ? null : nextLargerNum;
   }
+
+  // minDepth(root) {
+    // minDepth recursive solution is from Geeks for Geeks:
+    // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
+  //   if (root.val === undefined) return 0;
+  //   if (root.left === null && root.right === null) return 1;
+  //   if (root.left === null) return this.minDepth(root.right) + 1;
+  //   if (root.right === null) return this.minDepth(root.left) + 1;
+  //   return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;  
+  // }
 
   /** Further study!
    * areCousins(node1, node2): determine whether two nodes are cousins
