@@ -17,6 +17,7 @@ class BinaryTree {
    * return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
   minDepth() {
+    if (this.root.val === undefined) return 0;
     const queue = [this.root];
     let depth = 1;
     // console.log("queue", queue);
@@ -45,6 +46,7 @@ class BinaryTree {
   }
 
   maxDepth() {
+    if (this.root.val === undefined) return 0;
     const queue = [this.root];
     let depth = 1;
     const depths = [];
@@ -160,6 +162,7 @@ class BinaryTree {
 }
 /* SAMPLE TREES */
 let smallTree;
+let smallTreeNeg;
 let largeTree;
 let largeTreeII;
 let largeTreeIII;
@@ -167,29 +170,44 @@ let emptyTree;
 const emptyTreeNode = new BinaryTreeNode(1);
   emptyTree = new BinaryTree(emptyTreeNode);
 
-  const smallTree1 = new BinaryTreeNode(1);
-  const smallTree2 = new BinaryTreeNode(2);
-  const smallTree3 = new BinaryTreeNode(3);
-  const smallTree4 = new BinaryTreeNode(4);
-  const smallTree5 = new BinaryTreeNode(5);
-  const smallTree6 = new BinaryTreeNode(6);
-  const smallTree7 = new BinaryTreeNode(7);
+const smallTreeNeg1 = new BinaryTreeNode(1);
+const smallTreeNeg2 = new BinaryTreeNode(2);
+const smallTreeNeg3 = new BinaryTreeNode(3);
+const smallTreeNeg4 = new BinaryTreeNode(-4);
+const smallTreeNeg5 = new BinaryTreeNode(-5);
+const smallTreeNeg6 = new BinaryTreeNode(6);
+const smallTreeNeg7 = new BinaryTreeNode(-7);
+  smallTreeNeg1.left = smallTreeNeg2;
+  smallTreeNeg1.right = smallTreeNeg3;
+  smallTreeNeg2.left = smallTreeNeg4;
+  smallTreeNeg2.right = smallTreeNeg5;
+  smallTreeNeg3.left = smallTreeNeg6;
+  smallTreeNeg3.right = smallTreeNeg7;
+  smallTreeNeg = new BinaryTree(smallTreeNeg1);
+
+const smallTree1 = new BinaryTreeNode(1);
+const smallTree2 = new BinaryTreeNode(2);
+const smallTree3 = new BinaryTreeNode(3);
+const smallTree4 = new BinaryTreeNode(4);
+const smallTree5 = new BinaryTreeNode(5);
+const smallTree6 = new BinaryTreeNode(6);
+const smallTree7 = new BinaryTreeNode(7);
   smallTree1.left = smallTree2;
   smallTree1.right = smallTree3;
   smallTree2.left = smallTree4;
   smallTree = new BinaryTree(smallTree1);
 
-  const largeTree1 = new BinaryTreeNode(1);
-  const largeTree2 = new BinaryTreeNode(2);
-  const largeTree3 = new BinaryTreeNode(3);
-  const largeTree4 = new BinaryTreeNode(4);
-  const largeTree5 = new BinaryTreeNode(5);
-  const largeTree6 = new BinaryTreeNode(6);
-  const largeTree7 = new BinaryTreeNode(7);
-  const largeTree8 = new BinaryTreeNode(8);
-  const largeTree9 = new BinaryTreeNode(9);
-  const largeTree10 = new BinaryTreeNode(10);
-  const largeTree11 = new BinaryTreeNode(11);
+const largeTree1 = new BinaryTreeNode(1);
+const largeTree2 = new BinaryTreeNode(2);
+const largeTree3 = new BinaryTreeNode(3);
+const largeTree4 = new BinaryTreeNode(4);
+const largeTree5 = new BinaryTreeNode(5);
+const largeTree6 = new BinaryTreeNode(6);
+const largeTree7 = new BinaryTreeNode(7);
+const largeTree8 = new BinaryTreeNode(8);
+const largeTree9 = new BinaryTreeNode(9);
+const largeTree10 = new BinaryTreeNode(10);
+const largeTree11 = new BinaryTreeNode(11);
   largeTree1.left = largeTree2;
   largeTree1.right = largeTree3;
   largeTree3.left = largeTree4;
@@ -202,17 +220,17 @@ const emptyTreeNode = new BinaryTreeNode(1);
   largeTree7.right = largeTree11;
   largeTree = new BinaryTree(largeTree1);
 
-  const largeTreeII1 = new BinaryTreeNode(1);
-  const largeTreeII2 = new BinaryTreeNode(2);
-  const largeTreeII3 = new BinaryTreeNode(3);
-  const largeTreeII4 = new BinaryTreeNode(4);
-  const largeTreeII5 = new BinaryTreeNode(5);
-  const largeTreeII6 = new BinaryTreeNode(6);
-  const largeTreeII7 = new BinaryTreeNode(7);
-  const largeTreeII8 = new BinaryTreeNode(8);
-  const largeTreeII9 = new BinaryTreeNode(9);
-  const largeTreeII10 = new BinaryTreeNode(10);
-  const largeTreeII11 = new BinaryTreeNode(11);
+const largeTreeII1 = new BinaryTreeNode(1);
+const largeTreeII2 = new BinaryTreeNode(2);
+const largeTreeII3 = new BinaryTreeNode(3);
+const largeTreeII4 = new BinaryTreeNode(4);
+const largeTreeII5 = new BinaryTreeNode(5);
+const largeTreeII6 = new BinaryTreeNode(6);
+const largeTreeII7 = new BinaryTreeNode(7);
+const largeTreeII8 = new BinaryTreeNode(8);
+const largeTreeII9 = new BinaryTreeNode(9);
+const largeTreeII10 = new BinaryTreeNode(10);
+const largeTreeII11 = new BinaryTreeNode(11);
   largeTreeII1.left = largeTreeII2;
   largeTreeII1.right = largeTreeII3;
   largeTreeII2.left = largeTreeII6;
@@ -223,23 +241,23 @@ const emptyTreeNode = new BinaryTreeNode(1);
   largeTreeII7.right = largeTreeII11;
   largeTreeII = new BinaryTree(largeTreeII1);
 
-  const largeTreeIII1 = new BinaryTreeNode(1);
-  const largeTreeIII2 = new BinaryTreeNode(2);
-  const largeTreeIII3 = new BinaryTreeNode(3);
-  const largeTreeIII4 = new BinaryTreeNode(4);
-  const largeTreeIII5 = new BinaryTreeNode(5);
-  const largeTreeIII6 = new BinaryTreeNode(6);
-  const largeTreeIII7 = new BinaryTreeNode(7);
-  const largeTreeIII8 = new BinaryTreeNode(8);
-  const largeTreeIII9 = new BinaryTreeNode(9);
-  const largeTreeIII10 = new BinaryTreeNode(10);
-  const largeTreeIII11 = new BinaryTreeNode(11);
-  const largeTreeIII12 = new BinaryTreeNode(12);
-  const largeTreeIII13 = new BinaryTreeNode(13);
-  const largeTreeIII14 = new BinaryTreeNode(14);
-  const largeTreeIII15 = new BinaryTreeNode(15);
-  const largeTreeIII16 = new BinaryTreeNode(16);
-  const largeTreeIII17 = new BinaryTreeNode(17);
+const largeTreeIII1 = new BinaryTreeNode(1);
+const largeTreeIII2 = new BinaryTreeNode(2);
+const largeTreeIII3 = new BinaryTreeNode(3);
+const largeTreeIII4 = new BinaryTreeNode(4);
+const largeTreeIII5 = new BinaryTreeNode(5);
+const largeTreeIII6 = new BinaryTreeNode(6);
+const largeTreeIII7 = new BinaryTreeNode(7);
+const largeTreeIII8 = new BinaryTreeNode(8);
+const largeTreeIII9 = new BinaryTreeNode(9);
+const largeTreeIII10 = new BinaryTreeNode(10);
+const largeTreeIII11 = new BinaryTreeNode(11);
+const largeTreeIII12 = new BinaryTreeNode(12);
+const largeTreeIII13 = new BinaryTreeNode(13);
+const largeTreeIII14 = new BinaryTreeNode(14);
+const largeTreeIII15 = new BinaryTreeNode(15);
+const largeTreeIII16 = new BinaryTreeNode(16);
+const largeTreeIII17 = new BinaryTreeNode(17);
   largeTreeIII1.left = largeTreeIII2;
   largeTreeIII1.right = largeTreeIII3;
   largeTreeIII2.left = largeTreeIII4;
