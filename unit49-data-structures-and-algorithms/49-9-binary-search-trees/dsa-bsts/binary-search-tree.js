@@ -48,7 +48,19 @@ class BinarySearchTree {
    * return the node, if found; else undefined. Uses iteration. */
 
   find(val) {
-
+    try {
+      if (val === undefined) throw new Error("ERROR! Parameter is missing.");
+      const queue = [this.root];
+      while (queue.length) {
+        const currNode = queue.shift();
+        if (currNode === null) return -1;
+        else if (currNode.val === val) return currNode;
+        else if (val > currNode.val) queue.push(currNode.right);
+        else if (val < currNode.val) queue.push(currNode.left);
+      }
+    } catch (err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
 
   /** findRecursively(val): search the tree for a node with value val.
