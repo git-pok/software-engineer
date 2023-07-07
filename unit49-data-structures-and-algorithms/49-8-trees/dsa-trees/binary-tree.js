@@ -100,7 +100,6 @@ class BinaryTree {
 
   /** nextLarger(lowerBound): return the smallest value in the tree
    * which is larger than lowerBound. Return null if no such value exists. */
-
   nextLarger(lowerBound) {
     if (!this.root.val) return null;
     const queue = [this.root];
