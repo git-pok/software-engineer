@@ -19,7 +19,7 @@ class BinaryTree {
   minDepth() {
     const queue = [this.root];
     let depth = 1;
-    console.log("queue", queue);
+    // console.log("queue", queue);
     while (queue.length) {
       // const currentQueue = JSON.parse(JSON.stringify(queue.slice(0)));
       const currentQueue = JSON.parse(JSON.stringify(queue));
@@ -54,14 +54,47 @@ class BinaryTree {
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
-  maxDepth(root) {
-    // maxDepth solution is from Geeks for Geeks:
+  // maxDepth(root) {
+    // maxDepth recursive solution is from Geeks for Geeks:
     // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
-    if (root.val === undefined) return 0;
-    if (root.left === null && root.right === null) return 1;
-    if (root.left === null) return this.maxDepth(root.right) + 1;
-    if (root.right === null) return this.maxDepth(root.left) + 1;
-    return Math.max(this.maxDepth(root.left), this.maxDepth(root.right)) + 1;
+  //   if (root.val === undefined) return 0;
+  //   if (root.left === null && root.right === null) return 1;
+  //   if (root.left === null) return this.maxDepth(root.right) + 1;
+  //   if (root.right === null) return this.maxDepth(root.left) + 1;
+  //   return Math.max(this.maxDepth(root.left), this.maxDepth(root.right)) + 1;
+  // }
+
+  maxDepth() {
+    const queue = [this.root];
+    let depth = 1;
+    const depths = [];
+    console.log("QUEUE LENGTH", queue.length);
+    // console.log("queue", queue);
+    while (queue.length) {
+      console.log("WHILE queue.length");
+      const currentQueue = JSON.parse(JSON.stringify(queue));
+      // console.log("WHILE queue.length currentQueue", currentQueue);
+      while (currentQueue.length) {
+        console.log("WHILE CURRENT");
+        console.log("currentQueue.length", currentQueue.length);
+        // const queueCurrent = JSON.parse(JSON.stringify(currentQueue.shift()));
+        const queueCurrent = JSON.parse(JSON.stringify(currentQueue.shift()));
+        if (queueCurrent.left === null && queueCurrent.right === null) {
+          currentQueue.length = 0;
+          // depths.push(depth);
+          console.log("QUEUE", queue);
+          return queueCurrent;
+        }
+        else if (queueCurrent.left === null) queue.push(queueCurrent.right);
+        else if (queueCurrent.right === null) queue.push(queueCurrent.left);
+        else if (queueCurrent.left !== null && queueCurrent.right !== null) {
+          queue.push(queueCurrent.left);
+          queue.push(queueCurrent.right);
+        }
+      }
+      depth++;
+    }
+    return depths;
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
