@@ -19,22 +19,11 @@ class BinarySearchTree {
     while (queue.length) {
       const currNode = queue.shift();
       // console.log("CURR NODE", currNode);
-      if (this.root.val === undefined) {
-        this.root.val = val;
-        return this.root;
-      } else if (val <= currNode.val && currNode.left === null) {
-        const tree = new Node(val);
-        // console.log("CURR NODE LEFT", currNode.left);
-        currNode.left = tree;
-      } else if (val >= currNode.val && currNode.right === null) {
-        // console.log("CURR NODE RIGHT", currNode.right);
-        const tree = new Node(val);
-        currNode.right = tree;
-      } else if (val <= currNode.val && currNode.left !== null) {
-        queue.push(currNode.left);
-      } else if (val >= currNode.val && currNode.right !== null) {
-        queue.push(currNode.right);
-      }
+      if (this.root.val === undefined) this.root.val = val;
+      else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
+      else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
+      else if (val <= currNode.val && currNode.left !== null) queue.push(currNode.left);
+      else if (val >= currNode.val && currNode.right !== null) queue.push(currNode.right);
     }
     return this.root;
   }
@@ -42,8 +31,17 @@ class BinarySearchTree {
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
 
-  insertRecursively(val) {
-
+  insertRecursively(val, root) {
+    const queue = root ? [root] : [this.root];
+    while (queue.length) {
+      const currNode = queue.shift();
+      if (this.root.val === undefined) this.root.val = val;
+      else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
+      else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
+      else if (val <= currNode.val && currNode.left !== null) this.insertRecursively(val, currNode.left);
+      else if (val >= currNode.val && currNode.right !== null) this.insertRecursively(val, currNode.right);
+    }
+    return this.root;
   }
 
   /** find(val): search the tree for a node with value val.
