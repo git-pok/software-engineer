@@ -103,19 +103,18 @@ class BinaryTree {
 
   nextLarger(lowerBound) {
     if (!this.root.val) return null;
-    const toIterateQueue = [this.root];
+    const queue = [this.root];
     let nextLargerNum = Infinity;
-    while (toIterateQueue.length) {
-      const current = toIterateQueue.pop();
+    while (queue.length) {
+      const current = queue.pop();
       const val = current.val;
-      const left = current.left;
-      const right = current.right;
       if (val > lowerBound && val < nextLargerNum) nextLargerNum = val;
-      else if (left > lowerBound && left < nextLargerNum) nextLargerNum = left;
-      else if (right > lowerBound && right < nextLargerNum) nextLargerNum = right;
-      for (let child of current.children) {
-        toIterateQueue.push(child);
+      if (current.left !== null && current.right !== null) {
+        queue.push(current.left);
+        queue.push(current.right);
       }
+      else if (current.left !== null) queue.push(current.left);
+      else if (current.right !== null) queue.push(current.right);
     }
     return nextLargerNum === Infinity ? null : nextLargerNum;
   }
