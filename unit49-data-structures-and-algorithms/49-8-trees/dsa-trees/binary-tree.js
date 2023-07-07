@@ -16,42 +16,40 @@ class BinaryTree {
   /** minDepth()
    * return the minimum depth of the tree -- that is,
    * the length of the shortest path from the root to a leaf. */
+  minDepth() {
+    const queue = [this.root];
+    let depth = 1;
+    console.log("queue", queue);
+    while (queue.length) {
+      // const currentQueue = JSON.parse(JSON.stringify(queue.slice(0)));
+      const currentQueue = JSON.parse(JSON.stringify(queue));
+      // console.log("WHILE queue.length currentQueue", currentQueue);
+      while (currentQueue.length) {
+        // console.log("WHILE CURRENT");
+        const queueCurrent = JSON.parse(JSON.stringify(currentQueue.shift()));
+        if (queueCurrent.left === null && queueCurrent.right === null) {
+          currentQueue.length = 0;
+          return depth;
+        }
+        else if (queueCurrent.left === null) queue.push(queueCurrent.right);
+        else if (queueCurrent.right === null) queue.push(queueCurrent.left);
+        else if (queueCurrent.left !== null && queueCurrent.right !== null) {
+          queue.push(queueCurrent.left);
+          queue.push(queueCurrent.right);
+        }
+      }
+      depth++;
+    }
+  }
+
   // minDepth(root) {
-    // minDepth solution is from Geeks for Geeks:
+    // minDepth recursive solution is from Geeks for Geeks:
     // https://www.geeksforgeeks.org/find-minimum-depth-of-a-binary-tree/
   //   if (root.val === undefined) return 0;
   //   if (root.left === null && root.right === null) return 1;
   //   if (root.left === null) return this.minDepth(root.right) + 1;
   //   if (root.right === null) return this.minDepth(root.left) + 1;
   //   return Math.min(this.minDepth(root.left), this.minDepth(root.right)) + 1;  
-  // }
-  // minDepth() {
-  //   const queue = [this.root];
-  //   let depth = 0;
-
-  //   while (queue.length) {
-  //     let numberOfNodes = queue.length;
-
-  //     while (numberOfNodes > 0) {
-  //       console.log("numberOfNodes", numberOfNodes);
-  //       console.log("depth", depth);
-  //       console.log("queue", queue);
-  //       let current = queue.shift();
-  //       console.log("current", current);
-  //       if (current.left === null && current.right === null) {
-  //         depth++;
-  //         return depth;
-  //       }
-  //       if (current.left === null) {
-  //         queue.push(current.right);
-  //       }
-  //       if (current.right === null) {
-  //         queue.push(current.left);
-  //       }
-  //       numberOfNodes--;
-  //     }
-  //     depth++;
-  //   }
   // }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
