@@ -73,42 +73,23 @@ class BinaryTree {
     while (queue.length) {
       const current = JSON.parse(JSON.stringify(queue));
       queue.length = 0;
-      console.log("queue", queue);
+      // console.log("queue", queue);
       while (current.length) {
         const currentQueue = JSON.parse(JSON.stringify(current.shift()));
-        console.log("currentQueue", currentQueue);
-        if (currentQueue.left === null) queue.push(currentQueue.right);
+        // console.log("currentQueue", currentQueue);
+        if (currentQueue.left === null && currentQueue.right === null) {
+          depths.push(depth);
+        }
+        else if (currentQueue.left === null) queue.push(currentQueue.right);
         else if (currentQueue.right === null) queue.push(currentQueue.left);
         else if (currentQueue.left !== null && currentQueue.right !== null) {
           queue.push(currentQueue.left);
           queue.push(currentQueue.right);
         }
       }
+      depth++;
     }
-    console.log("QUEUE LENGTH", queue.length);
-    
-    // while (queue.length) {
-      // const currentQueue = JSON.parse(JSON.stringify(queue.slice(0)));
-      // const current = queue.shift();
-      // const currentQueue = JSON.parse(JSON.stringify(queue));
-      // console.log("WHILE queue.length currentQueue", currentQueue);
-      // while (currentQueue.length) {
-        // console.log("WHILE CURRENT");
-        // const queueCurrent = JSON.parse(JSON.stringify(currentQueue.shift()));
-        // if (queueCurrent.left === null && queueCurrent.right === null) {
-        //   // currentQueue.length = 0;
-        //   depths.push(depth);
-        //   console.log("DEPTH", depth);
-        // }
-        // else if (current.left === null) queue.push(current.right);
-        // else if (current.right === null) queue.push(current.left);
-        // else if (current.left !== null && current.right !== null) {
-        //   queue.push(current.left);
-        //   queue.push(current.right);
-        // }
-      // }
-      // depth++;
-    // }
+    return Math.max(...depths);
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
