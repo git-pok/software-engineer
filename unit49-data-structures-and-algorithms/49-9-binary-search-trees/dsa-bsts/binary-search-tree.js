@@ -87,16 +87,83 @@ class BinarySearchTree {
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
-
+  // traverse(node = this.root) {
+  //   if (node.left) this.traverse(node.left);
+  //   console.log(node.val);
+  //   if (node.right) this.traverse(node.right);
+  // }
+  
   dfsPreOrder() {
-
+    try {
+      const stack = [this.root];
+      const traversedNodes = [];
+      while (stack.length) {
+        const currNode = stack.pop();
+        if (currNode === null) null;
+        else {
+          traversedNodes.push(currNode);
+          stack.push(currNode.right);
+          stack.push(currNode.left);
+        }
+      }
+      return traversedNodes;
+    } catch (err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
 
-  dfsInOrder() {
+  dfsInOrder(root = this.root) {
+    try {
+      // Refactor EDIT
+      // const stackLft = [root.left];
+      // const stackRght = [root.right];
+      // const traversedNodes = [];
+      // while (stackRght.length) {
+      //   const currNode = stackLft.length ? stackLft.pop() : stackRght.pop();
+      //   console.log("stackLft", stackLft);
+      //   if (currNode === this.root.right) {
+      //     traversedNodes.unshift(this.root);
+      //     traversedNodes.unshift(currNode);
+      //   }
+      //   else if (currNode === null) null;
+      //   else  {
+      //     traversedNodes.unshift(currNode);
+      //     stackLft.length ? stackLft.push(currNode.right) : stackRght.push(currNode.right);
+      //     stackLft.length ? stackLft.push(currNode.left) : stackRght.push(currNode.left);
+      //   }
+      // }
+      // End of Refactor EDIT
 
+      // while (stackLft.length) {
+      //   const currNodeLft = stackLft.pop();
+      //   console.log("stackLft.length", stackLft.length);
+      //   if (currNodeLft === null) null;
+      //   else {
+      //     traversedNodes.unshift(currNodeLft);
+      //     stackLft.push(currNodeLft.right);
+      //     stackLft.push(currNodeLft.left);
+      //   }
+      // }
+
+      // traversedNodes.unshift(this.root);
+
+      // while (stackRght.length) {
+      //   console.log("stackRght.length", stackRght.length);
+      //   const currNodeRght = stackRght.pop();
+      //   if (currNodeRght === null) null;
+      //   else {
+      //     traversedNodes.unshift(currNodeRght);
+      //     stackRght.push(currNodeRght.right);
+      //     stackRght.push(currNodeRght.left);
+      //   }
+      // }
+      return traversedNodes;
+    } catch (err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
@@ -110,7 +177,22 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   bfs() {
-
+    try {
+      const queue = [this.root];
+      const traversedNodes = [];
+      while (queue.length) {
+        const currNode = queue.shift();
+        if (currNode === null) null;
+        else {
+          traversedNodes.push(currNode);
+          queue.push(currNode.left);
+          queue.push(currNode.right);
+        }
+      }
+      return traversedNodes;
+    } catch (err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
 
   /** Further Study!
@@ -136,5 +218,21 @@ class BinarySearchTree {
     
   }
 }
+
+const smallTree = new Node();
+const tree = new BinarySearchTree(smallTree);
+tree.insertRecursively(20);
+tree.insertRecursively(30);
+tree.insertRecursively(19);
+tree.insertRecursively(15);
+tree.insertRecursively(10);
+tree.insertRecursively(17);
+tree.insertRecursively(20);
+tree.insertRecursively(31);
+tree.insertRecursively(33);
+tree.insertRecursively(37);
+tree.insertRecursively(40);
+tree.insertRecursively(25);
+tree.insertRecursively(29);
 
 module.exports = BinarySearchTree;
