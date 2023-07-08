@@ -15,30 +15,40 @@ class BinarySearchTree {
    * Returns the tree. Uses iteration. */
 
   insert(val) {
-    const queue = [this.root];
-    while (queue.length) {
-      const currNode = queue.shift();
-      // console.log("CURR NODE", currNode);
-      if (this.root.val === undefined) this.root.val = val;
-      else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
-      else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
-      else if (val <= currNode.val && currNode.left !== null) queue.push(currNode.left);
-      else if (val >= currNode.val && currNode.right !== null) queue.push(currNode.right);
+    try {
+      if (val === undefined) throw new Error("ERROR! Parameter is missing.");
+      const queue = [this.root];
+      while (queue.length) {
+        const currNode = queue.shift();
+        // console.log("CURR NODE", currNode);
+        if (this.root.val === undefined) this.root.val = val;
+        else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
+        else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
+        else if (val <= currNode.val && currNode.left !== null) queue.push(currNode.left);
+        else if (val >= currNode.val && currNode.right !== null) queue.push(currNode.right);
+      }
+      return this.root;
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
     }
-    return this.root;
   }
 
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
   insertRecursively(val, root) {
-    const queue = root ? [root] : [this.root];
-    const currNode = queue.shift();
-    if (this.root.val === undefined) this.root.val = val;
-    else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
-    else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
-    else if (val <= currNode.val && currNode.left !== null) this.insertRecursively(val, currNode.left);
-    else if (val >= currNode.val && currNode.right !== null) this.insertRecursively(val, currNode.right);
-    return this.root;
+    try {
+      if (val === undefined) throw new Error("ERROR! Parameter is missing.");
+      const queue = root ? [root] : [this.root];
+      const currNode = queue.shift();
+      if (this.root.val === undefined) this.root.val = val;
+      else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
+      else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
+      else if (val <= currNode.val && currNode.left !== null) this.insertRecursively(val, currNode.left);
+      else if (val >= currNode.val && currNode.right !== null) this.insertRecursively(val, currNode.right);
+      return this.root;
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
 
   /** find(val): search the tree for a node with value val.
