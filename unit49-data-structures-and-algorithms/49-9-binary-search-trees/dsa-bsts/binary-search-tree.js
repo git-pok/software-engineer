@@ -117,50 +117,34 @@ class BinarySearchTree {
 
   dfsInOrder(root = this.root) {
     try {
-      // Refactor EDIT
-      // const stackLft = [root.left];
-      // const stackRght = [root.right];
-      // const traversedNodes = [];
-      // while (stackRght.length) {
-      //   const currNode = stackLft.length ? stackLft.pop() : stackRght.pop();
-      //   console.log("stackLft", stackLft);
-      //   if (currNode === this.root.right) {
-      //     traversedNodes.unshift(this.root);
-      //     traversedNodes.unshift(currNode);
-      //   }
-      //   else if (currNode === null) null;
-      //   else  {
-      //     traversedNodes.unshift(currNode);
-      //     stackLft.length ? stackLft.push(currNode.right) : stackRght.push(currNode.right);
-      //     stackLft.length ? stackLft.push(currNode.left) : stackRght.push(currNode.left);
-      //   }
-      // }
-      // End of Refactor EDIT
+      const stackLft = [root.left];
+      const stackRght = [root.right];
+      const leftTrvsNodes = [];
+      const rightTrvsNodes = [];
 
-      // while (stackLft.length) {
-      //   const currNodeLft = stackLft.pop();
-      //   console.log("stackLft.length", stackLft.length);
-      //   if (currNodeLft === null) null;
-      //   else {
-      //     traversedNodes.unshift(currNodeLft);
-      //     stackLft.push(currNodeLft.right);
-      //     stackLft.push(currNodeLft.left);
-      //   }
-      // }
+      while (stackLft.length) {
+        const currNode = stackLft.pop();
+        if (currNode === null) null;
+        else {
+          leftTrvsNodes.unshift(currNode);
+          stackLft.push(currNode.left);
+          stackLft.push(currNode.right);
+        }
+      }
 
-      // traversedNodes.unshift(this.root);
+      leftTrvsNodes.push(this.root);
 
-      // while (stackRght.length) {
-      //   console.log("stackRght.length", stackRght.length);
-      //   const currNodeRght = stackRght.pop();
-      //   if (currNodeRght === null) null;
-      //   else {
-      //     traversedNodes.unshift(currNodeRght);
-      //     stackRght.push(currNodeRght.right);
-      //     stackRght.push(currNodeRght.left);
-      //   }
-      // }
-      return traversedNodes;
+      while (stackRght.length) {
+        const currNode = stackRght.pop();
+        if (currNode === null) null;
+        else {
+          rightTrvsNodes.unshift(currNode);
+          stackRght.push(currNode.right);
+          stackRght.push(currNode.left);
+        }
+      }
+      
+      return [...leftTrvsNodes, ...rightTrvsNodes];
     } catch (err) {
       console.error(`ERROR!\n${err}`);
     }
