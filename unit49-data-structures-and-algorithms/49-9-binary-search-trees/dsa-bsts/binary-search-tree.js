@@ -13,7 +13,6 @@ class BinarySearchTree {
 
   /** insert(val): insert a new node into the BST with value val.
    * Returns the tree. Uses iteration. */
-
   insert(val) {
     try {
       if (val === undefined) throw new Error("ERROR! Parameter is missing.");
@@ -53,7 +52,6 @@ class BinarySearchTree {
 
   /** find(val): search the tree for a node with value val.
    * return the node, if found; else undefined. Uses iteration. */
-
   find(val) {
     try {
       if (val === undefined) throw new Error("ERROR! Parameter is missing.");
@@ -88,12 +86,6 @@ class BinarySearchTree {
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
-  // traverse(node = this.root) {
-  //   debugger;
-  //   if (node.left) this.traverse(node.left);
-  //   console.log(node.val);
-  //   if (node.right) this.traverse(node.right);
-  // }
   dfsPreOrder() {
     try {
       const stack = [this.root];
@@ -115,42 +107,18 @@ class BinarySearchTree {
 
   /** dfsInOrder(): Traverse the array using in-order DFS.
    * Return an array of visited nodes. */
-
-  dfsInOrder(root = this.root) {
-    // try {
-    //   const stackLft = [root.left];
-    //   const stackRght = [root.right];
-    //   const leftTrvsNodes = [];
-    //   const rightTrvsNodes = [];
-
-    //   while (stackLft.length) {
-    //     const currNode = stackLft.pop();
-    //     if (currNode === null) null;
-    //     else {
-    //       leftTrvsNodes.unshift(currNode);
-    //       // stackLft.push(currNode.val);
-    //       stackLft.push(currNode.left);
-    //       stackLft.push(currNode.right);
-    //     }
-    //   }
-
-    //   leftTrvsNodes.push(this.root);
-
-    //   while (stackRght.length) {
-    //     const currNode = stackRght.pop();
-    //     if (currNode === null) null;
-    //     else {
-    //       rightTrvsNodes.unshift(currNode);
-    //       stackRght.push(currNode.right);
-    //       stackRght.push(currNode.left);
-    //     }
-    //   }
-
-    //   return [...leftTrvsNodes, ...rightTrvsNodes];
-    // } catch (err) {
-    //   console.error(`ERROR!\n${err}`);
-    // }
+  dfsInOrder(node = this.root, arr = []) {
+    try {
+      // debugger;
+      if (node.left) this.traverse(node.left, arr);
+      arr.push(node);
+      if (node.right) this.traverse(node.right, arr);
+      return arr;
+    } catch (err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
+  
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
