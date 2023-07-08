@@ -79,7 +79,8 @@ class BinarySearchTree {
       const currNode = queue.shift();
       if (node === null) return -1;
       else if (currNode.val === val) return currNode;
-      return val > currNode.val ? this.findRecursively(val, currNode.right) : this.findRecursively(val, currNode.left);
+      else if (val > currNode.val) return this.findRecursively(val, currNode.right)
+      else return this.findRecursively(val, currNode.left);
     } catch (err) {
       console.error(`ERROR!\n${err}`);
     }
@@ -88,11 +89,11 @@ class BinarySearchTree {
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
   // traverse(node = this.root) {
+  //   debugger;
   //   if (node.left) this.traverse(node.left);
   //   console.log(node.val);
   //   if (node.right) this.traverse(node.right);
   // }
-  
   dfsPreOrder() {
     try {
       const stack = [this.root];
@@ -116,45 +117,61 @@ class BinarySearchTree {
    * Return an array of visited nodes. */
 
   dfsInOrder(root = this.root) {
-    try {
-      const stackLft = [root.left];
-      const stackRght = [root.right];
-      const leftTrvsNodes = [];
-      const rightTrvsNodes = [];
+    // try {
+    //   const stackLft = [root.left];
+    //   const stackRght = [root.right];
+    //   const leftTrvsNodes = [];
+    //   const rightTrvsNodes = [];
 
-      while (stackLft.length) {
-        const currNode = stackLft.pop();
-        if (currNode === null) null;
-        else {
-          leftTrvsNodes.unshift(currNode);
-          stackLft.push(currNode.left);
-          stackLft.push(currNode.right);
-        }
-      }
+    //   while (stackLft.length) {
+    //     const currNode = stackLft.pop();
+    //     if (currNode === null) null;
+    //     else {
+    //       leftTrvsNodes.unshift(currNode);
+    //       // stackLft.push(currNode.val);
+    //       stackLft.push(currNode.left);
+    //       stackLft.push(currNode.right);
+    //     }
+    //   }
 
-      leftTrvsNodes.push(this.root);
+    //   leftTrvsNodes.push(this.root);
 
-      while (stackRght.length) {
-        const currNode = stackRght.pop();
-        if (currNode === null) null;
-        else {
-          rightTrvsNodes.unshift(currNode);
-          stackRght.push(currNode.right);
-          stackRght.push(currNode.left);
-        }
-      }
-      
-      return [...leftTrvsNodes, ...rightTrvsNodes];
-    } catch (err) {
-      console.error(`ERROR!\n${err}`);
-    }
+    //   while (stackRght.length) {
+    //     const currNode = stackRght.pop();
+    //     if (currNode === null) null;
+    //     else {
+    //       rightTrvsNodes.unshift(currNode);
+    //       stackRght.push(currNode.right);
+    //       stackRght.push(currNode.left);
+    //     }
+    //   }
+
+    //   return [...leftTrvsNodes, ...rightTrvsNodes];
+    // } catch (err) {
+    //   console.error(`ERROR!\n${err}`);
+    // }
   }
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
    * Return an array of visited nodes. */
 
-  dfsPostOrder() {
-
+  dfsPostOrder(root = this.root) {
+    try {
+      const stack = [root];
+      const trvsNodes = [];
+      while (stack.length) {
+        const currNode = stack.pop();
+        if (currNode === null) null;
+        else {
+          trvsNodes.unshift(currNode);
+          stack.push(currNode.left);
+          stack.push(currNode.right);
+        }
+      }
+      return trvsNodes;
+    } catch (err) {
+      console.error(`ERROR!\n${err}`);
+    }
   }
 
   /** bfs(): Traverse the array using BFS.
