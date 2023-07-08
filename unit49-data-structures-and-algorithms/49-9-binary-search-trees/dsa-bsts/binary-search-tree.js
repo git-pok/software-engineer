@@ -110,9 +110,9 @@ class BinarySearchTree {
   dfsInOrder(node = this.root, arr = []) {
     try {
       // debugger;
-      if (node.left) this.traverse(node.left, arr);
+      if (node.left) this.dfsInOrder(node.left, arr);
       arr.push(node);
-      if (node.right) this.traverse(node.right, arr);
+      if (node.right) this.dfsInOrder(node.right, arr);
       return arr;
     } catch (err) {
       console.error(`ERROR!\n${err}`);
