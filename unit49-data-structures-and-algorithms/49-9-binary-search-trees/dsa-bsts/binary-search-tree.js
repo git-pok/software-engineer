@@ -86,20 +86,30 @@ class BinarySearchTree {
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
    * Return an array of visited nodes. */
-  dfsPreOrder() {
+  dfsPreOrder(node = this.root) {
     try {
-      const stack = [this.root];
-      const traversedNodes = [];
-      while (stack.length) {
-        const currNode = stack.pop();
+      const leftNodes = [node.left];
+      const rightNodes = [node.right];
+      const leftTrvsNodes = [];
+      const rightTrvsNodes = [];
+      while (leftNodes.length) {
+        const currNode = leftNodes.shift();
         if (currNode === null) null;
-        else {
-          traversedNodes.push(currNode);
-          stack.push(currNode.right);
-          stack.push(currNode.left);
-        }
+        else leftTrvsNodes.push(currNode);
+        if (currNode.left) leftNodes.push(currNode.left);
+        if (currNode.right) leftNodes.push(currNode.right);
       }
-      return traversedNodes;
+
+      while (rightNodes.length) {
+        const currNode = rightNodes.shift();
+        if (currNode === null) null;
+        else rightTrvsNodes.push(currNode);
+        if (currNode.left) rightNodes.push(currNode.left);
+        if (currNode.right) rightNodes.push(currNode.right);
+      }
+
+      return [...leftTrvsNodes, this.root, ...rightTrvsNodes];
+      
     } catch (err) {
       console.error(`ERROR!\n${err}`);
     }
