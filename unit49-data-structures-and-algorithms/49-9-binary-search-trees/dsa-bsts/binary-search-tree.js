@@ -109,7 +109,7 @@ class BinarySearchTree {
       }
 
       return [...leftTrvsNodes, this.root, ...rightTrvsNodes];
-      
+
     } catch (err) {
       console.error(`ERROR!\n${err}`);
     }
