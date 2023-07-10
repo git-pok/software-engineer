@@ -85,31 +85,21 @@ class BinarySearchTree {
   }
 
   /** dfsPreOrder(): Traverse the array using pre-order DFS.
-   * Return an array of visited nodes. */
+   * Return an array of visited nodes.
+   * root, left, right
+   * */
   dfsPreOrder(node = this.root) {
     try {
-      const leftNodes = [node.left];
-      const rightNodes = [node.right];
-      const leftTrvsNodes = [];
-      const rightTrvsNodes = [];
-      while (leftNodes.length) {
-        const currNode = leftNodes.shift();
+      const stack = [node];
+      const trvsNodes = [];
+      while (stack.length) {
+        const currNode = stack.pop();
         if (currNode === null) null;
-        else leftTrvsNodes.push(currNode);
-        if (currNode.left) leftNodes.push(currNode.left);
-        if (currNode.right) leftNodes.push(currNode.right);
+        else trvsNodes.push(currNode);
+        if (currNode.right) stack.push(currNode.right);
+        if (currNode.left) stack.push(currNode.left);
       }
-
-      while (rightNodes.length) {
-        const currNode = rightNodes.shift();
-        if (currNode === null) null;
-        else rightTrvsNodes.push(currNode);
-        if (currNode.left) rightNodes.push(currNode.left);
-        if (currNode.right) rightNodes.push(currNode.right);
-      }
-
-      return [...leftTrvsNodes, this.root, ...rightTrvsNodes];
-
+      return trvsNodes;
     } catch (err) {
       console.error(`ERROR!\n${err}`);
     }
@@ -131,7 +121,9 @@ class BinarySearchTree {
   
 
   /** dfsPostOrder(): Traverse the array using post-order DFS.
-   * Return an array of visited nodes. */
+   * Return an array of visited nodes.
+   * left, right, root
+   * */
 
   dfsPostOrder(root = this.root) {
     try {
@@ -154,21 +146,15 @@ class BinarySearchTree {
 
   /** bfs(): Traverse the array using BFS.
    * Return an array of visited nodes. */
-
-  bfs() {
+  bfs(queue = [this.root], arr = []) {
     try {
-      const queue = [this.root];
-      const traversedNodes = [];
-      while (queue.length) {
-        const currNode = queue.shift();
-        if (currNode === null) null;
-        else {
-          traversedNodes.push(currNode);
-          queue.push(currNode.left);
-          queue.push(currNode.right);
-        }
-      }
-      return traversedNodes;
+      const currNode = queue.shift();
+      if (currNode === undefined) return arr;
+      arr.push(currNode);
+      if (currNode.left) queue.push(currNode.left);
+      if (currNode.right) queue.push(currNode.right);
+      this.bfs(queue, arr);
+      return arr;
     } catch (err) {
       console.error(`ERROR!\n${err}`);
     }
