@@ -20,6 +20,7 @@ class BinarySearchTree {
       while (queue.length) {
         const currNode = queue.shift();
         // console.log("CURR NODE", currNode);
+        if (!this.root) return this.root = new Node(val);
         if (this.root.val === undefined) this.root.val = val;
         else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
         else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
@@ -34,16 +35,16 @@ class BinarySearchTree {
 
   /** insertRecursively(val): insert a new node into the BST with value val.
    * Returns the tree. Uses recursion. */
-  insertRecursively(val, root) {
+  insertRecursively(val, queue = [this.root]) {
     try {
       if (val === undefined) throw new Error("ERROR! Parameter is missing.");
-      const queue = root ? [root] : [this.root];
+      if (!this.root) return this.root = new Node(val);
       const currNode = queue.shift();
       if (this.root.val === undefined) this.root.val = val;
       else if (val <= currNode.val && currNode.left === null) currNode.left = new Node(val);
       else if (val >= currNode.val && currNode.right === null) currNode.right = new Node(val);
-      else if (val <= currNode.val && currNode.left !== null) this.insertRecursively(val, currNode.left);
-      else if (val >= currNode.val && currNode.right !== null) this.insertRecursively(val, currNode.right);
+      else if (val <= currNode.val && currNode.left !== null) this.insertRecursively(val, [currNode.left]);
+      else if (val >= currNode.val && currNode.right !== null) this.insertRecursively(val, [currNode.right]);
       return this.root;
     } catch(err) {
       console.error(`ERROR!\n${err}`);
@@ -95,7 +96,10 @@ class BinarySearchTree {
       while (stack.length) {
         const currNode = stack.pop();
         if (currNode === null) null;
-        else trvsNodes.push(currNode);
+        // push nodes
+        // else trvsNodes.push(currNode);
+        // push values
+        else trvsNodes.push(currNode.val);
         if (currNode.right) stack.push(currNode.right);
         if (currNode.left) stack.push(currNode.left);
       }
@@ -111,7 +115,10 @@ class BinarySearchTree {
     try {
       // debugger;
       if (node.left) this.dfsInOrder(node.left, arr);
-      arr.push(node);
+      // push nodes
+      // arr.push(node);
+      // push values
+      arr.push(node.val);
       if (node.right) this.dfsInOrder(node.right, arr);
       return arr;
     } catch (err) {
@@ -133,7 +140,10 @@ class BinarySearchTree {
         const currNode = stack.pop();
         if (currNode === null) null;
         else {
-          trvsNodes.unshift(currNode);
+          // push nodes
+          // trvsNodes.unshift(currNode);
+          // push values
+          trvsNodes.unshift(currNode.val);
           stack.push(currNode.left);
           stack.push(currNode.right);
         }
@@ -150,7 +160,10 @@ class BinarySearchTree {
     try {
       const currNode = queue.shift();
       if (currNode === undefined) return arr;
-      arr.push(currNode);
+      // push nodes
+      // arr.push(currNode);
+      // push values
+      arr.push(currNode.val);
       if (currNode.left) queue.push(currNode.left);
       if (currNode.right) queue.push(currNode.right);
       this.bfs(queue, arr);
