@@ -11,16 +11,42 @@ class Graph {
   }
 
   // this function accepts a Node instance and adds it to the nodes property on the graph
-  addVertex(vertex) {}
+  addVertex(vertex) {
+    try {
+      if (vertex === undefined) throw new Error("addVertex needs a vertex argument!");
+      this.nodes.add(vertex);
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
+  }
 
   // this function accepts an array of Node instances and adds them to the nodes property on the graph
-  addVertices(vertexArray) {}
+  addVertices(vertexArray) {
+    try {
+      if (vertexArray === undefined) throw new Error("addVertices needs a vertexArray argument!");
+      vertexArray.forEach(vertex => this.nodes.add(vertex));
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
+  }
 
   // this function accepts two vertices and updates their adjacent values to include the other vertex
-  addEdge(v1, v2) {}
+  addEdge(v1, v2) {
+    try {
+      if (v1 === undefined || v2 === undefined) throw new Error("addEdge needs a v1 and v2 argument!");
+      this.nodes.forEach(vertex => {
+        if (vertex.value === v1.value) vertex.adjacent.add(v2);
+        if (vertex.value === v2.value) vertex.adjacent.add(v1);
+      });
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
+  }
 
   // this function accepts two vertices and updates their adjacent values to remove the other vertex
-  removeEdge(v1, v2) {}
+  removeEdge(v1, v2) {
+    
+  }
 
   // this function accepts a vertex and removes it from the nodes property, it also updates any adjacency lists that include that vertex
   removeVertex(vertex) {}
