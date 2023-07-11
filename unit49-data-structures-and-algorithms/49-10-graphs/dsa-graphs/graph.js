@@ -77,4 +77,28 @@ class Graph {
   breadthFirstSearch(start) {}
 }
 
+/* SAMPLE GRAPH */
+const homer = new PersonNode("homer simpson");
+const marge = new PersonNode("marge simpson");
+const maggie = new PersonNode("maggie simpson");
+const lisa = new PersonNode("lisa simpson");
+const gramps = new PersonNode("gramps simpson");
+const friends = new FriendGraph();
+friends.addVertices([ homer, marge, maggie, lisa, gramps ]);
+
+friends.addEdge(homer, marge);
+friends.addEdge(homer, lisa);
+friends.addEdge(homer, maggie);
+friends.addEdge(marge, maggie);
+friends.addEdge(maggie, lisa);
+friends.addEdge(lisa, gramps);
+
+const moe = new PersonNode("moe");
+const barney = new PersonNode("barney");
+const lenny = new PersonNode("lenny");
+
+friends.addVertices([ moe, barney, lenny ]);
+friends.addEdge(moe, barney);
+friends.addEdge(barney, lenny);
+
 module.exports = {Graph, Node}
