@@ -95,25 +95,6 @@ class Graph {
   }
 
   // this function returns an array of Node values using BFS
-  // OLD SOLUTION
-  // breadthFirstSearch(start, seen = new Set(), arr = []) {
-  //   try {
-  //     if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
-  //     const toVisitQueue = [start];
-  //     const currPerson = toVisitQueue.shift();
-  //     if (!seen.has(currPerson)) {
-  //       arr.push(currPerson);
-  //       seen.add(currPerson);
-  //     }
-  //     currPerson.adjacent.forEach(node => {
-  //       if (!seen.has(node)) this.depthFirstSearch(node, seen, arr);
-  //     });
-  //     return arr;
-  //   } catch(err) {
-  //     console.error(`ERROR!\n${err}`);
-  //   }
-  // }
-
   breadthFirstSearch(start, seen = new Set()) {
     try {
       if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
@@ -131,6 +112,27 @@ class Graph {
           }
         }
       }
+      return arr;
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
+  }
+
+  // RECURSION
+  breadthFirstSearchRecur(start, seen = new Set(), arr = []) {
+    try {
+      if (start === undefined) throw new Error("breadthFirstSearchRecur needs a start argument!");
+      const toVisitQueue = Array.isArray(start) ? start : [start];
+      const currPerson = toVisitQueue.shift();
+      if (currPerson === undefined) return arr;
+      if (!seen.has(currPerson)) arr.push(currPerson);
+      if (!seen.has(currPerson)) seen.add(currPerson);
+      for (let node of currPerson.adjacent) {
+        if (!seen.has(node)) {
+          toVisitQueue.push(node);
+        }
+      }
+      this.breadthFirstSearchRecur(toVisitQueue, seen, arr);
       return arr;
     } catch(err) {
       console.error(`ERROR!\n${err}`);
