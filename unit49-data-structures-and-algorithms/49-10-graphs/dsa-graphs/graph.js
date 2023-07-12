@@ -71,31 +71,32 @@ class Graph {
   }
 
   // this function returns an array of Node values using DFS
-  depthFirstSearch(start, seen = new Set(), arr = []) {
-    
-  }
-
-  // this function returns an array of Node values using BFS
-  breadthFirstSearch(start) {
+  depthFirstSearch(start, seen = new Set()) {
     try {
       if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
+      const arr = [];
       const toVisitQueue = [start];
-      const currPerson = toVisitQueue.shift();
-      if (!seen.has(currPerson)) {
-        arr.push(currPerson);
-        seen.add(currPerson);
+      while (toVisitQueue.length ) {
+        const currPerson = toVisitQueue.pop();
+        if (!seen.has(currPerson)) {
+          arr.push(currPerson);
+          seen.add(currPerson);
+        }
+        for (let node of currPerson.adjacent) {
+          if (!seen.has(node)) {
+            toVisitQueue.push(node);
+          }
+        }
       }
-      currPerson.adjacent.forEach(node => {
-        if (!seen.has(node)) this.depthFirstSearch(node, seen, arr);
-      });
       return arr;
     } catch(err) {
       console.error(`ERROR!\n${err}`);
     }
   }
+
+  // this function returns an array of Node values using BFS
   // OLD SOLUTION
   // breadthFirstSearch(start, seen = new Set(), arr = []) {
-  //   // debugger;
   //   try {
   //     if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
   //     const toVisitQueue = [start];
@@ -105,17 +106,36 @@ class Graph {
   //       seen.add(currPerson);
   //     }
   //     currPerson.adjacent.forEach(node => {
-  //       if (!seen.has(node)) {
-  //         seen.add(node);
-  //         arr.push(node);
-  //         this.depthFirstSearch(node, seen, arr);
-  //       }
+  //       if (!seen.has(node)) this.depthFirstSearch(node, seen, arr);
   //     });
   //     return arr;
   //   } catch(err) {
   //     console.error(`ERROR!\n${err}`);
   //   }
   // }
+
+  breadthFirstSearch(start, seen = new Set()) {
+    try {
+      if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
+      const arr = [];
+      const toVisitQueue = [start];
+      while (toVisitQueue.length ) {
+        const currPerson = toVisitQueue.shift();
+        if (!seen.has(currPerson)) {
+          arr.push(currPerson);
+          seen.add(currPerson);
+        }
+        for (let node of currPerson.adjacent) {
+          if (!seen.has(node)) {
+            toVisitQueue.push(node);
+          }
+        }
+      }
+      return arr;
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
+  }
 }
 
 /* SAMPLE GRAPH */
