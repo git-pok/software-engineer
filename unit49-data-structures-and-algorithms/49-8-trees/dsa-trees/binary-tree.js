@@ -104,18 +104,18 @@ class BinaryTree {
    * which is larger than lowerBound. Return null if no such value exists. */
   nextLarger(lowerBound) {
     if (!this.root.val) return null;
-    const queue = [this.root];
+    const stack = [this.root];
     let nextLargerNum = Infinity;
-    while (queue.length) {
-      const current = queue.pop();
+    while (stack.length) {
+      const current = stack.pop();
       const val = current.val;
       if (val > lowerBound && val < nextLargerNum) nextLargerNum = val;
       if (current.left !== null && current.right !== null) {
-        queue.push(current.left);
-        queue.push(current.right);
+        stack.push(current.left);
+        stack.push(current.right);
       }
-      else if (current.left !== null) queue.push(current.left);
-      else if (current.right !== null) queue.push(current.right);
+      else if (current.left !== null) stack.push(current.left);
+      else if (current.right !== null) stack.push(current.right);
     }
     return nextLargerNum === Infinity ? null : nextLargerNum;
   }
