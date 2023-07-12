@@ -135,14 +135,9 @@ describe("DFS", function() {
     graph.addEdge(R, T);
     graph.addEdge(W, T);
 
-    var result = JSON.stringify(graph.depthFirstSearch(S));
-    var validResult =
-      result ===
-        JSON.stringify(["S", "U", "V", "W", "T", "R", "Q", "Y", "X", "P"]) ||
-      result ===
-        JSON.stringify(["S", "P", "X", "U", "V", "W", "Y", "R", "Q", "T"]);
+    const result = graph.depthFirstSearch(S);
 
-    expect(validResult).toBe(true);
+    expect(result).toEqual(["S", "U", "V", "W", "T", "R", "Y", "X", "Q", "P"]);
   });
 });
 
@@ -184,17 +179,8 @@ describe("BFS", function() {
     graph.addEdge(R, T);
     graph.addEdge(W, T);
 
-    expect(graph.breadthFirstSearch(S)).toEqual([
-      "S",
-      "P",
-      "U",
-      "X",
-      "Q",
-      "V",
-      "Y",
-      "R",
-      "W",
-      "T"
-    ]);
+    expect(graph.breadthFirstSearch(S)).toEqual(
+      ["S", "P", "U", "X", "Q", "V", "Y", "R", "W", "T"]
+    );
   });
 });

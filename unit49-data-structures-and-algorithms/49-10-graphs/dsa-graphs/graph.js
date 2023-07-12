@@ -79,7 +79,8 @@ class Graph {
       while (toVisitQueue.length ) {
         const currPerson = toVisitQueue.pop();
         if (!seen.has(currPerson)) {
-          arr.push(currPerson);
+          // arr.push(currPerson);
+          arr.push(currPerson.value);
           seen.add(currPerson);
         }
         for (let node of currPerson.adjacent) {
@@ -103,7 +104,8 @@ class Graph {
       while (toVisitQueue.length ) {
         const currPerson = toVisitQueue.shift();
         if (!seen.has(currPerson)) {
-          arr.push(currPerson);
+          // arr.push(currPerson);
+          arr.push(currPerson.value);
           seen.add(currPerson);
         }
         for (let node of currPerson.adjacent) {
