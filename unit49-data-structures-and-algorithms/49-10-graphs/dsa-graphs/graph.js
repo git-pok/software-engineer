@@ -71,19 +71,60 @@ class Graph {
   }
 
   // this function returns an array of Node values using DFS
-  depthFirstSearch(start) {}
+  depthFirstSearch(start, seen = new Set(), arr = []) {
+    
+  }
 
   // this function returns an array of Node values using BFS
-  breadthFirstSearch(start) {}
+  breadthFirstSearch(start) {
+    try {
+      if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
+      const toVisitQueue = [start];
+      const currPerson = toVisitQueue.shift();
+      if (!seen.has(currPerson)) {
+        arr.push(currPerson);
+        seen.add(currPerson);
+      }
+      currPerson.adjacent.forEach(node => {
+        if (!seen.has(node)) this.depthFirstSearch(node, seen, arr);
+      });
+      return arr;
+    } catch(err) {
+      console.error(`ERROR!\n${err}`);
+    }
+  }
+  // OLD SOLUTION
+  // breadthFirstSearch(start, seen = new Set(), arr = []) {
+  //   // debugger;
+  //   try {
+  //     if (start === undefined) throw new Error("depthFirstSearch needs a start argument!");
+  //     const toVisitQueue = [start];
+  //     const currPerson = toVisitQueue.shift();
+  //     if (!seen.has(currPerson)) {
+  //       arr.push(currPerson);
+  //       seen.add(currPerson);
+  //     }
+  //     currPerson.adjacent.forEach(node => {
+  //       if (!seen.has(node)) {
+  //         seen.add(node);
+  //         arr.push(node);
+  //         this.depthFirstSearch(node, seen, arr);
+  //       }
+  //     });
+  //     return arr;
+  //   } catch(err) {
+  //     console.error(`ERROR!\n${err}`);
+  //   }
+  // }
 }
 
 /* SAMPLE GRAPH */
-const homer = new PersonNode("homer simpson");
-const marge = new PersonNode("marge simpson");
-const maggie = new PersonNode("maggie simpson");
-const lisa = new PersonNode("lisa simpson");
-const gramps = new PersonNode("gramps simpson");
-const friends = new FriendGraph();
+const homer = new Node("homer simpson");
+const marge = new Node("marge simpson");
+const maggie = new Node("maggie simpson");
+const lisa = new Node("lisa simpson");
+const gramps = new Node("gramps simpson");
+const friends = new Graph();
 friends.addVertices([ homer, marge, maggie, lisa, gramps ]);
 
 friends.addEdge(homer, marge);
@@ -93,9 +134,9 @@ friends.addEdge(marge, maggie);
 friends.addEdge(maggie, lisa);
 friends.addEdge(lisa, gramps);
 
-const moe = new PersonNode("moe");
-const barney = new PersonNode("barney");
-const lenny = new PersonNode("lenny");
+const moe = new Node("moe");
+const barney = new Node("barney");
+const lenny = new Node("lenny");
 
 friends.addVertices([ moe, barney, lenny ]);
 friends.addEdge(moe, barney);
