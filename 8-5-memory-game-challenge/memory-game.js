@@ -18,6 +18,7 @@ const grid = document.querySelector('.grid');
 const result = document.querySelector("#score");
 const cardsChosen = [];
 const cardsChosenIds = [];
+const cardsWonIds = [];
 result.innerText = 0;
 
 // here is a helper function to shuffle an array
@@ -96,11 +97,25 @@ function handleCardClick(event) {
       this.style.backgroundColor = this.dataset.name;
       // Remove event listener from clicked card.
       this.removeEventListener('click', handleCardClick);
+      // Push cards won ids to cardsWonIds.
+      cardsWonIds.push(cardsChosenIds[0]);
+      cardsWonIds.push(this.dataset.id);
       // Empty cardsChosenIds and cardsChosen.
       cardsChosenIds.length = 0;
       cardsChosen.length = 0;
+    } if (cardsWonIds.length === COLORS.length) {
+      const cards = document.querySelectorAll("td");
+      // Reset styles and game.
+      setTimeout(() => {
+        cards.forEach(card => {
+          card.style.backgroundColor = "rgb(0, 1, 44)";
+          card.addEventListener('click', handleCardClick);
+        });
+      }, 1500);
+      cardsChosenIds.length = 0;
+      cardsChosen.length = 0;
+      cardsWonIds.length = 0;
     }
 }
 
-// when the DOM loads
 createDivsForColors(shuffledColors);
