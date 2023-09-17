@@ -1,4 +1,3 @@
-// THIS FILE IS STILL BEING WORKED ON
 // card options
 const COLORS = [
     "red",
@@ -15,11 +14,9 @@ const COLORS = [
 
 // create your game board
 const grid = document.querySelector('.grid');
-const result = document.querySelector("#score");
 const cardsChosen = [];
 const cardsChosenIds = [];
 const cardsWonIds = [];
-result.innerText = 0;
 
 // here is a helper function to shuffle an array
 // it returns the same array with values shuffled
