@@ -18,7 +18,6 @@ const grid = document.querySelector('.grid');
 const result = document.querySelector("#score");
 const cardsChosen = [];
 const cardsChosenIds = [];
-const cardsWon = [];
 result.innerText = 0;
 
 // here is a helper function to shuffle an array
@@ -66,15 +65,41 @@ function createDivsForColors(cardArray) {
 
 // TODO: Implement this function!
 function handleCardClick(event) {
-    // Flip cards if they match.
+    // I created all logic in here.
     const cardsChosenLgth = cardsChosen.length;
-    if (cardsChosenLgth === 2 && !cardsChosen.includes(this.dataset.name)) {
-        
+    if (cardsChosenLgth === 0) {
+      // Change card's background color.
+      this.style.backgroundColor = this.dataset.name;
+      // Push cards name to cardsChosen.
+      cardsChosen.push(this.dataset.name);
+      // Push card's id to cardsChosenIds.
+      cardsChosenIds.push(this.dataset.id);
+      // Remove event listener from clicked card.
+      this.removeEventListener('click', handleCardClick);
+    } else if (cardsChosenLgth === 1 && !cardsChosen.includes(this.dataset.name)) {
+      // Change card's background color.
+      this.style.backgroundColor = this.dataset.name;
+      // Find and Query first card selected.
+      const cardId = cardsChosenIds[0];
+      const card = document.querySelector(`[data-id="${cardId}"]`);
+      // Change background color of first selected card.
+      setTimeout(() => card.style.backgroundColor = "rgb(0, 1, 44)", 1000);
+      // Change background color of clicked card.
+      setTimeout(() => this.style.backgroundColor = "rgb(0, 1, 44)", 1000);
+      // Empty cardsChosenIds and cardsChosen.
+      cardsChosenIds.length = 0;
+      cardsChosen.length = 0;
+      // Add event listener to first selected card.
+      card.addEventListener('click', handleCardClick);
+    } else if (cardsChosenLgth === 1 && cardsChosen.includes(this.dataset.name)) {
+      // Change background color of clicked card.
+      this.style.backgroundColor = this.dataset.name;
+      // Remove event listener from clicked card.
+      this.removeEventListener('click', handleCardClick);
+      // Empty cardsChosenIds and cardsChosen.
+      cardsChosenIds.length = 0;
+      cardsChosen.length = 0;
     }
-    // you can use event.target to see which element was clicked
-    console.log("THIS", this.dataset.id);
-    console.log("THIS", this);
-    cardsChosenIds.push(this.dataset.id);
 }
 
 // when the DOM loads
