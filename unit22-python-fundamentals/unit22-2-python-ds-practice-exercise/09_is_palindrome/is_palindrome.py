@@ -21,9 +21,9 @@ def is_palindrome(phrase):
         >>> is_palindrome('Noon')
         True
     """
-    phrase = phrase.lower().strip().replace(' ', '')
-    reversed_phrase = phrase[::-1] 
-    return reversed_phrase == phrase  
+    nmlzd_phrase = phrase.lower().strip().replace(' ', '')
+    reversed_phrase = nmlzd_phrase[::-1] 
+    return reversed_phrase == nmlzd_phrase
 
 
 print("should return True, ----->,", is_palindrome('tacocat'))

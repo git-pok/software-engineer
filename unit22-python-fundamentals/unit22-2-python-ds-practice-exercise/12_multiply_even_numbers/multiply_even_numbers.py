@@ -1,6 +1,6 @@
 def multiply_even_numbers(nums):
     """Multiply the even numbers.
-    
+
         >>> multiply_even_numbers([2, 3, 4, 5, 6])
         48
         
@@ -19,14 +19,6 @@ def multiply_even_numbers(nums):
             product = product * num
 
     return product
-    
-    # what I tried to configure
-    # evens = []
-    # for num in nums:
-    #     if num % 2 == 0:
-    #         evens.append(num)
-        
-    # return evens[]
 
 
 
