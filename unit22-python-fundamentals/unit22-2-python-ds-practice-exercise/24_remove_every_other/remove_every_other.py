@@ -5,11 +5,6 @@ def remove_every_other(lst):
 
         >>> remove_every_other(lst)
         [1, 3, 5]
-
-    This should return a list, not mutate the original:
-
-        >>> lst
-        [1, 2, 3, 4, 5]
     """
     return [item for item in lst if lst.index(item) % 2 == 0]
 

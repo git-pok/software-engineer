@@ -16,9 +16,10 @@ def extract_full_names(people):
     """
     return [person.get("first") + ' ' + person.get("last") for person in people]
 
+
 names = [
     {'first': 'Ada', 'last': 'Lovelace'},
     {'first': 'Grace', 'last': 'Hopper'},
-    ]
+]
 
 print("should return ['Ada Lovelace', 'Grace Hopper'] ----->,", extract_full_names(names))

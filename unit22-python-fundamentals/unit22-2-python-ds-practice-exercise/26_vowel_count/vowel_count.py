@@ -3,7 +3,7 @@ def vowel_count(phrase):
 
         >>> vowel_count('rithm school')
         {'i': 1, 'o': 2}
-        
+
         >>> vowel_count('HOW ARE YOU? i am great!') 
         {'o': 2, 'a': 3, 'e': 2, 'u': 1, 'i': 1}
     """
@@ -16,8 +16,7 @@ def vowel_count(phrase):
                 vowel_count_objt[letter] = 1
             else:
                 vowel_count_objt[letter] += 1
-            
-        
+
     return vowel_count_objt
 
 print("should return, {'i': 1, 'o': 2} ----->,", vowel_count('rithm school'))

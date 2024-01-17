@@ -17,8 +17,6 @@ def mode(nums):
             return i
         else:
             return num
-        # if i.count() > num.count()
-        #     return i
 
 print("should return, 1 ----->", mode([1, 2, 1]))
 print("should return, 2 ----->", mode([2, 2, 3, 3, 2]))

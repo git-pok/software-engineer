@@ -21,8 +21,8 @@ def repeat(phrase, num):
     if isinstance(num, int) and num > 0:
         return phrase * num
     elif num == 0:
-        return ' '
-    elif not num is int:
+        return ''
+    else:
         return None
     
 

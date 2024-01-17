@@ -44,8 +44,6 @@ def calculate(operation, a, b, make_int=False, message='The result is'):
 
 
 
-
-
 print("should return, The result is 6.5 ----->", calculate('add', 2.5, 4))
 print("should return, The result is 2 ----->", calculate('subtract', 4, 1.5, make_int=True))
 print("should return, The result is 3.0 ----->", calculate('multiply', 1.5, 2))

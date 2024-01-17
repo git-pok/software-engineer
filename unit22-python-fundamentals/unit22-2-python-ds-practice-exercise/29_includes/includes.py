@@ -32,15 +32,12 @@ def includes(collection, sought, start=None):
     """
     if isinstance(collection, dict):
         return sought in collection.values()
-
-    if start is None or isinstance(collection, set):
+    elif start is None or isinstance(collection, set):
         return sought in collection
-
-    return sought in collection[start::]
+    else:
+        return sought in collection[start::]
     
 
-# print("should return, True ----->", includes([1, 2, 3], 1))
-# print("should return, False ----->", includes([1, 2, 3], 1, 2))
 print("should return, True ----->", includes([1, 2, 3], 1))
 print("should return, False ----->", includes([1, 2, 3], 1, 2))
 print("should return, True ----->", includes("hello", "o"))

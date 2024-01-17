@@ -1,6 +1,6 @@
 def partition(lst, fn):
     """Partition lst by predicate.
-     
+
      - lst: list of items
      - fn: function that returns True or False
      
