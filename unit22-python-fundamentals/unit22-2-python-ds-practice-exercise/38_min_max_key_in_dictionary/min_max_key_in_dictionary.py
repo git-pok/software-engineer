@@ -10,7 +10,6 @@ def min_max_keys(d):
         ('apple', 'cherry')
     """
     keys = d.keys()
-
     return (min(keys), max(keys))
 
 print("should return (1, 10) ----->,", min_max_keys({2: 'a', 7: 'b', 1: 'c', 10: 'd', 4: 'e'}))
