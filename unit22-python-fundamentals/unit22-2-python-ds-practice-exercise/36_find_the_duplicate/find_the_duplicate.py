@@ -13,9 +13,12 @@ def find_the_duplicate(nums):
         >>> find_the_duplicate([2, 1, 3, 4]) is None
         True
     """
+    result = None
     for num in nums:
         if nums.count(num) > 1:
-            return num  
+            result = num
+
+    return result
 
 
 print("should return 1 ----->,", find_the_duplicate([1, 2, 1, 4, 3, 12]))

@@ -26,15 +26,14 @@ def sum_range(nums, start=0, end=None):
     total = 0
     if start == 0 and end == None:
         total = sum(nums)
-        return total
     elif not start == 0 and end == None:
         num_list_splice = nums[start::]
         total = sum(num_list_splice)
-        return total
     else:
-        num_list_splice = nums[start:end + 1:] 
+        num_list_splice = nums[start:end + 1:] if end <= len(nums) - 1 else nums[start:len(nums):] 
         total = sum(num_list_splice)
-        return total
+
+    return total
 
 
 print("should return, 10 ----->,", sum_range([1, 2, 3, 4]))

@@ -33,30 +33,12 @@ def sum_up_diagonals(matrix):
     total = 0
 
     for i in matrix:
-        if i == matrix[0]:
-            total += matrix[0][0]
-            total += matrix[0][-1] 
-        if i != matrix[0] and i != matrix[-1]:
-            total += i[1]
-            total += i[-2] 
-        if i == matrix[-1]:
-            total += matrix[-1][0]
-            total += matrix[-1][-1]
-        
+        total += i[matrix.index(i)]
+        total += i[-1 - matrix.index(i)]
+ 
     return total
 
 
-# print("should return 73 ----->,", sum_up_diagonals([[1,   2], [30, 40],]))
-# print("should return 30 ----->,", sum_up_diagonals([[1, 2, 3], [4, 5, 6], [7, 8, 9],]))
-# print("should return 68 ----->,", sum_up_diagonals([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]))
-
-# Old Solution
-# # total = 0
-
-    # for i in range(len(matrix)):
-    #     total += matrix[i][i]
-    #     total += matrix[i][-1 - i]
-
-    # return total
-
-
+print("should return 73 ----->,", sum_up_diagonals([[1,   2], [30, 40],]))
+print("should return 30 ----->,", sum_up_diagonals([[1, 2, 3], [4, 5, 6], [7, 8, 9],]))
+print("should return 68 ----->,", sum_up_diagonals([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]))
