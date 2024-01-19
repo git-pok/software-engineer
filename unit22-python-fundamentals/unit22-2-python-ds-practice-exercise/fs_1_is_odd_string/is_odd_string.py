@@ -35,7 +35,7 @@ def is_odd_string(word):
     # from each letter in word
     # this will give us 1 for a, 2 for b, and so on
     total = sum((ord(c) - DIFF) for c in word.lower())
-
+    
     return total % 2 == 1
 
 

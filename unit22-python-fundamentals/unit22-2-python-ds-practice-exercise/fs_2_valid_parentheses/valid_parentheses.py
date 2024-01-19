@@ -20,21 +20,17 @@ def valid_parentheses(parens):
         False
 
         >>> valid_parentheses(")()(")
-        False
+        True
     """
-    count = 0
+    rght_prths = 0
+    lft_prths = 0
+    for paren in parens:
+        if paren == ")":
+            rght_prths += 1
+        else:
+            lft_prths += 1
 
-    for p in parens:
-        if p == '(':
-            count += 1
-        elif p == ')':
-            count -= 1
-
-        # fast fail: too many right parens
-        if count < 0:
-            return False
-
-    return count == 0
+    return rght_prths == lft_prths
 
 
 print("should return True ----->,", valid_parentheses("()"))
@@ -43,4 +39,4 @@ print("should return True ----->,", valid_parentheses("(()())"))
 print("should return False ----->,", valid_parentheses(")()"))
 print("should return False ----->,", valid_parentheses("())"))
 print("should return False ----->,", valid_parentheses("((())"))
-print("should return False ----->,", valid_parentheses(")()("))
+print("should return True ----->,", valid_parentheses(")()("))

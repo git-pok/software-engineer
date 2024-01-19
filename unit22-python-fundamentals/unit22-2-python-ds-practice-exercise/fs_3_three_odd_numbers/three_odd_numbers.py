@@ -13,12 +13,19 @@ def three_odd_numbers(nums):
         >>> three_odd_numbers([1, 2, 3, 3, 2])
         False
     """
-    # unsure of what, range(len(nums) - 2) does 
-    for i in range(len(nums) - 2):
-        if (nums[i] + nums[i + 1] + nums[i + 2]) % 2 != 0:
+    start_idx = 0
+    stop_idx = 3
+    while start_idx < len(nums): 
+        sum_arr = nums[start_idx:stop_idx:]
+        nums_sum = sum(sum_arr)
+        sum_arr_len = len(sum_arr)
+        if sum_arr_len < 3:
+            return False
+        elif nums_sum % 2 != 0:
             return True
-
-    return False
+        else:
+            start_idx += 1
+            stop_idx += 1
 
 
 print("should return True ----->,", three_odd_numbers([1, 2, 3, 4, 5]))
