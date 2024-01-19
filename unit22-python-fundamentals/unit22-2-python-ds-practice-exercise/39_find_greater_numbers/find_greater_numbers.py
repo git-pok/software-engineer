@@ -18,21 +18,26 @@ def find_greater_numbers(nums):
 
         >>> find_greater_numbers([])
         0
+        >>> find_greater_numbers([5, 1, 2, 9, 8, 10])
+        4
+        >>> find_greater_numbers([6, 1, 2, 7, 8])
+        6
     """
-    # %Q%Q%Q%Q%Q%Q%Q%Q% STILL WORKING ON THIS SOLUTION %Q%Q%Q%Q%Q%Q%Q%Q%
     count = 0
     idx = 0
+    re_itr_idx = 0
     nums_copy = nums.copy()
 
-    while len(nums_copy) > 0:
+    while re_itr_idx < len(nums_copy) - 1:
         if idx == len(nums_copy) - 1:
-            nums_copy.pop(0)
-            idx = 0
+            re_itr_idx += 1
+            idx = re_itr_idx
         elif nums_copy[idx + 1] > nums_copy[idx]:
             count += 1
             idx += 1
         else:
-            nums_copy.pop(idx)
+            re_itr_idx += 1
+            idx = re_itr_idx
 
     return count
 
@@ -41,5 +46,5 @@ print("should return 3 ----->,", find_greater_numbers([1, 2, 3]))
 print("should return 3 ----->,", find_greater_numbers([6, 1, 2, 7]))
 print("should return 6 ----->,", find_greater_numbers([6, 1, 2, 7, 8]))
 print("should return 0 ----->,", find_greater_numbers([5, 4, 3, 2, 1]))
-print("should return 7 ----->,", find_greater_numbers([5, 1, 2, 9, 8, 10]))
+print("should return 4 ----->,", find_greater_numbers([5, 1, 2, 9, 8, 10]))
 print("should return 0 ----->,", find_greater_numbers([]))
