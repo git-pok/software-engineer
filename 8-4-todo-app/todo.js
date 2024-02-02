@@ -5,6 +5,8 @@ const todoForm = domDoc.querySelector("form");
 const todoFormInput = domDoc.querySelector("form input");
 const todosDiv = domDoc.querySelector(".todos");
 const todoDiv = domDoc.querySelector(".todo-div");
+const lStodosSet = new Set ();
+items.forEach(todo => lStodosSet.add(todo.todo));
 
 appendTodoToDom(items);
 
@@ -55,7 +57,7 @@ function appendTodoToDom (items) {
 }
 
 function isTodoInItems (todo) {
-    return items.some(item => item.todo === todo);
+    return lStodosSet.has(todo);
 }
 
 function itemsDelAdd (todoStrOrObj, add = true) {
@@ -66,15 +68,15 @@ function itemsDelAdd (todoStrOrObj, add = true) {
         })
     }
     localStorage.setItem("todos", JSON.stringify(items));
-    // console.log(localStorage);
 }
 
 todoForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
     const todo = getSbmtdInpt(todoFormInput);
     const isTodoExis = isTodoInItems(todo);
-    if (!isTodoExis) {
+    if (!isTodoExis && todo !== "") {
         itemsDelAdd(todo);
+        lStodosSet.add(todo);
         const div = makeTodoDiv();
         const p = makeTodoP(todo);
         const checkBox = makeTodoCheckInpt();
@@ -95,6 +97,7 @@ todosDiv.addEventListener("click", function (evt) {
     if (evt.target.className === "delete") {
         const innerText = evt.target.previousElementSibling.previousElementSibling.innerText;
         itemsDelAdd (innerText, false);
+        lStodosSet.delete(innerText);
         prntTag.remove();
     } else if (isInpt) {
         const innerText = targetPrntTag.innerText;
