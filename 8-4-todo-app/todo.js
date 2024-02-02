@@ -6,40 +6,54 @@ const todoFormInput = domDoc.querySelector("form input");
 const todosDiv = domDoc.querySelector(".todos");
 const todoDiv = domDoc.querySelector(".todo-div");
 const lStodosSet = new Set ();
+// Make Set for each todo.
 todos.forEach(todo => lStodosSet.add(todo.todo));
-
+// Append todos to DOM.
 appendTodoToDom(todos);
-
+// getSbmtdInpt
+// function: accesses submitted form data.
+// returns: submitted form data.
 function getSbmtdInpt (qrySlcInpt) {
     const todoValue = qrySlcInpt.value;
     return todoValue;
 }
-
+// makeTodoDiv
+// function: creates div node.
+// returns: div node.
 function makeTodoDiv () {
     const div = document.createElement("div");
     div.classList.add("todo-div");
     return div;
 }
-
+// makeTodoP
+// function: creates p node.
+// returns: p node.
 function makeTodoP (todoStr) {
     const p = document.createElement("p");
     p.innerText = todoStr;
     return p;
 }
-
+// makeTodoCheckInpt
+// function: creates checkbox node.
+// returns: checkbox node.
 function makeTodoCheckInpt () {
     const cmpltInpt = document.createElement("input");
     cmpltInpt.setAttribute("type", "checkbox");
     return cmpltInpt;
 }
-
+// makeTodoX
+// function: creates div node for delete func.
+// returns: div node.
 function makeTodoX () {
     const dltDiv = document.createElement("div");
     dltDiv.classList.add("delete");
     dltDiv.innerText = "X";
     return dltDiv;
 }
-
+// appendTodoToDom
+// function: creates nodes for submitted todo,
+// and appends it to DOM.
+// returns: undefined.
 function appendTodoToDom (todoArray) {
     todoArray.forEach(todo => {
         const todoText = todo.todo;
@@ -56,12 +70,16 @@ function appendTodoToDom (todoArray) {
         todosDiv.append(div);
     });
 }
-
+// isTodoInItems
+// function: verifies if a todo exists.
+// returns: Boolean.
 function isTodoInItems (todo) {
     return lStodosSet.has(todo);
 }
-
-function itemsDelAdd (todoStrOrId, add = true) {
+// todosDelAdd
+// function: adds or deletes todo from todos.
+// returns: added or deleted todo object.
+function todosDelAdd (todoStrOrId, add = true) {
     const todosArrayLgth = todos.length;
     const todoId = todosArrayLgth ? todos[todosArrayLgth - 1].id : null;
     const id = todosArrayLgth ? todoId + 1 : 0;
@@ -81,13 +99,15 @@ function itemsDelAdd (todoStrOrId, add = true) {
         return JSON.parse(JSON.stringify(todoObj));
     }
 }
-
+// submitEventListener
+// function: creates todo node for sbmttd data,
+// and appends it to DOM.
 todoForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
     const todo = getSbmtdInpt(todoFormInput);
     const isTodoExis = isTodoInItems(todo);
     if (!isTodoExis && todo !== "") {
-        const todoObj = itemsDelAdd(todo);
+        const todoObj = todosDelAdd(todo);
         lStodosSet.add(todo);
         const div = makeTodoDiv();
         const p = makeTodoP(todo);
@@ -102,7 +122,9 @@ todoForm.addEventListener("submit", function (evt) {
     }
     todoFormInput.value = "";
 });
-
+// clickEventListener
+// function: changes style of todo to complete
+// or not complete, or deletes todo.
 todosDiv.addEventListener("click", function (evt) {
     const targetPrntTag = evt.target.previousElementSibling;
     const prntTag = evt.target.parentElement;
@@ -110,7 +132,7 @@ todosDiv.addEventListener("click", function (evt) {
     if (evt.target.className === "delete") {
         const innerText = evt.target.previousElementSibling.previousElementSibling.innerText;
         const { id } = prntTag.dataset;
-        itemsDelAdd (id, false);
+        todosDelAdd (id, false);
         lStodosSet.delete(innerText);
         prntTag.remove();
         const domTodos = document.querySelectorAll(".todos .todo-div");
