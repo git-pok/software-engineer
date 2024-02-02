@@ -1,14 +1,14 @@
-const lSitems = JSON.parse(localStorage.getItem("todos"));
-const items = lSitems ? lSitems : [];
+const lStodos = JSON.parse(localStorage.getItem("todos"));
+const todos = lStodos ? lStodos : [];
 const domDoc = document;
 const todoForm = domDoc.querySelector("form");
 const todoFormInput = domDoc.querySelector("form input");
 const todosDiv = domDoc.querySelector(".todos");
 const todoDiv = domDoc.querySelector(".todo-div");
 const lStodosSet = new Set ();
-items.forEach(todo => lStodosSet.add(todo.todo));
+todos.forEach(todo => lStodosSet.add(todo.todo));
 
-appendTodoToDom(items);
+appendTodoToDom(todos);
 
 function getSbmtdInpt (qrySlcInpt) {
     const todoValue = qrySlcInpt.value;
@@ -40,8 +40,8 @@ function makeTodoX () {
     return dltDiv;
 }
 
-function appendTodoToDom (items) {
-    items.forEach(todo => {
+function appendTodoToDom (todoArray) {
+    todoArray.forEach(todo => {
         const todoText = todo.todo;
         const div = makeTodoDiv();
         const p = makeTodoP(todoText);
@@ -49,6 +49,7 @@ function appendTodoToDom (items) {
         const x = makeTodoX();
         todo.cmplt ? p.classList.add("cmplt") : p.classList.add("not-cmplt");
         if (todo.cmplt) checkBox.checked = true;
+        div.setAttribute("data-id", todo.id);
         div.append(p);
         div.append(checkBox);
         div.append(x);
@@ -60,14 +61,25 @@ function isTodoInItems (todo) {
     return lStodosSet.has(todo);
 }
 
-function itemsDelAdd (todoStrOrObj, add = true) {
-    if (add) items.push({ todo: todoStrOrObj, cmplt: false });
-    else {
-        items.forEach((todo, idx) => {
-            if (todo.todo === todoStrOrObj) items.splice(idx, 1);
-        })
+function itemsDelAdd (todoStrOrId, add = true) {
+    const todosArrayLgth = todos.length;
+    const todoId = todosArrayLgth ? todos[todosArrayLgth - 1].id : null;
+    const id = todosArrayLgth ? todoId + 1 : 0;
+    if (add) {
+        const todoObj = { todo: todoStrOrId, cmplt: false, id };
+        todos.push(todoObj);
+        localStorage.setItem("todos", JSON.stringify(todos));
+        return JSON.parse(JSON.stringify(todoObj));
     }
-    localStorage.setItem("todos", JSON.stringify(items));
+    else {
+        const todoObj = todos[todoStrOrId];
+        todos.splice(todoStrOrId, 1);
+        todos.forEach((todo, idx) =>  {
+            todo.id = idx;
+        });
+        localStorage.setItem("todos", JSON.stringify(todos));
+        return JSON.parse(JSON.stringify(todoObj));
+    }
 }
 
 todoForm.addEventListener("submit", function (evt) {
@@ -75,12 +87,13 @@ todoForm.addEventListener("submit", function (evt) {
     const todo = getSbmtdInpt(todoFormInput);
     const isTodoExis = isTodoInItems(todo);
     if (!isTodoExis && todo !== "") {
-        itemsDelAdd(todo);
+        const todoObj = itemsDelAdd(todo);
         lStodosSet.add(todo);
         const div = makeTodoDiv();
         const p = makeTodoP(todo);
         const checkBox = makeTodoCheckInpt();
         const x = makeTodoX();
+        div.setAttribute("data-id", todoObj.id);
         p.classList.add("not-cmplt");
         div.append(p);
         div.append(checkBox);
@@ -96,18 +109,21 @@ todosDiv.addEventListener("click", function (evt) {
     const isInpt = evt.target.nodeName === "INPUT";
     if (evt.target.className === "delete") {
         const innerText = evt.target.previousElementSibling.previousElementSibling.innerText;
-        itemsDelAdd (innerText, false);
+        const { id } = prntTag.dataset;
+        itemsDelAdd (id, false);
         lStodosSet.delete(innerText);
         prntTag.remove();
+        const domTodos = document.querySelectorAll(".todos .todo-div");
+        domTodos.forEach((todo, idx) => todo.dataset.id = idx);
     } else if (isInpt) {
         const innerText = targetPrntTag.innerText;
         targetPrntTag.classList.toggle("cmplt");
-        items.forEach(item => {
+        todos.forEach(item => {
             if (item.todo === innerText) {
                 if (item.cmplt === true) item.cmplt = false;
                 else item.cmplt = true;
             }
         });
-        localStorage.setItem("todos", JSON.stringify(items));
     }
+    localStorage.setItem("todos", JSON.stringify(todos));
 });
