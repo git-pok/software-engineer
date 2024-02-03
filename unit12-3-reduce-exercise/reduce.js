@@ -1,5 +1,7 @@
 /*
-Write a function called extractValue which accepts an array of objects and a key and returns a new array with the value of each object at the key.
+Write a function called extractValue which accepts an
+array of objects and a key and returns a new array
+with the value of each object at the key.
 
 Examples:
     const arr = [{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}]
@@ -7,10 +9,11 @@ Examples:
 */
 
 function extractValue(arr, key) {
-    return arr.reduce(function(accu, next) {
-        accu.push(next[key]);
-        return accu;
+    const keyValsArr = arr.reduce((acc, next) => {
+        acc.push(next[key]);
+        return acc;
     }, []);
+    return keyValsArr; 
 };
 
 /*
