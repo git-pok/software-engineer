@@ -90,11 +90,8 @@ function todosDelAdd (todoStrOrId, add = true) {
         return JSON.parse(JSON.stringify(todoObj));
     }
     else {
-        const todoObj = todos[todoStrOrId];
-        todos.splice(todoStrOrId, 1);
-        todos.forEach((todo, idx) =>  {
-            todo.id = idx;
-        });
+        const todoObjIdx = todos.findIndex(obj => obj.id === todoStrOrId);
+        const todoObj = todos.splice(todoObjIdx, 1);
         localStorage.setItem("todos", JSON.stringify(todos));
         return JSON.parse(JSON.stringify(todoObj));
     }
@@ -132,11 +129,11 @@ todosDiv.addEventListener("click", function (evt) {
     if (evt.target.className === "delete") {
         const innerText = evt.target.previousElementSibling.previousElementSibling.innerText;
         const { id } = prntTag.dataset;
-        todosDelAdd (id, false);
+        todosDelAdd (+id, false);
         lStodosSet.delete(innerText);
         prntTag.remove();
         const domTodos = document.querySelectorAll(".todos .todo-div");
-        domTodos.forEach((todo, idx) => todo.dataset.id = idx);
+        // domTodos.forEach((todo, idx) => todo.dataset.id = idx);
     } else if (isInpt) {
         const innerText = targetPrntTag.innerText;
         targetPrntTag.classList.toggle("cmplt");
