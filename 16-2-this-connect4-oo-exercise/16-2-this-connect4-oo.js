@@ -1,7 +1,8 @@
 /** Connect Four **/
 class Player {
-  constructor(color) {
+  constructor(color, pColor) {
     this.color = color;
+    this.pColor = pColor;
   }
 }
 
@@ -167,26 +168,37 @@ const startBtn = document.querySelector("#start-btn");
 const p1Color = document.querySelector("#p1");
 const p2Color = document.querySelector("#p2");
 
+function makePlyrPceColor (gameInst, plyrInstArr) {
+  plyrInstArr.forEach(instance => {
+    const plyrColor = instance.pColor;
+    if (instance.color) gameInst[plyrColor] = instance.color;
+  });
+}
+
+function genTblHtml () {
+  const table = document.createElement("table");
+  table.setAttribute("id", "board");
+  return table;
+}
+
 startBtn.addEventListener("click", (evt) => {
   const { status } = evt.target.dataset;
   if (status === "start") {
+    evt.target.setAttribute("data-status", "reset");
     const p1ColorVal = p1Color.value;
     const p2ColorVal = p2Color.value;
     const game = new Game(6, 7);
-    const player1 = new Player (p1ColorVal);
-    const player2 = new Player (p2ColorVal);
-    if (player1.color) game.p1Color = player1.color;
-    if (player2.color) game.p2Color = player2.color;
+    const player1 = new Player (p1ColorVal, "p1Color");
+    const player2 = new Player (p2ColorVal, "p2Color");
+    makePlyrPceColor(game, [player1, player2]);
     game.makeBoard();
     game.makeHtmlBoard();
-    evt.target.setAttribute("data-status", "reset");
   } else if (status === "reset") {
+    evt.target.setAttribute("data-status", "start");
     const htmlGame = document.querySelector("#game");
     const htmlBoard = document.querySelector("#game #board");
-    evt.target.setAttribute("data-status", "start");
     htmlBoard.remove();
-    const table = document.createElement("table");
-    table.setAttribute("id", "board");
+    const table = genTblHtml();
     htmlGame.append(table);
   }
 });
