@@ -15,7 +15,6 @@ const board = []; // array of rows, each row is array of cells  (board[y][x])
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
  */
-
 const makeBoard = () => {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   const matrix = [];
@@ -29,7 +28,6 @@ const makeBoard = () => {
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 const makeHtmlBoard = () => {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
   const htmlBoard = document.querySelector("#board");
@@ -43,7 +41,7 @@ const makeHtmlBoard = () => {
   /** 
    * Iterate WIDTH and create elements to
    * create HTML slots to click. These slots
-   * are how pieces are dropped into game board.
+   * are how pieces get dropped into game board.
   * **/
   for (let x = 0; x < WIDTH; x++) {
     const headCell = document.createElement("td");
@@ -57,9 +55,9 @@ const makeHtmlBoard = () => {
    * Iterate HEIGHT and create elements to
    * create HTML board under HTML slots.
   * **/
-  for (var y = 0; y < HEIGHT; y++) {
+  for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
@@ -69,7 +67,6 @@ const makeHtmlBoard = () => {
 }
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
 const findSpotForCol = (x) => {
   // TODO: write the real version of this, rather than always returning 0
   let boardLgth = board.length - 1;
@@ -81,7 +78,6 @@ const findSpotForCol = (x) => {
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 const placeInTable = (y, x) => {
   // TODO: make a div and insert into correct table cell
   /**
@@ -91,11 +87,8 @@ const placeInTable = (y, x) => {
   div.setAttribute("class", "piece");
   const plyrClsNum = currPlayer === 1 ? "p1" : "p2";
   div.classList.add(plyrClsNum);
-  console.log("X", x);
-  console.log("Y", y);
   /**
-  * Set matrix's slot with matching Html's id,
-  * find matching Html td,
+  * Find Html td id to insert piece,
   * and append player piece div to it.
   */
   const emptyTdId = `${y}-${x}`;
@@ -117,7 +110,6 @@ const endGame = (msg) => {
 }
 
 /** handleClick: handle click of column top to play piece */
-
 const handleClick = (evt) => {
   // get x from ID of clicked cell
   const x = +evt.target.id;
@@ -154,7 +146,6 @@ const checkForWin = () => {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
     //  - returns true if all are legal coordinates & all match currPlayer
-
     return cells.every(
       ([y, x]) =>
         y >= 0 &&
@@ -166,14 +157,17 @@ const checkForWin = () => {
   }
 
   // TODO: read and understand this code. Add comments to help you.
-
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
+  /**
+   * Gathers coordinate indexes of potential
+   * wins, and checks if coordinates
+   * equal winning properties. 
+  */
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
       const horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       const vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
       const diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
       const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
-
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
