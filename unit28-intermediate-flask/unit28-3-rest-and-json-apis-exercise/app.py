@@ -2,6 +2,7 @@
 from flask import Flask, request, render_template, jsonify
 from models import db, connect_db, Cupcake
 from app_api_methods import create_cupcake, update_cupcake, delete_cupcake
+from sys import argv
 
 # flask app, instantiates app
 app = Flask(__name__)
@@ -12,8 +13,11 @@ app = Flask(__name__)
 # app.config['TESTING'] = True
 # end of test database and configurations
 
+# check if test command is used from command line
+is_cmd_test = argv[0].find("unittest") != -1
 # sqlalchemy database connection
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes_test' if is_cmd_test else "postgresql:///cupcakes"
+
 # disable sqlalchemy track
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # enable sqlalchemy echo for terminal output when querying
