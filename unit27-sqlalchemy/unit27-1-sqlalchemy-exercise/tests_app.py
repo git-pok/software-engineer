@@ -8,11 +8,15 @@ app.config['TESTING'] = True
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 
 class BloglyRoutes(TestCase):
+    with app.app_context():
+            db.drop_all()
+            db.create_all()
+
     def setUp(self):
         """Set up test settings and data!"""
         with app.app_context():
-            db.drop_all()
-            db.create_all()
+            # db.drop_all()
+            # db.create_all()
             User.query.delete()
             user1 = User(first_name='test', last_name='user', image_url="http://test.jpg")
             db.session.add(user1)
