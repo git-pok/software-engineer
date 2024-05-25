@@ -3,6 +3,21 @@ This is a multi-unit exercise to practice SQLAlchemy with relationships. Each pa
 
 In it, you’ll build “Blogly”, a blogging application.
 
+## How To create_all() Flask SQLAlchemy Models
+From ipython and while in venv mode, run below code. This will create the models. If ran in app file the db data deletes and models recreate every time a file change is made!
+```
+from app import app
+from models import db
+with app.app_context():
+    db.drop_all()
+    db.create_all()
+```
+
+## Command To Run Tests
+```
+python3 -m unittest test_file_name.py
+```
+
 ## Create user Model
 First, create a User model for SQLAlchemy. Put this in a models.py file.
 

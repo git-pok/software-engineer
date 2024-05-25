@@ -1,47 +1,65 @@
-from models import db, connect_db, User
+from models import db, connect_db, User 
 
-def create_db(db):
-    """creates table and table object"""
-    db.create_all()
-    return User.query.all() 
+def get_users():
+    """
+    Logic: queries all users from User model.
+    Returns: a list of users.
+    """
+    users = User.query.all()
+    return users
 
-def create_db_row(name_first, name_last, url_img):
-    """creates instance and db row""" 
-    name_first = User(first_name=name_first, last_name=name_last, image_url=url_img)
-    id = User.id 
-    db.session.add(name_first)
+def get_user(user_id):
+    """
+    Logic: queries a user from User model.
+    Returns: a user or 404 if not found.
+    """
+    user = User.query.get_or_404(user_id)
+    return user
+
+def form_data_dict(req_immut_dict):
+    """
+    Logic: creates dictionary from request data structure.
+    Returns: dictionary.
+    """
+    req_dict = dict(req_immut_dict)
+    img = req_dict.get("img")
+    req_dict["img"] = None if not img else img
+    return req_dict
+
+def create_db_user(fname, lname, img):
+    """
+    Logic: creates instance and db row in User model.
+    Returns: queried created user.
+    """ 
+    user = User(first_name=fname, last_name=lname, image_url=img)
+    db.session.add(user)
     db.session.commit()
-     
-    id = name_first.id
-    return id
+    created_user = User.query.filter_by(first_name=fname).first()
+    return created_user
 
-def update_db_row(edit_first_name, edit_last_name, edit_url_img, user_edit):
+def update_db_row(req_immut_dict, user):
     """
-    updates column values, and saves it to the database.
+    Logic: updates column values, and saves it to the database.
+    Returns: None
     """
-    if edit_first_name: 
-        user_edit.first_name = edit_first_name
-    
-        db.session.add(user_edit) 
-        db.session.commit()
-    if edit_last_name: 
-        user_edit.last_name = edit_last_name
-        db.session.add(user_edit) 
-        db.session.commit()
-    if edit_url_img: 
-        user_edit.image_url = edit_url_img
-        db.session.add(user_edit) 
-        db.session.commit()
-    if edit_first_name and edit_last_name and edit_url_img: 
-        user_edit.first_name = edit_first_name
-        user_edit.last_name = edit_last_name
-        user_edit.image_url = edit_url_img
-        db.session.add(user_edit) 
-        db.session.commit()
+    req_dict = dict(req_immut_dict)
+    fname = req_dict["fname-edit"]
+    lname = req_dict["lname-edit"]
+    img = req_dict["img-url-edit"]
 
-def delete_db_row(user_edit):
+    if fname:
+        user.first_name = fname
+    if lname:
+        user.last_name = lname
+    if img:
+        user.image_url = img
+
+    db.session.commit()
+
+def delete_db_row(user):
     """
-    deletes the instance and the database row.
+    Logic: deletes database row.
+    Returns: None
     """
-    db.session.delete(user_edit) 
+    db.session.delete(user) 
     db.session.commit()
