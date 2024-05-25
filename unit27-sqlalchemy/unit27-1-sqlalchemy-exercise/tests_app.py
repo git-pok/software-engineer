@@ -18,6 +18,7 @@ class BloglyRoutes(TestCase):
             # db.drop_all()
             # db.create_all()
             User.query.delete()
+            db.session.commit()
             user1 = User(first_name='test', last_name='user', image_url="http://test.jpg")
             db.session.add(user1)
             db.session.commit()
@@ -28,6 +29,8 @@ class BloglyRoutes(TestCase):
         """Clear possible transaction bugs!"""
         with app.app_context():
             db.session.rollback()
+            User.query.delete()
+            db.session.commit()
 
     def test_home(self):
         """
